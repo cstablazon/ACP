@@ -437,7 +437,7 @@
             this.pHeader.MaximumSize = new System.Drawing.Size(1111, 380);
             this.pHeader.MinimumSize = new System.Drawing.Size(2, 22);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1086, 22);
+            this.pHeader.Size = new System.Drawing.Size(1086, 368);
             this.pHeader.TabIndex = 0;
             // 
             // dtpEntry
@@ -1018,7 +1018,7 @@
             this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
-            this.pLines.Location = new System.Drawing.Point(3, 31);
+            this.pLines.Location = new System.Drawing.Point(3, 377);
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";

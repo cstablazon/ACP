@@ -14,6 +14,13 @@ namespace ACP
             System.Data.SqlClient.SqlConnection conn = new SqlConnection(ConnectionString);
             return conn;
         }
+
+        public int autoIncrementID(string columnID, string table)
+        {
+            int currentMaxValue = 0;
+            currentMaxValue = db.autoIncrement("SELECT ISNULL(MAX(CAST(" + columnID + " as int)),0) FROM " + table + " WHERE isDistributor = 0");
+            return currentMaxValue;
+        }
         //insert and update supplier records
         public void insertSupplier(string suppID, string payID, string sGroup, string name, string agent, string rtype, string fn, string mn, string ln, string suffix, string gender, string dob, string status)
         {

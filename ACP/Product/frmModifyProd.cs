@@ -1749,5 +1749,10 @@ namespace ACP
             frmKitComponents kit = new frmKitComponents();
             kit.ShowDialog();
         }
+
+        private void pGeneral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

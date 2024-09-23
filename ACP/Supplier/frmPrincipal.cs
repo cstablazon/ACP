@@ -40,6 +40,11 @@ namespace ACP
             //var inc = db.sp_autoInc("Principal");
             //txtSupCode.Text = inc.FirstOrDefault().Value.ToString();
             //string currentMaxID = inc.FirstOrDefault().Value.ToString();
+<<<<<<< HEAD
+=======
+            int inc = supClass.autoIncrementID("suppID", "supplier");
+            txtSupCode.Text = inc.ToString();
+>>>>>>> main
         }
 
         private void noPrincipal()
