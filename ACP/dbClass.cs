@@ -94,6 +94,21 @@ namespace ACP
             return dt;
         }
 
+        public DataTable fetchRecords(string query, string tableName, string action)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
         public DataTable fetchRecordForDepartment(string query, string tableName, string action, long RID)
         {
             SqlConnection conn = getConnection();

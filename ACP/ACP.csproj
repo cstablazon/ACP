@@ -161,6 +161,7 @@
       <DependentUpon>frmProdDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Product\productCreation.cs" />
+    <Compile Include="Purchase Order\purchaseOrderClass.cs" />
     <Compile Include="Supplier config\frmItemSalesTaxGroup.cs">
       <SubType>Form</SubType>
     </Compile>

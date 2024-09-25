@@ -14,33 +14,31 @@ namespace ACP
     {
         bool dropdownBtn;
         bool dropdownBtn2;
-        PO_Class po = new PO_Class();
         acpEntities db = new acpEntities();
         barcodeClass code = new barcodeClass();
+        purchaseOrderClass po = new purchaseOrderClass();
         public frmAddOrder()
         {
             InitializeComponent();
-            deliveryAdd();
-            modeOfDelivery();
-            fetch_pool();
         }
 
         public void autocomplete()
         {
-            DataTable dt = po.fetch_supplier();
-            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+            //DataTable dt = po.fetch_supplier();
+            //AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
 
-            foreach (DataRow rows in dt.Rows)
-            {
-                coll.Add(rows["suppID"].ToString());
-            }
+            //foreach (DataRow rows in dt.Rows)
+            //{
+            //    coll.Add(rows["suppID"].ToString());
+            //}
         }
 
         public void fetch_pool() 
         {
-            cmbPool.DataSource = (from a in db.C_pool select a).ToList();
-            cmbPool.ValueMember = "poolID";
+            DataSet ds = po.cbRecords("pool", "fetchPool", "PoolID");
+            cmbPool.DataSource = ds.Tables["PoolID"];
             cmbPool.DisplayMember = "poolID";
+            cmbPool.ValueMember = "poolID";
             cmbPool.Text = "";
             //DataSet ds = po.fetch_pool();
             //cbPool.DataSource = ds.Tables["poolID"];
@@ -131,17 +129,19 @@ namespace ACP
 
         public void modeOfDelivery()
         {
-            cmbMOD.DataSource = (from a in db.modeOfDeliveries select a).ToList();
+            DataSet ds = po.cbRecords("modeOfDelivery", "fetchModeOfDelivery", "Mode of delivery");
+            cmbMOD.DataSource = ds.Tables["Mode of delivery"];
+            cmbMOD.DisplayMember = "Mode of delivery";
             cmbMOD.ValueMember = "modID";
-            cmbMOD.DisplayMember = "modDesc";
             cmbMOD.Text = "";
         }
 
         public void deliveryAdd()
         {
-            cmbDeliveryAdd.DataSource = (from a in db.vwDeliveryAddresses select a).ToList();
+            DataSet ds = po.cbRecords("deliveryAddress", "fetchDeliveryAddress", "Name");
+            cmbDeliveryAdd.DataSource = ds.Tables["Name"];
+            cmbDeliveryAdd.DisplayMember = "Name";
             cmbDeliveryAdd.ValueMember = "delAddressID";
-            cmbDeliveryAdd.DisplayMember = "desc";
             cmbDeliveryAdd.Text = "";
         }
 
@@ -169,38 +169,49 @@ namespace ACP
             //dgvLines.Columns[8].ReadOnly = true;
         }
 
-        private void orderNo()
-        {
-            if(Id.button.Equals("Create"))
-            {
-                txtOrderNo.Text = code.GenerateEan5();
-                cmbPool.Text = "";
-                cmbMOD.Text = "";
-                cmbDeliveryAdd.Text = "";
-            }
-        }
+        //private void orderNo()
+        //{
+        //    if(Id.button.Equals("Create"))
+        //    {
+        //        txtOrderNo.Text = code.GenerateEan5();
+        //        cmbPool.Text = "";
+        //        cmbMOD.Text = "";
+        //        cmbDeliveryAdd.Text = "";
+        //    }
+        //}
 
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
-            orderNo();
+            deliveryAdd();
+            modeOfDelivery();
+            fetch_pool();
+            //orderNo();
             readOnly();
             editableDGV();
             //supplier();
             
             autocomplete();
         //   fetch_poolID();
+            if(Id.button == "Create")
+            {
+                lblLines.Enabled = false;
+            }
+            else
+            {
+                lblLines.Enabled = true;
+            }
         }
 
         private void fetch_poolID() {
 
-            DataTable dt = po.fetch_poolID(cmbPool.Text);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow rows in dt.Rows)
-                {
-                    txtPoolDesc.Text = rows["poolDesc"].ToString();
-                }
-            }
+            //DataTable dt = po.fetch_poolID(cmbPool.Text);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    foreach (DataRow rows in dt.Rows)
+            //    {
+            //        txtPoolDesc.Text = rows["poolDesc"].ToString();
+            //    }
+            //}
         }
 
         private void cbPool_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,57 +289,65 @@ namespace ACP
         string address;
         private void cmbDeliveryAdd_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            address = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
-            var deliveryAdd = (from a in db.vwDeliveryAddresses where a.delAddressID == address select a).SingleOrDefault();
+            int id = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
+            DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "deliveryAddress", "fetchDeliveryAddress");
 
-            rtxtAddress.Text = deliveryAdd.address + ", " + deliveryAdd.city + ", " + deliveryAdd.province + ", " + deliveryAdd.remarks;
+            DataRow[] dr = dt.Select("delAddressID = "+ id +"");
+            rtxtAddress.Text = dr[0]["fullAddress"].ToString();
         }
 
         public void createUpdate()
         {
             if (Id.button.Equals("Create"))
             {
+                MessageBox.Show("1");
                 if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
                 {
+
+                    MessageBox.Show("2");
                     MessageBox.Show("Please fill up all necessary information");
                 }
                 else
                 {
-                    purchase_order po = new purchase_order();
-                    po.orderNo = txtOrderNo.Text;
+                    MessageBox.Show("3");
+                    int modID = Convert.ToInt32(cmbMOD.SelectedValue);
+                    int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
+                    int discountID = Convert.ToInt32(cmbDiscount.SelectedValue);
+                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, deliveryAddressID, discountID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
 
-                    po.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
-                    po.poType = cmbPOtype.Text;
-                    po.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
-                    po.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
-                    po.discountID = null;
-                    po.deliveryDate = dtpDelivery.Value;
-                    po.cancelDate = dtpCancel.Value;
-                    po.salesTax = null;
-                    po.status = "For approval";
-                    po.remarks = rtxtRemarks.Text;
-                    po.transDate = DateTime.Now;
-                    po.userID = null;
+                    lblLines.Enabled = true;
+                    //purchase_order po = new purchase_order();
+                    //po.orderNo = txtOrderNo.Text;
 
-                    db.purchase_order.Add(po);
-                    db.SaveChanges();
+                    //po.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
+                    //po.poType = cmbPOtype.Text;
+                    //po.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
+                    //po.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
+                    //po.discountID = null;
+                    //po.deliveryDate = dtpDelivery.Value;
+                    //po.cancelDate = dtpCancel.Value;
+                    //po.salesTax = null;
+                    //po.status = "For approval";
+                    //po.remarks = rtxtRemarks.Text;
+                    //po.transDate = DateTime.Now;
+                    //po.userID = null;
 
-                    for (int i = 0; dgvLines.Rows.Count > i; i++)
-                    {
-                        PO_Line poLine = new PO_Line();
+                    //db.purchase_order.Add(po);
+                    //db.SaveChanges();
 
-                        poLine.orderNo = txtOrderNo.Text;
-                        poLine.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                        poLine.qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        poLine.transDate = DateTime.Now;
-                        poLine.userID = null;
+                    //for (int i = 0; dgvLines.Rows.Count > i; i++)
+                    //{
+                    //    PO_Line poLine = new PO_Line();
 
-                        db.PO_Line.Add(poLine);
-                        db.SaveChanges();
-                    }
+                    //    poLine.orderNo = txtOrderNo.Text;
+                    //    poLine.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                    //    poLine.qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                    //    poLine.transDate = DateTime.Now;
+                    //    poLine.userID = null;
 
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
+                    //    db.PO_Line.Add(poLine);
+                    //    db.SaveChanges();
+                    //}
                 }
             }
             else if(Id.button.Equals("Update"))
@@ -672,10 +691,15 @@ namespace ACP
         {
             pHeader.Controls.RemoveByKey("poolError");
             cmbPool.FlatStyle = FlatStyle.Standard;
-            string pool = cmbPool.GetItemText(cmbPool.SelectedValue);
-            var pDesc = (from a in db.C_pool where a.poolID == pool select a).SingleOrDefault();
 
-            txtPoolDesc.Text = pDesc.poolDesc;
+            DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "pool", "fetchPool");
+            DataRow[] dr = dt.Select("poolID = '" + cmbPool.SelectedValue + "'");
+
+            txtPoolDesc.Text = dr[0]["Pool"].ToString();
+            //string pool = cmbPool.GetItemText(cmbPool.SelectedValue);
+            //var pDesc = (from a in db.C_pool where a.poolID == pool select a).SingleOrDefault();
+
+            //txtPoolDesc.Text = pDesc.poolDesc;
         }
 
         private void tsbRemove_Click(object sender, EventArgs e)
@@ -1079,11 +1103,17 @@ namespace ACP
         {
             pHeader.Controls.RemoveByKey("modError");
             cmbMOD.FlatStyle = FlatStyle.Standard;
-            Id.iGlobalID = Convert.ToInt32(cmbMOD.GetItemText(cmbMOD.SelectedValue));
-            var days = db.modeOfDeliveries.Where(a => a.modID.Equals(Id.iGlobalID)).SingleOrDefault();
-            double delivery = Convert.ToDouble(days.days);
-            dtpDelivery.Value = dtpEntry.Value.AddDays(delivery);
-            dtpCancel.Value = dtpEntry.Value.AddDays(delivery + delivery);
+            int modID = Convert.ToInt32(cmbMOD.SelectedValue);
+            DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "modeOfDelivery", "fetchModeOfDelivery");
+            DataRow[] dr = dt.Select("modID = "+ modID +"");
+            int days = Convert.ToInt32(dr[0]["Days"]);
+            dtpDelivery.Value = DateTime.Now.AddDays(days);
+            dtpCancel.Value = dtpDelivery.Value.AddDays(days);
+            //Id.iGlobalID = Convert.ToInt32(cmbMOD.GetItemText(cmbMOD.SelectedValue));
+            //var days = db.modeOfDeliveries.Where(a => a.modID.Equals(Id.iGlobalID)).SingleOrDefault();
+            //double delivery = Convert.ToDouble(days.days);
+            //dtpDelivery.Value = dtpEntry.Value.AddDays(delivery);
+            //dtpCancel.Value = dtpEntry.Value.AddDays(delivery + delivery);
         }
 
         private void cmbDeliveryAdd_Leave(object sender, EventArgs e)

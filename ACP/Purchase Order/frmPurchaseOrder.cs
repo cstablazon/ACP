@@ -14,6 +14,7 @@ namespace ACP
     public partial class frmPurchaseOrder : Form
     {
         acpEntities db = new acpEntities();
+        purchaseOrderClass po = new purchaseOrderClass();
         public frmPurchaseOrder()
         {
             InitializeComponent();
@@ -21,38 +22,49 @@ namespace ACP
 
         public void fetchPO()
         {
-            dgvPO.DataSource = (from a in db.vwPurchaseOrders
-                                select new 
-                                {
-                                a.Order_No,
-                                a.Supplier_ID,
-                                a.Name,
-                                a.agent,
-                                a.Date_created,
-                                a.Delivery_date,
-                                a.Cancellation_date,
-                                a.Status,
-                                a.Amount,
-                                }).ToList();
-            dgvPO.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPO.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPO.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPO.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPO");
+            dgvPO.DataSource = dt;
+            //dgvPO.DataSource = (from a in db.vwPurchaseOrders
+            //                    select new 
+            //                    {
+            //                    a.Order_No,
+            //                    a.Supplier_ID,
+            //                    a.Name,
+            //                    a.agent,
+            //                    a.Date_created,
+            //                    a.Delivery_date,
+            //                    a.Cancellation_date,
+            //                    a.Status,
+            //                    a.Amount,
+            //                    }).ToList();
+            //dgvPO.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvPO.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvPO.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvPO.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnNewOder_Click(object sender, EventArgs e)
         {
             Id.button = "Create";
             frmAddOrder order = new frmAddOrder();
-            order.btnCreate.Text = "Create";
-            order.cmbPOtype.Text = "Purchase order";
-            order.ShowDialog();
-            fetchPO();
+            po.createUpdatePurchaseOrder("Create", null, null, 0, null, 0, null, null, null, "Draft", null, Id.userID);
+            order.txtOrderNo.Text = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
+            order.btnCreate.Text = "Save";
+            order.btnClose.Text = "Cancel";
+            DialogResult res = order.ShowDialog();
+            if(res == DialogResult.OK)
+            {
+                fetchPO();
+            }
+            //order.btnCreate.Text = "Create";
+            //order.cmbPOtype.Text = "Purchase order";
+            //order.ShowDialog();
+            //fetchPO();
         }
 
         private void dgvPOlines()
@@ -134,14 +146,14 @@ namespace ACP
                     {
                         btnConfirm.Enabled = false;
                     }
-                    if(Id.status.Equals("Received"))
-                    {
-                        btnPosting.Enabled = true;
-                    }
-                    else
-                    {
-                        btnPosting.Enabled = false;
-                    }
+                    //if(Id.status.Equals("Received"))
+                    //{
+                    //    btnPosting.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    btnPosting.Enabled = false;
+                    //}
                 }
                 else
                 {

@@ -28,9 +28,7 @@ namespace ACP
             location,
             siteID,
             autoIncSKU,
-            //Item sales tax group
-            purchaseTaxID,
-            salesTaxID,
+            autoIncOrderNo,
             columnName = "@SKU",
             //CRUD
             desc2 = "@desc2",
