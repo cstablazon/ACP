@@ -407,6 +407,11 @@ namespace ACP
             //}
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
         //private void qty_KeyPress(object sender, KeyPressEventArgs e)
         //{
         //    if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))

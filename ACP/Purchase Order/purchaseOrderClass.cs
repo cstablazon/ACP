@@ -71,6 +71,19 @@ namespace ACP
             conn.Close();
         }
 
+        public void deletePO(string sp, string action, string orderNo)
+        {
+            SqlConnection conn = db.getConnection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sp, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
         public void createUpdatePesoDiscount(string action, int? PDID, string orderNo, decimal pesoDisc, decimal priceUnit, int? userID)
         {
             SqlConnection conn = db.getConnection();

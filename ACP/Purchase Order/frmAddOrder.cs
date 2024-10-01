@@ -430,7 +430,8 @@ namespace ACP
                             po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
                         }
                     }
-
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnClose.Text = "Close";
                     lblLines.Enabled = true;
                     //purchase_order po = new purchase_order();
                     //po.orderNo = txtOrderNo.Text;
@@ -1330,6 +1331,24 @@ namespace ACP
                 txtTotalDiscount.Enabled = false;
                 txtPesoDiscount.Enabled = true;
                 txtPriceUnit.Enabled = true;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if(btnClose.Text == "Cancel")
+            {
+                DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (res == DialogResult.Yes)
+                {
+                    po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
+                    this.Hide();
+                }
+            }
+            else if(btnClose.Text == "Close")
+            {
+                this.Hide();
+                this.DialogResult = DialogResult.OK;
             }
         }
 

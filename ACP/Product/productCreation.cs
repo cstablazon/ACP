@@ -46,7 +46,7 @@ namespace ACP
 
         public DataTable fetch(string sp, string tableName, string action)
         {
-            return db.fetchRecords(sp, tableName, action);
+            return db.fetch(sp, tableName, action);
         }
 
         public DataTable fetchComponentSetup(string sp, string action)

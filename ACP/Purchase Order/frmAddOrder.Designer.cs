@@ -53,6 +53,12 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pHeader = new System.Windows.Forms.Panel();
+            this.cmbDiscountType = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtPriceUnit = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.txtPesoDiscount = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.dtpEntry = new System.Windows.Forms.DateTimePicker();
             this.btnClose = new System.Windows.Forms.Button();
@@ -126,12 +132,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lblLineDetails = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtPriceUnit = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.txtPesoDiscount = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.cmbDiscountType = new System.Windows.Forms.ComboBox();
-            this.label40 = new System.Windows.Forms.Label();
             this.tabPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabOder.SuspendLayout();
@@ -452,6 +452,78 @@
             this.pHeader.Size = new System.Drawing.Size(1086, 470);
             this.pHeader.TabIndex = 0;
             // 
+            // cmbDiscountType
+            // 
+            this.cmbDiscountType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDiscountType.FormattingEnabled = true;
+            this.cmbDiscountType.Items.AddRange(new object[] {
+            "Seasonal discount",
+            "Peso discount"});
+            this.cmbDiscountType.Location = new System.Drawing.Point(129, 341);
+            this.cmbDiscountType.Name = "cmbDiscountType";
+            this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
+            this.cmbDiscountType.TabIndex = 152;
+            this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label40.Location = new System.Drawing.Point(12, 343);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(90, 17);
+            this.label40.TabIndex = 151;
+            this.label40.Text = "Discount type:";
+            // 
+            // txtPriceUnit
+            // 
+            this.txtPriceUnit.Enabled = false;
+            this.txtPriceUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPriceUnit.Location = new System.Drawing.Point(129, 429);
+            this.txtPriceUnit.Name = "txtPriceUnit";
+            this.txtPriceUnit.Size = new System.Drawing.Size(182, 23);
+            this.txtPriceUnit.TabIndex = 150;
+            this.txtPriceUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPriceUnit.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPriceUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtPriceUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label38.Location = new System.Drawing.Point(13, 431);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(64, 17);
+            this.label38.TabIndex = 149;
+            this.label38.Text = "Price unit:";
+            // 
+            // txtPesoDiscount
+            // 
+            this.txtPesoDiscount.Enabled = false;
+            this.txtPesoDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPesoDiscount.Location = new System.Drawing.Point(129, 400);
+            this.txtPesoDiscount.Name = "txtPesoDiscount";
+            this.txtPesoDiscount.Size = new System.Drawing.Size(182, 23);
+            this.txtPesoDiscount.TabIndex = 148;
+            this.txtPesoDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPesoDiscount.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPesoDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtPesoDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label39.Location = new System.Drawing.Point(13, 402);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(92, 17);
+            this.label39.TabIndex = 147;
+            this.label39.Text = "Peso discount:";
+            // 
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -496,6 +568,7 @@
             this.btnClose.Text = " Cancel";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label1
             // 
@@ -1276,78 +1349,6 @@
             this.lblLineDetails.TabIndex = 138;
             this.lblLineDetails.Text = "   Line details";
             this.lblLineDetails.Click += new System.EventHandler(this.lblLineDetails_Click);
-            // 
-            // txtPriceUnit
-            // 
-            this.txtPriceUnit.Enabled = false;
-            this.txtPriceUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriceUnit.Location = new System.Drawing.Point(129, 429);
-            this.txtPriceUnit.Name = "txtPriceUnit";
-            this.txtPriceUnit.Size = new System.Drawing.Size(182, 23);
-            this.txtPriceUnit.TabIndex = 150;
-            this.txtPriceUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPriceUnit.Enter += new System.EventHandler(this.txtDecimal_Enter);
-            this.txtPriceUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
-            this.txtPriceUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label38.Location = new System.Drawing.Point(13, 431);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(64, 17);
-            this.label38.TabIndex = 149;
-            this.label38.Text = "Price unit:";
-            // 
-            // txtPesoDiscount
-            // 
-            this.txtPesoDiscount.Enabled = false;
-            this.txtPesoDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPesoDiscount.Location = new System.Drawing.Point(129, 400);
-            this.txtPesoDiscount.Name = "txtPesoDiscount";
-            this.txtPesoDiscount.Size = new System.Drawing.Size(182, 23);
-            this.txtPesoDiscount.TabIndex = 148;
-            this.txtPesoDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPesoDiscount.Enter += new System.EventHandler(this.txtDecimal_Enter);
-            this.txtPesoDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
-            this.txtPesoDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label39.Location = new System.Drawing.Point(13, 402);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(92, 17);
-            this.label39.TabIndex = 147;
-            this.label39.Text = "Peso discount:";
-            // 
-            // cmbDiscountType
-            // 
-            this.cmbDiscountType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDiscountType.FormattingEnabled = true;
-            this.cmbDiscountType.Items.AddRange(new object[] {
-            "Seasonal discount",
-            "Peso discount"});
-            this.cmbDiscountType.Location = new System.Drawing.Point(129, 341);
-            this.cmbDiscountType.Name = "cmbDiscountType";
-            this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
-            this.cmbDiscountType.TabIndex = 152;
-            this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label40.Location = new System.Drawing.Point(12, 343);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(90, 17);
-            this.label40.TabIndex = 151;
-            this.label40.Text = "Discount type:";
             // 
             // frmAddOrder
             // 

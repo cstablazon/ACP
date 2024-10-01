@@ -1270,7 +1270,7 @@ namespace ACP
                 txtSupplier.Text = row.Cells["Supplier_ID"].Value.ToString();
                 Id.suppID = row.Cells["Supplier_ID"].Value.ToString();
                 txtSupplier.BorderStyle = BorderStyle.Fixed3D;
-                pGeneral.Controls.RemoveByKey("pSupplier");
+                panel.Hide();
             }
         }
 
