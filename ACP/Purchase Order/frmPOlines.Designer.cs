@@ -59,13 +59,13 @@
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Location = new System.Drawing.Point(15, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(854, 427);
+            this.groupBox1.Size = new System.Drawing.Size(722, 427);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // txtFilter
             // 
-            this.txtFilter.Location = new System.Drawing.Point(728, 109);
+            this.txtFilter.Location = new System.Drawing.Point(591, 106);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(121, 22);
             this.txtFilter.TabIndex = 102;
@@ -79,7 +79,7 @@
             "SKU",
             "Barcode",
             "Item description"});
-            this.cmbFilter.Location = new System.Drawing.Point(728, 79);
+            this.cmbFilter.Location = new System.Drawing.Point(591, 76);
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.Size = new System.Drawing.Size(121, 21);
             this.cmbFilter.TabIndex = 101;
@@ -87,7 +87,7 @@
             // btnFilter
             // 
             this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFilter.Location = new System.Drawing.Point(728, 45);
+            this.btnFilter.Location = new System.Drawing.Point(591, 42);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 28);
             this.btnFilter.TabIndex = 100;
@@ -103,7 +103,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 18);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(719, 406);
+            this.tabControl1.Size = new System.Drawing.Size(586, 406);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -113,7 +113,7 @@
             this.tpExistItems.Location = new System.Drawing.Point(4, 24);
             this.tpExistItems.Name = "tpExistItems";
             this.tpExistItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tpExistItems.Size = new System.Drawing.Size(711, 378);
+            this.tpExistItems.Size = new System.Drawing.Size(578, 378);
             this.tpExistItems.TabIndex = 0;
             this.tpExistItems.Text = "Existing items";
             this.tpExistItems.UseVisualStyleBackColor = true;
@@ -124,6 +124,8 @@
             this.dgvExistItems.AllowUserToDeleteRows = false;
             this.dgvExistItems.AllowUserToResizeColumns = false;
             this.dgvExistItems.AllowUserToResizeRows = false;
+            this.dgvExistItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvExistItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvExistItems.BackgroundColor = System.Drawing.Color.White;
             this.dgvExistItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvExistItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -134,8 +136,9 @@
             this.dgvExistItems.ReadOnly = true;
             this.dgvExistItems.RowHeadersVisible = false;
             this.dgvExistItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExistItems.Size = new System.Drawing.Size(705, 372);
+            this.dgvExistItems.Size = new System.Drawing.Size(572, 372);
             this.dgvExistItems.TabIndex = 5;
+            this.dgvExistItems.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvExistItems_CellFormatting);
             // 
             // tpNewItems
             // 
@@ -143,7 +146,7 @@
             this.tpNewItems.Location = new System.Drawing.Point(4, 24);
             this.tpNewItems.Name = "tpNewItems";
             this.tpNewItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNewItems.Size = new System.Drawing.Size(711, 378);
+            this.tpNewItems.Size = new System.Drawing.Size(578, 378);
             this.tpNewItems.TabIndex = 1;
             this.tpNewItems.Text = "New items";
             this.tpNewItems.UseVisualStyleBackColor = true;
@@ -164,8 +167,9 @@
             this.dgvNewItems.Name = "dgvNewItems";
             this.dgvNewItems.RowHeadersVisible = false;
             this.dgvNewItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNewItems.Size = new System.Drawing.Size(705, 372);
+            this.dgvNewItems.Size = new System.Drawing.Size(572, 372);
             this.dgvNewItems.TabIndex = 6;
+            this.dgvNewItems.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNewItems_CellFormatting);
             this.dgvNewItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNewItems_EditingControlShowing);
             // 
             // label1
@@ -173,13 +177,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Filter:";
+            this.label1.Text = "Department code:";
             // 
             // txtDepartment
             // 
-            this.txtDepartment.Location = new System.Drawing.Point(57, 6);
+            this.txtDepartment.Location = new System.Drawing.Point(120, 6);
             this.txtDepartment.Name = "txtDepartment";
             this.txtDepartment.Size = new System.Drawing.Size(189, 22);
             this.txtDepartment.TabIndex = 1;
@@ -188,7 +192,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(252, 6);
+            this.btnLoad.Location = new System.Drawing.Point(315, 6);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 2;
@@ -206,7 +210,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(701, 469);
+            this.btnCreate.Location = new System.Drawing.Point(573, 469);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 99;
@@ -225,7 +229,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(790, 469);
+            this.btnClose.Location = new System.Drawing.Point(662, 469);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 100;
@@ -237,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 511);
+            this.ClientSize = new System.Drawing.Size(750, 511);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnLoad);

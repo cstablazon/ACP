@@ -47,9 +47,10 @@ namespace ACP
             //cbPool.Text = Id.payId;
         }
 
+        string dropdown;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Id.dropdown == "Header")
+            if (dropdown == "Header")
             {
                 if (dropdownBtn)
                 {
@@ -75,7 +76,7 @@ namespace ACP
                 }
 
             }
-            else if (Id.dropdown == "Lines")
+            else if (dropdown == "Lines")
             {
 
                 if (dropdownBtn2)
@@ -102,18 +103,44 @@ namespace ACP
                     
                 }
             }
+            else if(dropdown == "lineDetails")
+            {
+                if (dropdownBtn2)
+                {
+                    pLines.Height -= 20;
+                    flowLayoutPanel1.Height -= 15;
+                    if (pLines.Height == pLines.MinimumSize.Height)
+                    {
+                        lblLines.Image = Properties.Resources.arrowRight10px;
+                        dropdownBtn2 = false;
+                        timer1.Stop();
+                    }
+                }
+                else
+                {
+                    pLines.Height += 20;
+                    flowLayoutPanel1.Height += 15;
+                    if (pLines.Height == pLines.MaximumSize.Height)
+                    {
+                        lblLines.Image = Properties.Resources.arrowDown10px;
+                        dropdownBtn2 = true;
+                        timer1.Stop();
+                    }
+
+                }
+            }
                
         }
 
         private void lblHeader_Click(object sender, EventArgs e)
         {
-            Id.dropdown = "Header";
+            dropdown = "Header";
             timer1.Start();
         }
 
         private void lblLines_Click(object sender, EventArgs e)
         {
-            Id.dropdown = "Lines";
+            dropdown = "Lines";
             timer1.Start();
         }
 
@@ -145,29 +172,34 @@ namespace ACP
             cmbDeliveryAdd.Text = "";
         }
 
-        public void editableDGV()
+        private void fetchDiscount()
         {
-            //foreach(DataGridViewColumn dc in dgvLines.Columns)
-            //{
-            //    if(dc.Index.Equals(1) || dc.Index.Equals(2))
-            //    {
-            //        dc.ReadOnly = false;
-                    
-            //    }
-            //}
-            dgvLines.Columns[1].ReadOnly = false;
-            dgvLines.Columns[2].ReadOnly = false;
+
         }
 
-        public void readOnly()
-        {
-            dgvLines.Columns[0].ReadOnly = true;
-            dgvLines.Columns[4].ReadOnly = true;
-            dgvLines.Columns[5].ReadOnly = true;
-            dgvLines.Columns[6].ReadOnly = true;
-            dgvLines.Columns[7].ReadOnly = true;
-            //dgvLines.Columns[8].ReadOnly = true;
-        }
+        //public void editableDGV()
+        //{
+        //    //foreach(DataGridViewColumn dc in dgvLines.Columns)
+        //    //{
+        //    //    if(dc.Index.Equals(1) || dc.Index.Equals(2))
+        //    //    {
+        //    //        dc.ReadOnly = false;
+                    
+        //    //    }
+        //    //}
+        //    dgvLines.Columns[1].ReadOnly = false;
+        //    dgvLines.Columns[2].ReadOnly = false;
+        //}
+
+        //public void readOnly()
+        //{
+        //    dgvLines.Columns[0].ReadOnly = true;
+        //    dgvLines.Columns[4].ReadOnly = true;
+        //    dgvLines.Columns[5].ReadOnly = true;
+        //    dgvLines.Columns[6].ReadOnly = true;
+        //    dgvLines.Columns[7].ReadOnly = true;
+        //    //dgvLines.Columns[8].ReadOnly = true;
+        //}
 
         //private void orderNo()
         //{
@@ -180,14 +212,90 @@ namespace ACP
         //    }
         //}
 
+        private void fetchPOlines()
+        {
+            DataTable dt = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", txtOrderNo.Text);
+
+            dgvLines.DataSource = dt;
+            dgvLines.Columns["lineID"].Visible = false;
+        }
+
+        private void txtDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == 45)
+            {
+                TextBox t = (TextBox)sender;
+                int cursorPosition = t.Text.Length - t.SelectionStart;      // Text in the box and Cursor position
+
+                if (e.KeyChar == 45)
+                    t.Text = t.Text[0] == 45 ? t.Text = t.Text[1].ToString() : "-" + t.Text;
+                else
+                    if (t.Text.Length < 20)
+                        t.Text = (decimal.Parse(t.Text.Insert(t.SelectionStart, e.KeyChar.ToString())
+                                                .Replace(",", "").Replace(".", "")) / 100).ToString("N2");
+
+                t.SelectionStart = (t.Text.Length - cursorPosition < 0 ? 0 : t.Text.Length - cursorPosition);
+            }
+            e.Handled = true;
+        }
+
+        private void txtDecimal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)     // Deals with BackSpace e Delete keys
+            {
+                TextBox t = (TextBox)sender;
+                int cursorPosition = t.Text.Length - t.SelectionStart;
+
+                string Left = t.Text.Substring(0, t.Text.Length - cursorPosition).Replace(".", "").Replace(",", "");
+                string Right = t.Text.Substring(t.Text.Length - cursorPosition).Replace(".", "").Replace(",", "");
+
+                if (Left.Length > 0)
+                {
+                    Left = Left.Remove(Left.Length - 1);                            // Take out the rightmost digit
+                    t.Text = (decimal.Parse(Left + Right) / 100).ToString("N2");
+                    t.SelectionStart = (t.Text.Length - cursorPosition < 0 ? 0 : t.Text.Length - cursorPosition);
+                }
+                e.Handled = true;
+            }
+
+            if (e.KeyCode == Keys.End)
+            {
+                TextBox t = (TextBox)sender;
+                t.SelectionStart = t.Text.Length;                       // Moves the cursor o the rightmost position
+                e.Handled = true;
+            }
+
+            if (e.KeyCode == Keys.Home)
+            {
+                TextBox t = (TextBox)sender;
+                t.Text = 0.ToString("N2");                              // Set field value to zero 
+                t.SelectionStart = t.Text.Length;                       // Moves the cursor o the rightmost position
+                e.Handled = true;
+            }
+        }
+
+        private void txtDecimal_Enter(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            t.SelectionStart = t.Text.Length;
+        }
+
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
             deliveryAdd();
             modeOfDelivery();
             fetch_pool();
+            fetchPOlines();
+
+            txtTotalDiscount.Text = 0.ToString("N2");
+            txtPercentage.Text = 0.ToString("N2");
+            txtPesoDiscount.Text = 0.ToString("N2");
+            txtPriceUnit.Text = 0.ToString("N2");
+            txtDiscountDesc.Text = 0.ToString("N2");
+            txtPurchaseDiscount.Text = 0.ToString("N2");
             //orderNo();
-            readOnly();
-            editableDGV();
+            //readOnly();
+            //editableDGV();
             //supplier();
             
             autocomplete();
@@ -300,20 +408,28 @@ namespace ACP
         {
             if (Id.button.Equals("Create"))
             {
-                MessageBox.Show("1");
                 if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
                 {
 
-                    MessageBox.Show("2");
                     MessageBox.Show("Please fill up all necessary information");
                 }
                 else
                 {
-                    MessageBox.Show("3");
                     int modID = Convert.ToInt32(cmbMOD.SelectedValue);
                     int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
-                    int discountID = Convert.ToInt32(cmbDiscount.SelectedValue);
-                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, deliveryAddressID, discountID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
+                    int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
+                    decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
+                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
+
+                    if(cmbDiscountType.Text == "Peso discount")
+                    {
+                        if(txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
+                        {
+                            decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                            decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                            po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                        }
+                    }
 
                     lblLines.Enabled = true;
                     //purchase_order po = new purchase_order();
@@ -352,7 +468,7 @@ namespace ACP
             }
             else if(Id.button.Equals("Update"))
             {
-                if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtAgent.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbDiscount.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text) || string.IsNullOrEmpty(cmbDepartment.Text) || string.IsNullOrEmpty(cmbEncodedBy.Text) || string.IsNullOrEmpty(cmbOrderBy.Text) || string.IsNullOrEmpty(cmbApprovedBy.Text) || string.IsNullOrEmpty(cmbCheckedBy.Text))
+                if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtAgent.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbCashDiscount.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text) || string.IsNullOrEmpty(cmbDepartment.Text) || string.IsNullOrEmpty(cmbEncodedBy.Text) || string.IsNullOrEmpty(cmbOrderBy.Text) || string.IsNullOrEmpty(cmbApprovedBy.Text) || string.IsNullOrEmpty(cmbCheckedBy.Text))
                 {
                     MessageBox.Show("Please fill up all necessary information");
                 }
@@ -521,30 +637,31 @@ namespace ACP
                 DialogResult res = lines.ShowDialog();
                 if(res == DialogResult.OK)
                 {
-                    foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
-                    {
-                        if (row.Cells["qty"].Value == null)
-                        {
+                    fetchPOlines();
+                    //foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
+                    //{
+                    //    if (row.Cells["qty"].Value == null)
+                    //    {
 
-                        }
-                        else
-                        {
-                            //barcode = row.Cells["Barcode"].Value.ToString();
-                            //productDesc = row.Cells["Product_description"].Value.ToString();
-                            //qty = Convert.ToDecimal(row.Cells["qty"].Value);
-                            //var objCol = db.vwProducts.Where(a => a.Barcode.Equals(barcode)).SingleOrDefault();
-                            //RID = objCol.RID;
-                            //unit = objCol.Unit;
-                            //unitPrice = Convert.ToDecimal(objCol.Cost_price);
-                            //retailPrice = Convert.ToDecimal(objCol.Retail_price);
-                            //lineDisc = Convert.ToDecimal(objCol.lineDisc);
-                            //discPrice = (lineDisc / 100) * (qty * unitPrice);
-                            //netAmount = (qty * unitPrice) - discPrice;
-                            //var objDept = db.sp_catValidation("rid", RID);
+                    //    }
+                    //    else
+                    //    {
+                    //        //barcode = row.Cells["Barcode"].Value.ToString();
+                    //        //productDesc = row.Cells["Product_description"].Value.ToString();
+                    //        //qty = Convert.ToDecimal(row.Cells["qty"].Value);
+                    //        //var objCol = db.vwProducts.Where(a => a.Barcode.Equals(barcode)).SingleOrDefault();
+                    //        //RID = objCol.RID;
+                    //        //unit = objCol.Unit;
+                    //        //unitPrice = Convert.ToDecimal(objCol.Cost_price);
+                    //        //retailPrice = Convert.ToDecimal(objCol.Retail_price);
+                    //        //lineDisc = Convert.ToDecimal(objCol.lineDisc);
+                    //        //discPrice = (lineDisc / 100) * (qty * unitPrice);
+                    //        //netAmount = (qty * unitPrice) - discPrice;
+                    //        //var objDept = db.sp_catValidation("rid", RID);
 
-                            //dgvLines.Rows.Add(i++, barcode, productDesc, qty, objDept.SingleOrDefault().dept_desc, unit, unitPrice, retailPrice, lineDisc, Math.Round(netAmount, 2));
-                        }
-                    }
+                    //        //dgvLines.Rows.Add(i++, barcode, productDesc, qty, objDept.SingleOrDefault().dept_desc, unit, unitPrice, retailPrice, lineDisc, Math.Round(netAmount, 2));
+                    //    }
+                    //}
                     
                 }
                 //frmAddLines sorting = new frmAddLines();
@@ -569,121 +686,105 @@ namespace ACP
 
         private void dgvLines_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            
-            //if(dgvLines.CurrentCell.ColumnIndex == 1)
+            //if (dgvLines.CurrentCell.ColumnIndex == 1)
             //{
-            //    TextBox prodSKU = (TextBox)e.Control;
-            //    prodSKU.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //    prodSKU.AutoCompleteCustomSource = SKUline();
-            //    prodSKU.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //}
-            if (dgvLines.CurrentCell.ColumnIndex == 1)
-            {
-                
-                if(string.IsNullOrEmpty(txtSuppID.Text))
-                {
-                    MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtSuppID.Focus();
-                }
-                //else if (string.IsNullOrEmpty(Id.skuLine))
-                //{
-                //    MessageBox.Show("SKU is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
-                else
-                {
-                    //this.barcode.DataSource = (from a in db.vwProducts where a.suppID == cmbSuppID.Text select a).ToList();
-                    //this.barcode.ValueMember = "barcode";
-                    //this.barcode.DisplayMember = "barcode";
-                }
-                e.CellStyle.BackColor = this.dgvLines.DefaultCellStyle.BackColor;
-                //}
-               
-            }
-            else if (dgvLines.CurrentCell.ColumnIndex == 2)
-            {
-                int rowIndex = dgvLines.CurrentRow.Index;
-                if(string.IsNullOrEmpty(dgvLines.Rows[rowIndex].Cells["barcode"].Value as String))
-                {
-                    MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
-                    e.CellStyle.BackColor = Color.White;
-                }
-            }
-        }
 
+            //    if (string.IsNullOrEmpty(txtSuppID.Text))
+            //    {
+            //        MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        txtSuppID.Focus();
+            //    }
+            //    //else if (string.IsNullOrEmpty(Id.skuLine))
+            //    //{
+            //    //    MessageBox.Show("SKU is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    //}
+            //    else
+            //    {
+            //        //this.barcode.DataSource = (from a in db.vwProducts where a.suppID == cmbSuppID.Text select a).ToList();
+            //        //this.barcode.ValueMember = "barcode";
+            //        //this.barcode.DisplayMember = "barcode";
+            //    }
+            //    e.CellStyle.BackColor = this.dgvLines.DefaultCellStyle.BackColor;
+            //    //}
+
+            //}
+            //else if (dgvLines.CurrentCell.ColumnIndex == 2)
+            //{
+            //    int rowIndex = dgvLines.CurrentRow.Index;
+            //    if (string.IsNullOrEmpty(dgvLines.Rows[rowIndex].Cells["barcode"].Value as String))
+            //    {
+            //        MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
+            //        e.CellStyle.BackColor = Color.White;
+            //    }
+            //}
+        }
+        long lineID;
         private void dgvLines_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvLines.Rows[e.RowIndex];
+                if(dgvLines.SelectedRows.Count > 0)
+                {
+                    lineID = Convert.ToInt64(row.Cells["lineID"].Value);
 
+                    tsbRemove.Enabled = true;
+                }
+                else
+                {
+                    tsbRemove.Enabled = false;
+                }
+            }
         }
 
         private void dgvLines_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
+            //decimal costPrice, retailPrice, lineDisc;
             //if (e.ColumnIndex == 1 && e.RowIndex != -1)
             //{
             //    Cursor.Current = Cursors.IBeam;
             //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
-            //    if (!string.IsNullOrEmpty(row.Cells["SKU"].Value.ToString()))
+            //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value.ToString()))
             //    {
-            //        //Id.skuLine = row.Cells["SKU"].Value.ToString();
-            //        row.Cells["barcode"].Value = "";
-            //        row.Cells["RID"].Value = "";
-            //        row.Cells["po_unit"].Value = "";
-            //        row.Cells["po_price"].Value = "";
-            //        row.Cells["retailPrice"].Value = "";
+            //        string barcodeLine = row.Cells["barcode"].Value.ToString();
+            //        var prodCol = (from a in db.vwProducts where a.Barcode == barcodeLine select a);
+            //        if (prodCol.Any())
+            //        {
+            //            long rid = prodCol.SingleOrDefault().RID;
+            //            var objDept = db.sp_catValidation("rid", rid).SingleOrDefault();
+            //            costPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Cost_price);
+            //            retailPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Retail_price);
+            //            //lineDisc = Convert.ToDecimal(prodCol.SingleOrDefault().lineDisc);
+            //            row.Cells["department"].Value = objDept.subcat_desc;
+            //            row.Cells["po_unit"].Value = prodCol.SingleOrDefault().PO_Unit;
+            //            row.Cells["po_price"].Value = costPrice;
+            //            //row.Cells["lineDisc"].Value = lineDisc;
+            //            row.Cells["retailPrice"].Value = retailPrice;
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            row.Cells["barcode"].Value = "";
+            //        }
+
+            //        //discPrice = (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
             //    }
-
-
             //}
-            //else
-
-
-            
-                decimal costPrice, retailPrice, lineDisc;
-                if (e.ColumnIndex == 1 && e.RowIndex != -1)
-                {
-                    Cursor.Current = Cursors.IBeam;
-                    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
-                    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value.ToString()))
-                    {
-                        string barcodeLine = row.Cells["barcode"].Value.ToString();
-                        var prodCol = (from a in db.vwProducts where a.Barcode == barcodeLine select a);
-                        if(prodCol.Any())
-                        {
-                            long rid = prodCol.SingleOrDefault().RID;
-                            var objDept = db.sp_catValidation("rid", rid).SingleOrDefault();
-                            costPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Cost_price);
-                            retailPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Retail_price);
-                            //lineDisc = Convert.ToDecimal(prodCol.SingleOrDefault().lineDisc);
-                            row.Cells["department"].Value = objDept.subcat_desc;
-                            row.Cells["po_unit"].Value = prodCol.SingleOrDefault().PO_Unit;
-                            row.Cells["po_price"].Value = costPrice;
-                            //row.Cells["lineDisc"].Value = lineDisc;
-                            row.Cells["retailPrice"].Value = retailPrice;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            row.Cells["barcode"].Value = "";
-                        }
-                        
-                        //discPrice = (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
-                    }
-                }
-            if (e.ColumnIndex == 2 && e.RowIndex != -1)
-            {
-                int rowIndex = dgvLines.CurrentRow.Index;
-                DataGridViewRow row = dgvLines.Rows[e.RowIndex];
-                if (!string.IsNullOrEmpty(row.Cells["barcode"].Value as String))
-                {
-                    row.Cells["netAmount"].Value = Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value) - (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
-                }
-                else
-                {
-                    MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
-                }
-            }
+            //if (e.ColumnIndex == 2 && e.RowIndex != -1)
+            //{
+            //    int rowIndex = dgvLines.CurrentRow.Index;
+            //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
+            //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value as String))
+            //    {
+            //        row.Cells["netAmount"].Value = Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value) - (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
+            //    }
+            //}
 
         }
 
@@ -704,13 +805,17 @@ namespace ACP
 
         private void tsbRemove_Click(object sender, EventArgs e)
         {
-            if(dgvLines.SelectedRows.Count > 0)
+            DialogResult res = MessageBox.Show("Remove product line?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(res == DialogResult.Yes)
             {
-                dgvLines.Rows.RemoveAt(dgvLines.SelectedRows[0].Index);
-            }
-            else
-            {
-                MessageBox.Show("Please select a row", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int rowIndex = dgvLines.SelectedRows[0].Index;
+
+                long lineID = Convert.ToInt64(dgvLines.Rows[rowIndex].Cells["lineID"].Value);
+                po.deletePOline("sp_purchaseOrderOperations", "POlines", "Delete", lineID);
+
+                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                fetchPOlines();
+                tsbRemove.Enabled = false;
             }
         }
 
@@ -805,7 +910,7 @@ namespace ACP
         public void supplierForm()
         {
             p.Name = "pSupplier";
-            p.Size = new System.Drawing.Size(328, 219);
+            p.Size = new System.Drawing.Size(400, 219);
             p.Location = new Point(317, 23); //317, 133
             p.Font = new System.Drawing.Font("Segeo UI", 8, FontStyle.Regular);
             //groupBox1.Controls.Add(p);
@@ -978,8 +1083,8 @@ namespace ACP
             supplierForm();
             pHeader.Controls.Add(p);
             p.BorderStyle = BorderStyle.FixedSingle;
-            dgvSupplier.Size = new System.Drawing.Size(328, 174);
-            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSupplier.Size = new System.Drawing.Size(400, 174);
+            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSupplier.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSupplier.Columns[0].HeaderText = "Supplier ID";
             dgvSupplier.Columns[1].HeaderText = "Name";
@@ -1193,6 +1298,39 @@ namespace ACP
         private void txtOrderNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void dgvLines_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvLines.ClearSelection();
+        }
+
+        private void lblLineDetails_Click(object sender, EventArgs e)
+        {
+            dropdown = "lineDetails";
+            timer1.Start();
+        }
+
+        private void cmbDiscountType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbDiscountType.Text))
+            {
+                txtTotalDiscount.Enabled = false;
+                txtPesoDiscount.Enabled = false;
+                txtPriceUnit.Enabled = false;
+            }
+            else if (cmbDiscountType.Text == "Seasonal discount")
+            {
+                txtTotalDiscount.Enabled = true;
+                txtPesoDiscount.Enabled = false;
+                txtPriceUnit.Enabled = false;
+            }
+            else if (cmbDiscountType.Text == "Peso discount")
+            {
+                txtTotalDiscount.Enabled = false;
+                txtPesoDiscount.Enabled = true;
+                txtPriceUnit.Enabled = true;
+            }
         }
 
        

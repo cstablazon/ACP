@@ -44,6 +44,11 @@ namespace ACP
             return db.fetchRecordsForProduct(sp, tableName, action, SKU);
         }
 
+        public DataTable fetch(string sp, string tableName, string action)
+        {
+            return db.fetchRecords(sp, tableName, action);
+        }
+
         public DataTable fetchComponentSetup(string sp, string action)
         {
             return db.fetchComponentSetup(sp, action);
@@ -232,7 +237,7 @@ namespace ACP
 
 
 
-
+//WALA GINA GAMIT!!
         //Datasets for comboBox
         public DataSet fetchData(string action, string desc, string dss)
         {

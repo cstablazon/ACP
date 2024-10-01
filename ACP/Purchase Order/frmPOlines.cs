@@ -15,54 +15,92 @@ namespace ACP
     {
         CatHierarchyClass cat = new CatHierarchyClass();
         acpEntities db = new acpEntities();
+        purchaseOrderClass po = new purchaseOrderClass();
         public frmPOlines()
         {
             InitializeComponent();
         }
 
+        string catRID;
+        string subCatRID;
         public void newItems()
         {
             dgvNewItems.Columns.Clear();
-            dgvNewItems.DataSource = (from a in db.vwProducts
-                                      where a.suppID == Id.suppID && a.RID.Equals(Id.RID)
-                                      select new
-                                      {
-                                          a.SKU,
-                                          a.Barcode,
-                                          a.Product_description,
-                                      }).ToList();
+            DataTable dt = po.fetchProductLine("sp_purchaseOrderOperations", "purchaseOrder", "fetchProductLine", Id.suppID, txtDepartment.Text);
 
-            dgvNewItems.Columns[0].HeaderText = "SKU";
-            dgvNewItems.Columns[1].HeaderText = "Barcode";
-            dgvNewItems.Columns[2].HeaderText = "Product description";
-            DataGridViewTextBoxColumn qtyCol = new DataGridViewTextBoxColumn();
-            qtyCol.Name = "qty";
-            qtyCol.HeaderText = "Quantity";
-            dgvNewItems.Columns.Insert(3, qtyCol);
-            dgvNewItems.Columns["qty"].ReadOnly = false;
+            //DataTable catDT = po.fetchCategoryHierarchy("sp_purchaseOrderOperations", "categoryHierarchy", "code", null, txtDepartment.Text);
+
+
+            //if (catDT.Rows.Count > 0)
+            //{
+                //catRID = catDT.Rows[0].Field<string>("cat_RID").ToString().Trim();
+                //subCatRID = catDT.Rows[0].Field<string>("subcat_RID").ToString().Trim();
+                //MessageBox.Show(Id.suppID);
+                //MessageBox.Show(subCatRID);
+                //MessageBox.Show(catRID);
+                //DataTable dt = po.fetchProductLine("sp_purchaseOrderOperations", "purchaseOrder", "fetchProductLine", Id.suppID, catRID, subCatRID);
+
+                //DataRow[] productDR = dt.Select("suppID = '" + Id.suppID + "' AND RID in ('" + catRID + "', '" + subCatRID + "')");
+                //if (productDR.Length > 0)
+                //{
+                //    dgvNewItems.DataSource = productDR.CopyToDataTable();
+                //}
+                dgvNewItems.DataSource = dt;
+
+                DataGridViewTextBoxColumn qtyCol = new DataGridViewTextBoxColumn();
+                qtyCol.Name = "qtyCol";
+                qtyCol.HeaderText = "Quantity";
+                dgvNewItems.Columns.Add(qtyCol);
+                dgvNewItems.Columns["qtyCol"].ReadOnly = false;
+
+                //dgvNewItems.Columns["qtyCol"].DefaultCellStyle.Format = "N2";
+
+            //}
+            //else
+            //{
+            //    MessageBox.Show("2");
+            //}
+            //dgvNewItems.Columns.Clear();
+            //dgvNewItems.DataSource = (from a in db.vwProducts
+            //                          where a.suppID == Id.suppID && a.RID.Equals(Id.RID)
+            //                          select new
+            //                          {
+            //                              a.SKU,
+            //                              a.Barcode,
+            //                              a.Product_description,
+            //                          }).ToList();
+
+            //dgvNewItems.Columns[0].HeaderText = "SKU";
+            //dgvNewItems.Columns[1].HeaderText = "Barcode";
+            //dgvNewItems.Columns[2].HeaderText = "Product description";
+            //DataGridViewTextBoxColumn qtyCol = new DataGridViewTextBoxColumn();
+            //qtyCol.Name = "qty";
+            //qtyCol.HeaderText = "Quantity";
+            //dgvNewItems.Columns.Insert(3, qtyCol);
+            //dgvNewItems.Columns["qty"].ReadOnly = false;
         }
 
         public void fetchByCode()
         {
-            dgvNewItems.Columns.Clear();
-            var objCode = db.sp_catValidation("code", Convert.ToInt64(txtDepartment.Text)).SingleOrDefault();
-            Id.globalString = objCode.subcat_RID;
-            dgvNewItems.DataSource = (from a in db.vwProducts
-                                      where a.suppID.Equals(Id.suppID) && a.RID.Equals(Id.globalString)
-                                      select new 
-                                      {
-                                          a.SKU,
-                                          a.Barcode,
-                                          a.Product_description,
-                                      }).ToList();
-            dgvNewItems.Columns[0].HeaderText = "SKU";
-            dgvNewItems.Columns[1].HeaderText = "Barcode";
-            dgvNewItems.Columns[2].HeaderText = "Product description";
-            DataGridViewTextBoxColumn qtyCol = new DataGridViewTextBoxColumn();
-            qtyCol.Name = "qty";
-            qtyCol.HeaderText = "Quantity";
-            dgvNewItems.Columns.Insert(3, qtyCol);
-            dgvNewItems.Columns["qty"].ReadOnly = false;
+            //dgvNewItems.Columns.Clear();
+            //var objCode = db.sp_catValidation("code", Convert.ToInt64(txtDepartment.Text)).SingleOrDefault();
+            //Id.globalString = objCode.subcat_RID;
+            //dgvNewItems.DataSource = (from a in db.vwProducts
+            //                          where a.suppID.Equals(Id.suppID) && a.RID.Equals(Id.globalString)
+            //                          select new 
+            //                          {
+            //                              a.SKU,
+            //                              a.Barcode,
+            //                              a.Product_description,
+            //                          }).ToList();
+            //dgvNewItems.Columns[0].HeaderText = "SKU";
+            //dgvNewItems.Columns[1].HeaderText = "Barcode";
+            //dgvNewItems.Columns[2].HeaderText = "Product description";
+            //DataGridViewTextBoxColumn qtyCol = new DataGridViewTextBoxColumn();
+            //qtyCol.Name = "qty";
+            //qtyCol.HeaderText = "Quantity";
+            //dgvNewItems.Columns.Insert(3, qtyCol);
+            //dgvNewItems.Columns["qty"].ReadOnly = false;
 
         }
 
@@ -74,6 +112,7 @@ namespace ACP
         private void dgvNewItems_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress += new KeyPressEventHandler(Control_KeyPress);
+            dgvNewItems.Columns["qtyCol"].DefaultCellStyle.Format = "N2";
             //e.Control.KeyPress -= new KeyPressEventHandler(qty_KeyPress);
             //if(dgvNewItems.CurrentCell.ColumnIndex == 4)
             //{
@@ -130,7 +169,7 @@ namespace ACP
         }
 
         private TreeNode lastAddedNode = null;
-
+        
         private void populateTreeView()
         {
             try
@@ -140,7 +179,7 @@ namespace ACP
                 // Resets the lastAddedNode variable to null
                 lastAddedNode = null;
                 // Fetches a DataTable containing category hierarchy data
-                DataTable dataTable = cat.fetchCatHierarchy();
+                DataTable dataTable = cat.fetchDepartment();
                 // Creates a dictionary to store TreeNode objects, with string keys and TreeNode values
                 Dictionary<string, TreeNode> nodeDict = new Dictionary<string, TreeNode>();
                 // Iterates through each row in the DataTable
@@ -156,7 +195,7 @@ namespace ACP
                     // Sets the Tag property of the TreeNode to the value of "RID"
                     node.Tag = RID;
                     // Adds the TreeNode to the TreeView's root if "rtype" is "0"
-                    if (rtype == "0")
+                    if (rtype == "0" || string.IsNullOrEmpty(rtype))
                     {
                         tv.Nodes.Add(node);
                     }
@@ -209,6 +248,7 @@ namespace ACP
             e.DrawDefault = true;
         }
 
+         
         private void tv_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Retrieves the currently selected TreeNode from the TreeView
@@ -221,16 +261,23 @@ namespace ACP
 
         }
 
+        //string catRID;
+        //string subCatRID;
         private void tv_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
             {
-                var category = (from a in db.categoryHierarchies where a.RID == Id.RID select a).SingleOrDefault();
+                DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "categoryHierarchy", "code");
+                //DataRow[] dr = dt.Select("code = '" + lbl + "'");
+
+                //catRID = dr[0]["cat_RID"].ToString().Trim();
+                //subCatRID = dr[0]["subcat_RID"].ToString().Trim();
+                //var category = (from a in db.categoryHierarchies where a.RID == Id.RID select a).SingleOrDefault();
                 //txtCategory.Text = category.code.Trim();
                 //var dept = db.sp_catValidation("rid", Id.RID);
                 //txtCategory.Text = dept.subcat_code.Trim();
                 //txtDepartment.Text = dept.FirstOrDefault().subcat_desc;
-                txtDepartment.Text = category.desc.Trim();
+                //txtDepartment.Text = dr[0][].ToString().Trim();
                 p.Hide();
                 hideCat = true;
                 //txtCategory.BorderStyle = BorderStyle.Fixed3D;
@@ -249,7 +296,7 @@ namespace ACP
 
         private void txtDepartment_Click(object sender, EventArgs e)
         {
-            categoryForm();
+            //categoryForm();
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -259,26 +306,62 @@ namespace ACP
             {
                 MessageBox.Show("Fill up filter to load products", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if(check.IsMatch(txtDepartment.Text.Trim()))
-            {
-                //MessageBox.Show("letters");
-                newItems();
-            }
             else
             {
-                //MessageBox.Show("mnumbers");
-                fetchByCode();
+                newItems();
             }
-            //newItems();
+            //else if(check.IsMatch(txtDepartment.Text.Trim()))
+            //{
+            //    //MessageBox.Show("letters");
+            //    newItems();
+            //}
+            //else
+            //{
+            //    //MessageBox.Show("mnumbers");
+            //    fetchByCode();
+            //}
+            ////newItems();
 
         }
 
         string dgv;
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.DialogResult = DialogResult.OK;
-            this.Hide();
+            if(dgvNewItems.Rows.Count > 0)
+            {
+                bool isEmpty = false;
+                for (int i = 0; dgvNewItems.Rows.Count > i; i++ )
+                {
+                    if(string.IsNullOrEmpty(dgvNewItems.Rows[i].Cells["qtyCol"].Value as string))
+                    {
+                        isEmpty = true;
+                        break;
+                    }
+                    else
+                    {
+                        isEmpty = false;
+                    }
+                }
+                if(isEmpty == true)
+                {
+                    MessageBox.Show("Quantity is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    for(int i = 0; dgvNewItems.Rows.Count > i; i++ )
+                    {
+                        string barcode = dgvNewItems.Rows[i].Cells["barcode"].Value.ToString();
+                        decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
+                        po.createUpdatePOlines("Create", Id.orderNo, barcode, qty, Id.userID);
+                    }
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
+                    this.Hide();
+
+                }
+            }
+
+            
             //if(dgv.Equals("newItems"))
             //{
             //    int i = 1;
@@ -302,6 +385,26 @@ namespace ACP
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             dgv = "newItems";
+        }
+
+        private void dgvExistItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+        }
+
+        private void dgvNewItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.ColumnIndex == 3 && e.RowIndex != dgvNewItems.NewRowIndex)
+            {
+                if(dgvNewItems.Rows[e.RowIndex].Cells[3].Value != null)
+                {
+                    double qty = double.Parse(e.Value.ToString());
+                    e.Value = qty.ToString("N2");
+                }
+            }
+            //if (e.ColumnIndex == 3)
+            //{
+            //    e.CellStyle.Format = "N2";
+            //}
         }
 
         //private void qty_KeyPress(object sender, KeyPressEventArgs e)

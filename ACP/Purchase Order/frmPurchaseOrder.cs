@@ -24,6 +24,16 @@ namespace ACP
         {
             DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPO");
             dgvPO.DataSource = dt;
+
+            dgvPO.Columns["order No."].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Supplier ID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPO.Columns["Agent"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPO.Columns["Date created"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Delivery date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Cancellation date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPO.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //dgvPO.DataSource = (from a in db.vwPurchaseOrders
             //                    select new 
             //                    {
@@ -52,8 +62,9 @@ namespace ACP
         {
             Id.button = "Create";
             frmAddOrder order = new frmAddOrder();
-            po.createUpdatePurchaseOrder("Create", null, null, 0, null, 0, null, null, null, "Draft", null, Id.userID);
+            po.createUpdatePurchaseOrder("Create", null, null, 0, null, null, 0, null, null, "Draft", null, Id.userID);
             order.txtOrderNo.Text = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
+            Id.orderNo = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
             order.btnCreate.Text = "Save";
             order.btnClose.Text = "Cancel";
             DialogResult res = order.ShowDialog();
@@ -67,29 +78,29 @@ namespace ACP
             //fetchPO();
         }
 
-        private void dgvPOlines()
-        {
-            if(dgvPO.SelectedRows.Count > 0)
-            {
-                pLines.Visible = true;
-                dgvLines.Visible = true;
-            }
-            else
-            {
-                pLines.Visible = false;
-                dgvLines.Visible = false;
-                int h, w;
-                h = 569;
-                w = dgvPO.Size.Width;
-                dgvPO.Size = new Size(w, h);
-            }
+        //private void dgvPOlines()
+        //{
+        //    if(dgvPO.SelectedRows.Count > 0)
+        //    {
+        //        pLines.Visible = true;
+        //        dgvLines.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        pLines.Visible = false;
+        //        dgvLines.Visible = false;
+        //        int h, w;
+        //        h = 569;
+        //        w = dgvPO.Size.Width;
+        //        dgvPO.Size = new Size(w, h);
+        //    }
 
-        }
+        //}
 
         private void frmPurchaseOrder_Load(object sender, EventArgs e)
         {
             fetchPO();
-            dgvPOlines();
+            //dgvPOlines();
         }
 
         private void dgvPO_Paint(object sender, PaintEventArgs e)
@@ -108,19 +119,19 @@ namespace ACP
                 {
                     DataGridViewRow row = dgvPO.Rows[e.RowIndex];
 
-                    Id.orderNo = row.Cells["Order_No"].Value.ToString();
+                    Id.orderNo = row.Cells["Order No."].Value.ToString();
                     Id.status = row.Cells["Status"].Value.ToString();
                     Id.globalString = row.Cells["Name"].Value.ToString();
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
 
-                    var lines = db.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo)).ToList();
-                    int i = 1;
-                    dgvLines.Rows.Clear();
-                    foreach(vwPO_Line line in lines)
-                    {
-                        dgvLines.Rows.Add(i++, line.barcode, line.posDesc, line.subcat_desc, line.CPuomDesc, line.costPrice, line.retailPrice, line.lineDisc, line.Net_amount, line.remarks);
-                    }
+                    //var lines = db.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo)).ToList();
+                    //int i = 1;
+                    //dgvLines.Rows.Clear();
+                    //foreach(vwPO_Line line in lines)
+                    //{
+                    //    dgvLines.Rows.Add(i++, line.barcode, line.posDesc, line.subcat_desc, line.CPuomDesc, line.costPrice, line.retailPrice, line.lineDisc, line.Net_amount, line.remarks);
+                    //}
                     int h, w;
                     h = 416;
                     w = dgvPO.Size.Width;
@@ -174,7 +185,7 @@ namespace ACP
         private void dgvPO_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dgvPO.ClearSelection();
-            dgvPOlines();
+            //dgvPOlines();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -302,7 +313,7 @@ namespace ACP
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             fetchPO();
-            dgvPOlines();
+            //dgvPOlines();
         }
     }
 }

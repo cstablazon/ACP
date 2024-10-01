@@ -14,6 +14,10 @@ namespace ACP
         {
             return db.getRecord("sp_catHierarchy 'FETCHDATA'");
         }
+        public DataTable fetchDepartment()
+        {
+            return db.getRecord("sp_catHierarchy 'fetchDepartment'");
+        }
         public DataTable removeCategory()
         {
             return db.getRecord("sp_catHierarchy 'DELETECAT','','" + Id.RID + "'");

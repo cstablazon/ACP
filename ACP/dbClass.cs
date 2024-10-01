@@ -94,6 +94,21 @@ namespace ACP
             return dt;
         }
 
+        public DataTable fetch(string query, string tableName, string action)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
         public DataTable fetchRecords(string query, string tableName, string action)
         {
             SqlConnection conn = getConnection();
@@ -101,6 +116,56 @@ namespace ACP
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+        public DataTable fetchCategoryHierarchy(string query, string tableName, string action, long? RID, string code)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@RID", RID);
+            cmd.Parameters.AddWithValue("@code", code);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
+//Fetch product lines for purchase order based on department search
+        public DataTable fetchProductLine(string query, string tableName, string action, string suppID, string code)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", suppID);
+            cmd.Parameters.AddWithValue("@code", code);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+//Fetch PO lines based on order no
+        public DataTable fetchPOline(string query, string tableName, string action, string orderNo)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);
@@ -161,7 +226,7 @@ namespace ACP
 
 
 
-
+//WALA GINA GAMIT// NEED CHECK
         public DataTable fetchRecord(string query, string action, string suppID)
         {
             SqlConnection conn = getConnection();

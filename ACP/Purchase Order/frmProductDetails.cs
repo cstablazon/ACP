@@ -407,15 +407,18 @@ namespace ACP
             pPurchaseDiscount.BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(pPurchaseDiscount);
 
-            dgvPurchaseDiscount.DataSource = (from a in db.discounts
-                                              where a.discountType == "Purchase discount"
-                                              select new
-                                              {
-                                                  a.discountID,
-                                                  a.code,
-                                                  a.dDesc,
-                                                  a.percentage
-                                              }).ToList();
+            //dgvPurchaseDiscount.DataSource = (from a in db.discounts
+            //                                  where a.discountType == "Purchase discount"
+            //                                  select new
+            //                                  {
+            //                                      a.discountID,
+            //                                      a.code,
+            //                                      a.dDesc,
+            //                                      a.percentage
+            //                                  }).ToList();
+
+            DataTable dt = pc.fetch("sp_productOperations", "discount", "fetchPopupDiscount");
+            dgvPurchaseDiscount.DataSource = dt;
 
             cmbDiscountFilter.Font = new System.Drawing.Font("Segeo UI", 8, FontStyle.Regular);
             cmbDiscountFilter.Dock = DockStyle.Top;

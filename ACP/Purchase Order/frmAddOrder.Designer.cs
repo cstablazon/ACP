@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddOrder));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPanel = new System.Windows.Forms.Panel();
@@ -89,11 +88,11 @@
             this.cmbPool = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtTotalDiscount = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtPercentage = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.cmbDiscount = new System.Windows.Forms.ComboBox();
+            this.cmbCashDiscount = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -117,18 +116,22 @@
             this.tsbAddProd = new System.Windows.Forms.ToolStripButton();
             this.tsbRemove = new System.Windows.Forms.ToolStripButton();
             this.dgvLines = new System.Windows.Forms.DataGridView();
-            this.lineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.department = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.po_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.po_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.retailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lineDisc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.netAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblLines = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDiscountDesc = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.txtPurchaseDiscount = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblLineDetails = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtPriceUnit = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.txtPesoDiscount = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.cmbDiscountType = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.tabPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabOder.SuspendLayout();
@@ -141,6 +144,8 @@
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).BeginInit();
+            this.panel6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -368,9 +373,10 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.pHeader);
             this.flowLayoutPanel1.Controls.Add(this.pLines);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 133);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 501);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 571);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // pHeader
@@ -378,6 +384,12 @@
             this.pHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pHeader.Controls.Add(this.cmbDiscountType);
+            this.pHeader.Controls.Add(this.label40);
+            this.pHeader.Controls.Add(this.txtPriceUnit);
+            this.pHeader.Controls.Add(this.label38);
+            this.pHeader.Controls.Add(this.txtPesoDiscount);
+            this.pHeader.Controls.Add(this.label39);
             this.pHeader.Controls.Add(this.btnCreate);
             this.pHeader.Controls.Add(this.dtpEntry);
             this.pHeader.Controls.Add(this.btnClose);
@@ -413,11 +425,11 @@
             this.pHeader.Controls.Add(this.cmbPool);
             this.pHeader.Controls.Add(this.label26);
             this.pHeader.Controls.Add(this.label27);
-            this.pHeader.Controls.Add(this.textBox5);
+            this.pHeader.Controls.Add(this.txtTotalDiscount);
             this.pHeader.Controls.Add(this.label15);
-            this.pHeader.Controls.Add(this.textBox4);
+            this.pHeader.Controls.Add(this.txtPercentage);
             this.pHeader.Controls.Add(this.label16);
-            this.pHeader.Controls.Add(this.cmbDiscount);
+            this.pHeader.Controls.Add(this.cmbCashDiscount);
             this.pHeader.Controls.Add(this.label17);
             this.pHeader.Controls.Add(this.label18);
             this.pHeader.Controls.Add(this.label10);
@@ -434,10 +446,10 @@
             this.pHeader.Controls.Add(this.label6);
             this.pHeader.Controls.Add(this.lblHeader);
             this.pHeader.Location = new System.Drawing.Point(3, 3);
-            this.pHeader.MaximumSize = new System.Drawing.Size(1111, 390);
+            this.pHeader.MaximumSize = new System.Drawing.Size(1111, 470);
             this.pHeader.MinimumSize = new System.Drawing.Size(2, 22);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1086, 390);
+            this.pHeader.Size = new System.Drawing.Size(1086, 470);
             this.pHeader.TabIndex = 0;
             // 
             // btnCreate
@@ -450,7 +462,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(902, 354);
+            this.btnCreate.Location = new System.Drawing.Point(902, 435);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 5;
@@ -477,7 +489,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(991, 354);
+            this.btnClose.Location = new System.Drawing.Point(991, 435);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 6;
@@ -536,7 +548,7 @@
             this.rtxtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtRemarks.Location = new System.Drawing.Point(867, 257);
             this.rtxtRemarks.Name = "rtxtRemarks";
-            this.rtxtRemarks.Size = new System.Drawing.Size(203, 91);
+            this.rtxtRemarks.Size = new System.Drawing.Size(203, 172);
             this.rtxtRemarks.TabIndex = 137;
             this.rtxtRemarks.Text = "";
             // 
@@ -680,7 +692,7 @@
             this.rtxtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtAddress.Location = new System.Drawing.Point(491, 249);
             this.rtxtAddress.Name = "rtxtAddress";
-            this.rtxtAddress.Size = new System.Drawing.Size(223, 121);
+            this.rtxtAddress.Size = new System.Drawing.Size(223, 180);
             this.rtxtAddress.TabIndex = 123;
             this.rtxtAddress.Text = "";
             // 
@@ -827,63 +839,65 @@
             this.label27.TabIndex = 107;
             this.label27.Text = "Delivery:";
             // 
-            // textBox5
+            // txtTotalDiscount
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(129, 332);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(182, 23);
-            this.textBox5.TabIndex = 106;
-            this.textBox5.Text = "0.0";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotalDiscount.Enabled = false;
+            this.txtTotalDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalDiscount.Location = new System.Drawing.Point(129, 371);
+            this.txtTotalDiscount.Name = "txtTotalDiscount";
+            this.txtTotalDiscount.Size = new System.Drawing.Size(182, 23);
+            this.txtTotalDiscount.TabIndex = 106;
+            this.txtTotalDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotalDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtTotalDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label15.Location = new System.Drawing.Point(13, 334);
+            this.label15.Location = new System.Drawing.Point(13, 373);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(107, 17);
             this.label15.TabIndex = 105;
             this.label15.Text = "Total discount %:";
             // 
-            // textBox4
+            // txtPercentage
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(129, 303);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(182, 23);
-            this.textBox4.TabIndex = 104;
-            this.textBox4.Text = "0.0";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPercentage.Enabled = false;
+            this.txtPercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPercentage.Location = new System.Drawing.Point(129, 312);
+            this.txtPercentage.Name = "txtPercentage";
+            this.txtPercentage.Size = new System.Drawing.Size(182, 23);
+            this.txtPercentage.TabIndex = 104;
+            this.txtPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label16.Location = new System.Drawing.Point(13, 305);
+            this.label16.Location = new System.Drawing.Point(13, 314);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(76, 17);
             this.label16.TabIndex = 103;
             this.label16.Text = "Percentage:";
             // 
-            // cmbDiscount
+            // cmbCashDiscount
             // 
-            this.cmbDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDiscount.FormattingEnabled = true;
-            this.cmbDiscount.Location = new System.Drawing.Point(129, 269);
-            this.cmbDiscount.Name = "cmbDiscount";
-            this.cmbDiscount.Size = new System.Drawing.Size(182, 24);
-            this.cmbDiscount.TabIndex = 102;
+            this.cmbCashDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCashDiscount.FormattingEnabled = true;
+            this.cmbCashDiscount.Location = new System.Drawing.Point(129, 282);
+            this.cmbCashDiscount.Name = "cmbCashDiscount";
+            this.cmbCashDiscount.Size = new System.Drawing.Size(182, 24);
+            this.cmbCashDiscount.TabIndex = 102;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label17.Location = new System.Drawing.Point(12, 276);
+            this.label17.Location = new System.Drawing.Point(12, 284);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(92, 17);
             this.label17.TabIndex = 101;
@@ -894,7 +908,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label18.Location = new System.Drawing.Point(12, 252);
+            this.label18.Location = new System.Drawing.Point(12, 257);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(68, 19);
             this.label18.TabIndex = 100;
@@ -1055,7 +1069,7 @@
             this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
-            this.pLines.Location = new System.Drawing.Point(3, 399);
+            this.pLines.Location = new System.Drawing.Point(3, 479);
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
@@ -1094,6 +1108,7 @@
             this.tsbAddLine.Name = "tsbAddLine";
             this.tsbAddLine.Size = new System.Drawing.Size(55, 22);
             this.tsbAddLine.Text = "Add line";
+            this.tsbAddLine.Visible = false;
             this.tsbAddLine.Click += new System.EventHandler(this.tsbAddLine_Click);
             // 
             // tsbAddLines
@@ -1119,6 +1134,7 @@
             // tsbRemove
             // 
             this.tsbRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbRemove.Enabled = false;
             this.tsbRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbRemove.Image")));
             this.tsbRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRemove.Name = "tsbRemove";
@@ -1137,17 +1153,6 @@
             this.dgvLines.BackgroundColor = System.Drawing.Color.White;
             this.dgvLines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.lineID,
-            this.barcode,
-            this.productDesc,
-            this.qty,
-            this.department,
-            this.po_unit,
-            this.po_price,
-            this.retailPrice,
-            this.lineDisc,
-            this.netAmount});
             this.dgvLines.Location = new System.Drawing.Point(5, 52);
             this.dgvLines.MultiSelect = false;
             this.dgvLines.Name = "dgvLines";
@@ -1157,61 +1162,8 @@
             this.dgvLines.TabIndex = 3;
             this.dgvLines.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLines_CellClick);
             this.dgvLines.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLines_CellValueChanged);
+            this.dgvLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLines_DataBindingComplete);
             this.dgvLines.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvLines_EditingControlShowing);
-            // 
-            // lineID
-            // 
-            this.lineID.HeaderText = "Line ID";
-            this.lineID.Name = "lineID";
-            // 
-            // barcode
-            // 
-            this.barcode.HeaderText = "Barcode";
-            this.barcode.Name = "barcode";
-            this.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // productDesc
-            // 
-            this.productDesc.HeaderText = "Product description";
-            this.productDesc.Name = "productDesc";
-            // 
-            // qty
-            // 
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = ".00";
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
-            this.qty.HeaderText = "Quantity";
-            this.qty.Name = "qty";
-            // 
-            // department
-            // 
-            this.department.HeaderText = "Department";
-            this.department.Name = "department";
-            // 
-            // po_unit
-            // 
-            this.po_unit.HeaderText = "Unit";
-            this.po_unit.Name = "po_unit";
-            // 
-            // po_price
-            // 
-            this.po_price.HeaderText = "Unit price";
-            this.po_price.Name = "po_price";
-            // 
-            // retailPrice
-            // 
-            this.retailPrice.HeaderText = "Retail price";
-            this.retailPrice.Name = "retailPrice";
-            // 
-            // lineDisc
-            // 
-            this.lineDisc.HeaderText = "Discount percent";
-            this.lineDisc.Name = "lineDisc";
-            // 
-            // netAmount
-            // 
-            this.netAmount.HeaderText = "Net amount";
-            this.netAmount.Name = "netAmount";
             // 
             // lblLines
             // 
@@ -1227,13 +1179,183 @@
             this.lblLines.Text = "   Lines";
             this.lblLines.Click += new System.EventHandler(this.lblLines_Click);
             // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.groupBox2);
+            this.panel6.Controls.Add(this.lblLineDetails);
+            this.panel6.Location = new System.Drawing.Point(3, 507);
+            this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
+            this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1086, 22);
+            this.panel6.TabIndex = 2;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtDiscountDesc);
+            this.groupBox2.Controls.Add(this.label37);
+            this.groupBox2.Controls.Add(this.txtPurchaseDiscount);
+            this.groupBox2.Controls.Add(this.label24);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Location = new System.Drawing.Point(6, 23);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1070, 110);
+            this.groupBox2.TabIndex = 139;
+            this.groupBox2.TabStop = false;
+            // 
+            // txtDiscountDesc
+            // 
+            this.txtDiscountDesc.Enabled = false;
+            this.txtDiscountDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscountDesc.Location = new System.Drawing.Point(147, 38);
+            this.txtDiscountDesc.Name = "txtDiscountDesc";
+            this.txtDiscountDesc.Size = new System.Drawing.Size(137, 23);
+            this.txtDiscountDesc.TabIndex = 148;
+            this.txtDiscountDesc.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtDiscountDesc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtDiscountDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label37.Location = new System.Drawing.Point(11, 40);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(130, 17);
+            this.label37.TabIndex = 147;
+            this.label37.Text = "Discount description:";
+            // 
+            // txtPurchaseDiscount
+            // 
+            this.txtPurchaseDiscount.Enabled = false;
+            this.txtPurchaseDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPurchaseDiscount.Location = new System.Drawing.Point(147, 67);
+            this.txtPurchaseDiscount.Name = "txtPurchaseDiscount";
+            this.txtPurchaseDiscount.Size = new System.Drawing.Size(137, 23);
+            this.txtPurchaseDiscount.TabIndex = 144;
+            this.txtPurchaseDiscount.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPurchaseDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtPurchaseDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label24.Location = new System.Drawing.Point(11, 69);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(116, 17);
+            this.label24.TabIndex = 143;
+            this.label24.Text = "Purchase discount:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label7.Location = new System.Drawing.Point(8, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 19);
+            this.label7.TabIndex = 88;
+            this.label7.Text = "Discount";
+            // 
+            // lblLineDetails
+            // 
+            this.lblLineDetails.AutoSize = true;
+            this.lblLineDetails.Enabled = false;
+            this.lblLineDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLineDetails.Image = global::ACP.Properties.Resources.arrowRight10px;
+            this.lblLineDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLineDetails.Location = new System.Drawing.Point(2, 1);
+            this.lblLineDetails.Name = "lblLineDetails";
+            this.lblLineDetails.Size = new System.Drawing.Size(87, 17);
+            this.lblLineDetails.TabIndex = 138;
+            this.lblLineDetails.Text = "   Line details";
+            this.lblLineDetails.Click += new System.EventHandler(this.lblLineDetails_Click);
+            // 
+            // txtPriceUnit
+            // 
+            this.txtPriceUnit.Enabled = false;
+            this.txtPriceUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPriceUnit.Location = new System.Drawing.Point(129, 429);
+            this.txtPriceUnit.Name = "txtPriceUnit";
+            this.txtPriceUnit.Size = new System.Drawing.Size(182, 23);
+            this.txtPriceUnit.TabIndex = 150;
+            this.txtPriceUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPriceUnit.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPriceUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtPriceUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label38.Location = new System.Drawing.Point(13, 431);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(64, 17);
+            this.label38.TabIndex = 149;
+            this.label38.Text = "Price unit:";
+            // 
+            // txtPesoDiscount
+            // 
+            this.txtPesoDiscount.Enabled = false;
+            this.txtPesoDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPesoDiscount.Location = new System.Drawing.Point(129, 400);
+            this.txtPesoDiscount.Name = "txtPesoDiscount";
+            this.txtPesoDiscount.Size = new System.Drawing.Size(182, 23);
+            this.txtPesoDiscount.TabIndex = 148;
+            this.txtPesoDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPesoDiscount.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPesoDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
+            this.txtPesoDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label39.Location = new System.Drawing.Point(13, 402);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(92, 17);
+            this.label39.TabIndex = 147;
+            this.label39.Text = "Peso discount:";
+            // 
+            // cmbDiscountType
+            // 
+            this.cmbDiscountType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDiscountType.FormattingEnabled = true;
+            this.cmbDiscountType.Items.AddRange(new object[] {
+            "Seasonal discount",
+            "Peso discount"});
+            this.cmbDiscountType.Location = new System.Drawing.Point(129, 341);
+            this.cmbDiscountType.Name = "cmbDiscountType";
+            this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
+            this.cmbDiscountType.TabIndex = 152;
+            this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label40.Location = new System.Drawing.Point(12, 343);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(90, 17);
+            this.label40.TabIndex = 151;
+            this.label40.Text = "Discount type:";
+            // 
             // frmAddOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1111, 646);
+            this.ClientSize = new System.Drawing.Size(1111, 707);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.tabPanel);
@@ -1265,6 +1387,10 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1295,11 +1421,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel pHeader;
         private System.Windows.Forms.Label lblHeader;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtPercentage;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cmbDiscount;
+        private System.Windows.Forms.ComboBox cmbCashDiscount;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label10;
@@ -1358,16 +1482,22 @@
         public System.Windows.Forms.DateTimePicker dtpEntry;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Button btnCreate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDesc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn department;
-        private System.Windows.Forms.DataGridViewTextBoxColumn po_unit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn po_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn retailPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineDisc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn netAmount;
         public System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.TextBox txtPurchaseDiscount;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLineDetails;
+        private System.Windows.Forms.TextBox txtTotalDiscount;
+        private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.TextBox txtDiscountDesc;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox cmbDiscountType;
+        private System.Windows.Forms.Label label40;
+        public System.Windows.Forms.TextBox txtPriceUnit;
+        private System.Windows.Forms.Label label38;
+        public System.Windows.Forms.TextBox txtPesoDiscount;
+        private System.Windows.Forms.Label label39;
     }
 }
