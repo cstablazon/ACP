@@ -297,16 +297,17 @@ namespace ACP
             }
         }
 
+        string whID, LID;
         private void dgvWarehouse_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvWarehouse.Rows[e.RowIndex];
-                Id.LID = row.Cells["LID"].Value.ToString();
+                LID = row.Cells["LID"].Value.ToString();
 
                 txtIssueLoc.Text = row.Cells["desc"].Value.ToString();
                 txtSite.Text = row.Cells["siteID"].Value.ToString();
-                Id.whID = row.Cells["whID"].Value.ToString();
+                whID = row.Cells["whID"].Value.ToString();
                 txtWarehouse.Text = row.Cells["whDesc"].Value.ToString();
                 pWarehouse.Hide();
             }
@@ -464,12 +465,13 @@ namespace ACP
 
         }
 
+        int discountID;
         private void dgvPurchaseDiscount_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvPurchaseDiscount.Rows[e.RowIndex];
-                Id.discountID = Convert.ToInt32(row.Cells["discountID"].Value);
+                discountID = Convert.ToInt32(row.Cells["discountID"].Value);
                 Id.percent = Convert.ToDecimal(row.Cells["percentage"].Value);
 
                 txtPurchaseDiscount.Text = row.Cells["dDesc"].Value.ToString();
@@ -733,7 +735,7 @@ namespace ACP
             e.DrawDefault = true;
         }
 
-        
+        long bmrxID, privilegeID;
         private void tvPopup_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Retrieves the currently selected TreeNode from the TreeView
@@ -744,11 +746,11 @@ namespace ACP
             // Sets a static property "rtypeID" in the "Id" class to the value of the selected node's ID
             if(profile == "BMRX")
             {
-                Id.bmrxID = Convert.ToInt64(selectedNodeID);
+                bmrxID = Convert.ToInt64(selectedNodeID);
             }
             else if(profile == "Privilege")
             {
-                Id.privilegeID = Convert.ToInt64(selectedNodeID);
+                privilegeID = Convert.ToInt64(selectedNodeID);
             }
             // Checks if the selected node's text matches a specific condition
 
@@ -854,6 +856,7 @@ namespace ACP
             int bomID = Convert.ToInt32(cmbBOM.SelectedValue);
             decimal? factor, costPrice, inventoryCost;
             decimal retailPrice = Convert.ToDecimal(txtRetailP.Text);
+
             if (cmbPOunit.Text != cmbRetailUnit.Text)
             {
                 factor = Convert.ToDecimal(txtFactor.Text);
@@ -862,20 +865,85 @@ namespace ACP
             {
                 factor = null;
             }
-                costPrice = Convert.ToDecimal(txtPOcostP.Text);
-                inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
+            costPrice = Convert.ToDecimal(txtPOcostP.Text);
+            inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
+            Id.dt.Columns.Add("Barcode", typeof(string));
+            Id.dt.Columns.Add("SKU", typeof(string));
+            Id.dt.Columns.Add("Item model ID", typeof(string));
+            Id.dt.Columns.Add("chargeID", typeof(int));
+            Id.dt.Columns.Add("Charge", typeof(string));
+            Id.dt.Columns.Add("PID", typeof(long));
+            Id.dt.Columns.Add("Privilege", typeof(string));
+            Id.dt.Columns.Add("BMRXID", typeof(long));
+            Id.dt.Columns.Add("BMRX", typeof(string));
+            Id.dt.Columns.Add("LID", typeof(long));
+            Id.dt.Columns.Add("discountID", typeof(int));
+            Id.dt.Columns.Add("Discount", typeof(string));
+            Id.dt.Columns.Add("CPuomID", typeof(int));
+            Id.dt.Columns.Add("Purchase unit", typeof(string));
+            Id.dt.Columns.Add("Cost price", typeof(decimal));
+            Id.dt.Columns.Add("Inventory cost", typeof(decimal));
+            Id.dt.Columns.Add("RPuomID", typeof(int));
+            Id.dt.Columns.Add("Retail unit", typeof(string));
+            Id.dt.Columns.Add("Retail price", typeof(decimal));
+            Id.dt.Columns.Add("BOMid", typeof(int));
+            Id.dt.Columns.Add("BOM unit", typeof(string));
+            Id.dt.Columns.Add("factor", typeof(decimal));
+            Id.dt.Columns.Add("Product description", typeof(string));
+            Id.dt.Columns.Add("Sales tax", typeof(string));
+            Id.dt.Columns.Add("Purchase tax", typeof(string));
+            Id.dt.Columns.Add("isDiscountable", typeof(bool));
+            Id.dt.Columns.Add("isActive", typeof(bool));
+            Id.dt.Columns.Add("userID", typeof(int));
+
+            DataRow dRow = Id.dt.NewRow();
+            dRow[0] = txtBarcode.Text;
+            dRow[1] = Id.SKU;
+            dRow[2] = itemModelID;
+            dRow[3] = chargeID;
+            dRow[4] = cmbCharges.Text;
+            dRow[5] = privilegeID;
+            dRow[6] = txtPrivilege.Text;
+            dRow[7] = bmrxID;
+            dRow[8] = txtBMRX.Text;
+            dRow[9] = LID;
+            dRow[10] = discountID;
+            dRow[11] = txtPurchaseDiscount.Text;
+            dRow[12] = CPuomID;
+            dRow[13] = cmbPOunit.Text;
+            dRow[14] = costPrice;
+            dRow[15] = inventoryCost;
+            dRow[16] = RPuomID;
+            dRow[17] = cmbRetailUnit.Text;
+            dRow[18] = retailPrice;
+            dRow[19] = bomID;
+            dRow[20] = cmbBOM.Text;
+            dRow[21] = factor ?? (object)DBNull.Value;
+            dRow[22] = txtPosDesc.Text;
+            dRow[23] = cmbSalesTax.Text;
+            dRow[24] = cmbPurchaseTax.Text;
+            dRow[25] = cbNotDiscountable.Checked;
+            dRow[26] = true;
+            dRow[27] = Id.userID;
+            Id.dt.Rows.Add(dRow);
+            //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.DialogResult = DialogResult.OK;
+            this.Hide();
             
-            //if (btnCreate.Text == "Create")
-            //{
-                //if (!string.IsNullOrEmpty(txtConfig.Text))
-                //{
-                pc.createUpdateBarcode("Update", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, Id.discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, Id.barcode);
-                Id.barcode = txtBarcode.Text;
-                MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Id.discountID = 0;
-                Id.percent = 0;
-                this.Hide();
-                this.DialogResult = DialogResult.OK;
+            //    costPrice = Convert.ToDecimal(txtPOcostP.Text);
+            //    inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
+            
+            ////if (btnCreate.Text == "Create")
+            ////{
+            //    //if (!string.IsNullOrEmpty(txtConfig.Text))
+            //    //{
+            //    pc.createUpdateBarcode("Update", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, Id.discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, Id.barcode);
+            //    Id.barcode = txtBarcode.Text;
+            //    MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    Id.discountID = 0;
+            //    Id.percent = 0;
+            //    this.Hide();
+            //    this.DialogResult = DialogResult.OK;
                 //}
                 //else
                 //{

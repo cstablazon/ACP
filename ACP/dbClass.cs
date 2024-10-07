@@ -78,6 +78,7 @@ namespace ACP
 
             return dt;
         }
+
         public DataTable fetchRecordsForProduct(string query, string tableName, string action, string columnValue)
         {
             SqlConnection conn = getConnection();
@@ -86,6 +87,22 @@ namespace ACP
             cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
             cmd.Parameters.AddWithValue(Id.columnName, columnValue);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
+        public DataTable fetchBarcodeById(string query, string tableName, string action, string SKU)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@SKU", SKU);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);
@@ -174,12 +191,11 @@ namespace ACP
             return dt;
         }
 
-        public DataTable fetchRecordForDepartment(string query, string tableName, string action, long RID)
+        public DataTable fetchRecordForDepartment(string query, string action, long RID)
         {
             SqlConnection conn = getConnection();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
             cmd.Parameters.AddWithValue("@RID", RID);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);

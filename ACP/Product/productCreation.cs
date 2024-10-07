@@ -38,6 +38,11 @@ namespace ACP
             return db.fetchRecordsForProduct(sp, tableName, action, columnValue);
         }
 
+        public DataTable fetchBarcodeById(string sp, string tableName, string action, string SKU)
+        {
+            return db.fetchRecordsForProduct(sp, tableName, action, SKU);
+        }
+
 //Retreive
         public DataTable fetchRecords(string sp, string tableName, string action, string SKU)
         {
@@ -54,9 +59,9 @@ namespace ACP
             return db.fetchComponentSetup(sp, action);
         }
 //Department hierarchy
-        public DataTable fetchDept(string sp, string tableName, string action, long RID)
+        public DataTable fetchDept(string sp, string action, long RID)
         {
-            return db.fetchRecordForDepartment(sp, tableName, action, RID);
+            return db.fetchRecordForDepartment(sp, action, RID);
         }
 //CRUD
     //Product CRUD

@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductMgmt));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -69,14 +68,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
             this.dgvProduct = new System.Windows.Forms.DataGridView();
-            this.pLines = new System.Windows.Forms.Panel();
-            this.dgvLines = new System.Windows.Forms.DataGridView();
-            this.lineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.retailUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.retailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -87,8 +78,6 @@
             this.cmsDimensions.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).BeginInit();
-            this.pLines.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -521,20 +510,21 @@
             this.dgvProduct.AllowUserToDeleteRows = false;
             this.dgvProduct.AllowUserToResizeColumns = false;
             this.dgvProduct.AllowUserToResizeRows = false;
-            this.dgvProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProduct.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvProduct.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvProduct.BackgroundColor = System.Drawing.Color.White;
             this.dgvProduct.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProduct.EnableHeadersVisualStyles = false;
             this.dgvProduct.Location = new System.Drawing.Point(4, 150);
@@ -543,110 +533,18 @@
             this.dgvProduct.ReadOnly = true;
             this.dgvProduct.RowHeadersVisible = false;
             this.dgvProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProduct.Size = new System.Drawing.Size(988, 398);
+            this.dgvProduct.Size = new System.Drawing.Size(988, 559);
             this.dgvProduct.TabIndex = 11;
             this.dgvProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_CellClick);
             this.dgvProduct.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_CellDoubleClick);
             this.dgvProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvProduct_DataBindingComplete);
             this.dgvProduct.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvProduct_Paint);
             // 
-            // pLines
-            // 
-            this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pLines.Controls.Add(this.dgvLines);
-            this.pLines.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pLines.Location = new System.Drawing.Point(0, 554);
-            this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(994, 158);
-            this.pLines.TabIndex = 12;
-            this.pLines.Visible = false;
-            // 
-            // dgvLines
-            // 
-            this.dgvLines.AllowUserToAddRows = false;
-            this.dgvLines.AllowUserToDeleteRows = false;
-            this.dgvLines.AllowUserToResizeColumns = false;
-            this.dgvLines.AllowUserToResizeRows = false;
-            this.dgvLines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvLines.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvLines.BackgroundColor = System.Drawing.Color.White;
-            this.dgvLines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.lineID,
-            this.barcode,
-            this.productDesc,
-            this.subCategory,
-            this.retailUnit,
-            this.retailPrice});
-            this.dgvLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLines.EnableHeadersVisualStyles = false;
-            this.dgvLines.Location = new System.Drawing.Point(0, 0);
-            this.dgvLines.MultiSelect = false;
-            this.dgvLines.Name = "dgvLines";
-            this.dgvLines.ReadOnly = true;
-            this.dgvLines.RowHeadersVisible = false;
-            this.dgvLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLines.Size = new System.Drawing.Size(992, 156);
-            this.dgvLines.TabIndex = 12;
-            this.dgvLines.Visible = false;
-            // 
-            // lineID
-            // 
-            this.lineID.HeaderText = "Line ID";
-            this.lineID.Name = "lineID";
-            this.lineID.ReadOnly = true;
-            this.lineID.Width = 62;
-            // 
-            // barcode
-            // 
-            this.barcode.HeaderText = "Barcode";
-            this.barcode.Name = "barcode";
-            this.barcode.ReadOnly = true;
-            this.barcode.Width = 73;
-            // 
-            // productDesc
-            // 
-            this.productDesc.HeaderText = "Product Description";
-            this.productDesc.Name = "productDesc";
-            this.productDesc.ReadOnly = true;
-            this.productDesc.Width = 123;
-            // 
-            // subCategory
-            // 
-            this.subCategory.HeaderText = "Sub category";
-            this.subCategory.Name = "subCategory";
-            this.subCategory.ReadOnly = true;
-            this.subCategory.Width = 91;
-            // 
-            // retailUnit
-            // 
-            this.retailUnit.HeaderText = "Retail unit";
-            this.retailUnit.Name = "retailUnit";
-            this.retailUnit.ReadOnly = true;
-            this.retailUnit.Width = 78;
-            // 
-            // retailPrice
-            // 
-            this.retailPrice.HeaderText = "Retail price";
-            this.retailPrice.Name = "retailPrice";
-            this.retailPrice.ReadOnly = true;
-            this.retailPrice.Width = 82;
-            // 
             // frmProductMgmt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 734);
-            this.Controls.Add(this.pLines);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
@@ -675,8 +573,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
-            this.pLines.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,13 +617,5 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridView dgvProduct;
-        private System.Windows.Forms.Panel pLines;
-        private System.Windows.Forms.DataGridView dgvLines;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDesc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn retailUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn retailPrice;
     }
 }

@@ -144,7 +144,6 @@
             // 
             // btnPOreport
             // 
-            this.btnPOreport.Enabled = false;
             this.btnPOreport.FlatAppearance.BorderSize = 0;
             this.btnPOreport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPOreport.Image = ((System.Drawing.Image)(resources.GetObject("btnPOreport.Image")));

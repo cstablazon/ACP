@@ -412,6 +412,11 @@ namespace ACP
             this.Hide();
         }
 
+        private void jm(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         //private void qty_KeyPress(object sender, KeyPressEventArgs e)
         //{
         //    if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))

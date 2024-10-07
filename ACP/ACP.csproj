@@ -124,6 +124,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPO.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsPurchaseOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
+    </Compile>
     <Compile Include="employee.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
@@ -602,6 +607,7 @@
     <EmbeddedResource Include="frmProdDetails.resx">
       <DependentUpon>frmProdDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="reportPurchaseOrder.rdlc" />
     <EmbeddedResource Include="Supplier config\frmItemSalesTaxGroup.resx">
       <DependentUpon>frmItemSalesTaxGroup.cs</DependentUpon>
     </EmbeddedResource>
@@ -733,6 +739,17 @@
     </None>
     <None Include="dsPO.xss">
       <DependentUpon>dsPO.xsd</DependentUpon>
+    </None>
+    <None Include="dsPurchaseOrder.xsc">
+      <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
+    </None>
+    <None Include="dsPurchaseOrder.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPurchaseOrder.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dsPurchaseOrder.xss">
+      <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

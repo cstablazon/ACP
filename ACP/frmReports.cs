@@ -23,19 +23,9 @@ namespace ACP
            
         }
 
-        private void rbCostP_CheckedChanged(object sender, EventArgs e)
-        {
-            Id.condition = true;
-        }
-
-        private void rbRetailP_CheckedChanged(object sender, EventArgs e)
-        {
-            Id.condition = false;
-        }
-
         private void btnReview_Click(object sender, EventArgs e)
         {
-            if (rbCostP.Checked == false && rbRetailP.Checked == false)
+            if (cbCostPrice.Checked == false && cbRetailPrice.Checked == false)
             {
                 MessageBox.Show("Please select an option to preview", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -44,17 +34,39 @@ namespace ACP
                 // TODO: This line of code loads data into the 'dsPO.sp_reportPO' table. You can move, or remove it, as needed.
                 this.sp_reportPOTableAdapter.Fill(this.dsPO.sp_reportPO, Id.orderNo);
                 ReportParameter[] parameters = new ReportParameter[1];
-                if (Id.condition)
+                if(cbCostPrice.Checked == true && cbRetailPrice.Checked == false)
                 {
-                    parameters[0] = new ReportParameter("HiddenColumn", "False");
+                    parameters[0] = new ReportParameter("hiddenColumn", "True");
+                    parameters[1] = new ReportParameter("nullParam", "Cost price");
                 }
-                else
+                else if (cbCostPrice.Checked == false && cbRetailPrice.Checked == true)
                 {
-                    parameters[0] = new ReportParameter("HiddenColumn", "True");
+                    parameters[0] = new ReportParameter("hiddenColumn", "False");
+                    parameters[1] = new ReportParameter("nullParam", "Retail price");
                 }
+                else if (cbCostPrice.Checked == true && cbRetailPrice.Checked == true)
+                {
+
+                }
+                //if (Id.condition)
+                //{
+                //    parameters[0] = new ReportParameter("HiddenColumn", "False");
+                //}
+                //else
+                //{
+                //    parameters[0] = new ReportParameter("HiddenColumn", "True");
+                //}
                 this.reportViewer1.LocalReport.SetParameters(parameters);
                 this.reportViewer1.RefreshReport();
             }
+        }
+
+        private void cbCostPrice_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cbRetailPrice_CheckedChanged(object sender, EventArgs e)
+        {
         }
     }
 }

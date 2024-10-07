@@ -163,7 +163,7 @@ namespace ACP
             dgvBarcode.Columns["LID"].Visible = false;
             //dgvBarcode.Columns["site"].Visible = false;
             dgvBarcode.Columns["discountID"].Visible = false;
-            dgvBarcode.Columns["whID"].Visible = false;
+            //dgvBarcode.Columns["whID"].Visible = false;
         }
         
         private void fetchBarcode()
@@ -317,18 +317,16 @@ namespace ACP
         
         private void frmModifyProd_Load(object sender, EventArgs e)
         {
-            fetchBarcode();
-            barcodeHideColumn();
             categoryForm();
             p.Hide();
             supplierForm();
             panel.Hide();
-            if(Id.button.Equals("Create"))
+            if(Id.button == "Update")
             {
-                cmbProdSubType.Text = "";
-                cmbProdType.Text = "";
-                cmbBrand.Text = "";
+                fetchBarcode();
+                barcodeHideColumn();
             }
+
             
             dgvBarcode.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvBarcode, true, null);
             dgvBarcode.ClearSelection();
@@ -390,31 +388,116 @@ namespace ACP
             }
             if (Id.button == "Create")
             {
-                MessageBox.Show("4");
-                if (cmbProdSubType.Text == "Product master")
+                if (dgvBarcode.Rows.Count > 0)
                 {
-                    MessageBox.Show("3");
-                    if (string.IsNullOrEmpty(cmbProdDimension.Text))
-                    {
+                    string barcode, SKU, itemModelID, posDesc, salesTax, purchaseTax, LID;
+                    long? PID, BMRXID;
+                    int? chargeID, discountID, CPuomID, RPuomID, BOMid;
+                    decimal? factor, costPrice, inventoryCost, retailPrice;
+                    bool? isDiscountable;
+                    bool    isActive;
 
-                        MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbProdDimension.Focus();
-                        pName = "ProdDimensionError";
-                        oW = cmbProdDimension.Size.Width;
-                        oH = cmbProdDimension.Size.Height;
-                        x = cmbProdDimension.Location.X - 2;
-                        y = cmbProdDimension.Location.Y - 2;
-                        w = oW + 4;
-                        h = oH + 4;
-                        Controls.RemoveByKey("prodDimensionError");
-                        redBorder();
-                        cmbProdDimension.FlatStyle = FlatStyle.Flat;
+                    if (cmbProdSubType.Text == "Product master")
+                    {
+                        if (string.IsNullOrEmpty(cmbProdDimension.Text))
+                        {
+                            MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            cmbProdDimension.Focus();
+                            pName = "ProdDimensionError";
+                            oW = cmbProdDimension.Size.Width;
+                            oH = cmbProdDimension.Size.Height;
+                            x = cmbProdDimension.Location.X - 2;
+                            y = cmbProdDimension.Location.Y - 2;
+                            w = oW + 4;
+                            h = oH + 4;
+                            Controls.RemoveByKey("prodDimensionError");
+                            redBorder();
+                            cmbProdDimension.FlatStyle = FlatStyle.Flat;
+                        }
+                        else
+                        {
+                            pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
+                            //Id.SKU = txtSKU.Text;
+
+                            foreach(DataGridViewRow row in dgvBarcode.Rows)
+                            {
+                                barcode = row.Cells["Barcode"].Value.ToString();
+                                SKU = txtSKU.Text;
+                                itemModelID = row.Cells["Item model ID"].Value.ToString();
+                                chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                                PID = Convert.ToInt64(row.Cells["PID"].Value);
+                                BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
+                                LID = row.Cells["LID"].Value.ToString();
+                                discountID = Convert.ToInt32(row.Cells["discountID"].Value);
+                                CPuomID = Convert.ToInt32(row.Cells["CPuomID"].Value);
+                                RPuomID = Convert.ToInt32(row.Cells["RPuomID"].Value);
+                                BOMid = Convert.ToInt32(row.Cells["BOMid"].Value);
+                                if(string.IsNullOrEmpty(row.Cells["factor"].Value as string))
+                                {
+                                    factor = null;
+                                }
+                                else
+                                {
+                                    factor = Convert.ToDecimal(row.Cells["factor"].Value);
+                                }
+                                retailPrice = Convert.ToDecimal(row.Cells["Retail price"].Value);
+                                costPrice = Convert.ToDecimal(row.Cells["Cost price"].Value);
+                                inventoryCost = Convert.ToDecimal(row.Cells["Inventory cost"].Value);
+                                posDesc = row.Cells["Product description"].Value.ToString();
+                                salesTax = row.Cells["Sales tax"].Value.ToString();
+                                purchaseTax = row.Cells["Purchase tax"].Value.ToString();
+                                isDiscountable = Convert.ToBoolean(row.Cells["isDiscountable"].Value);
+                                isActive = true;
+
+                                pc.createUpdateBarcode("Update", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+
+                            }
+                            lblProdDetails.Enabled = true;
+                            btnClose.Text = "Close";
+                            MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("2");
                         pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
-                        Id.SKU = txtSKU.Text;
+                        //Id.SKU = txtSKU.Text;
+
+                        foreach (DataGridViewRow row in dgvBarcode.Rows)
+                        {
+                            barcode = row.Cells["Barcode"].Value.ToString();
+                            SKU = txtSKU.Text;
+                            itemModelID = row.Cells["Item model ID"].Value.ToString();
+                            chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                            PID = Convert.ToInt64(row.Cells["PID"].Value);
+                            BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
+                            LID = row.Cells["LID"].Value.ToString();
+                            discountID = Convert.ToInt32(row.Cells["discountID"].Value);
+                            CPuomID = Convert.ToInt32(row.Cells["CPuomID"].Value);
+                            RPuomID = Convert.ToInt32(row.Cells["RPuomID"].Value);
+                            BOMid = Convert.ToInt32(row.Cells["BOMid"].Value);
+                            if (string.IsNullOrEmpty(row.Cells["factor"].Value as string))
+                            {
+                                factor = null;
+                            }
+                            else
+                            {
+                                factor = Convert.ToDecimal(row.Cells["factor"].Value);
+                            }
+                            retailPrice = Convert.ToDecimal(row.Cells["Retail price"].Value);
+                            costPrice = Convert.ToDecimal(row.Cells["Cost price"].Value);
+                            inventoryCost = Convert.ToDecimal(row.Cells["Inventory cost"].Value);
+                            posDesc = row.Cells["Product description"].Value.ToString();
+                            salesTax = row.Cells["Sales tax"].Value.ToString();
+                            purchaseTax = row.Cells["Purchase tax"].Value.ToString();
+                            isDiscountable = Convert.ToBoolean(row.Cells["isDiscountable"].Value);
+                            isActive = true;
+
+                            pc.createUpdateBarcode("Update", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+
+                        }
+                        lblProdDetails.Enabled = true;
+                        btnClose.Text = "Close";
+                        MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         lblProdDetails.Enabled = true;
                         btnClose.Text = "Close";
                         MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -422,12 +505,7 @@ namespace ACP
                 }
                 else
                 {
-                    MessageBox.Show("1");
-                    pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
-                    Id.SKU = txtSKU.Text;
-                    lblProdDetails.Enabled = true;
-                    btnClose.Text = "Close";
-                    MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Product details is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else if(Id.button == "Update")
@@ -589,6 +667,21 @@ namespace ACP
             //pc.createUpdateBarcode("Barcode", "Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
             if(additionalInfo.ShowDialog() == DialogResult.OK)
             {
+                dgvBarcode.DataSource = Id.dt;
+                dgvBarcode.Columns["chargeID"].Visible = false;
+                dgvBarcode.Columns["PID"].Visible = false;
+                dgvBarcode.Columns["BMRXID"].Visible = false;
+                //dgvBarcode.Columns["LID"].Visible = false;
+                dgvBarcode.Columns["discountID"].Visible = false;
+                dgvBarcode.Columns["CPuomID"].Visible = false;
+                dgvBarcode.Columns["RPuomID"].Visible = false;
+                dgvBarcode.Columns["BOMid"].Visible = false;
+                dgvBarcode.Columns["userID"].Visible = false;
+                //foreach(DataRow row in Id.dt.Rows)
+                //{
+                //    dgvBarcode.Rows.Add(row["barcode"], row["SKU"], row["itemModelID"], row["chargeID"], row["PID"], row["BMRXID"], row["LID"], row["discountID"], row["CPuomID"], row["RPuomID"], row["BOMid"], row["factor"], row["retailPrice"], row["costPrice"], row["inventoryCost"], row["posDesc"], row["salesTax"], row["purchaseTax"], row["isDiscountable"], row["isActive"]);
+                //}
+
                 //if (Id.button == "Create")
                 //{
                 //    dgvBarcode.DataSource = Id.dtBarcode;
@@ -597,7 +690,7 @@ namespace ACP
                 //}
                 //else if(Id.button == "Update")
                 //{
-                    fetchBarcode();
+                   // fetchBarcode();
                 //}
             }
             //dgvBarcode.Rows.Add();
@@ -1482,35 +1575,35 @@ namespace ACP
                 {
                     DataGridViewRow row = dgvBarcode.Rows[e.RowIndex];
 
-                    Id.globalString2 = row.Cells["_barcode"].Value.ToString();
-                    addInfo.txtBarcode.Text = row.Cells["_barcode"].Value.ToString();
-                    addInfo.txtPosDesc.Text = row.Cells["_purchaseDesc"].Value.ToString();
-                    addInfo.cmbPOunit.Text = row.Cells["_costUnit"].Value.ToString();
-                    addInfo.cmbRetailUnit.Text = row.Cells["_retailUnit"].Value.ToString();
+                    Id.globalString2 = row.Cells["Barcode"].Value.ToString();
+                    addInfo.txtBarcode.Text = row.Cells["Barcode"].Value.ToString();
+                    addInfo.txtPosDesc.Text = row.Cells["Product description"].Value.ToString();
+                    addInfo.cmbPOunit.Text = row.Cells["Purchase unit"].Value.ToString();
+                    addInfo.cmbRetailUnit.Text = row.Cells["Retail unit"].Value.ToString();
                     //addInfo.cmbBMRX.Text = row.Cells["_bmrx"].Value.ToString();
-                    addInfo.txtPOcostP.Text = row.Cells["_costPrice"].Value.ToString();
-                    addInfo.txtRetailP.Text = row.Cells["_retailPrice"].Value.ToString();
-                    addInfo.cmbPurchaseTax.Text = row.Cells["purchaseTax"].Value.ToString();
-                    addInfo.cmbSalesTax.Text = row.Cells["salesTax"].Value.ToString();
+                    addInfo.txtPOcostP.Text = row.Cells["Cost price"].Value.ToString();
+                    addInfo.txtRetailP.Text = row.Cells["Retail price"].Value.ToString();
+                    //addInfo.cmbPurchaseTax.Text = row.Cells["Purchase tax"].Value.ToString();
+                    //addInfo.cmbSalesTax.Text = row.Cells["Sales tax"].Value.ToString();
                     //if (!string.IsNullOrEmpty(row.Cells["_factor"].Value.ToString()))
                     //{
-                        addInfo.txtFactor.Text = row.Cells["_factor"].Value as string;
+                        addInfo.txtFactor.Text = row.Cells["Factor"].Value as string;
                     //}
-                    addInfo.cmbItemModel.Text = row.Cells["_itemModelGroup"].Value.ToString();
+                    addInfo.cmbItemModel.Text = row.Cells["Item model group"].Value.ToString();
                     Id.discountID = Convert.ToInt32(row.Cells["discountID"].Value);
-                    addInfo.txtPurchaseDiscount.Text = row.Cells["purchaseDiscount"].Value.ToString();
-                    addInfo.txtInventoryCost.Text = row.Cells["inventoryCost"].Value.ToString();
+                    addInfo.txtPurchaseDiscount.Text = row.Cells["Purchase discount"].Value.ToString();
+                    addInfo.txtInventoryCost.Text = row.Cells["Inventory cost"].Value.ToString();
                     Id.LID = row.Cells["LID"].Value.ToString();
-                    addInfo.txtIssueLoc.Text = row.Cells["location"].Value.ToString();
-                    addInfo.txtSite.Text = row.Cells["site"].Value.ToString();
-                    addInfo.txtWarehouse.Text = row.Cells["warehouse"].Value.ToString();
+                    //addInfo.txtIssueLoc.Text = row.Cells["location"].Value.ToString();
+                    //addInfo.txtSite.Text = row.Cells["site"].Value.ToString();
+                    //addInfo.txtWarehouse.Text = row.Cells["warehouse"].Value.ToString();
                     Id.bmrxID = Convert.ToInt64(row.Cells["bmrxID"].Value);
                     addInfo.txtBMRX.Text = row.Cells["_bmrx"].Value.ToString();
                     addInfo.cbNotDiscountable.Checked = Convert.ToBoolean(row.Cells["isDiscountable"].Value);
                     addInfo.cmbCharges.Text = row.Cells["chargeGroup"].Value as string;
                     Id.privilegeID = Convert.ToInt64(row.Cells["privilegeID"].Value);
-                    addInfo.txtPrivilege.Text = row.Cells["_privilegeSetup"].Value.ToString();
-                    addInfo.txtConfig.Text = row.Cells["config"].Value as string;
+                    addInfo.txtPrivilege.Text = row.Cells["Privilege setup"].Value.ToString();
+                    //addInfo.txtConfig.Text = row.Cells["config"].Value as string;
 
                     DialogResult res = addInfo.ShowDialog();
                     if(res == DialogResult.OK)
@@ -1752,6 +1845,22 @@ namespace ACP
 
         private void pGeneral_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void tsbView_Click(object sender, EventArgs e)
+        {
+            frmProductDetails details = new frmProductDetails();
+
+            DataTable dt = pc.fetchBarcodeById("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+            foreach(DataRow dr in dt.Rows)
+            {
+                details.txtBarcode.Text = dr["Barcode"].ToString();
+                details.txtPosDesc.Text = dr["Product description"].ToString();
+                details.cmbPOunit.Text = dr["Purchase unit"].ToString();
+                details.cmbRetailUnit.Text = dr["Retail unit"].ToString();
+                details.cmbBOM.Text = dr["BOM"].ToString();
+            }
 
         }
     }

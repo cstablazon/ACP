@@ -232,7 +232,6 @@ C:\Users\cstablazon\Source\Repos\ACP\ACP\bin\Debug\EntityFramework.SqlServer.xml
 D:\CHING\Repos\ACP\ACP\bin\Debug\ACP.exe.config
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.exe
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.pdb
-D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.csprojResolveAssemblyReference.cache
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmAddress.resources
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmBrand.resources
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmKitComponents.resources
@@ -284,3 +283,4 @@ D:\CHING\Repos\ACP\ACP\bin\Debug\EntityFramework.dll
 D:\CHING\Repos\ACP\ACP\bin\Debug\EntityFramework.SqlServer.dll
 D:\CHING\Repos\ACP\ACP\bin\Debug\EntityFramework.xml
 D:\CHING\Repos\ACP\ACP\bin\Debug\EntityFramework.SqlServer.xml
+D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.csprojResolveAssemblyReference.cache

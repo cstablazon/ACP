@@ -26,16 +26,16 @@ namespace ACP
             dgvProduct.Columns["RID"].Visible = false;
             dgvProduct.Columns["brandID"].Visible = false;
             dgvProduct.Columns["bDesc"].Visible = false;
-            dgvProduct.Columns["SKU"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["itemDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvProduct.Columns["suppID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvProduct.Columns["prodTypeDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["prodSubTypeDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["pDimension"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["desc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvProduct.Columns["isConcession"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvProduct.Columns["transDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["SKU"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["itemDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvProduct.Columns["suppID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvProduct.Columns["prodTypeDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["prodSubTypeDesc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["pDimension"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["desc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvProduct.Columns["isConcession"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvProduct.Columns["transDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvProduct.Columns["itemDesc"].HeaderText = "Item description";
             dgvProduct.Columns["suppID"].HeaderText = "Supplier ID";
             dgvProduct.Columns["name"].HeaderText = "Name";
@@ -71,28 +71,25 @@ namespace ACP
             //dgvProduct.Columns[6].HeaderText = "Date created";
         }
 
-        private void dgvlines()
-        {
-            if(dgvLines.SelectedRows.Count > 0)
-            {
-                pLines.Visible = true;
-                dgvLines.Visible = true;
-            }
-            else
-            {
-                pLines.Visible = false;
-                dgvLines.Visible = false;
-                int h, w;
-                w = dgvProduct.Size.Width;
-                h = 558;
-                dgvProduct.Size = new System.Drawing.Size(w, h);
-            }
-        }
+        //private void dgvlines()
+        //{
+        //    if(dgvLines.SelectedRows.Count > 0)
+        //    {
+        //        pLines.Visible = true;
+        //        dgvLines.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        int h, w;
+        //        w = dgvProduct.Size.Width;
+        //        h = 558;
+        //        dgvProduct.Size = new System.Drawing.Size(w, h);
+        //    }
+        //}
 
         private void frmProductMgmt_Load(object sender, EventArgs e)
         {
             productList();
-            dgvlines();
         }
 
         bool show;
@@ -181,8 +178,6 @@ namespace ACP
             w = dgvProduct.Size.Width;
             h = 558;
             dgvProduct.Size = new System.Drawing.Size(w, h);
-            pLines.Visible = false;
-            dgvLines.Visible = false;
         }
 
         private void dgvProduct_Paint(object sender, PaintEventArgs e)
@@ -196,7 +191,6 @@ namespace ACP
         private void dgvProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dgvProduct.ClearSelection();
-            dgvlines();
         }
 
         private void dgvProduct_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -210,30 +204,12 @@ namespace ACP
                 Id.globalString2 = row.Cells["itemDesc"].Value.ToString();
                 if (dgvProduct.SelectedRows.Count > 0)
                 {
-                    DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductLines", Id.SKU);
-                    dgvLines.DataSource = dt;
-
-                    dgvLines.Columns["barcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgvLines.Columns["Product Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                    dgvLines.Columns["desc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                    dgvLines.Columns["Retail Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgvLines.Columns["Retail price"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgvLines.Columns["barcode"].HeaderText = "Barcode";
-                    dgvLines.Columns["desc"].HeaderText = "Sub category";
-
-                    int h, w;
-                    w = dgvProduct.Size.Width;
-                    h = 398;
-                    dgvProduct.Size = new System.Drawing.Size(w, h);
-                    pLines.Visible = true;
-                    dgvLines.Visible = true;
+                    
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
                 }
                 else
                 {
-                    pLines.Visible = false;
-                    dgvLines.Visible = false;
                     btnEdit.Enabled = false;
                     btnDelete.Enabled = false;
                 }
@@ -258,7 +234,7 @@ namespace ACP
 
                 modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
                 Id.RIDL = Convert.ToInt64(dgvProduct.Rows[rowIndex].Cells["RID"].Value);
-                DataTable dt = pc.fetchDept("sp_catValidation", null, "rid", Id.RIDL);
+                DataTable dt = pc.fetchDept("sp_catValidation", "rid", Id.RIDL);
                 
                 foreach(DataRow dr in dt.Rows)
                 {

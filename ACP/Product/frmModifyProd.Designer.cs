@@ -99,6 +99,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnNewBarcode = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
+            this.tsbView = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.pGeneral.SuspendLayout();
             this.pProdCategory.SuspendLayout();
@@ -128,15 +129,13 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 474);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 426);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
             // 
             this.pGeneral.BackColor = System.Drawing.Color.White;
             this.pGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pGeneral.Controls.Add(this.btnCreate);
-            this.pGeneral.Controls.Add(this.btnClose);
             this.pGeneral.Controls.Add(this.label15);
             this.pGeneral.Controls.Add(this.cmbProdDimension);
             this.pGeneral.Controls.Add(this.label13);
@@ -181,7 +180,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(777, 221);
+            this.btnCreate.Location = new System.Drawing.Point(799, 536);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 96;
@@ -200,7 +199,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(866, 221);
+            this.btnClose.Location = new System.Drawing.Point(888, 536);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 97;
@@ -506,7 +505,7 @@
             this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
             this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 20);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 122);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -528,7 +527,8 @@
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsBtnNewBarcode,
             this.tsbEdit,
-            this.tsbDeleteBarcode});
+            this.tsbDeleteBarcode,
+            this.tsbView});
             this.toolStrip3.Location = new System.Drawing.Point(3, 18);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.Size = new System.Drawing.Size(930, 25);
@@ -593,7 +593,6 @@
             this.lblProdDetails.AutoSize = true;
             this.lblProdDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblProdDetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProdDetails.Enabled = false;
             this.lblProdDetails.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProdDetails.Image = global::ACP.Properties.Resources.arrowRight10px;
             this.lblProdDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -619,7 +618,7 @@
             this.pFinancials.Controls.Add(this.label54);
             this.pFinancials.Controls.Add(this.cbItemGroup);
             this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 293);
+            this.pFinancials.Location = new System.Drawing.Point(3, 395);
             this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
             this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
             this.pFinancials.Name = "pFinancials";
@@ -976,6 +975,15 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "New";
             // 
+            // tsbView
+            // 
+            this.tsbView.Image = ((System.Drawing.Image)(resources.GetObject("tsbView.Image")));
+            this.tsbView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbView.Name = "tsbView";
+            this.tsbView.Size = new System.Drawing.Size(89, 22);
+            this.tsbView.Text = "View details";
+            this.tsbView.Click += new System.EventHandler(this.tsbView_Click);
+            // 
             // frmModifyProd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -986,7 +994,9 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnCreate);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1095,5 +1105,6 @@
         private System.Windows.Forms.Label label17;
         public System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ToolStripButton tsbEdit;
+        private System.Windows.Forms.ToolStripButton tsbView;
     }
 }

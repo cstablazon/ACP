@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPOlines));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtFilter = new System.Windows.Forms.TextBox();
-            this.cmbFilter = new System.Windows.Forms.ComboBox();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpExistItems = new System.Windows.Forms.TabPage();
             this.dgvExistItems = new System.Windows.Forms.DataGridView();
@@ -53,46 +50,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtFilter);
-            this.groupBox1.Controls.Add(this.cmbFilter);
-            this.groupBox1.Controls.Add(this.btnFilter);
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Location = new System.Drawing.Point(15, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(722, 427);
+            this.groupBox1.Size = new System.Drawing.Size(598, 427);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            // 
-            // txtFilter
-            // 
-            this.txtFilter.Location = new System.Drawing.Point(591, 106);
-            this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(121, 22);
-            this.txtFilter.TabIndex = 102;
-            // 
-            // cmbFilter
-            // 
-            this.cmbFilter.FormattingEnabled = true;
-            this.cmbFilter.Items.AddRange(new object[] {
-            "",
-            "Supplier ID",
-            "SKU",
-            "Barcode",
-            "Item description"});
-            this.cmbFilter.Location = new System.Drawing.Point(591, 76);
-            this.cmbFilter.Name = "cmbFilter";
-            this.cmbFilter.Size = new System.Drawing.Size(121, 21);
-            this.cmbFilter.TabIndex = 101;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFilter.Location = new System.Drawing.Point(591, 42);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 28);
-            this.btnFilter.TabIndex = 100;
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -169,6 +132,7 @@
             this.dgvNewItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNewItems.Size = new System.Drawing.Size(572, 372);
             this.dgvNewItems.TabIndex = 6;
+            this.dgvNewItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.jm);
             this.dgvNewItems.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNewItems_CellFormatting);
             this.dgvNewItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNewItems_EditingControlShowing);
             // 
@@ -210,7 +174,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(573, 469);
+            this.btnCreate.Location = new System.Drawing.Point(446, 469);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 99;
@@ -229,7 +193,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(662, 469);
+            this.btnClose.Location = new System.Drawing.Point(535, 469);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 100;
@@ -242,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 511);
+            this.ClientSize = new System.Drawing.Size(623, 511);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnLoad);
@@ -258,7 +222,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmPOlines_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tpExistItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistItems)).EndInit();
@@ -281,9 +244,6 @@
         private System.Windows.Forms.TabPage tpExistItems;
         private System.Windows.Forms.DataGridView dgvExistItems;
         private System.Windows.Forms.TabPage tpNewItems;
-        private System.Windows.Forms.TextBox txtFilter;
-        private System.Windows.Forms.ComboBox cmbFilter;
-        private System.Windows.Forms.Button btnFilter;
         public System.Windows.Forms.DataGridView dgvNewItems;
     }
 }

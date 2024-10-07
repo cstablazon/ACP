@@ -837,7 +837,7 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label20.Location = new System.Drawing.Point(365, 198);
+            this.label20.Location = new System.Drawing.Point(366, 195);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(111, 17);
             this.label20.TabIndex = 114;
@@ -1146,7 +1146,7 @@
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 22);
+            this.pLines.Size = new System.Drawing.Size(1086, 194);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1259,7 +1259,7 @@
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 507);
+            this.panel6.Location = new System.Drawing.Point(3, 679);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
