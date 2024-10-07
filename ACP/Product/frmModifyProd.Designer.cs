@@ -129,7 +129,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 426);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 483);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
@@ -180,7 +180,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(799, 536);
+            this.btnCreate.Location = new System.Drawing.Point(799, 593);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 96;
@@ -199,7 +199,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(888, 536);
+            this.btnClose.Location = new System.Drawing.Point(888, 593);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 97;
@@ -505,7 +505,7 @@
             this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
             this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 122);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 96);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -618,7 +618,7 @@
             this.pFinancials.Controls.Add(this.label54);
             this.pFinancials.Controls.Add(this.cbItemGroup);
             this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 395);
+            this.pFinancials.Location = new System.Drawing.Point(3, 369);
             this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
             this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
             this.pFinancials.Name = "pFinancials";
@@ -729,7 +729,7 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 581);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 626);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(987, 22);
             this.statusStrip1.TabIndex = 3;
@@ -990,7 +990,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(987, 603);
+            this.ClientSize = new System.Drawing.Size(987, 648);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);

@@ -1683,12 +1683,13 @@ namespace ACP
 
         }
 
+        string barcodee;
         private void dgvBarcode_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvBarcode.Rows[e.RowIndex];
-                Id.barcode = row.Cells["barcode"].Value.ToString();
+                barcodee = row.Cells["barcode"].Value.ToString();
                 if(dgvBarcode.SelectedRows.Count > 0)
                 {
                     if (cmbProdSubType.Text == "Product master")
@@ -1852,15 +1853,36 @@ namespace ACP
         {
             frmProductDetails details = new frmProductDetails();
 
-            DataTable dt = pc.fetchBarcodeById("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+            DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", barcodee);
             foreach(DataRow dr in dt.Rows)
             {
-                details.txtBarcode.Text = dr["Barcode"].ToString();
-                details.txtPosDesc.Text = dr["Product description"].ToString();
-                details.cmbPOunit.Text = dr["Purchase unit"].ToString();
-                details.cmbRetailUnit.Text = dr["Retail unit"].ToString();
-                details.cmbBOM.Text = dr["BOM"].ToString();
+                details.txtBarcode.Text = dr["barcode"].ToString();
+                details.txtPosDesc.Text = dr["posDesc"].ToString();
+                details.cmbPOunit.Text = dr["poUnit"].ToString();
+                details.cmbRetailUnit.Text = dr["retailUnit"].ToString();
+                details.cmbBOM.Text = dr["bomDesc"].ToString();
+                details.cmbPurchaseTax.Text = dr["purchaseTax"].ToString();
+                details.cmbSalesTax.Text = dr["salesTax"].ToString();
+                details.txtFactor.Text = dr["factor"].ToString();
+                details.cmbItemModel.Text = dr["itemModelDesc"].ToString();
+                //Id.discountID = Convert.ToInt32(dr["discountID"]);
+                details.txtPurchaseDiscount.Text = dr["dDesc"].ToString();
+                details.txtPOcostP.Text = dr["costPrice"].ToString();
+                details.txtRetailP.Text = dr["retailPrice"].ToString();
+                details.txtInventoryCost.Text = dr["inventoryCost"].ToString();
+                details.txtIssueLoc.Text = dr["Location"].ToString();
+                details.txtWarehouse.Text = dr["whDesc"].ToString();
+                details.txtSite.Text = dr["siteID"].ToString();
+                //Id.bmrxID = Convert.ToInt64(dr["BMRXID"]);
+                details.txtBMRX.Text = dr["BMRX"].ToString();
+                details.cbNotDiscountable.Checked = Convert.ToBoolean(dr["isDiscountable"]);
+                //Id.privilegeID = Convert.ToInt64(dr["PID"]);
+                details.txtPrivilege.Text = dr["Privilege setup"].ToString();
+                details.cmbCharges.Text = dr["chargeDesc"].ToString();
             }
+            details.btnCreate.Text = "Ok";
+            details.btnClose.Text = "Close";
+            details.ShowDialog();
 
         }
     }

@@ -38,9 +38,9 @@ namespace ACP
             return db.fetchRecordsForProduct(sp, tableName, action, columnValue);
         }
 
-        public DataTable fetchBarcodeById(string sp, string tableName, string action, string SKU)
+        public DataTable fetchBarcodeById(string sp, string tableName, string action, string barcode)
         {
-            return db.fetchRecordsForProduct(sp, tableName, action, SKU);
+            return db.fetchBarcodeById(sp, tableName, action, barcode);
         }
 
 //Retreive

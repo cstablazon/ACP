@@ -95,14 +95,14 @@ namespace ACP
             return dt;
         }
 
-        public DataTable fetchBarcodeById(string query, string tableName, string action, string SKU)
+        public DataTable fetchBarcodeById(string query, string tableName, string action, string barcode)
         {
             SqlConnection conn = getConnection();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
-            cmd.Parameters.AddWithValue("@SKU", SKU);
+            cmd.Parameters.AddWithValue("@barcode", barcode);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);

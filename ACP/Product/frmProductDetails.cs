@@ -133,10 +133,10 @@ namespace ACP
                 cmbPOunit.Text = "";
                 cmbItemModel.Text = "";
                 cmbCharges.Text = "";
+                txtPOcostP.Text = 0.ToString("N2");
+                txtRetailP.Text = 0.ToString("N2");
+                txtInventoryCost.Text = 0.ToString("N2");
             }
-            txtPOcostP.Text = 0.ToString("N2");
-            txtRetailP.Text = 0.ToString("N2");
-            txtInventoryCost.Text = 0.ToString("N2");
             //txtFactor.Text = 0.ToString("N2");
             txtFactor.Enabled = false;
             discountCriteria();
