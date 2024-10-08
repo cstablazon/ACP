@@ -11,6 +11,7 @@ namespace ACP
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        public static int CurrentUserId { get; set; }
         [STAThread]
         static void Main()
         {

@@ -123,13 +123,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pSidebar = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
             this.tvModule = new System.Windows.Forms.TreeView();
             this.imageModule = new System.Windows.Forms.ImageList(this.components);
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblUserRole = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pBody = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pHeader.SuspendLayout();
             this.pSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -174,9 +174,9 @@
             // pSidebar
             // 
             this.pSidebar.BackColor = System.Drawing.Color.White;
-            this.pSidebar.Controls.Add(this.label2);
+            this.pSidebar.Controls.Add(this.lblUser);
             this.pSidebar.Controls.Add(this.tvModule);
-            this.pSidebar.Controls.Add(this.label3);
+            this.pSidebar.Controls.Add(this.lblUserRole);
             this.pSidebar.Controls.Add(this.pictureBox2);
             this.pSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pSidebar.Location = new System.Drawing.Point(0, 30);
@@ -184,15 +184,15 @@
             this.pSidebar.Size = new System.Drawing.Size(287, 668);
             this.pSidebar.TabIndex = 2;
             // 
-            // label2
+            // lblUser
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(43, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(185, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Juan D. Dela Cruz";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUser.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Location = new System.Drawing.Point(9, 74);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(272, 20);
+            this.lblUser.TabIndex = 6;
+            this.lblUser.Text = "Juan D. Dela Cruz";
+            this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tvModule
             // 
@@ -336,15 +336,25 @@
             this.imageModule.Images.SetKeyName(8, "resource (1).png");
             this.imageModule.Images.SetKeyName(9, "settings.png");
             // 
-            // label3
+            // lblUserRole
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(100, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Administrator";
+            this.lblUserRole.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserRole.Location = new System.Drawing.Point(9, 94);
+            this.lblUserRole.Name = "lblUserRole";
+            this.lblUserRole.Size = new System.Drawing.Size(272, 13);
+            this.lblUserRole.TabIndex = 5;
+            this.lblUserRole.Text = "Administrator";
+            this.lblUserRole.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(103, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(81, 65);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
             // 
             // pBody
             // 
@@ -364,16 +374,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(2, 668);
             this.panel1.TabIndex = 4;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(93, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(81, 65);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
             // 
             // frMain
             // 
@@ -395,7 +395,6 @@
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
             this.pSidebar.ResumeLayout(false);
-            this.pSidebar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -406,9 +405,9 @@
         private System.Windows.Forms.Panel pHeader;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pSidebar;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.TreeView tvModule;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblUserRole;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ImageList imageModule;
         private System.Windows.Forms.Panel pBody;

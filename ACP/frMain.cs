@@ -6,14 +6,18 @@ namespace ACP
 {
     public partial class frMain : Form
     {
-        public frMain()
+        UserPermissionManager _permissionManager;
+        public frMain(int userId)
         {
             InitializeComponent();
+            _permissionManager = new UserPermissionManager(userId);
         }
 
         private void frMain_Load(object sender, EventArgs e)
         {
             pictureBox2.Focus();
+            lblUser.Text = _permissionManager.GetUserFullName();
+            lblUserRole.Text = _permissionManager.GetUserRole();
         }
 
         private void tvModule_AfterSelect(object sender, TreeViewEventArgs e)
@@ -25,14 +29,18 @@ namespace ACP
 
                 case "ProductMgt":
                     //2nd commit
-
-                    
-
-                    frmProductMgmt prodmgmt = new frmProductMgmt { TopLevel = false };
-                    pBody.Controls.Clear();
-                    pBody.Controls.Add(prodmgmt);
-                    prodmgmt.BringToFront();
-                    prodmgmt.Show();
+                    if (_permissionManager.CanOpenForm("Product Management Form"))
+                    {
+                        frmProductMgmt prodmgmt = new frmProductMgmt { TopLevel = false };
+                        pBody.Controls.Clear();
+                        pBody.Controls.Add(prodmgmt);
+                        prodmgmt.BringToFront();
+                        prodmgmt.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to open the Product Management Form.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     
                     break;
 
@@ -57,13 +65,21 @@ namespace ACP
 
 
                 case "supp":
-                    frmSupplierMgt sup = new frmSupplierMgt { TopLevel = false };
-                    pBody.Controls.Clear();
-                    pBody.Controls.Add(sup);
-                    sup.BringToFront();
-                    sup.Show();
-                    break;
+                    if (_permissionManager.CanOpenForm("Supplier Management Form"))
+                    {
+                        frmSupplierMgt sup = new frmSupplierMgt { TopLevel = false };
+                        pBody.Controls.Clear();
+                        pBody.Controls.Add(sup);
+                        sup.BringToFront();
+                        sup.Show();
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to open the Supplier Form.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
 
+                    break;
                 case "storage_dimension_group":
                     frmStorageGroup sdg = new frmStorageGroup { TopLevel = false };
                     pBody.Controls.Clear();
@@ -143,15 +159,24 @@ namespace ACP
                     break;
 
                 case "item_tax_group":
-                    frmItemTax itemTax = new frmItemTax { TopLevel = false };
-                    pBody.Controls.Clear();
-                    pBody.Controls.Add(itemTax);
-                    Id.desc2 = "@Id";
-                    Id.desc3 = "@itemTaxID";
-                    Id.desc4 = "@itemTaxDesc";
-                    Id.desc5 = "@percent";
-                    itemTax.BringToFront();
-                    itemTax.Show();
+                    if (_permissionManager.CanOpenForm("Item Tax Group Form"))
+                    {
+                        frmItemTax itemTax = new frmItemTax { TopLevel = false };
+                        pBody.Controls.Clear();
+                        pBody.Controls.Add(itemTax);
+                        Id.desc2 = "@Id";
+                        Id.desc3 = "@itemTaxID";
+                        Id.desc4 = "@itemTaxDesc";
+                        Id.desc5 = "@percent";
+                        itemTax.BringToFront();
+                        itemTax.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to open the Item Tax Group Form.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
+                    
                     break;
 
                     case "inventLocation":
@@ -194,12 +219,20 @@ namespace ACP
                     break;
 
                 case "itemSalesTaxGroup":
-                    frmItemSalesTaxGroup tax = new frmItemSalesTaxGroup { TopLevel = false };
-                    pBody.Controls.Clear();
-                    pBody.Controls.Add(tax);
-                    tax.Dock = DockStyle.Fill;
-                    tax.BringToFront();
-                    tax.Show();
+                    if (_permissionManager.CanOpenForm("Item Sales Tax Group Form"))
+                    {
+                        frmItemSalesTaxGroup tax = new frmItemSalesTaxGroup { TopLevel = false };
+                        pBody.Controls.Clear();
+                        pBody.Controls.Add(tax);
+                        tax.Dock = DockStyle.Fill;
+                        tax.BringToFront();
+                        tax.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to open the Item Sales Tax Group Form.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                     break;
 
                 case "brand":

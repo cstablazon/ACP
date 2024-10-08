@@ -39,9 +39,10 @@ namespace ACP
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        if (Convert.ToInt32(row["authID"]) == 1)
+                        if (Convert.ToInt32(row["authID"]) == 1 || Convert.ToInt32(row["authID"]) == 2 || Convert.ToInt32(row["authID"]) == 3)
                         {
-                            frMain main = new frMain();
+                            Program.CurrentUserId = Convert.ToInt32(row["userID"]);
+                            frMain main = new frMain(Convert.ToInt32(row["userID"]));
                             main.Show();
                             this.Hide();
                         }
