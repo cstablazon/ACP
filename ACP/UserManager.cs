@@ -77,7 +77,6 @@ namespace ACP
                 {"@Password", user.Password},
                 {"@RID", user.RID},
                 {"@IsActive", user.IsActive},
-                {"@TransDate", user.TransDate},
                 {"@FirstName", user.FirstName},
                 {"@LastName", user.LastName},
                 {"@Email", user.Email},
