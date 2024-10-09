@@ -55,7 +55,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbAutoGenerate = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPosDesc = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -365,17 +365,17 @@
             this.txtBarcode.Leave += new System.EventHandler(this.txtBarcode_Leave);
             this.txtBarcode.MouseHover += new System.EventHandler(this.txtBarcode_MouseHover);
             // 
-            // checkBox1
+            // cbAutoGenerate
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(421, 39);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(101, 17);
-            this.checkBox1.TabIndex = 119;
-            this.checkBox1.Text = "Auto Generate";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            this.checkBox1.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cbAutoGenerate.AutoSize = true;
+            this.cbAutoGenerate.Location = new System.Drawing.Point(421, 39);
+            this.cbAutoGenerate.Name = "cbAutoGenerate";
+            this.cbAutoGenerate.Size = new System.Drawing.Size(101, 17);
+            this.cbAutoGenerate.TabIndex = 119;
+            this.cbAutoGenerate.Text = "Auto Generate";
+            this.cbAutoGenerate.UseVisualStyleBackColor = true;
+            this.cbAutoGenerate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.cbAutoGenerate.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             // 
             // label1
             // 
@@ -763,7 +763,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtPosDesc);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbAutoGenerate);
             this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -832,7 +832,6 @@
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.TextBox txtBarcode;
-        private System.Windows.Forms.CheckBox checkBox1;
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox txtPosDesc;
         public System.Windows.Forms.Button btnCreate;
@@ -866,6 +865,7 @@
         public System.Windows.Forms.TextBox txtWarehouse;
         public System.Windows.Forms.TextBox txtIssueLoc;
         public System.Windows.Forms.Button btnClose;
+        public System.Windows.Forms.CheckBox cbAutoGenerate;
 
     }
 }

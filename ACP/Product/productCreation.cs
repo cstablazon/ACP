@@ -59,13 +59,13 @@ namespace ACP
             return db.fetchComponentSetup(sp, action);
         }
 //Department hierarchy
-        public DataTable fetchDept(string sp, string action, long RID)
+        public DataTable fetchDept(string sp, string action, long? RID)
         {
             return db.fetchRecordForDepartment(sp, action, RID);
         }
 //CRUD
     //Product CRUD
-        public void createUpdateProduct(string action, string SKU, string @SKUtoBeUpdated, long RID, int prodTypeID, int prodSubTypeID, string suppID, int? brandID, string pDimension, string itemDesc, bool isConcession, int? userID)
+        public void createUpdateProduct(string action, string SKU, string @SKUtoBeUpdated, long? RID, int prodTypeID, int prodSubTypeID, string suppID, int? brandID, string pDimension, string itemDesc, bool isConcession, int? userID)
         {
             SqlConnection conn = db.getConnection();
             conn.Open();

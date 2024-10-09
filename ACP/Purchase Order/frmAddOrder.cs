@@ -20,6 +20,10 @@ namespace ACP
         public frmAddOrder()
         {
             InitializeComponent();
+            deliveryAdd();
+            modeOfDelivery();
+            fetch_pool();
+            fetchPOlines();
         }
 
         public void autocomplete()
@@ -218,6 +222,7 @@ namespace ACP
 
             dgvLines.DataSource = dt;
             dgvLines.Columns["lineID"].Visible = false;
+            dgvLines.Columns["Order No."].Visible = false;
         }
 
         private void txtDecimal_KeyPress(object sender, KeyPressEventArgs e)
@@ -282,17 +287,16 @@ namespace ACP
 
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
-            deliveryAdd();
-            modeOfDelivery();
-            fetch_pool();
-            fetchPOlines();
-
-            txtTotalDiscount.Text = 0.ToString("N2");
-            txtPercentage.Text = 0.ToString("N2");
-            txtPesoDiscount.Text = 0.ToString("N2");
-            txtPriceUnit.Text = 0.ToString("N2");
-            txtDiscountDesc.Text = 0.ToString("N2");
-            txtPurchaseDiscount.Text = 0.ToString("N2");
+            
+            if(Id.button == "Create")
+            {
+                txtTotalDiscount.Text = 0.ToString("N2");
+                txtPercentage.Text = 0.ToString("N2");
+                txtPesoDiscount.Text = 0.ToString("N2");
+                txtPriceUnit.Text = 0.ToString("N2");
+                txtDiscountDesc.Text = 0.ToString("N2");
+                txtPurchaseDiscount.Text = 0.ToString("N2");
+            }
             //orderNo();
             //readOnly();
             //editableDGV();
@@ -302,11 +306,12 @@ namespace ACP
         //   fetch_poolID();
             if(Id.button == "Create")
             {
-                lblLines.Enabled = false;
+                //lblLines.Enabled = false;
             }
-            else
+            else if(Id.button == "Update")
             {
-                lblLines.Enabled = true;
+                //lblLines.Enabled = true;
+                fetchPOlines();
             }
         }
 
@@ -419,8 +424,35 @@ namespace ACP
                     int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
                     int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
                     decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
-                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
+                    
 
+                    bool isEmpty = false;
+                    for (int i = 0; dgvLines.Rows.Count > i; i++)
+                    {
+                        if (string.IsNullOrEmpty(dgvLines.Rows[i].Cells["Quantity"].Value.ToString()))
+                        {
+                            isEmpty = true;
+                            break;
+                        }
+                        else
+                        {
+                            isEmpty = false;
+                        }
+                    }
+                    if (isEmpty == true)
+                    {
+                        MessageBox.Show("Quantity is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
+                        for (int i = 0; dgvLines.Rows.Count > i; i++)
+                        {
+                            string barcode = dgvLines.Rows[i].Cells["Barcode"].Value.ToString();
+                            decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
+                            po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
+                        }
+                    }
                     if(cmbDiscountType.Text == "Peso discount")
                     {
                         if(txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
@@ -431,8 +463,9 @@ namespace ACP
                         }
                     }
                     MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnClose.Text = "Close";
-                    lblLines.Enabled = true;
+                    this.Hide();
+                    this.DialogResult = DialogResult.OK;
+                    //lblLines.Enabled = true;
                     //purchase_order po = new purchase_order();
                     //po.orderNo = txtOrderNo.Text;
 
@@ -638,7 +671,12 @@ namespace ACP
                 DialogResult res = lines.ShowDialog();
                 if(res == DialogResult.OK)
                 {
-                    fetchPOlines();
+                    dgvLines.DataSource = Id.dt;
+
+
+
+
+                    //fetchPOlines();
                     //foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
                     //{
                     //    if (row.Cells["qty"].Value == null)

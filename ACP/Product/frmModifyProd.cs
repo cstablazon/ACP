@@ -659,6 +659,10 @@ namespace ACP
             frmProductDetails additionalInfo = new frmProductDetails();
             additionalInfo.btnCreate.Text = "Create";
             additionalInfo.btnClose.Text = "Cancel";
+            Id.LID = null;
+            Id.privilegeID = null;
+            Id.bmrxID = null;
+            Id.discountID = null;
             Id.barcode = barcode.GenerateEan13();
             pc.createUpdateBarcode("Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
             additionalInfo.txtPosDesc.Text = Id.globalString2;
@@ -1683,13 +1687,12 @@ namespace ACP
 
         }
 
-        string barcodee;
         private void dgvBarcode_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvBarcode.Rows[e.RowIndex];
-                barcodee = row.Cells["barcode"].Value.ToString();
+                Id.barcode = row.Cells["barcode"].Value.ToString();
                 if(dgvBarcode.SelectedRows.Count > 0)
                 {
                     if (cmbProdSubType.Text == "Product master")
@@ -1835,7 +1838,54 @@ namespace ACP
 
         private void tsbEdit_Click(object sender, EventArgs e)
         {
+            if (dgvBarcode.SelectedRows.Count > 0)
+            {
+                Id.button = "Update";
+                frmProductDetails details = new frmProductDetails();
 
+                details.btnCreate.Text = "Update";
+                details.btnClose.Text = "Close";
+                DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", Id.barcode);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    details.txtBarcode.Text = dr["barcode"].ToString();
+                    details.txtPosDesc.Text = dr["posDesc"].ToString();
+                    details.cmbPOunit.Text = dr["poUnit"].ToString();
+                    details.cmbRetailUnit.Text = dr["retailUnit"].ToString();
+                    details.cmbBOM.Text = dr["bomDesc"].ToString();
+                    details.cmbPurchaseTax.Text = dr["purchaseTax"].ToString();
+                    details.cmbSalesTax.Text = dr["salesTax"].ToString();
+                    details.txtFactor.Text = dr["factor"].ToString();
+                    details.cmbItemModel.Text = dr["itemModelDesc"].ToString();
+                    if(dr.IsNull("discountID"))
+                    {
+                        Id.discountID = null;
+                    }
+                    else
+                    {
+                        Id.discountID = Convert.ToInt32(dr["discountID"]);
+                    }
+                    details.txtPurchaseDiscount.Text = dr["dDesc"].ToString();
+                    details.txtPOcostP.Text = dr["costPrice"].ToString();
+                    details.txtRetailP.Text = dr["retailPrice"].ToString();
+                    details.txtInventoryCost.Text = dr["inventoryCost"].ToString();
+                    Id.LID = dr["LID"].ToString();
+                    details.txtIssueLoc.Text = dr["Location"].ToString();
+                    details.txtWarehouse.Text = dr["whDesc"].ToString();
+                    details.txtSite.Text = dr["siteID"].ToString();
+                    Id.bmrxID = Convert.ToInt64(dr["BMRXID"]);
+                    details.txtBMRX.Text = dr["BMRX"].ToString();
+                    details.cbNotDiscountable.Checked = Convert.ToBoolean(dr["isDiscountable"]);
+                    Id.privilegeID = Convert.ToInt64(dr["PID"]);
+                    details.txtPrivilege.Text = dr["Privilege setup"].ToString();
+                    details.cmbCharges.Text = dr["chargeDesc"].ToString();
+                }
+                DialogResult res = details.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    fetchBarcode();
+                }
+            }
         }
 
         private void btnKitSetup_Click(object sender, EventArgs e)
@@ -1853,7 +1903,7 @@ namespace ACP
         {
             frmProductDetails details = new frmProductDetails();
 
-            DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", barcodee);
+            DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", Id.barcode);
             foreach(DataRow dr in dt.Rows)
             {
                 details.txtBarcode.Text = dr["barcode"].ToString();
@@ -1880,7 +1930,28 @@ namespace ACP
                 details.txtPrivilege.Text = dr["Privilege setup"].ToString();
                 details.cmbCharges.Text = dr["chargeDesc"].ToString();
             }
-            details.btnCreate.Text = "Ok";
+
+            details.txtBarcode.Enabled = false;
+            details.cbAutoGenerate.Enabled = false;
+            details.txtPosDesc.Enabled = false;
+            details.cmbPOunit.Enabled = false;
+            details.cmbRetailUnit.Enabled = false;
+            details.cmbBOM.Enabled = false;
+            details.cmbPurchaseTax.Enabled = false;
+            details.cmbSalesTax.Enabled = false;
+            details.txtFactor.Enabled = false;
+            details.cmbItemModel.Enabled = false;
+            details.txtPurchaseDiscount.Enabled = false;
+            details.txtInventoryCost.Enabled = false;
+            details.txtPOcostP.Enabled = false;
+            details.txtRetailP.Enabled = false;
+            details.txtIssueLoc.Enabled = false;
+            details.txtBMRX.Enabled = false;
+            details.cbNotDiscountable.Enabled = false;
+            details.cmbCharges.Enabled = false;
+            details.txtPrivilege.Enabled = false;
+
+            details.btnCreate.Visible = false; 
             details.btnClose.Text = "Close";
             details.ShowDialog();
 
