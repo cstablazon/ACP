@@ -29,6 +29,19 @@ namespace ACP
             inventLoc();
             itemModel();
             charges();
+
+            if (Id.isConcession == true)
+            {
+                txtPOcostP.Enabled = false;
+                txtInventoryCost.Enabled = false;
+                txtPurchaseDiscount.Enabled = false;
+            }
+            else
+            {
+                txtPOcostP.Enabled = true;
+                txtInventoryCost.Enabled = true;
+                txtPurchaseDiscount.Enabled = true;
+            }
         }
 
         private void itemModel()
@@ -118,7 +131,7 @@ namespace ACP
         }
         
 
-        public void hide()
+        public void hidePopup()
         {
             pPopup.Hide();
             pPurchaseDiscount.Hide();
@@ -146,18 +159,7 @@ namespace ACP
             warehouse();
             pWarehouse.Hide();
 
-            if(Id.isConcession == true)
-            {
-                txtPOcostP.Enabled = false;
-                txtInventoryCost.Enabled = false;
-                txtPurchaseDiscount.Enabled = false;
-            }
-            else
-            {
-                txtPOcostP.Enabled = true;
-                txtInventoryCost.Enabled = true;
-                txtPurchaseDiscount.Enabled = true;
-            }
+            
             //if(Id.isProductMaster == true)
             //{
             //    txtConfig.Enabled = true;
@@ -226,7 +228,7 @@ namespace ACP
         {
             TextBox t = (TextBox)sender; 
             t.SelectionStart = t.Text.Length;
-            hide();
+            hidePopup();
         }
 
         //Warehouse setup
@@ -850,85 +852,115 @@ namespace ACP
         private void createUpdate()
         {
             string itemModelID = cmbItemModel.SelectedValue.ToString();
-            int? chargeID = Convert.ToInt32(cmbCharges.SelectedValue);
-            int CPuomID = Convert.ToInt32(cmbPOunit.SelectedValue);
-            int RPuomID = Convert.ToInt32(cmbRetailUnit.SelectedValue);
-            int bomID = Convert.ToInt32(cmbBOM.SelectedValue);
-            decimal? factor, costPrice, inventoryCost;
-            decimal retailPrice = Convert.ToDecimal(txtRetailP.Text);
+                int? chargeID = Convert.ToInt32(cmbCharges.SelectedValue);
+                int CPuomID = Convert.ToInt32(cmbPOunit.SelectedValue);
+                int RPuomID = Convert.ToInt32(cmbRetailUnit.SelectedValue);
+                int bomID = Convert.ToInt32(cmbBOM.SelectedValue);
+                decimal? factor, costPrice, inventoryCost;
+                decimal retailPrice = Convert.ToDecimal(txtRetailP.Text);
 
-            if (cmbPOunit.Text != cmbRetailUnit.Text)
+                if (cmbPOunit.Text != cmbRetailUnit.Text)
+                {
+                    factor = Convert.ToDecimal(txtFactor.Text);
+                }
+                else
+                {
+                    factor = null;
+                }
+                costPrice = Convert.ToDecimal(txtPOcostP.Text);
+                inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
+            if (btnCreate.Text == "Create")
             {
-                factor = Convert.ToDecimal(txtFactor.Text);
-            }
-            else
-            {
-                factor = null;
-            }
-            costPrice = Convert.ToDecimal(txtPOcostP.Text);
-            inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
-            Id.dt.Columns.Add("Barcode", typeof(string));
-            Id.dt.Columns.Add("SKU", typeof(string));
-            Id.dt.Columns.Add("Item model ID", typeof(string));
-            Id.dt.Columns.Add("chargeID", typeof(int));
-            Id.dt.Columns.Add("Charge", typeof(string));
-            Id.dt.Columns.Add("PID", typeof(long));
-            Id.dt.Columns.Add("Privilege", typeof(string));
-            Id.dt.Columns.Add("BMRXID", typeof(long));
-            Id.dt.Columns.Add("BMRX", typeof(string));
-            Id.dt.Columns.Add("LID", typeof(long));
-            Id.dt.Columns.Add("discountID", typeof(int));
-            Id.dt.Columns.Add("Discount", typeof(string));
-            Id.dt.Columns.Add("CPuomID", typeof(int));
-            Id.dt.Columns.Add("Purchase unit", typeof(string));
-            Id.dt.Columns.Add("Cost price", typeof(decimal));
-            Id.dt.Columns.Add("Inventory cost", typeof(decimal));
-            Id.dt.Columns.Add("RPuomID", typeof(int));
-            Id.dt.Columns.Add("Retail unit", typeof(string));
-            Id.dt.Columns.Add("Retail price", typeof(decimal));
-            Id.dt.Columns.Add("BOMid", typeof(int));
-            Id.dt.Columns.Add("BOM unit", typeof(string));
-            Id.dt.Columns.Add("factor", typeof(decimal));
-            Id.dt.Columns.Add("Product description", typeof(string));
-            Id.dt.Columns.Add("Sales tax", typeof(string));
-            Id.dt.Columns.Add("Purchase tax", typeof(string));
-            Id.dt.Columns.Add("isDiscountable", typeof(bool));
-            Id.dt.Columns.Add("isActive", typeof(bool));
-            Id.dt.Columns.Add("userID", typeof(int));
+                
+                Id.dt.Columns.Add("Barcode", typeof(string));
+                Id.dt.Columns.Add("SKU", typeof(string));
+                Id.dt.Columns.Add("Item model ID", typeof(string));
+                Id.dt.Columns.Add("chargeID", typeof(int));
+                Id.dt.Columns.Add("Charge", typeof(string));
+                Id.dt.Columns.Add("PID", typeof(long));
+                Id.dt.Columns.Add("Privilege", typeof(string));
+                Id.dt.Columns.Add("BMRXID", typeof(long));
+                Id.dt.Columns.Add("BMRX", typeof(string));
+                Id.dt.Columns.Add("LID", typeof(long));
+                Id.dt.Columns.Add("discountID", typeof(int));
+                Id.dt.Columns.Add("Discount", typeof(string));
+                Id.dt.Columns.Add("CPuomID", typeof(int));
+                Id.dt.Columns.Add("Purchase unit", typeof(string));
+                Id.dt.Columns.Add("Cost price", typeof(decimal));
+                Id.dt.Columns.Add("Inventory cost", typeof(decimal));
+                Id.dt.Columns.Add("RPuomID", typeof(int));
+                Id.dt.Columns.Add("Retail unit", typeof(string));
+                Id.dt.Columns.Add("Retail price", typeof(decimal));
+                Id.dt.Columns.Add("BOMid", typeof(int));
+                Id.dt.Columns.Add("BOM unit", typeof(string));
+                Id.dt.Columns.Add("factor", typeof(decimal));
+                Id.dt.Columns.Add("Product description", typeof(string));
+                Id.dt.Columns.Add("Sales tax", typeof(string));
+                Id.dt.Columns.Add("Purchase tax", typeof(string));
+                Id.dt.Columns.Add("isDiscountable", typeof(bool));
+                Id.dt.Columns.Add("isActive", typeof(bool));
+                Id.dt.Columns.Add("userID", typeof(int));
 
-            DataRow dRow = Id.dt.NewRow();
-            dRow[0] = txtBarcode.Text;
-            dRow[1] = Id.SKU;
-            dRow[2] = itemModelID;
-            dRow[3] = chargeID;
-            dRow[4] = cmbCharges.Text;
-            dRow[5] = privilegeID;
-            dRow[6] = txtPrivilege.Text;
-            dRow[7] = bmrxID;
-            dRow[8] = txtBMRX.Text;
-            dRow[9] = LID;
-            dRow[10] = discountID;
-            dRow[11] = txtPurchaseDiscount.Text;
-            dRow[12] = CPuomID;
-            dRow[13] = cmbPOunit.Text;
-            dRow[14] = costPrice;
-            dRow[15] = inventoryCost;
-            dRow[16] = RPuomID;
-            dRow[17] = cmbRetailUnit.Text;
-            dRow[18] = retailPrice;
-            dRow[19] = bomID;
-            dRow[20] = cmbBOM.Text;
-            dRow[21] = factor ?? (object)DBNull.Value;
-            dRow[22] = txtPosDesc.Text;
-            dRow[23] = cmbSalesTax.Text;
-            dRow[24] = cmbPurchaseTax.Text;
-            dRow[25] = cbNotDiscountable.Checked;
-            dRow[26] = true;
-            dRow[27] = Id.userID;
-            Id.dt.Rows.Add(dRow);
-            //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.DialogResult = DialogResult.OK;
-            this.Hide();
+                DataRow dRow = Id.dt.NewRow();
+                dRow[0] = txtBarcode.Text;
+                dRow[1] = Id.SKU;
+                dRow[2] = itemModelID;
+                dRow[3] = chargeID;
+                dRow[4] = cmbCharges.Text;
+                dRow[5] = privilegeID;
+                dRow[6] = txtPrivilege.Text;
+                dRow[7] = bmrxID;
+                dRow[8] = txtBMRX.Text;
+                dRow[9] = LID;
+                dRow[10] = discountID;
+                dRow[11] = txtPurchaseDiscount.Text;
+                dRow[12] = CPuomID;
+                dRow[13] = cmbPOunit.Text;
+                dRow[14] = costPrice;
+                dRow[15] = inventoryCost;
+                dRow[16] = RPuomID;
+                dRow[17] = cmbRetailUnit.Text;
+                dRow[18] = retailPrice;
+                dRow[19] = bomID;
+                dRow[20] = cmbBOM.Text;
+                dRow[21] = factor ?? (object)DBNull.Value;
+                dRow[22] = txtPosDesc.Text;
+                dRow[23] = cmbSalesTax.Text;
+                dRow[24] = cmbPurchaseTax.Text;
+                dRow[25] = cbNotDiscountable.Checked;
+                dRow[26] = true;
+                dRow[27] = Id.userID;
+                Id.dt.Rows.Add(dRow);
+                //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Hide();
+            }
+            else if(btnCreate.Text == "Update")
+            {
+                DataTable dt = pc.fetch("sp_productOperations", "barcode", "fetchBarcode");
+                DataRow[] dr = dt.Select("barcode <> '" + Id.barcode + "' AND barcode = '" + txtBarcode.Text + "'");
+
+                if(dr.Any())
+                {
+                    MessageBox.Show("Barcode already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtBarcode.Focus();
+                }
+                else
+                {
+                    string salesTaxation = cmbSalesTax.SelectedValue.ToString();
+                    string purchaseTaxation = cmbPurchaseTax.SelectedValue.ToString();
+                    pc.createUpdateBarcode("_Update", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, salesTaxation, purchaseTaxation, cbNotDiscountable.Checked, true,  null, txtBarcode.Text);
+
+                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
+                    this.Hide();
+                }
+
+            }
+            else if(btnCreate.Text == "Ok")
+            {
+                this.Hide();
+            }
             
             //    costPrice = Convert.ToDecimal(txtPOcostP.Text);
             //    inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
@@ -1199,7 +1231,7 @@ namespace ACP
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (cbAutoGenerate.Checked)
             {
                 txtBarcode.Text = Id.barcode;
                 //string ean13 = barcode.GenerateEan13();
@@ -1246,6 +1278,7 @@ namespace ACP
 
         private void cmbRetailUnit_SelectedValueChanged(object sender, EventArgs e)
         {
+            cmbBOM.Text = cmbRetailUnit.Text;
             if (Id.isConcession == false)
             {
                 if (cmbRetailUnit.Text == cmbPOunit.Text)
@@ -1921,7 +1954,7 @@ namespace ACP
 
         private void hidePopupForms_Enter(object sender, EventArgs e)
         {
-            hide();
+            hidePopup();
         }
 
         private void frmProductDetails_FormClosing(object sender, FormClosingEventArgs e)

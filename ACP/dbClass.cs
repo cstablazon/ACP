@@ -191,7 +191,7 @@ namespace ACP
             return dt;
         }
 
-        public DataTable fetchRecordForDepartment(string query, string action, long RID)
+        public DataTable fetchRecordForDepartment(string query, string action, long? RID)
         {
             SqlConnection conn = getConnection();
             SqlCommand cmd = new SqlCommand(query, conn);

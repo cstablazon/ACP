@@ -33,8 +33,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pGeneral = new System.Windows.Forms.Panel();
-            this.btnCreate = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbProdDimension = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -66,6 +64,7 @@
             this.tsBtnNewBarcode = new System.Windows.Forms.ToolStripButton();
             this.tsbEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteBarcode = new System.Windows.Forms.ToolStripButton();
+            this.tsbView = new System.Windows.Forms.ToolStripButton();
             this.dgvBarcode = new System.Windows.Forms.DataGridView();
             this.lblProdDetails = new System.Windows.Forms.Label();
             this.pFinancials = new System.Windows.Forms.Panel();
@@ -78,6 +77,8 @@
             this.label54 = new System.Windows.Forms.Label();
             this.cbItemGroup = new System.Windows.Forms.ComboBox();
             this.lblFinancials = new System.Windows.Forms.Label();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -99,7 +100,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnNewBarcode = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
-            this.tsbView = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
             this.pGeneral.SuspendLayout();
             this.pProdCategory.SuspendLayout();
@@ -113,6 +114,7 @@
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -129,7 +131,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 483);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 477);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
@@ -169,44 +171,6 @@
             this.pGeneral.TabIndex = 0;
             this.pGeneral.Paint += new System.Windows.Forms.PaintEventHandler(this.pGeneral_Paint);
             this.pGeneral.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pGeneral_MouseDown);
-            // 
-            // btnCreate
-            // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(799, 593);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(83, 30);
-            this.btnCreate.TabIndex = 96;
-            this.btnCreate.Text = "Save";
-            this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCreate.UseVisualStyleBackColor = false;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(888, 593);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(79, 30);
-            this.btnClose.TabIndex = 97;
-            this.btnClose.Text = "Close";
-            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label15
             // 
@@ -505,7 +469,7 @@
             this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
             this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 96);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 104);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -565,6 +529,15 @@
             this.tsbDeleteBarcode.Text = "Delete";
             this.tsbDeleteBarcode.Click += new System.EventHandler(this.tsbDeleteBarcode_Click);
             // 
+            // tsbView
+            // 
+            this.tsbView.Image = ((System.Drawing.Image)(resources.GetObject("tsbView.Image")));
+            this.tsbView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbView.Name = "tsbView";
+            this.tsbView.Size = new System.Drawing.Size(89, 22);
+            this.tsbView.Text = "View details";
+            this.tsbView.Click += new System.EventHandler(this.tsbView_Click);
+            // 
             // dgvBarcode
             // 
             this.dgvBarcode.AllowUserToAddRows = false;
@@ -618,7 +591,7 @@
             this.pFinancials.Controls.Add(this.label54);
             this.pFinancials.Controls.Add(this.cbItemGroup);
             this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 369);
+            this.pFinancials.Location = new System.Drawing.Point(3, 377);
             this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
             this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
             this.pFinancials.Name = "pFinancials";
@@ -722,6 +695,44 @@
             this.lblFinancials.Text = "    3 Financials";
             this.lblFinancials.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFinancials.Click += new System.EventHandler(this.lblFinancials_Click);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.ForeColor = System.Drawing.Color.White;
+            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
+            this.btnCreate.Location = new System.Drawing.Point(807, 3);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(83, 30);
+            this.btnCreate.TabIndex = 96;
+            this.btnCreate.Text = "Save";
+            this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(896, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(79, 30);
+            this.btnClose.TabIndex = 97;
+            this.btnClose.Text = "Close";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // statusStrip1
             // 
@@ -975,14 +986,15 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "New";
             // 
-            // tsbView
+            // panel1
             // 
-            this.tsbView.Image = ((System.Drawing.Image)(resources.GetObject("tsbView.Image")));
-            this.tsbView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbView.Name = "tsbView";
-            this.tsbView.Size = new System.Drawing.Size(89, 22);
-            this.tsbView.Text = "View details";
-            this.tsbView.Click += new System.EventHandler(this.tsbView_Click);
+            this.panel1.Controls.Add(this.btnClose);
+            this.panel1.Controls.Add(this.btnCreate);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 587);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(987, 39);
+            this.panel1.TabIndex = 98;
             // 
             // frmModifyProd
             // 
@@ -991,12 +1003,11 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(987, 648);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnCreate);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1028,6 +1039,7 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1106,5 +1118,6 @@
         public System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ToolStripButton tsbEdit;
         private System.Windows.Forms.ToolStripButton tsbView;
+        private System.Windows.Forms.Panel panel1;
     }
 }

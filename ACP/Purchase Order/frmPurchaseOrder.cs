@@ -195,51 +195,99 @@ namespace ACP
             {
                 frmAddOrder addOrder = new frmAddOrder();
                 addOrder.btnCreate.Text = "Update";
-                var objEdit = db.vwPurchaseOrders.Where(a => a.Order_No.Equals(Id.orderNo)).SingleOrDefault();
-                DateTime delivery = Convert.ToDateTime(objEdit.Delivery_date);
-                DateTime cancellation = Convert.ToDateTime(objEdit.Cancellation_date);
+                DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
 
-                Id.suppID = objEdit.Supplier_ID;
-                addOrder.txtOrderNo.Text = objEdit.Order_No;
-                addOrder.cmbPOtype.Text = objEdit.poType;
-                addOrder.txtSuppID.Text = objEdit.Supplier_ID;
-                addOrder.txtName.Text = objEdit.Name;
-                addOrder.txtAgent.Text = objEdit.agent;
-                addOrder.txtPayTerm.Text = objEdit.payDesc;
-                addOrder.cmbPool.Text = objEdit.Pool_ID;
-                addOrder.txtPoolDesc.Text = objEdit.Pool_name;
-                addOrder.cmbMOD.Text = objEdit.modDesc;
-                addOrder.dtpDelivery.Value = delivery;
-                addOrder.dtpCancel.Value = cancellation;
-                addOrder.cmbDeliveryAdd.Text = objEdit.desc;
-                addOrder.rtxtAddress.Text = objEdit.address + ", " + objEdit.city + ", " + objEdit.province + ", " + objEdit.delRemarks;
-                addOrder.rtxtRemarks.Text = objEdit.remarks;
+                DataRow[] dr = dt.Select("orderNo = '" + Id.orderNo + "'");
 
-                int i = 1;
-                using (var db2 = new acpEntities())
+                foreach(DataRow row in dr)
                 {
-
-                    var poLines = db2.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo)).ToList();
-
-                    foreach (vwPO_Line lines in poLines)
+                    addOrder.txtOrderNo.Text = row["orderNo"].ToString();
+                    addOrder.cmbPOtype.Text = row["poType"].ToString();
+                    addOrder.txtSuppID.Text = row["suppID"].ToString();
+                    addOrder.txtName.Text = row["name"].ToString();
+                    addOrder.txtAgent.Text = row["agent"].ToString();
+                    addOrder.txtPayTerm.Text = row["payDesc"].ToString();
+                    if (!string.IsNullOrEmpty(row["seasonalDiscount"].ToString()) || row["seasonalDiscount"].ToString() != "0.00" && string.IsNullOrEmpty(row["payDesc"].ToString()))
                     {
-                        addOrder.dgvLines.Rows.Add(i++, lines.barcode, lines.qty, lines.subcat_desc, lines.CPuomDesc, lines.costPrice, lines.retailPrice, lines.lineDisc, lines.Net_amount);
+                        addOrder.cmbDiscountType.Text = "Seasonal discount";
+
+                        addOrder.txtPesoDiscount.Text = 0.ToString("N2");
+                        addOrder.txtPriceUnit.Text = 0.ToString("N2");
                     }
+                    else if (string.IsNullOrEmpty(row["seasonalDiscount"].ToString()) || row["seasonalDiscount"].ToString() == "0.00" && !string.IsNullOrEmpty(row["payDesc"].ToString()) || row["payDesc"].ToString() != "0.00")
+                    {
+                        addOrder.cmbDiscountType.Text = "Peso discount";
+
+                        addOrder.txtTotalDiscount.Text = 0.ToString("N2");
+                    }
+                    else
+                    {
+                        addOrder.cmbDiscountType.Text = "";
+
+                        addOrder.txtTotalDiscount.Text = 0.ToString("N2");
+                        addOrder.txtPesoDiscount.Text = 0.ToString("N2");
+                        addOrder.txtPriceUnit.Text = 0.ToString("N2");
+                    }
+                    addOrder.cmbPool.Text = row["poolID"].ToString();
+                    addOrder.txtPoolDesc.Text = row["poolDesc"].ToString();
+                    addOrder.cmbMOD.Text = row["modDesc"].ToString();
+                    addOrder.dtpEntry.Value = Convert.ToDateTime(row["transDate"]);
+                    addOrder.dtpDelivery.Value = Convert.ToDateTime(row["deliveryDate"]);
+                    addOrder.dtpCancel.Value = Convert.ToDateTime(row["cancelDate"]);
+                    addOrder.cmbDeliveryAdd.Text = row["desc"].ToString();
+                    addOrder.rtxtAddress.Text = row["address"].ToString() + ", " + row["City"].ToString() + ", " + row["Province"].ToString();
+                    addOrder.rtxtRemarks.Text = row["Remarks"].ToString();
                 }
-                //var poLines = db.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo));
                 DialogResult res = addOrder.ShowDialog();
                 if(res == DialogResult.OK)
                 {
                     fetchPO();
-
-                    //var entity = db.ChangeTracker.Entries().ToArray();
-                    //for (int y = 0; y < entity.Length; y++ )
-                    //{
-                    //    entity[y].Reload();
-                    //}
-                    //db.Entities(objRefresh).State = EntitySate.Detached;
-                    //db.Entry(objRefresh).ReloadAsync();
                 }
+                //var objEdit = db.vwPurchaseOrders.Where(a => a.Order_No.Equals(Id.orderNo)).SingleOrDefault();
+                //DateTime delivery = Convert.ToDateTime(objEdit.Delivery_date);
+                //DateTime cancellation = Convert.ToDateTime(objEdit.Cancellation_date);
+
+                //Id.suppID = objEdit.Supplier_ID;
+                //addOrder.txtOrderNo.Text = objEdit.Order_No;
+                //addOrder.cmbPOtype.Text = objEdit.poType;
+                //addOrder.txtSuppID.Text = objEdit.Supplier_ID;
+                //addOrder.txtName.Text = objEdit.Name;
+                //addOrder.txtAgent.Text = objEdit.agent;
+                //addOrder.txtPayTerm.Text = objEdit.payDesc;
+                //addOrder.cmbPool.Text = objEdit.Pool_ID;
+                //addOrder.txtPoolDesc.Text = objEdit.Pool_name;
+                //addOrder.cmbMOD.Text = objEdit.modDesc;
+                //addOrder.dtpDelivery.Value = delivery;
+                //addOrder.dtpCancel.Value = cancellation;
+                //addOrder.cmbDeliveryAdd.Text = objEdit.desc;
+                //addOrder.rtxtAddress.Text = objEdit.address + ", " + objEdit.city + ", " + objEdit.province + ", " + objEdit.delRemarks;
+                //addOrder.rtxtRemarks.Text = objEdit.remarks;
+
+                //int i = 1;
+                //using (var db2 = new acpEntities())
+                //{
+
+                //    var poLines = db2.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo)).ToList();
+
+                //    foreach (vwPO_Line lines in poLines)
+                //    {
+                //        addOrder.dgvLines.Rows.Add(i++, lines.barcode, lines.qty, lines.subcat_desc, lines.CPuomDesc, lines.costPrice, lines.retailPrice, lines.lineDisc, lines.Net_amount);
+                //    }
+                //}
+                //var poLines = db.vwPO_Line.Where(a => a.orderNo.Equals(Id.orderNo));
+                //DialogResult res = addOrder.ShowDialog();
+                //if(res == DialogResult.OK)
+                //{
+                //    fetchPO();
+
+                //    //var entity = db.ChangeTracker.Entries().ToArray();
+                //    //for (int y = 0; y < entity.Length; y++ )
+                //    //{
+                //    //    entity[y].Reload();
+                //    //}
+                //    //db.Entities(objRefresh).State = EntitySate.Detached;
+                //    //db.Entry(objRefresh).ReloadAsync();
+                //}
             }
         }
 
