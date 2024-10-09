@@ -500,7 +500,20 @@
     <Compile Include="UOM.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserManager.cs" />
     <Compile Include="UserPermissionManager.cs" />
+    <Compile Include="User\FormUserEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\FormUserEntry.Designer.cs">
+      <DependentUpon>FormUserEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\FormUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\FormUserManagement.Designer.cs">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="user_tbl.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
@@ -723,6 +736,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\FormUserEntry.resx">
+      <DependentUpon>FormUserEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\FormUserManagement.resx">
+      <DependentUpon>FormUserManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="acpDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

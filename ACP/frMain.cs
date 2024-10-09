@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ACP;
+using ACP.User;
 
 namespace ACP
 {
@@ -242,6 +243,15 @@ namespace ACP
                     brand.Dock = DockStyle.Fill;
                     brand.BringToFront();
                     brand.Show();
+                    break;
+
+                case "userManagement":
+                    FormUserManagement _userForm = new FormUserManagement { TopLevel = false };
+                    pBody.Controls.Clear();
+                    pBody.Controls.Add(_userForm);
+                    _userForm.Dock = DockStyle.Fill;
+                    _userForm.BringToFront();
+                    _userForm.Show();
                     break;
 
                 default:

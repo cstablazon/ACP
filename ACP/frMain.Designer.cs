@@ -109,15 +109,17 @@
             treeNode36,
             treeNode40,
             treeNode41});
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Process");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Item Sales Tax Group");
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Setup", new System.Windows.Forms.TreeNode[] {
-            treeNode44});
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Administration", 4, 4, new System.Windows.Forms.TreeNode[] {
-            treeNode43,
-            treeNode45,
-            treeNode46});
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("User Management");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Process", new System.Windows.Forms.TreeNode[] {
+            treeNode43});
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Item Sales Tax Group");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Setup", new System.Windows.Forms.TreeNode[] {
+            treeNode45});
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Administration", 4, 4, new System.Windows.Forms.TreeNode[] {
+            treeNode44,
+            treeNode46,
+            treeNode47});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frMain));
             this.pHeader = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -127,9 +129,9 @@
             this.tvModule = new System.Windows.Forms.TreeView();
             this.imageModule = new System.Windows.Forms.ImageList(this.components);
             this.lblUserRole = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pBody = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pHeader.SuspendLayout();
             this.pSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -298,24 +300,26 @@
             treeNode42.ImageIndex = 0;
             treeNode42.Name = "pAccounting";
             treeNode42.Text = "Accounting";
-            treeNode43.Name = "cAdminProcess";
-            treeNode43.Text = "Process";
-            treeNode44.Name = "itemSalesTaxGroup";
-            treeNode44.Text = "Item Sales Tax Group";
-            treeNode45.Name = "cAdminSetup";
-            treeNode45.Text = "Setup";
-            treeNode46.Name = "cAdminReports";
-            treeNode46.Text = "Reports";
-            treeNode47.ImageIndex = 4;
-            treeNode47.Name = "pAdmin";
-            treeNode47.SelectedImageIndex = 4;
-            treeNode47.Text = "Administration";
+            treeNode43.Name = "userManagement";
+            treeNode43.Text = "User Management";
+            treeNode44.Name = "cAdminProcess";
+            treeNode44.Text = "Process";
+            treeNode45.Name = "itemSalesTaxGroup";
+            treeNode45.Text = "Item Sales Tax Group";
+            treeNode46.Name = "cAdminSetup";
+            treeNode46.Text = "Setup";
+            treeNode47.Name = "cAdminReports";
+            treeNode47.Text = "Reports";
+            treeNode48.ImageIndex = 4;
+            treeNode48.Name = "pAdmin";
+            treeNode48.SelectedImageIndex = 4;
+            treeNode48.Text = "Administration";
             this.tvModule.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode26,
             treeNode30,
             treeNode34,
             treeNode42,
-            treeNode47});
+            treeNode48});
             this.tvModule.SelectedImageIndex = 0;
             this.tvModule.Size = new System.Drawing.Size(278, 546);
             this.tvModule.TabIndex = 6;
@@ -346,16 +350,6 @@
             this.lblUserRole.Text = "Administrator";
             this.lblUserRole.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(103, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(81, 65);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
             // pBody
             // 
             this.pBody.BackColor = System.Drawing.Color.White;
@@ -374,6 +368,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(2, 668);
             this.panel1.TabIndex = 4;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(103, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(81, 65);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
             // 
             // frMain
             // 
