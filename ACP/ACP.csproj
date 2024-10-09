@@ -109,6 +109,7 @@
     <Compile Include="C_pool.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="dbClass.cs" />
     <Compile Include="deliveryAddress.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
@@ -499,6 +500,7 @@
     <Compile Include="UOM.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserPermissionManager.cs" />
     <Compile Include="user_tbl.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
