@@ -344,8 +344,7 @@ D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmTest.resources
 =======
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserManagement.resources
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserEntry.resources
-<<<<<<< HEAD
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormRolePermissionEntry.resources
-=======
 >>>>>>> 71dcbebfc773f7b96a18cadb7e3174d27d3ccf90
 >>>>>>> a3c4a02730ef0c53667386d4b0d36b1577baa3d4
+D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.frmTest.resources
