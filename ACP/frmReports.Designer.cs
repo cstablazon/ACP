@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource4 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.sp_reportPOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsPO = new ACP.dsPO();
-            this.sp_reportPOTableAdapter = new ACP.dsPOTableAdapters.sp_reportPOTableAdapter();
+            this.dsPurchaseOrder = new ACP.dsPurchaseOrder();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,35 +39,32 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbCostPrice = new System.Windows.Forms.CheckBox();
             this.cbRetailPrice = new System.Windows.Forms.CheckBox();
+            this.cbCostPrice = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.sp_reportPOTableAdapter = new ACP.dsPurchaseOrderTableAdapters.sp_reportPOTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.sp_reportPOBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsPO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsPurchaseOrder)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // sp_reportPOBindingSource
             // 
             this.sp_reportPOBindingSource.DataMember = "sp_reportPO";
-            this.sp_reportPOBindingSource.DataSource = this.dsPO;
+            this.sp_reportPOBindingSource.DataSource = this.dsPurchaseOrder;
             // 
-            // dsPO
+            // dsPurchaseOrder
             // 
-            this.dsPO.DataSetName = "dsPO";
-            this.dsPO.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sp_reportPOTableAdapter
-            // 
-            this.sp_reportPOTableAdapter.ClearBeforeFill = true;
+            this.dsPurchaseOrder.DataSetName = "dsPurchaseOrder";
+            this.dsPurchaseOrder.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource4.Name = "dsPO";
-            reportDataSource4.Value = this.sp_reportPOBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource4);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.ReportPO.rdlc";
+            reportDataSource1.Name = "costPrice";
+            reportDataSource1.Value = this.sp_reportPOBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.reportPOcostPrice.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 58);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(1076, 471);
@@ -132,15 +128,15 @@
             this.panel3.Size = new System.Drawing.Size(1076, 48);
             this.panel3.TabIndex = 9;
             // 
-            // label3
+            // cbRetailPrice
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Parameters";
+            this.cbRetailPrice.AutoSize = true;
+            this.cbRetailPrice.Location = new System.Drawing.Point(182, 25);
+            this.cbRetailPrice.Name = "cbRetailPrice";
+            this.cbRetailPrice.Size = new System.Drawing.Size(15, 14);
+            this.cbRetailPrice.TabIndex = 8;
+            this.cbRetailPrice.UseVisualStyleBackColor = true;
+            this.cbRetailPrice.CheckedChanged += new System.EventHandler(this.cbRetailPrice_CheckedChanged);
             // 
             // cbCostPrice
             // 
@@ -152,15 +148,19 @@
             this.cbCostPrice.UseVisualStyleBackColor = true;
             this.cbCostPrice.CheckedChanged += new System.EventHandler(this.cbCostPrice_CheckedChanged);
             // 
-            // cbRetailPrice
+            // label3
             // 
-            this.cbRetailPrice.AutoSize = true;
-            this.cbRetailPrice.Location = new System.Drawing.Point(182, 25);
-            this.cbRetailPrice.Name = "cbRetailPrice";
-            this.cbRetailPrice.Size = new System.Drawing.Size(15, 14);
-            this.cbRetailPrice.TabIndex = 8;
-            this.cbRetailPrice.UseVisualStyleBackColor = true;
-            this.cbRetailPrice.CheckedChanged += new System.EventHandler(this.cbRetailPrice_CheckedChanged);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(7, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Parameters";
+            // 
+            // sp_reportPOTableAdapter
+            // 
+            this.sp_reportPOTableAdapter.ClearBeforeFill = true;
             // 
             // frmReports
             // 
@@ -179,7 +179,7 @@
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.frmReports_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sp_reportPOBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsPO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsPurchaseOrder)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -188,9 +188,6 @@
 
         #endregion
 
-        private System.Windows.Forms.BindingSource sp_reportPOBindingSource;
-        private dsPO dsPO;
-        private dsPOTableAdapters.sp_reportPOTableAdapter sp_reportPOTableAdapter;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
@@ -201,5 +198,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox cbRetailPrice;
         private System.Windows.Forms.CheckBox cbCostPrice;
+        private System.Windows.Forms.BindingSource sp_reportPOBindingSource;
+        private dsPurchaseOrder dsPurchaseOrder;
+        private dsPurchaseOrderTableAdapters.sp_reportPOTableAdapter sp_reportPOTableAdapter;
     }
 }

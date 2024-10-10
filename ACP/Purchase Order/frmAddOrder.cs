@@ -23,7 +23,7 @@ namespace ACP
             deliveryAdd();
             modeOfDelivery();
             fetch_pool();
-            fetchPOlines();
+            //fetchPOlines();
         }
 
         public void autocomplete()
@@ -766,7 +766,7 @@ namespace ACP
                 DataGridViewRow row = dgvLines.Rows[e.RowIndex];
                 if(dgvLines.SelectedRows.Count > 0)
                 {
-                    lineID = Convert.ToInt64(row.Cells["lineID"].Value);
+                    //lineID = Convert.ToInt64(row.Cells["lineID"].Value);
 
                     tsbRemove.Enabled = true;
                 }
@@ -860,9 +860,10 @@ namespace ACP
 
         private void tsbAddLine_Click(object sender, EventArgs e)
         {
-            int n = dgvLines.Rows.Add();
-            var maxID = dgvLines.Rows.Cast<DataGridViewRow>().Max(a => Convert.ToInt32(a.Cells["lineID"].Value));
-            dgvLines.Rows[n].Cells["lineID"].Value = maxID + 1;
+            dgvLines.Rows.Add();
+            //int n = dgvLines.Rows.Add();
+            //var maxID = dgvLines.Rows.Cast<DataGridViewRow>().Max(a => Convert.ToInt32(a.Cells["lineID"].Value));
+            //dgvLines.Rows[n].Cells["lineID"].Value = maxID + 1;
         }
         int x, y;
         string pName;
@@ -1388,6 +1389,11 @@ namespace ACP
                 this.Hide();
                 this.DialogResult = DialogResult.OK;
             }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
 
        

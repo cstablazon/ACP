@@ -469,7 +469,7 @@
             this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
             this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 104);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 20);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -591,7 +591,7 @@
             this.pFinancials.Controls.Add(this.label54);
             this.pFinancials.Controls.Add(this.cbItemGroup);
             this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 377);
+            this.pFinancials.Location = new System.Drawing.Point(3, 293);
             this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
             this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
             this.pFinancials.Name = "pFinancials";
