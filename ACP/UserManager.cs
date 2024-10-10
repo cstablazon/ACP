@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ACP
 {
-    class UserManager
+    public class UserManager
     {
         public class User
         {
