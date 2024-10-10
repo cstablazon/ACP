@@ -312,6 +312,15 @@ namespace ACP
             {
                 //lblLines.Enabled = true;
                 fetchPOlines();
+                dgvLines.Columns["Barcode"].ReadOnly = true;
+                dgvLines.Columns["Quantity"].ReadOnly = false;
+                dgvLines.Columns["Product description"].ReadOnly = true;
+                dgvLines.Columns["Dept class code"].ReadOnly = true;
+                dgvLines.Columns["Unit"].ReadOnly = true;
+                dgvLines.Columns["Cost price"].ReadOnly = true;
+                dgvLines.Columns["Retail price"].ReadOnly = true;
+                dgvLines.Columns["Discount percent"].ReadOnly = true;
+                dgvLines.Columns["Net amount"].ReadOnly = true;
             }
         }
 
@@ -502,12 +511,54 @@ namespace ACP
             }
             else if(Id.button.Equals("Update"))
             {
-                if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtAgent.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbCashDiscount.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text) || string.IsNullOrEmpty(cmbDepartment.Text) || string.IsNullOrEmpty(cmbEncodedBy.Text) || string.IsNullOrEmpty(cmbOrderBy.Text) || string.IsNullOrEmpty(cmbApprovedBy.Text) || string.IsNullOrEmpty(cmbCheckedBy.Text))
+                if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
                 {
                     MessageBox.Show("Please fill up all necessary information");
                 }
                 else
                 {
+                    string barcode;
+                    decimal qty;
+                    //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
+                    for(int i= 0; dgvLines.Rows.Count > i; i++)
+                    {
+                        barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
+                        DataTable dt = po.fetchPOlineByBarcodeAndOrderNo("sp_purchaseOrderOperations", "POlines", "fetchPOlineByBarcodeAndOrderNo", barcode, txtOrderNo.Text);
+                        if(dt.Rows.Count > 0)
+                        {
+                            po.createUpdatePOlines("Update", txtOrderNo.Text, barcode, qty, Id.userID);
+                        }
+                        else
+                        {
+                            po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
+                        }
+                    }
+
+                    //Check if po_lines are existing in datagridview . If not delete line in po_line table
+                    DataTable dtLines = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", txtOrderNo.Text);
+                    bool isExist = true;
+                    foreach(DataRow row in dtLines.Rows)
+                    {
+                        for(int i = 0; dgvLines.Rows.Count > i; i++)
+                        {
+                            if(row["Barcode"].ToString() == dgvLines.Rows[i].Cells["Barcode"].Value.ToString())
+                            {
+                                isExist = true;
+                                break;
+                            }
+                            else
+                            {
+                                isExist = false;
+                            }
+                        }
+                        
+                    
+                        if(!isExist)
+                        {
+                            po.deletePOline("Delete", row["Barcode"].ToString(), txtOrderNo.Text);
+                        }
+                    }
                     
                     //int i = 0;
 
@@ -574,74 +625,74 @@ namespace ACP
                         //}
                     //}
 
-                    var update = db.purchase_order.Where(a => a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
+                    ////var update = db.purchase_order.Where(a => a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
 
-                    update.poType = cmbPOtype.Text;
-                    update.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
-                    update.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
-                    update.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
-                    update.deliveryDate = dtpDelivery.Value;
-                    update.cancelDate = dtpCancel.Value;
+                    ////update.poType = cmbPOtype.Text;
+                    ////update.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
+                    ////update.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
+                    ////update.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
+                    ////update.deliveryDate = dtpDelivery.Value;
+                    ////update.cancelDate = dtpCancel.Value;
 
-                    var updateLines = db.PO_Line.Where(a => a.orderNo.Equals(txtOrderNo.Text)).ToList();
+                    ////var updateLines = db.PO_Line.Where(a => a.orderNo.Equals(txtOrderNo.Text)).ToList();
 
-                    //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
-                    string barcode;
-                    decimal qty;
-                    for (int i = 0; dgvLines.Rows.Count > i; i++)
-                    {
-                        barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                        var objExist = db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text));
-                        if (objExist.Any())
-                        {
-                            qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                            //objExist.FirstOrDefault().qty = qty;
-                            db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text)).ToList().ForEach(b => { b.qty = qty; });
+                    //////Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
+                    ////string barcode;
+                    ////decimal qty;
+                    ////for (int i = 0; dgvLines.Rows.Count > i; i++)
+                    ////{
+                    ////    barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                    ////    var objExist = db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text));
+                    ////    if (objExist.Any())
+                    ////    {
+                    ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                    ////        //objExist.FirstOrDefault().qty = qty;
+                    ////        db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text)).ToList().ForEach(b => { b.qty = qty; });
                             
-                        }
-                        else
-                        {
-                            PO_Line line = new PO_Line();
+                    ////    }
+                    ////    else
+                    ////    {
+                    ////        PO_Line line = new PO_Line();
 
-                            qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                            line.orderNo = txtOrderNo.Text;
-                            line.barcode = barcode;
-                            line.qty = qty;
-                            line.transDate = DateTime.Now;
+                    ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                    ////        line.orderNo = txtOrderNo.Text;
+                    ////        line.barcode = barcode;
+                    ////        line.qty = qty;
+                    ////        line.transDate = DateTime.Now;
 
-                            db.PO_Line.Add(line);
-                            db.SaveChanges();
-                        }
-                    }
+                    ////        db.PO_Line.Add(line);
+                    ////        db.SaveChanges();
+                    ////    }
+                    ////}
 
-                    //Check if po_lines are existing in datagridview . If not delete line in po_line table
-                    bool isExist = true;
-                    foreach(PO_Line lines in updateLines)
-                    {
-                        for (int i = 0; dgvLines.Rows.Count > i; i++ )
-                        {
-                            if(lines.barcode == dgvLines.Rows[i].Cells["barcode"].Value as String)
-                            {
-                                //MessageBox.Show("Equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() +" "+ i);
-                                isExist = true;
-                                break;
-                            }
-                            else
-                            {
-                                //MessageBox.Show("Not equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + i);
-                                isExist = false;
-                            }
+                    //////Check if po_lines are existing in datagridview . If not delete line in po_line table
+                    ////bool isExist = true;
+                    ////foreach(PO_Line lines in updateLines)
+                    ////{
+                    ////    for (int i = 0; dgvLines.Rows.Count > i; i++ )
+                    ////    {
+                    ////        if(lines.barcode == dgvLines.Rows[i].Cells["barcode"].Value as String)
+                    ////        {
+                    ////            //MessageBox.Show("Equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() +" "+ i);
+                    ////            isExist = true;
+                    ////            break;
+                    ////        }
+                    ////        else
+                    ////        {
+                    ////            //MessageBox.Show("Not equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + i);
+                    ////            isExist = false;
+                    ////        }
                             
-                        }
-                        if(!isExist)
-                        {
-                            var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode) && a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
+                    ////    }
+                    ////    if(!isExist)
+                    ////    {
+                    ////        var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode) && a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
 
-                            db.PO_Line.Remove(objDel);
-                            //db.SaveChanges();
-                            //MessageBox.Show("Removed "+ lines.barcode, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
+                    ////        db.PO_Line.Remove(objDel);
+                    ////        //db.SaveChanges();
+                    ////        //MessageBox.Show("Removed "+ lines.barcode, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ////    }
+                    ////}
 
                     MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     db.SaveChanges();
@@ -671,11 +722,8 @@ namespace ACP
                 DialogResult res = lines.ShowDialog();
                 if(res == DialogResult.OK)
                 {
+
                     dgvLines.DataSource = Id.dt;
-
-
-
-
                     //fetchPOlines();
                     //foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
                     //{
@@ -779,44 +827,74 @@ namespace ACP
 
         private void dgvLines_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (Id.button == "Update")
+            {
+                if (e.ColumnIndex == 2 && e.RowIndex != dgvLines.NewRowIndex)
+                {
+                    if (dgvLines.Rows[e.RowIndex].Cells[2].Value != null)
+                    {
+                        double qty = double.Parse(dgvLines.Rows[e.RowIndex].Cells[4].Value.ToString());
+                        dgvLines.Rows[e.RowIndex].Cells[4].Value = qty.ToString("N2");
+                    }
+                }
+            }
             //decimal costPrice, retailPrice, lineDisc;
-            //if (e.ColumnIndex == 1 && e.RowIndex != -1)
+            //if (e.ColumnIndex == 3 && e.RowIndex != -1)
             //{
             //    Cursor.Current = Cursors.IBeam;
             //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
             //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value.ToString()))
             //    {
             //        string barcodeLine = row.Cells["barcode"].Value.ToString();
-            //        var prodCol = (from a in db.vwProducts where a.Barcode == barcodeLine select a);
-            //        if (prodCol.Any())
+            //        DataTable dt = po.fetchProductLine("sp_purchaseOrderOperations", "purchaseOrder", "fetchProductLine2", txtSuppID.Text, barcodeLine);
+            //        if(dt.Rows.Count > 0)
             //        {
-            //            long rid = prodCol.SingleOrDefault().RID;
-            //            var objDept = db.sp_catValidation("rid", rid).SingleOrDefault();
-            //            costPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Cost_price);
-            //            retailPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Retail_price);
-            //            //lineDisc = Convert.ToDecimal(prodCol.SingleOrDefault().lineDisc);
-            //            row.Cells["department"].Value = objDept.subcat_desc;
-            //            row.Cells["po_unit"].Value = prodCol.SingleOrDefault().PO_Unit;
-            //            row.Cells["po_price"].Value = costPrice;
-            //            //row.Cells["lineDisc"].Value = lineDisc;
-            //            row.Cells["retailPrice"].Value = retailPrice;
+            //            foreach(DataRow dRow in dt.Rows)
+            //            {
+            //                row.Cells["Product description"].Value = dRow["posDesc"];
+            //                row.Cells["Dept class code"].Value = dRow["dept_code"];
+            //                row.Cells["Unit"].Value = dRow["poUnit"];
+            //                row.Cells["Cost price"].Value = dRow["costPrice"];
+            //                row.Cells["Retail price"].Value = dRow["retailPrice"];
+            //                row.Cells["Discount percent"].Value = Convert.ToDecimal(dRow["percentage"]) * 100;
+            //            }
             //        }
             //        else
             //        {
             //            MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //            row.Cells["barcode"].Value = "";
             //        }
+            //        //string barcodeLine = row.Cells["barcode"].Value.ToString();
+            //        //var prodCol = (from a in db.vwProducts where a.Barcode == barcodeLine select a);
+            //        //if (prodCol.Any())
+            //        //{
+            //        //    long rid = prodCol.SingleOrDefault().RID;
+            //        //    var objDept = db.sp_catValidation("rid", rid).SingleOrDefault();
+            //        //    costPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Cost_price);
+            //        //    retailPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Retail_price);
+            //        //    //lineDisc = Convert.ToDecimal(prodCol.SingleOrDefault().lineDisc);
+            //        //    row.Cells["department"].Value = objDept.subcat_desc;
+            //        //    row.Cells["po_unit"].Value = prodCol.SingleOrDefault().PO_Unit;
+            //        //    row.Cells["po_price"].Value = costPrice;
+            //        //    //row.Cells["lineDisc"].Value = lineDisc;
+            //        //    row.Cells["retailPrice"].Value = retailPrice;
+            //        //}
+            //        //else
+            //        //{
+            //        //    MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        //    row.Cells["barcode"].Value = "";
+            //        //}
 
             //        //discPrice = (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
             //    }
             //}
-            //if (e.ColumnIndex == 2 && e.RowIndex != -1)
+            //if (e.ColumnIndex == 4 && e.RowIndex != -1)
             //{
             //    int rowIndex = dgvLines.CurrentRow.Index;
             //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
             //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value as String))
             //    {
-            //        row.Cells["netAmount"].Value = Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value) - (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
+            //        row.Cells["Net amount"].Value = Convert.ToDecimal(row.Cells["Quantity"].Value) * Convert.ToDecimal(row.Cells["Cost price"].Value) - (Convert.ToDecimal(row.Cells["Discount percent"].Value) / 100) * (Convert.ToDecimal(row.Cells["Quantity"].Value) * Convert.ToDecimal(row.Cells["Cost price"].Value));
             //    }
             //    else
             //    {
@@ -849,12 +927,13 @@ namespace ACP
             {
                 int rowIndex = dgvLines.SelectedRows[0].Index;
 
-                long lineID = Convert.ToInt64(dgvLines.Rows[rowIndex].Cells["lineID"].Value);
-                po.deletePOline("sp_purchaseOrderOperations", "POlines", "Delete", lineID);
+                dgvLines.Rows.RemoveAt(rowIndex);
+                //long lineID = Convert.ToInt64(dgvLines.Rows[rowIndex].Cells["lineID"].Value);
+                //po.deletePOline("sp_purchaseOrderOperations", "POlines", "Delete", lineID);
 
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetchPOlines();
-                tsbRemove.Enabled = false;
+                //MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //fetchPOlines();
+                //tsbRemove.Enabled = false;
             }
         }
 
@@ -1375,25 +1454,46 @@ namespace ACP
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if(btnClose.Text == "Cancel")
-            {
-                DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (res == DialogResult.Yes)
-                {
-                    po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
-                    this.Hide();
-                }
-            }
-            else if(btnClose.Text == "Close")
-            {
-                this.Hide();
-                this.DialogResult = DialogResult.OK;
-            }
+            this.Hide();
+            this.DialogResult = DialogResult.OK;
+            //if(btnClose.Text == "Cancel")
+            //{
+            //    DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            //    if (res == DialogResult.Yes)
+            //    {
+            //        po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
+            //        this.Hide();
+            //    }
+            //}
+            //else if(btnClose.Text == "Close")
+            //{
+            //    this.Hide();
+            //    this.DialogResult = DialogResult.OK;
+            //}
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void dgvLines_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 4 && e.RowIndex != dgvLines.NewRowIndex)
+            {
+                if (dgvLines.Rows[e.RowIndex].Cells[4].Value != null)
+                {
+                    double qty = double.Parse(e.Value.ToString());
+                    e.Value = qty.ToString("N2");
+                }
+            }
+            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
         }
 
        

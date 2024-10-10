@@ -345,3 +345,5 @@ D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmTest.resources
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserManagement.resources
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserEntry.resources
 >>>>>>> 71dcbebfc773f7b96a18cadb7e3174d27d3ccf90
+D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.User.FormUserEntry.resources
+D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.User.FormUserManagement.resources

@@ -120,6 +120,7 @@ namespace ACP
                     DataGridViewRow row = dgvPO.Rows[e.RowIndex];
 
                     Id.orderNo = row.Cells["Order No."].Value.ToString();
+                    Id.suppID = row.Cells["Supplier ID"].Value.ToString();
                     Id.status = row.Cells["Status"].Value.ToString();
                     Id.globalString = row.Cells["Name"].Value.ToString();
                     btnEdit.Enabled = true;
