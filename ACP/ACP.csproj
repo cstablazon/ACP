@@ -136,6 +136,7 @@
     <Compile Include="exchangeRate.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FormsPermissionsManager.cs" />
     <Compile Include="frmAddress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +169,8 @@
     </Compile>
     <Compile Include="Product\productCreation.cs" />
     <Compile Include="Purchase Order\purchaseOrderClass.cs" />
+    <Compile Include="RoleManager.cs" />
+    <Compile Include="RolePermissionManager.cs" />
     <Compile Include="Supplier config\frmItemSalesTaxGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,6 +505,12 @@
     </Compile>
     <Compile Include="UserManager.cs" />
     <Compile Include="UserPermissionManager.cs" />
+    <Compile Include="User\FormRolePermissionEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\FormRolePermissionEntry.Designer.cs">
+      <DependentUpon>FormRolePermissionEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\FormUserEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -736,6 +745,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\FormRolePermissionEntry.resx">
+      <DependentUpon>FormRolePermissionEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\FormUserEntry.resx">
       <DependentUpon>FormUserEntry.cs</DependentUpon>

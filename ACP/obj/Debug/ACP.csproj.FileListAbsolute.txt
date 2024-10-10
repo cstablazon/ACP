@@ -341,3 +341,4 @@ D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\RdlCompile.cache
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\RdlCompile.compiled
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserManagement.resources
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserEntry.resources
+D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormRolePermissionEntry.resources
