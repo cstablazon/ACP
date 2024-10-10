@@ -174,6 +174,23 @@ namespace ACP
 
             return dt;
         }
+
+        public DataTable fetchProductLine2(string query, string tableName, string action, string suppID, string barcode)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", suppID);
+            cmd.Parameters.AddWithValue("@barcode", barcode);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
 //Fetch PO lines based on order no
         public DataTable fetchPOline(string query, string tableName, string action, string orderNo)
         {
@@ -182,6 +199,23 @@ namespace ACP
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
+        public DataTable fetchPOlineByBarcodeAndOrderNo(string query, string tableName, string action, string barcode, string orderNo)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@barcode", barcode);
             cmd.Parameters.AddWithValue("@orderNo", orderNo);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();

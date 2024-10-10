@@ -32,10 +32,19 @@ namespace ACP
         {
             return db.fetchProductLine(sp, tableName, action, suppID, code);
         }
+        public DataTable fetchProductLine2(string sp, string tableName, string action, string suppID, string barcode)
+        {
+            return db.fetchProductLine2(sp, tableName, action, suppID, barcode);
+        }
 
         public DataTable fetchPOline(string sp, string tableName, string action, string orderNo)
         {
             return db.fetchPOline(sp, tableName, action, orderNo);
+        }
+
+        public DataTable fetchPOlineByBarcodeAndOrderNo(string sp, string tableName, string action, string barcode, string orderNo)
+        {
+            return db.fetchPOlineByBarcodeAndOrderNo(sp, tableName, action, barcode, orderNo);
         }
 
 //CRUD
@@ -126,15 +135,15 @@ namespace ACP
             conn.Close();
         }
 
-        public void deletePOline(string sp, string tableName, string action, long lineID)
+        public void deletePOline(string action, string barcode, string orderNo)
         {
             SqlConnection conn = db.getConnection();
             conn.Open();
-            SqlCommand cmd = new SqlCommand(sp, conn);
+            SqlCommand cmd = new SqlCommand("sp_POlines", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
-            cmd.Parameters.AddWithValue("@lineID", lineID);
+            cmd.Parameters.AddWithValue("@barcode", barcode);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
 
             cmd.ExecuteNonQuery();
             conn.Close();

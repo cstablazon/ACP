@@ -21,7 +21,7 @@ namespace ACP
         private void frmReports_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dsPurchaseOrder.sp_reportPO' table. You can move, or remove it, as needed.
-            this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, "00001");
+            this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, Id.orderNo);
            
         }
 
