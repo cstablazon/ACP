@@ -139,24 +139,24 @@ namespace ACP
                     pLines.Visible = true;
                     dgvLines.Visible = true;
 
-                    if(Id.status.Equals("Confirmed"))
-                    {
-                        btnReceive.Enabled = true;
-                        btnPOreport.Enabled = true;
-                    }
-                    else
-                    {
-                        btnReceive.Enabled = false;
-                        btnPOreport.Enabled = false;
-                    }
-                    if(Id.status.Equals("For approval"))
-                    {
-                        btnConfirm.Enabled = true;
-                    }
-                    else
-                    {
-                        btnConfirm.Enabled = false;
-                    }
+                    //if(Id.status.Equals("Confirmed"))
+                    //{
+                    //    btnReceive.Enabled = true;
+                    //    btnPOreport.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    btnReceive.Enabled = false;
+                    //    btnPOreport.Enabled = false;
+                    //}
+                    //if(Id.status.Equals("For approval"))
+                    //{
+                    //    btnConfirm.Enabled = true;
+                    //}
+                    //else
+                    //{
+                    //    btnConfirm.Enabled = false;
+                    //}
                     //if(Id.status.Equals("Received"))
                     //{
                     //    btnPosting.Enabled = true;

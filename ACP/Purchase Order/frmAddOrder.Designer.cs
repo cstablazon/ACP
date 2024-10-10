@@ -37,14 +37,12 @@
             this.tabOder = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnApproval = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.pline1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.pLine = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnNewProd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabMange = new System.Windows.Forms.TabPage();
             this.tabRecieve = new System.Windows.Forms.TabPage();
@@ -59,9 +57,7 @@
             this.label38 = new System.Windows.Forms.Label();
             this.txtPesoDiscount = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
-            this.btnCreate = new System.Windows.Forms.Button();
             this.dtpEntry = new System.Windows.Forms.DateTimePicker();
-            this.btnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSuppID = new System.Windows.Forms.TextBox();
             this.cmbDeliveryAdd = new System.Windows.Forms.ComboBox();
@@ -113,26 +109,30 @@
             this.cmbPOtype = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.pLines = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbAddLine = new System.Windows.Forms.ToolStripButton();
-            this.tsbAddLines = new System.Windows.Forms.ToolStripButton();
-            this.tsbAddProd = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemove = new System.Windows.Forms.ToolStripButton();
             this.dgvLines = new System.Windows.Forms.DataGridView();
-            this.lblLines = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.txtDiscountDesc = new System.Windows.Forms.TextBox();
+            this.txtPurchaseDiscount = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblLineDetails = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel8 = new System.Windows.Forms.Panel();
-            this.txtPurchaseDiscount = new System.Windows.Forms.TextBox();
-            this.txtDiscountDesc = new System.Windows.Forms.TextBox();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.tsbAddLine = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddLines = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddProd = new System.Windows.Forms.ToolStripButton();
+            this.tsbRemove = new System.Windows.Forms.ToolStripButton();
+            this.lblLines = new System.Windows.Forms.Label();
+            this.lblLineDetails = new System.Windows.Forms.Label();
+            this.btnApproval = new System.Windows.Forms.Button();
+            this.btnNewProd = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.tabPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabOder.SuspendLayout();
@@ -223,24 +223,6 @@
             this.panel5.Size = new System.Drawing.Size(173, 89);
             this.panel5.TabIndex = 4;
             // 
-            // btnApproval
-            // 
-            this.btnApproval.FlatAppearance.BorderSize = 0;
-            this.btnApproval.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApproval.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApproval.Image = ((System.Drawing.Image)(resources.GetObject("btnApproval.Image")));
-            this.btnApproval.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnApproval.Location = new System.Drawing.Point(3, 3);
-            this.btnApproval.Margin = new System.Windows.Forms.Padding(0);
-            this.btnApproval.Name = "btnApproval";
-            this.btnApproval.Size = new System.Drawing.Size(79, 58);
-            this.btnApproval.TabIndex = 4;
-            this.btnApproval.Text = "Submit for approval";
-            this.btnApproval.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnApproval.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnApproval.UseVisualStyleBackColor = true;
-            this.btnApproval.Click += new System.EventHandler(this.btnApproval_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -297,23 +279,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(166, 89);
             this.panel2.TabIndex = 0;
-            // 
-            // btnNewProd
-            // 
-            this.btnNewProd.FlatAppearance.BorderSize = 0;
-            this.btnNewProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewProd.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewProd.Image = ((System.Drawing.Image)(resources.GetObject("btnNewProd.Image")));
-            this.btnNewProd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnNewProd.Location = new System.Drawing.Point(1, 3);
-            this.btnNewProd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnNewProd.Name = "btnNewProd";
-            this.btnNewProd.Size = new System.Drawing.Size(79, 58);
-            this.btnNewProd.TabIndex = 3;
-            this.btnNewProd.Text = "Recalculate prices";
-            this.btnNewProd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnNewProd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNewProd.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -378,7 +343,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 133);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 577);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 531);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // pHeader
@@ -449,7 +414,7 @@
             this.pHeader.MaximumSize = new System.Drawing.Size(1111, 470);
             this.pHeader.MinimumSize = new System.Drawing.Size(2, 22);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1086, 64);
+            this.pHeader.Size = new System.Drawing.Size(1086, 222);
             this.pHeader.TabIndex = 0;
             // 
             // cmbDiscountType
@@ -524,25 +489,6 @@
             this.label39.TabIndex = 147;
             this.label39.Text = "Peso discount:";
             // 
-            // btnCreate
-            // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(912, 2);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(83, 30);
-            this.btnCreate.TabIndex = 5;
-            this.btnCreate.Text = "  Save";
-            this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCreate.UseVisualStyleBackColor = false;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
             // dtpEntry
             // 
             this.dtpEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -550,25 +496,6 @@
             this.dtpEntry.Name = "dtpEntry";
             this.dtpEntry.Size = new System.Drawing.Size(223, 21);
             this.dtpEntry.TabIndex = 143;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(1001, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(79, 30);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = " Cancel";
-            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label1
             // 
@@ -1122,19 +1049,6 @@
             this.label6.TabIndex = 86;
             this.label6.Text = "Purchase Order:";
             // 
-            // lblHeader
-            // 
-            this.lblHeader.AutoSize = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.Image = global::ACP.Properties.Resources.arrowDown10px;
-            this.lblHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblHeader.Location = new System.Drawing.Point(3, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(64, 17);
-            this.lblHeader.TabIndex = 2;
-            this.lblHeader.Text = "   Header";
-            this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
-            // 
             // pLines
             // 
             this.pLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1142,11 +1056,11 @@
             this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
-            this.pLines.Location = new System.Drawing.Point(3, 73);
+            this.pLines.Location = new System.Drawing.Point(3, 231);
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 22);
+            this.pLines.Size = new System.Drawing.Size(1086, 304);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1172,52 +1086,10 @@
             this.toolStrip1.Size = new System.Drawing.Size(1064, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tsbAddLine
-            // 
-            this.tsbAddLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbAddLine.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddLine.Image")));
-            this.tsbAddLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddLine.Name = "tsbAddLine";
-            this.tsbAddLine.Size = new System.Drawing.Size(55, 22);
-            this.tsbAddLine.Text = "Add line";
-            this.tsbAddLine.Visible = false;
-            this.tsbAddLine.Click += new System.EventHandler(this.tsbAddLine_Click);
-            // 
-            // tsbAddLines
-            // 
-            this.tsbAddLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbAddLines.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddLines.Image")));
-            this.tsbAddLines.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddLines.Name = "tsbAddLines";
-            this.tsbAddLines.Size = new System.Drawing.Size(60, 22);
-            this.tsbAddLines.Text = "Add lines";
-            this.tsbAddLines.Click += new System.EventHandler(this.tsbAddLines_Click);
-            // 
-            // tsbAddProd
-            // 
-            this.tsbAddProd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbAddProd.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddProd.Image")));
-            this.tsbAddProd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddProd.Name = "tsbAddProd";
-            this.tsbAddProd.Size = new System.Drawing.Size(83, 22);
-            this.tsbAddProd.Text = "Add products";
-            this.tsbAddProd.Visible = false;
-            // 
-            // tsbRemove
-            // 
-            this.tsbRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbRemove.Enabled = false;
-            this.tsbRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbRemove.Image")));
-            this.tsbRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRemove.Name = "tsbRemove";
-            this.tsbRemove.Size = new System.Drawing.Size(54, 22);
-            this.tsbRemove.Text = "Remove";
-            this.tsbRemove.Click += new System.EventHandler(this.tsbRemove_Click);
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // dgvLines
             // 
-            this.dgvLines.AllowUserToAddRows = false;
             this.dgvLines.AllowUserToDeleteRows = false;
             this.dgvLines.AllowUserToResizeColumns = false;
             this.dgvLines.AllowUserToResizeRows = false;
@@ -1238,19 +1110,6 @@
             this.dgvLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLines_DataBindingComplete);
             this.dgvLines.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvLines_EditingControlShowing);
             // 
-            // lblLines
-            // 
-            this.lblLines.AutoSize = true;
-            this.lblLines.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLines.Image = global::ACP.Properties.Resources.arrowRight10px;
-            this.lblLines.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLines.Location = new System.Drawing.Point(2, 1);
-            this.lblLines.Name = "lblLines";
-            this.lblLines.Size = new System.Drawing.Size(50, 17);
-            this.lblLines.TabIndex = 138;
-            this.lblLines.Text = "   Lines";
-            this.lblLines.Click += new System.EventHandler(this.lblLines_Click);
-            // 
             // panel6
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1260,12 +1119,30 @@
             this.panel6.Controls.Add(this.txtPurchaseDiscount);
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 101);
+            this.panel6.Location = new System.Drawing.Point(3, 545);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1086, 134);
+            this.panel6.Size = new System.Drawing.Size(1086, 22);
             this.panel6.TabIndex = 2;
+            // 
+            // txtDiscountDesc
+            // 
+            this.txtDiscountDesc.Enabled = false;
+            this.txtDiscountDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscountDesc.Location = new System.Drawing.Point(174, 39);
+            this.txtDiscountDesc.Name = "txtDiscountDesc";
+            this.txtDiscountDesc.Size = new System.Drawing.Size(137, 23);
+            this.txtDiscountDesc.TabIndex = 149;
+            // 
+            // txtPurchaseDiscount
+            // 
+            this.txtPurchaseDiscount.Enabled = false;
+            this.txtPurchaseDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPurchaseDiscount.Location = new System.Drawing.Point(174, 67);
+            this.txtPurchaseDiscount.Name = "txtPurchaseDiscount";
+            this.txtPurchaseDiscount.Size = new System.Drawing.Size(209, 23);
+            this.txtPurchaseDiscount.TabIndex = 145;
             // 
             // groupBox2
             // 
@@ -1311,6 +1188,84 @@
             this.label7.TabIndex = 88;
             this.label7.Text = "Discount";
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.btnClose);
+            this.panel8.Controls.Add(this.btnCreate);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 665);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(1111, 35);
+            this.panel8.TabIndex = 7;
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.Image = global::ACP.Properties.Resources.arrowDown10px;
+            this.lblHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeader.Location = new System.Drawing.Point(3, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(64, 17);
+            this.lblHeader.TabIndex = 2;
+            this.lblHeader.Text = "   Header";
+            this.lblHeader.Click += new System.EventHandler(this.lblHeader_Click);
+            // 
+            // tsbAddLine
+            // 
+            this.tsbAddLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbAddLine.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddLine.Image")));
+            this.tsbAddLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddLine.Name = "tsbAddLine";
+            this.tsbAddLine.Size = new System.Drawing.Size(55, 22);
+            this.tsbAddLine.Text = "Add line";
+            this.tsbAddLine.Visible = false;
+            this.tsbAddLine.Click += new System.EventHandler(this.tsbAddLine_Click);
+            // 
+            // tsbAddLines
+            // 
+            this.tsbAddLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbAddLines.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddLines.Image")));
+            this.tsbAddLines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddLines.Name = "tsbAddLines";
+            this.tsbAddLines.Size = new System.Drawing.Size(60, 22);
+            this.tsbAddLines.Text = "Add lines";
+            this.tsbAddLines.Click += new System.EventHandler(this.tsbAddLines_Click);
+            // 
+            // tsbAddProd
+            // 
+            this.tsbAddProd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbAddProd.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddProd.Image")));
+            this.tsbAddProd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddProd.Name = "tsbAddProd";
+            this.tsbAddProd.Size = new System.Drawing.Size(83, 22);
+            this.tsbAddProd.Text = "Add products";
+            this.tsbAddProd.Visible = false;
+            // 
+            // tsbRemove
+            // 
+            this.tsbRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbRemove.Enabled = false;
+            this.tsbRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbRemove.Image")));
+            this.tsbRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRemove.Name = "tsbRemove";
+            this.tsbRemove.Size = new System.Drawing.Size(54, 22);
+            this.tsbRemove.Text = "Remove";
+            this.tsbRemove.Click += new System.EventHandler(this.tsbRemove_Click);
+            // 
+            // lblLines
+            // 
+            this.lblLines.AutoSize = true;
+            this.lblLines.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLines.Image = global::ACP.Properties.Resources.arrowRight10px;
+            this.lblLines.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLines.Location = new System.Drawing.Point(2, 1);
+            this.lblLines.Name = "lblLines";
+            this.lblLines.Size = new System.Drawing.Size(50, 17);
+            this.lblLines.TabIndex = 138;
+            this.lblLines.Text = "   Lines";
+            this.lblLines.Click += new System.EventHandler(this.lblLines_Click);
+            // 
             // lblLineDetails
             // 
             this.lblLineDetails.AutoSize = true;
@@ -1325,33 +1280,78 @@
             this.lblLineDetails.Text = "   Line details";
             this.lblLineDetails.Click += new System.EventHandler(this.lblLineDetails_Click);
             // 
-            // panel8
+            // btnApproval
             // 
-            this.panel8.Controls.Add(this.btnClose);
-            this.panel8.Controls.Add(this.btnCreate);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 714);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1111, 35);
-            this.panel8.TabIndex = 7;
+            this.btnApproval.FlatAppearance.BorderSize = 0;
+            this.btnApproval.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApproval.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApproval.Image = ((System.Drawing.Image)(resources.GetObject("btnApproval.Image")));
+            this.btnApproval.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnApproval.Location = new System.Drawing.Point(3, 3);
+            this.btnApproval.Margin = new System.Windows.Forms.Padding(0);
+            this.btnApproval.Name = "btnApproval";
+            this.btnApproval.Size = new System.Drawing.Size(79, 58);
+            this.btnApproval.TabIndex = 4;
+            this.btnApproval.Text = "Submit for approval";
+            this.btnApproval.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnApproval.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApproval.UseVisualStyleBackColor = true;
+            this.btnApproval.Click += new System.EventHandler(this.btnApproval_Click);
             // 
-            // txtPurchaseDiscount
+            // btnNewProd
             // 
-            this.txtPurchaseDiscount.Enabled = false;
-            this.txtPurchaseDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPurchaseDiscount.Location = new System.Drawing.Point(174, 67);
-            this.txtPurchaseDiscount.Name = "txtPurchaseDiscount";
-            this.txtPurchaseDiscount.Size = new System.Drawing.Size(209, 23);
-            this.txtPurchaseDiscount.TabIndex = 145;
+            this.btnNewProd.FlatAppearance.BorderSize = 0;
+            this.btnNewProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewProd.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewProd.Image = ((System.Drawing.Image)(resources.GetObject("btnNewProd.Image")));
+            this.btnNewProd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnNewProd.Location = new System.Drawing.Point(1, 3);
+            this.btnNewProd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnNewProd.Name = "btnNewProd";
+            this.btnNewProd.Size = new System.Drawing.Size(79, 58);
+            this.btnNewProd.TabIndex = 3;
+            this.btnNewProd.Text = "Recalculate prices";
+            this.btnNewProd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnNewProd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNewProd.UseVisualStyleBackColor = true;
             // 
-            // txtDiscountDesc
+            // btnClose
             // 
-            this.txtDiscountDesc.Enabled = false;
-            this.txtDiscountDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiscountDesc.Location = new System.Drawing.Point(174, 39);
-            this.txtDiscountDesc.Name = "txtDiscountDesc";
-            this.txtDiscountDesc.Size = new System.Drawing.Size(137, 23);
-            this.txtDiscountDesc.TabIndex = 149;
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(1001, 2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(79, 30);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = " Cancel";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnCreate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCreate.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.ForeColor = System.Drawing.Color.White;
+            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
+            this.btnCreate.Location = new System.Drawing.Point(912, 2);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(83, 30);
+            this.btnCreate.TabIndex = 5;
+            this.btnCreate.Text = "  Save";
+            this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // frmAddOrder
             // 
@@ -1359,7 +1359,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1111, 749);
+            this.ClientSize = new System.Drawing.Size(1111, 700);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.tabPanel);

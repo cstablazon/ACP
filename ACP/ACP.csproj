@@ -167,6 +167,12 @@
     <Compile Include="frmProdDetails.Designer.cs">
       <DependentUpon>frmProdDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Product\productCreation.cs" />
     <Compile Include="Purchase Order\purchaseOrderClass.cs" />
     <Compile Include="RoleManager.cs" />
@@ -631,7 +637,12 @@
     <EmbeddedResource Include="frmProdDetails.resx">
       <DependentUpon>frmProdDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="reportPurchaseOrder.rdlc" />
+    <EmbeddedResource Include="frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reportPOretailAndCost.rdlc" />
+    <EmbeddedResource Include="reportPOcostPrice.rdlc" />
+    <EmbeddedResource Include="reportPOretailPrice.rdlc" />
     <EmbeddedResource Include="Supplier config\frmItemSalesTaxGroup.resx">
       <DependentUpon>frmItemSalesTaxGroup.cs</DependentUpon>
     </EmbeddedResource>

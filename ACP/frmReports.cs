@@ -20,6 +20,8 @@ namespace ACP
 
         private void frmReports_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dsPurchaseOrder.sp_reportPO' table. You can move, or remove it, as needed.
+            this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, "00001");
            
         }
 
@@ -32,32 +34,54 @@ namespace ACP
             else
             {
                 // TODO: This line of code loads data into the 'dsPO.sp_reportPO' table. You can move, or remove it, as needed.
-                this.sp_reportPOTableAdapter.Fill(this.dsPO.sp_reportPO, Id.orderNo);
-                ReportParameter[] parameters = new ReportParameter[1];
+                //this.sp_reportPOTableAdapter.Fill(this.dsPO.sp_reportPO, Id.orderNo);
+
+                //this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, Id.orderNo);
+                //ReportParameter[] parameters = new ReportParameter[1];
+
                 if(cbCostPrice.Checked == true && cbRetailPrice.Checked == false)
                 {
-                    parameters[0] = new ReportParameter("hiddenColumn", "True");
-                    parameters[1] = new ReportParameter("nullParam", "Cost price");
+                    reportViewer1.Reset();
+                    //ReportDataSource rds = new ReportDataSource("costPrice", bind);
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("costPrice", this.sp_reportPOBindingSource));
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.reportPOcostPrice.rdlc";
+                    this.reportViewer1.RefreshReport();
+                    //var bind = new BindingSource();
+                    //bind.DataSource = dsPurchaseOrder;
+                    //reportViewer1.Reset();
+                    //reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("costPrice", bind));
+                    //reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.reportPOcostPrice.rdlc";
+                    //this.reportViewer1.RefreshReport();
+
+                    //parameters[0] = new ReportParameter("hiddenColumn", "Cost price");
+                //    //new ReportParameter("hiddenColumn", "True");
+                //    //new ReportParameter("nullParam", "Cost price");
                 }
                 else if (cbCostPrice.Checked == false && cbRetailPrice.Checked == true)
                 {
-                    parameters[0] = new ReportParameter("hiddenColumn", "False");
-                    parameters[1] = new ReportParameter("nullParam", "Retail price");
+                    reportViewer1.Reset();
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("retailPrice", this.sp_reportPOBindingSource));
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.reportPOretailPrice.rdlc";
+                    this.reportViewer1.RefreshReport();
+                  //new ReportParameter("hiddenColumn", "Retail price");
+                //   //new ReportParameter("nullParam", "Retail price");
                 }
                 else if (cbCostPrice.Checked == true && cbRetailPrice.Checked == true)
                 {
-
+                    reportViewer1.Reset();
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("retailAndCost", this.sp_reportPOBindingSource));
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "ACP.reportPOretailAndCost.rdlc";
+                    this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, Id.orderNo);
+                    this.reportViewer1.RefreshReport();
+                    //new ReportParameter("hiddenColumn", "Retail and Cost");
                 }
-                //if (Id.condition)
-                //{
-                //    parameters[0] = new ReportParameter("HiddenColumn", "False");
-                //}
-                //else
-                //{
-                //    parameters[0] = new ReportParameter("HiddenColumn", "True");
-                //}
-                this.reportViewer1.LocalReport.SetParameters(parameters);
-                this.reportViewer1.RefreshReport();
+
+                //this.sp_reportPOTableAdapter.Fill(this.dsPurchaseOrder.sp_reportPO, Id.orderNo);
+                //this.reportViewer1.LocalReport.SetParameters(parameters);
+                //this.reportViewer1.RefreshReport();
             }
         }
 

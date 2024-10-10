@@ -23,7 +23,7 @@ namespace ACP
             BOM();
             UOM();
             UOMretail();
-            site();
+            //site();
             PurchaseTax();
             salesTax();
             inventLoc();
@@ -90,17 +90,17 @@ namespace ACP
             cmbCharges.ValueMember = "chargeID";
         }
 
-        private void site()
-        {
-            cmbSite.DataSource = (from a in db.sites select a).ToList();
-            cmbSite.ValueMember = "siteID";
-            cmbSite.DisplayMember = "siteDesc";
-            //DataSet ds = pc.fetchData("VIEW", "FETCHSITE", "Name");
-            //cbSite.DataSource = ds.Tables["Name"];
-            //cbSite.DisplayMember = "Name";
-            //cbSite.ValueMember = "ID";
-            //cbSite.Text = Id.siteID;
-        }
+        //private void site()
+        //{
+        //    cmbSite.DataSource = (from a in db.sites select a).ToList();
+        //    cmbSite.ValueMember = "siteID";
+        //    cmbSite.DisplayMember = "siteDesc";
+        //    //DataSet ds = pc.fetchData("VIEW", "FETCHSITE", "Name");
+        //    //cbSite.DataSource = ds.Tables["Name"];
+        //    //cbSite.DisplayMember = "Name";
+        //    //cbSite.ValueMember = "ID";
+        //    //cbSite.Text = Id.siteID;
+        //}
 
         private void inventLoc()
         {
