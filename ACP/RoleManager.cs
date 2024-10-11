@@ -62,6 +62,11 @@ namespace ACP
 
         public bool UpdateRole(Role role)
         {
+            if (role == null)
+            {
+                throw new ArgumentNullException("role");
+            }
+
             var parameters = new Dictionary<string, object>
             {
                 {"@Action", "Update"},
@@ -70,9 +75,23 @@ namespace ACP
                 {"@Description", role.Description}
             };
 
-            DataSet ds = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageRoles", parameters);
+            try
+            {
+                DataSet ds = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageRoles", parameters);
 
-            return ds.Tables[0].Rows.Count > 0;
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToBoolean(ds.Tables[0].Rows[0]["Success"]);
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine("Error updating role: " + ex.Message);
+                return false;
+            }
         }
 
         public bool DeleteRole(int roleID)
@@ -83,9 +102,22 @@ namespace ACP
                 {"@RoleID", roleID}
             };
 
-            DataSet ds = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageRoles", parameters);
+            try
+            {
+                DataSet ds = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageRoles", parameters);
 
-            return ds.Tables[0].Rows.Count > 0;
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToBoolean(ds.Tables[0].Rows[0]["Success"]);
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting role: " + ex.Message);
+                return false;
+            }
         }
 
         public List<Role> GetAllRoles()
@@ -165,6 +197,16 @@ namespace ACP
         {
             List<Role> roles = GetAllRoles();
 
+            // Store the current position of the delete column
+            int deleteColumnIndex = -1;
+            DataGridViewColumn deleteColumn = null;
+            if (dataGridView.Columns["DeleteColumn"] != null)
+            {
+                deleteColumnIndex = dataGridView.Columns["DeleteColumn"].Index;
+                deleteColumn = dataGridView.Columns["DeleteColumn"];
+                dataGridView.Columns.Remove("DeleteColumn");
+            }
+
             dataGridView.DataSource = null;
             dataGridView.DataSource = roles;
 
@@ -172,6 +214,21 @@ namespace ACP
             dataGridView.Columns["RoleID"].Visible = false;
             dataGridView.Columns["RoleName"].HeaderText = "Role Name";
             dataGridView.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Re-add or add the delete button column
+            if (deleteColumn == null)
+            {
+                deleteColumn = new DataGridViewLinkColumn
+                {
+                    Name = "DeleteColumn",
+                    HeaderText = "Delete",
+                    Text = "Delete",
+                    UseColumnTextForLinkValue = true
+                };
+            }
+
+            // Always add the delete column at the end
+            dataGridView.Columns.Add(deleteColumn);
 
             // AutoSize the columns for better appearance
             dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);

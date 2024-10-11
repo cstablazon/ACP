@@ -62,7 +62,10 @@ namespace ACP.User
 
         private void btnUserRole_Click(object sender, EventArgs e)
         {
-
+            using (var roleManagement = new FormRoleManagement())
+            {
+                roleManagement.ShowDialog();
+            }
         }
 
         private void btnRolePermissions_Click(object sender, EventArgs e)
