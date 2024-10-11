@@ -196,6 +196,7 @@ namespace ACP
             {
                 frmAddOrder addOrder = new frmAddOrder();
                 addOrder.btnCreate.Text = "Update";
+                addOrder.btnClose.Text = "Close";
                 DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
 
                 DataRow[] dr = dt.Select("orderNo = '" + Id.orderNo + "'");

@@ -498,9 +498,6 @@ namespace ACP
                         lblProdDetails.Enabled = true;
                         btnClose.Text = "Close";
                         MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        lblProdDetails.Enabled = true;
-                        btnClose.Text = "Close";
-                        MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
@@ -658,14 +655,14 @@ namespace ACP
         {
             frmProductDetails additionalInfo = new frmProductDetails();
             additionalInfo.btnCreate.Text = "Create";
-            additionalInfo.btnClose.Text = "Cancel";
+            additionalInfo.btnClose.Text = "Close";
             Id.LID = null;
             Id.privilegeID = null;
             Id.bmrxID = null;
             Id.discountID = null;
             Id.barcode = barcode.GenerateEan13();
-            pc.createUpdateBarcode("Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
-            additionalInfo.txtPosDesc.Text = Id.globalString2;
+            //pc.createUpdateBarcode("Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
+            additionalInfo.txtPosDesc.Text = Id.globalString;
             //int autoIncBarcode = pc.autoInc("barcode", "barcode");
             //Id.barcode = string.Format("{0:0000000000000}", autoIncBarcode);
             //pc.createUpdateBarcode("Barcode", "Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);

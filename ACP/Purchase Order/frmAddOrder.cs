@@ -21,6 +21,10 @@ namespace ACP
         {
             InitializeComponent();
             //fetchPOlines();
+
+            deliveryAdd();
+            modeOfDelivery();
+            fetch_pool();
         }
 
         public void autocomplete()
@@ -40,7 +44,6 @@ namespace ACP
             cmbPool.DataSource = ds.Tables["PoolID"];
             cmbPool.DisplayMember = "poolID";
             cmbPool.ValueMember = "poolID";
-            cmbPool.Text = "";
             //DataSet ds = po.fetch_pool();
             //cbPool.DataSource = ds.Tables["poolID"];
             //cbPool.DisplayMember = "poolID";
@@ -161,7 +164,6 @@ namespace ACP
             cmbMOD.DataSource = ds.Tables["Mode of delivery"];
             cmbMOD.DisplayMember = "Mode of delivery";
             cmbMOD.ValueMember = "modID";
-            cmbMOD.Text = "";
         }
 
         public void deliveryAdd()
@@ -170,7 +172,6 @@ namespace ACP
             cmbDeliveryAdd.DataSource = ds.Tables["Name"];
             cmbDeliveryAdd.DisplayMember = "Name";
             cmbDeliveryAdd.ValueMember = "delAddressID";
-            cmbDeliveryAdd.Text = "";
         }
 
         private void fetchDiscount()
@@ -284,9 +285,6 @@ namespace ACP
 
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
-            deliveryAdd();
-            modeOfDelivery();
-            fetch_pool();
             if(Id.button == "Create")
             {
                 txtTotalDiscount.Text = 0.ToString("N2");
@@ -295,6 +293,9 @@ namespace ACP
                 txtPriceUnit.Text = 0.ToString("N2");
                 txtDiscountDesc.Text = 0.ToString("N2");
                 txtPurchaseDiscount.Text = 0.ToString("N2");
+                cmbPool.Text = "";
+                cmbMOD.Text = "";
+                cmbDeliveryAdd.Text = "";
             }
             //orderNo();
             //readOnly();
@@ -1455,22 +1456,20 @@ namespace ACP
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            this.DialogResult = DialogResult.OK;
-            //if(btnClose.Text == "Cancel")
-            //{
-            //    DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            //    if (res == DialogResult.Yes)
-            //    {
-            //        po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
-            //        this.Hide();
-            //    }
-            //}
-            //else if(btnClose.Text == "Close")
-            //{
-            //    this.Hide();
-            //    this.DialogResult = DialogResult.OK;
-            //}
+            if (btnClose.Text == "Cancel")
+            {
+                DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (res == DialogResult.Yes)
+                {
+                    po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
+                    this.Hide();
+                }
+            }
+            else if (btnClose.Text == "Close")
+            {
+                this.Hide();
+                this.DialogResult = DialogResult.OK;
+            }
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
