@@ -511,6 +511,12 @@
     </Compile>
     <Compile Include="UserManager.cs" />
     <Compile Include="UserPermissionManager.cs" />
+    <Compile Include="User\FormRoleManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\FormRoleManagement.Designer.cs">
+      <DependentUpon>FormRoleManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\FormRolePermissionEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -756,6 +762,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\FormRoleManagement.resx">
+      <DependentUpon>FormRoleManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\FormRolePermissionEntry.resx">
       <DependentUpon>FormRolePermissionEntry.cs</DependentUpon>
