@@ -20,9 +20,6 @@ namespace ACP
         public frmAddOrder()
         {
             InitializeComponent();
-            deliveryAdd();
-            modeOfDelivery();
-            fetch_pool();
             //fetchPOlines();
         }
 
@@ -287,7 +284,9 @@ namespace ACP
 
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
-            
+            deliveryAdd();
+            modeOfDelivery();
+            fetch_pool();
             if(Id.button == "Create")
             {
                 txtTotalDiscount.Text = 0.ToString("N2");
@@ -724,6 +723,8 @@ namespace ACP
                 {
 
                     dgvLines.DataSource = Id.dt;
+                    dgvLines.Columns["lineID"].Visible = false;
+                    dgvLines.Columns["Order No."].Visible = false;
                     //fetchPOlines();
                     //foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
                     //{

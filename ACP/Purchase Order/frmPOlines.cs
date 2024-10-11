@@ -339,51 +339,103 @@ namespace ACP
             {
                 if (dgvNewItems.Rows.Count > 0)
                 {
-                    Id.dt.Columns.Clear();
-                    Id.dt.Rows.Clear();
-                    Id.dt.Columns.Add("Barcode", typeof(string));
-                    Id.dt.Columns.Add("Product description", typeof(string));
-                    Id.dt.Columns.Add("Dept class code", typeof(string));
-                    Id.dt.Columns.Add("Quantity", typeof(decimal));
-                    Id.dt.Columns.Add("Purchase unit", typeof(string));
-                    Id.dt.Columns.Add("Cost price", typeof(decimal));
-                    Id.dt.Columns.Add("Retail price", typeof(decimal));
-                    Id.dt.Columns.Add("Discount percent", typeof(decimal));
-                    Id.dt.Columns.Add("Net amount", typeof(decimal));
-
-                    DataRow dRow = Id.dt.NewRow();
-
-                    //bool isEmpty = false;
-                    for (int i = 0; dgvNewItems.Rows.Count > i; i++)
+                    if (Id.dt.Rows.Count > 0)
                     {
-                        if (!string.IsNullOrEmpty(dgvNewItems.Rows[i].Cells["qtyCol"].Value as string))
-                        {
-                            string barcode = dgvNewItems.Rows[i].Cells["barcode"].Value.ToString();
-                            string posDesc = dgvNewItems.Rows[i].Cells["posDesc"].Value.ToString();
-                            string deptCode = dgvNewItems.Rows[i].Cells["dept_code"].Value.ToString();
-                            decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
-                            string poUnit = dgvNewItems.Rows[i].Cells["poUnit"].Value.ToString();
-                            decimal costPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["costPrice"].Value);
-                            decimal retailPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["retailPrice"].Value);
-                            decimal percentage = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["percentage"].Value);
-                            decimal discountPercent = (100 - (percentage * 100));
-                            decimal netAmount = ((qty * costPrice) * percentage);
-                            dRow[0] = barcode;
-                            dRow[1] = posDesc;
-                            dRow[2] = deptCode;
-                            dRow[4] = poUnit;
-                            dRow[5] = costPrice;
-                            dRow[6] = retailPrice;
-                            dRow[7] = discountPercent;
-                            dRow[8] = netAmount;
-                            Id.dt.Rows.Add(dRow.ItemArray);
-                        }
-
+                          DataRow dRow = Id.dt.NewRow();
+                          for (int i = 0; dgvNewItems.Rows.Count > i; i++)
+                          {
+                              if (!string.IsNullOrEmpty(dgvNewItems.Rows[i].Cells["qtyCol"].Value as string))
+                              {
+                                  string barcode = dgvNewItems.Rows[i].Cells["barcode"].Value.ToString();
+                                  if (Id.dt.Select("barcode = '" + barcode + "'").Any())
+                                  {
+                                      MessageBox.Show("" + barcode + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                  }
+                                  else
+                                  {
+                                      string posDesc = dgvNewItems.Rows[i].Cells["posDesc"].Value.ToString();
+                                      string deptCode = dgvNewItems.Rows[i].Cells["dept_code"].Value.ToString();
+                                      decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
+                                      string poUnit = dgvNewItems.Rows[i].Cells["poUnit"].Value.ToString();
+                                      decimal costPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["costPrice"].Value);
+                                      decimal retailPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["retailPrice"].Value);
+                                      decimal percentage = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["percentage"].Value);
+                                      decimal discountPercent = (100 - (percentage * 100));
+                                      decimal netAmount = ((qty * costPrice) * percentage);
+                                      dRow[0] = i;
+                                      dRow[1] = Id.orderNo;
+                                      dRow[2] = barcode;
+                                      dRow[3] = posDesc;
+                                      dRow[4] = deptCode;
+                                      dRow[5] = qty.ToString("N2"); ;
+                                      dRow[6] = poUnit;
+                                      dRow[7] = costPrice;
+                                      dRow[8] = retailPrice;
+                                      dRow[9] = discountPercent;
+                                      dRow[10] = netAmount;
+                                      Id.dt.Rows.Add(dRow.ItemArray);
+                                  }
+                              }
+                          }
+                          //MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                          //dgvExistItems.DataSource = Id.dt;
+                          this.DialogResult = DialogResult.OK;
+                          this.Hide();
                     }
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvExistItems.DataSource = Id.dt;
-                    this.DialogResult = DialogResult.OK;
-                    this.Hide();
+                    else
+                    {
+                        Id.dt.Columns.Clear();
+                        Id.dt.Rows.Clear();
+                        Id.dt.Columns.Add("lineID", typeof(int));
+                        Id.dt.Columns.Add("order No.", typeof(string));
+                        Id.dt.Columns.Add("Barcode", typeof(string));
+                        Id.dt.Columns.Add("Product description", typeof(string));
+                        Id.dt.Columns.Add("Dept class code", typeof(string));
+                        Id.dt.Columns.Add("Quantity", typeof(decimal));
+                        Id.dt.Columns.Add("Purchase unit", typeof(string));
+                        Id.dt.Columns.Add("Cost price", typeof(decimal));
+                        Id.dt.Columns.Add("Retail price", typeof(decimal));
+                        Id.dt.Columns.Add("Discount percent", typeof(decimal));
+                        Id.dt.Columns.Add("Net amount", typeof(decimal));
+
+                        DataRow dRow = Id.dt.NewRow();
+
+
+                        //bool isEmpty = false;
+                        for (int i = 0; dgvNewItems.Rows.Count > i; i++)
+                        {
+                            if (!string.IsNullOrEmpty(dgvNewItems.Rows[i].Cells["qtyCol"].Value as string))
+                            {
+                                string barcode = dgvNewItems.Rows[i].Cells["barcode"].Value.ToString();
+                                string posDesc = dgvNewItems.Rows[i].Cells["posDesc"].Value.ToString();
+                                string deptCode = dgvNewItems.Rows[i].Cells["dept_code"].Value.ToString();
+                                decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
+                                string poUnit = dgvNewItems.Rows[i].Cells["poUnit"].Value.ToString();
+                                decimal costPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["costPrice"].Value);
+                                decimal retailPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["retailPrice"].Value);
+                                decimal percentage = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["percentage"].Value);
+                                decimal discountPercent = (100 - (percentage * 100));
+                                decimal netAmount = ((qty * costPrice) * percentage);
+                                dRow[0] = i;
+                                dRow[1] = Id.orderNo;
+                                dRow[2] = barcode;
+                                dRow[3] = posDesc;
+                                dRow[4] = deptCode;
+                                dRow[5] = qty.ToString("N2"); ;
+                                dRow[6] = poUnit;
+                                dRow[7] = costPrice;
+                                dRow[8] = retailPrice;
+                                dRow[9] = discountPercent;
+                                dRow[10] = netAmount;
+                                Id.dt.Rows.Add(dRow.ItemArray);
+                            }
+
+                        }
+                        //MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //dgvExistItems.DataSource = Id.dt;
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
+                    }
                 }
             }
             else if (Id.button == "Update")
