@@ -8,10 +8,10 @@ namespace ACP
     public partial class frMain : Form
     {
         UserPermissionManager _permissionManager;
-        public frMain(int userId)
+        public frMain(UserLoginResult loginResult)
         {
             InitializeComponent();
-            _permissionManager = new UserPermissionManager(userId);
+            _permissionManager = new UserPermissionManager(loginResult.UserId);
         }
 
         private void frMain_Load(object sender, EventArgs e)

@@ -34,23 +34,21 @@ namespace ACP
             }
             else
             {
-                DataTable dt = login.authenticateUser(txtUsername.Text, txtPassword.Text);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        if (Convert.ToInt32(row["authID"]) == 1 || Convert.ToInt32(row["authID"]) == 2 || Convert.ToInt32(row["authID"]) == 3)
-                        {
-                            Program.CurrentUserId = Convert.ToInt32(row["userID"]);
-                            frMain main = new frMain(Convert.ToInt32(row["userID"]));
-                            main.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                UserLoginResult loginResult = UserPermissionManager.Login(username, password);
 
-                        }
-                    }
+                if (loginResult.Success)
+                {
+                    MessageBox.Show(string.Format("Welcome, {0} {1}!", loginResult.FirstName, loginResult.LastName));
+                    // Create and show the MainForm, passing the login result
+                    frMain mainForm = new frMain(loginResult);
+                    mainForm.Show();
+                    this.Hide(); // Hide the login form
+                }
+                else
+                {
+                    MessageBox.Show(loginResult.ErrorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             //var sqlQuery = db.user_tbl.SqlQuery("OPEN SYMMETRIC KEY encryptUserPass DECRYPTION BY PASSWORD = 'inh0used3v'; SELECT userID, username, pass = CAST(DECRYPTBYKEY(pass) AS nvarchar), authID, RID, isActive, timestamp, transDate FROM user_tbl WHERE username = @username AND CAST(DECRYPTBYKEY(pass) AS nvarchar) = @pass", new System.Data.SqlClient.SqlParameter("@username", txtUsername.Text), new System.Data.SqlClient.SqlParameter("@pass", txtPassword.Text)).ToList();
@@ -84,6 +82,7 @@ namespace ACP
         private void btnLogin_Click(object sender, EventArgs e)
         {
             authenticateUser();
+            
         }
 
         string pName;

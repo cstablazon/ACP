@@ -54,7 +54,6 @@ D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.Properties.Resources.resources
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.csproj.GenerateResource.Cache
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\RdlCompile.cache
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\RdlCompile.compiled
-<<<<<<< HEAD
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.frmTest.resources
 =======
 D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormUserManagement.resources
@@ -69,5 +68,5 @@ D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.frmTest.resources
 D:\CHING\Repos\ACP\ACP\obj\Debug\ACP.User.FormRolePermissionEntry.resources
 >>>>>>> a0ddf508ac459256a93a55c05beb85aa91b179f1
 >>>>>>> b97439d227d6018a0630658918ada05ed5e2f2d3
-=======
 >>>>>>> 0ea28c41e4ec400700b86921aff0f08ecce5a5ca
+D:\GASPY FILES\ACE PROJECTS\ACP\ACP\obj\Debug\ACP.User.FormRoleManagement.resources
