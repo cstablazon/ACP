@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace ACP.User
 {
@@ -52,10 +53,104 @@ namespace ACP.User
             txtPhone.Text = _currentUser.PhoneNumber;
             cmbRole.SelectedItem = cmbRole.Items.Cast<UserManager.Role>().FirstOrDefault(r => r.RoleName == _currentUser.RoleName);
             txtPassword.Text = string.Empty; // For security reasons, don't populate the password field
+            txtConfirmPassword.Text = string.Empty;
+        }
+
+        private bool ValidateForm()
+        {
+            // Username validation
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                ShowError("Username is required.");
+                return false;
+            }
+
+            // First name validation
+            if (string.IsNullOrWhiteSpace(txtFirstname.Text))
+            {
+                ShowError("First name is required.");
+                return false;
+            }
+
+            // Last name validation
+            if (string.IsNullOrWhiteSpace(txtLastname.Text))
+            {
+                ShowError("Last name is required.");
+                return false;
+            }
+
+            // Email validation
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                ShowError("Invalid email address.");
+                return false;
+            }
+
+            // Phone number validation
+            if (!IsValidPhoneNumber(txtPhone.Text))
+            {
+                ShowError("Invalid phone number.");
+                return false;
+            }
+
+            // Role validation
+            if (cmbRole.SelectedItem == null)
+            {
+                ShowError("Please select a role.");
+                return false;
+            }
+
+            // Password validation
+            if (!_isEditMode || !string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                if (!IsValidPassword(txtPassword.Text))
+                {
+                    ShowError("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+                    return false;
+                }
+
+                if (txtPassword.Text != txtConfirmPassword.Text)
+                {
+                    ShowError("Passwords do not match.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            return Regex.IsMatch(phoneNumber, @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$");
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            return Regex.IsMatch(password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$");
         }
 
         private void CreateUser()
         {
+            if (!ValidateForm()) return;
+
             UserManager.User newUser = new UserManager.User
             {
                 Username = txtUsername.Text,
@@ -75,6 +170,8 @@ namespace ACP.User
 
         private void UpdateUser()
         {
+            if (!ValidateForm()) return;
+
             _currentUser.Username = txtUsername.Text;
             _currentUser.IsActive = cbActive.Checked;
             _currentUser.FirstName = txtFirstname.Text;
@@ -83,7 +180,6 @@ namespace ACP.User
             _currentUser.PhoneNumber = txtPhone.Text;
             _currentUser.RoleName = ((UserManager.Role)cmbRole.SelectedItem).RoleName;
 
-            // Only update password if a new one is provided
             if (!string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 _currentUser.Password = txtPassword.Text;
@@ -104,6 +200,11 @@ namespace ACP.User
             {
                 CreateUser();
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

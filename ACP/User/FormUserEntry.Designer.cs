@@ -45,7 +45,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -85,6 +85,7 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(15, 142);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '|';
             this.txtPassword.Size = new System.Drawing.Size(232, 20);
             this.txtPassword.TabIndex = 7;
             // 
@@ -180,6 +181,7 @@
             this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -191,12 +193,13 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // textBox1
+            // txtConfirmPassword
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 181);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 20);
-            this.textBox1.TabIndex = 9;
+            this.txtConfirmPassword.Location = new System.Drawing.Point(15, 181);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.PasswordChar = '|';
+            this.txtConfirmPassword.Size = new System.Drawing.Size(232, 20);
+            this.txtConfirmPassword.TabIndex = 9;
             // 
             // label8
             // 
@@ -212,7 +215,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 387);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
@@ -260,7 +263,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.Label label8;
     }
 }

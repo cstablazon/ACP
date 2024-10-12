@@ -151,10 +151,51 @@ namespace ACP.User
         {
             if (string.IsNullOrWhiteSpace(txtRole.Text))
             {
-                MessageBox.Show("Role name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Role name is required.");
+                txtRole.Focus();
                 return false;
             }
+
+            if (txtRole.Text.Length > 50) // Assuming a maximum length of 50 characters for role name
+            {
+                ShowError("Role name cannot exceed 50 characters.");
+                txtRole.Focus();
+                return false;
+            }
+
+            if (txtDescription.Text.Length > 255) // Assuming a maximum length of 255 characters for description
+            {
+                ShowError("Description cannot exceed 255 characters.");
+                txtDescription.Focus();
+                return false;
+            }
+
+            // Check for duplicate role name when creating a new role
+            if (isNewMode && roleManager.RoleExists(txtRole.Text.Trim()))
+            {
+                ShowError("A role with this name already exists.");
+                txtRole.Focus();
+                return false;
+            }
+
+            // Check for duplicate role name when editing, excluding the current role
+            if (isEditMode && dgvRoles.SelectedRows.Count > 0)
+            {
+                var selectedRole = (RoleManager.Role)dgvRoles.SelectedRows[0].DataBoundItem;
+                if (txtRole.Text.Trim() != selectedRole.RoleName && roleManager.RoleExists(txtRole.Text.Trim()))
+                {
+                    ShowError("A role with this name already exists.");
+                    txtRole.Focus();
+                    return false;
+                }
+            }
+
             return true;
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void CreateNewRole()
@@ -172,7 +213,7 @@ namespace ACP.User
             }
             else
             {
-                MessageBox.Show("Failed to create new role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowError("Failed to create new role. Please try again.");
             }
         }
 
@@ -190,7 +231,7 @@ namespace ACP.User
                 }
                 else
                 {
-                    MessageBox.Show("Failed to update role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowError("Failed to update role. Please try again.");
                 }
             }
         }
