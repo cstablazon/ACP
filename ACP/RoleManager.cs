@@ -168,6 +168,19 @@ namespace ACP
             return null;
         }
 
+        public bool RoleExists(string roleName)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                {"@Action", "ReadByName"},
+                {"@RoleName", roleName}
+            };
+
+            DataSet ds = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageRoles", parameters);
+
+            return ds.Tables[0].Rows.Count > 0;
+        }
+
         public List<Role> SearchRolesByDescription(string description)
         {
             var parameters = new Dictionary<string, object>

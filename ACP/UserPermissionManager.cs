@@ -80,6 +80,49 @@ namespace ACP
             return string.Empty;
         }
 
+        public static UserLoginResult Login(string username, string password)
+        {
+            try
+            {
+                var parameters = new Dictionary<string, object>
+                {
+                    {"@Action", "LOGIN"},
+                    {"@Username", username},
+                    {"@Password", password}
+                };
+
+                var result = DatabaseHelper.ExecuteStoredProcedureWithDataSet("sp_ManageUser", parameters);
+
+                if (result.Tables[0].Rows.Count > 0)
+                {
+                    var row = result.Tables[0].Rows[0];
+                    return new UserLoginResult
+                    {
+                        Success = true,
+                        UserId = Convert.ToInt32(row["userID"]),
+                        Username = row["username"].ToString(),
+                        AuthId = row["authID"].ToString(),
+                        AuthDesc = row["authDesc"].ToString(),
+                        RID = row["RID"].ToString(),
+                        FirstName = row["FirstName"].ToString(),
+                        LastName = row["LastName"].ToString(),
+                        IsActive = Convert.ToBoolean(row["isActive"]),
+                        TransDate = Convert.ToDateTime(row["transDate"]),
+                        RoleName = row["RoleName"].ToString()
+                    };
+                }
+                else
+                {
+                    return new UserLoginResult { Success = false, ErrorMessage = "Invalid username or password." };
+                }
+            }
+            catch (SqlException ex)
+            {
+                DisplaySqlError(ex);
+                return new UserLoginResult { Success = false, ErrorMessage = "An error occurred during login." };
+            }
+        }
+
         private static void DisplaySqlError(SqlException ex)
         {
             string errorMessage = ex.Message;
@@ -89,5 +132,21 @@ namespace ACP
             }
             MessageBox.Show(errorMessage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    public class UserLoginResult
+    {
+        public bool Success { get; set; }
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string AuthId { get; set; }
+        public string AuthDesc { get; set; }
+        public string RID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime TransDate { get; set; }
+        public string RoleName { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }
