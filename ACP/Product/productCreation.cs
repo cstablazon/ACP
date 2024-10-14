@@ -90,13 +90,10 @@ namespace ACP
             {
                 var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
                 returnPara.Direction = ParameterDirection.ReturnValue;
-            }
-            cmd.ExecuteNonQuery();
-            if (Id.button == "Create")
-            {
-                var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
+                cmd.ExecuteNonQuery();
                 Id.autoIncSKU = returnPara.Value.ToString();
             }
+            cmd.ExecuteNonQuery();
             conn.Close();
         }
 
