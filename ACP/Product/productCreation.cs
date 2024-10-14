@@ -95,7 +95,7 @@ namespace ACP
             }
             cmd.ExecuteNonQuery();
             conn.Close();
-            //
+            
         }
 
         public void deleteProduct(string sp, string tableName, string action, string SKU)
