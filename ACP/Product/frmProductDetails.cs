@@ -745,7 +745,7 @@ namespace ACP
             TreeNode selectedNode = tvPopup.SelectedNode;
             // Retrieves the Tag property of the selected node and converts it to a string
             string selectedNodeID = selectedNode.Tag.ToString();
-            Id.RIDL = Convert.ToInt64(selectedNodeID);
+            Id.ID = Convert.ToInt64(selectedNodeID);
             // Sets a static property "rtypeID" in the "Id" class to the value of the selected node's ID
             if(profile == "BMRX")
             {
@@ -761,7 +761,7 @@ namespace ACP
 
         private void tvPopup_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            var objDiscountCriteria = (from a in db.hierarchies where a.RID == Id.RIDL select a).SingleOrDefault();
+            var objDiscountCriteria = (from a in db.hierarchies where a.RID == Id.ID select a).SingleOrDefault();
             //string rType = objDiscountCriteria.rType;
             if (!string.IsNullOrEmpty(objDiscountCriteria.rType))
             {
@@ -936,14 +936,14 @@ namespace ACP
                             Id.dt.Columns.Add("BOM unit", typeof(string));
                             Id.dt.Columns.Add("Inventory cost", typeof(decimal));
                             Id.dt.Columns.Add("discountID", typeof(int));
-                            Id.dt.Columns.Add("Discount", typeof(string));
+                            Id.dt.Columns.Add("Purchase discount", typeof(string));
                             Id.dt.Columns.Add("BMRXID", typeof(long));
                             Id.dt.Columns.Add("BMRX", typeof(string));
                             Id.dt.Columns.Add("PID", typeof(long));
-                            Id.dt.Columns.Add("Privilege", typeof(string));
+                            Id.dt.Columns.Add("Privilege setup", typeof(string));
                             Id.dt.Columns.Add("Item model ID", typeof(string));
                             Id.dt.Columns.Add("chargeID", typeof(int));
-                            Id.dt.Columns.Add("Charge", typeof(string));
+                            Id.dt.Columns.Add("Charge description", typeof(string));
                             Id.dt.Columns.Add("LID", typeof(long));
                             Id.dt.Columns.Add("Issue location", typeof(string));
                             Id.dt.Columns.Add("Warehouse", typeof(string));
@@ -1001,9 +1001,9 @@ namespace ACP
                                     dRow["Barcode"] = txtBarcode.Text;
                                     dRow["Item model ID"] = itemModelID;
                                     dRow["chargeID"] = chargeID;
-                                    dRow["Charge"] = cmbCharges.Text;
+                                    dRow["Charge description"] = cmbCharges.Text;
                                     dRow["PID"] = Id.privilegeID;
-                                    dRow["Privilege"] = txtPrivilege.Text;
+                                    dRow["Privilege setup"] = txtPrivilege.Text;
                                     dRow["BMRXID"] = Id.bmrxID;
                                     dRow["BMRX"] = txtBMRX.Text;
                                     dRow["LID"] = Id.LID;
@@ -1011,7 +1011,7 @@ namespace ACP
                                     dRow["Warehouse"] = txtWarehouse.Text;
                                     dRow["Site"] = txtSite.Text;
                                     dRow["discountID"] = discountID;
-                                    dRow["Discount"] = txtPurchaseDiscount.Text;
+                                    dRow["Purchase discount"] = txtPurchaseDiscount.Text;
                                     dRow["CPuomID"] = CPuomID;
                                     dRow["Purchase unit"] = cmbPOunit.Text;
                                     dRow["Cost price"] = costPrice;
@@ -1063,6 +1063,7 @@ namespace ACP
                     {
                         if (Id.dt.Rows.Count > 0)
                         {
+                            
                             DataRow dRow = Id.dt.NewRow();
                             if (Id.dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
                             {
@@ -1108,6 +1109,7 @@ namespace ACP
                         }
                         else
                         {
+                            MessageBox.Show("1");
                             DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
                             Id.dt.Columns.Clear();
                             Id.dt.Rows.Clear();
@@ -1124,14 +1126,14 @@ namespace ACP
                             Id.dt.Columns.Add("BOM unit", typeof(string));
                             Id.dt.Columns.Add("Inventory cost", typeof(decimal));
                             Id.dt.Columns.Add("discountID", typeof(int));
-                            Id.dt.Columns.Add("Discount", typeof(string));
+                            Id.dt.Columns.Add("Purchase discount", typeof(string));
                             Id.dt.Columns.Add("BMRXID", typeof(long));
                             Id.dt.Columns.Add("BMRX", typeof(string));
                             Id.dt.Columns.Add("PID", typeof(long));
-                            Id.dt.Columns.Add("Privilege", typeof(string));
+                            Id.dt.Columns.Add("Privilege setup", typeof(string));
                             Id.dt.Columns.Add("Item model ID", typeof(string));
                             Id.dt.Columns.Add("chargeID", typeof(int));
-                            Id.dt.Columns.Add("Charge", typeof(string));
+                            Id.dt.Columns.Add("Charge description", typeof(string));
                             Id.dt.Columns.Add("LID", typeof(long));
                             Id.dt.Columns.Add("Issue location", typeof(string));
                             Id.dt.Columns.Add("Warehouse", typeof(string));
@@ -1146,6 +1148,8 @@ namespace ACP
                             foreach(DataRow imp in dt.Rows)
                             {
                                 Id.dt.ImportRow(imp);
+
+                                MessageBox.Show("2");
                             }
                             if (Id.dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
                             {
@@ -1153,6 +1157,8 @@ namespace ACP
                             }
                             else
                             {
+
+                                MessageBox.Show("3");
                                 dRow[0] = txtBarcode.Text;
                                 dRow[1] = txtPosDesc.Text;
                                 dRow[2] = CPuomID;
@@ -1192,17 +1198,59 @@ namespace ACP
                     }
                     else if(btnCreate.Text == "Update")
                     {
-                        foreach (DataRow dRow in Id.dt.Rows)
+
+                        MessageBox.Show("4");
+                        DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+                        Id.dt.Columns.Clear();
+                        Id.dt.Rows.Clear();
+                        Id.dt.Columns.Add("Barcode", typeof(string));
+                        Id.dt.Columns.Add("Product description", typeof(string));
+                        Id.dt.Columns.Add("CPuomID", typeof(int));
+                        Id.dt.Columns.Add("Purchase unit", typeof(string));
+                        Id.dt.Columns.Add("Cost price", typeof(decimal));
+                        Id.dt.Columns.Add("factor", typeof(decimal));
+                        Id.dt.Columns.Add("RPuomID", typeof(int));
+                        Id.dt.Columns.Add("Retail unit", typeof(string));
+                        Id.dt.Columns.Add("Retail price", typeof(decimal));
+                        Id.dt.Columns.Add("BOMid", typeof(int));
+                        Id.dt.Columns.Add("BOM unit", typeof(string));
+                        Id.dt.Columns.Add("Inventory cost", typeof(decimal));
+                        Id.dt.Columns.Add("discountID", typeof(int));
+                        Id.dt.Columns.Add("Purchase discount", typeof(string));
+                        Id.dt.Columns.Add("BMRXID", typeof(long));
+                        Id.dt.Columns.Add("BMRX", typeof(string));
+                        Id.dt.Columns.Add("PID", typeof(long));
+                        Id.dt.Columns.Add("Privilege setup", typeof(string));
+                        Id.dt.Columns.Add("Item model ID", typeof(string));
+                        Id.dt.Columns.Add("chargeID", typeof(int));
+                        Id.dt.Columns.Add("Charge description", typeof(string));
+                        Id.dt.Columns.Add("LID", typeof(long));
+                        Id.dt.Columns.Add("Issue location", typeof(string));
+                        Id.dt.Columns.Add("Warehouse", typeof(string));
+                        Id.dt.Columns.Add("Site", typeof(string));
+                        Id.dt.Columns.Add("Sales tax", typeof(string));
+                        Id.dt.Columns.Add("Purchase tax", typeof(string));
+                        Id.dt.Columns.Add("isDiscountable", typeof(bool));
+                        Id.dt.Columns.Add("isActive", typeof(bool));
+                        Id.dt.Columns.Add("userID", typeof(int));
+
+                        foreach (DataRow imp in dt.Rows)
                         {
-                            if (dRow["Barcode"] == Id.barcode)
+                            Id.dt.ImportRow(imp);
+
+                            MessageBox.Show("2");
+                        }
+                        DataRow dRow = Id.dt.Select("Barcode = '" + Id.barcode + "'").FirstOrDefault();
+                            if (dRow != null)
                             {
+
+                                MessageBox.Show("5");
                                 dRow["Barcode"] = txtBarcode.Text;
-                                dRow["SKU"] = Id.SKU;
                                 dRow["Item model ID"] = itemModelID;
                                 dRow["chargeID"] = chargeID;
-                                dRow["Charge"] = cmbCharges.Text;
+                                dRow["Charge description"] = cmbCharges.Text;
                                 dRow["PID"] = Id.privilegeID;
-                                dRow["Privilege"] = txtPrivilege.Text;
+                                dRow["Privilege setup"] = txtPrivilege.Text;
                                 dRow["BMRXID"] = Id.bmrxID;
                                 dRow["BMRX"] = txtBMRX.Text;
                                 dRow["LID"] = Id.LID;
@@ -1210,7 +1258,7 @@ namespace ACP
                                 dRow["Warehouse"] = txtWarehouse.Text;
                                 dRow["Site"] = txtSite.Text;
                                 dRow["discountID"] = discountID;
-                                dRow["Discount"] = txtPurchaseDiscount.Text;
+                                dRow["Purchase discount"] = txtPurchaseDiscount.Text;
                                 dRow["CPuomID"] = CPuomID;
                                 dRow["Purchase unit"] = cmbPOunit.Text;
                                 dRow["Cost price"] = costPrice;
@@ -1226,7 +1274,7 @@ namespace ACP
                                 dRow["Purchase tax"] = cmbPurchaseTax.Text;
                                 dRow["isDiscountable"] = cbNotDiscountable.Checked;
 
-                            }
+                            
                         }
                         this.DialogResult = DialogResult.OK;
                         this.Hide();

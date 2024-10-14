@@ -460,6 +460,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -480,6 +481,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -565,6 +567,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -600,6 +603,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -635,6 +639,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -717,8 +722,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.2639in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.25001in</Top>
+            <Left>1.29339in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <Style>
@@ -751,8 +756,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.47917in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.46528in</Top>
+            <Left>1.29339in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>1</ZIndex>
@@ -787,8 +792,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.69445in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.68056in</Top>
+            <Left>1.29339in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -822,8 +827,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.90973in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.89584in</Top>
+            <Left>1.29339in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>3</ZIndex>
@@ -858,8 +863,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>1.12501in</Top>
-            <Left>0.13826in</Left>
+            <Top>1.11112in</Top>
+            <Left>1.29339in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>4</ZIndex>
@@ -894,8 +899,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.2639in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.25001in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>5</ZIndex>
@@ -930,8 +935,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.47917in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.46528in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>6</ZIndex>
@@ -967,8 +972,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.70834in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.69445in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>7</ZIndex>
@@ -1003,8 +1008,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.90973in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.89584in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>8</ZIndex>
@@ -1040,8 +1045,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>1.12501in</Top>
-            <Left>1.17993in</Left>
+            <Top>1.11112in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>9</ZIndex>
@@ -1075,7 +1080,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.06252in</Top>
+            <Top>0.04863in</Top>
+            <Left>1.15513in</Left>
             <Height>0.1875in</Height>
             <Width>1.13826in</Width>
             <ZIndex>10</ZIndex>
@@ -1100,6 +1106,7 @@
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1109,8 +1116,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.06252in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.04863in</Top>
+            <Left>2.33506in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>11</ZIndex>
@@ -1127,7 +1134,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>1.03819in</Top>
-        <Left>3.99153in</Left>
+        <Left>4.64827in</Left>
         <Height>1.3264in</Height>
         <Width>3.34895in</Width>
         <ZIndex>1</ZIndex>
@@ -1249,47 +1256,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
-        <Top>2.29514in</Top>
-        <Left>0.11282in</Left>
-        <Height>0.17707in</Height>
-        <Width>3.66904in</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox87">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=": " + First(Fields!desc.Value, "retailAndCost")</Value>
-                <Style>
-                  <FontFamily>Segoe UI</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <Format>dd/MM/yyyy</Format>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>2.10764in</Top>
-        <Left>0.71143in</Left>
-        <Height>0.1875in</Height>
-        <Width>3.03015in</Width>
-        <ZIndex>5</ZIndex>
+        <Left>0.71337in</Left>
+        <Height>0.36458in</Height>
+        <Width>3.20872in</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1304,7 +1275,7 @@
         <Top>2.54166in</Top>
         <Height>0in</Height>
         <Width>7.82707in</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -2339,6 +2310,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
+          <Top>0in</Top>
           <Left>6.90594in</Left>
           <Height>0.1875in</Height>
           <Width>0.84373in</Width>

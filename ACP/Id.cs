@@ -16,7 +16,7 @@ namespace ACP
         public static int? discountID;
         public static DataTable dt = new DataTable();
         //public static DataTable dtBarcode = new DataTable();
-        public static long? RIDL, bmrxID, privilegeID;
+        public static long? RIDL, bmrxID, privilegeID, ID;
         public static decimal percent;
         public static bool shown, shownSupp, showSite, showWH, isConcession, isPrimary, isDistri, isActive;
         public static string access, columnID, globalID, globalString, globalString2, suppID, rType, sdGroupID, button, table,autoRID,fn,mn,ln,gender,dob,groupID,suffix,status, principalID, distriName, orderNo, RID, param, action, barcode, dropdown, modID, rrNum, itemTaxID, kitCode, LID, whID, SKU,skuLine,

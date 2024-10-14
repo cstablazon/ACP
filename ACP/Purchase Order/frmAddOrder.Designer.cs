@@ -1111,7 +1111,7 @@
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 22);
+            this.pLines.Size = new System.Drawing.Size(1086, 91);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1227,7 +1227,7 @@
             this.panel6.Controls.Add(this.txtPurchaseDiscount);
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 259);
+            this.panel6.Location = new System.Drawing.Point(3, 328);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
@@ -1322,7 +1322,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 287);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 356);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
