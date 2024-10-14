@@ -84,14 +84,16 @@ namespace ACP
             cmd.Parameters.AddWithValue("@isConcession", isConcession);
             cmd.Parameters.AddWithValue("@userID", userID);
 
-            var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
+            
             if (Id.button == "Create")
             {
+                var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
                 returnPara.Direction = ParameterDirection.ReturnValue;
             }
             cmd.ExecuteNonQuery();
             if (Id.button == "Create")
             {
+                var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
                 Id.autoIncSKU = returnPara.Value.ToString();
             }
             conn.Close();

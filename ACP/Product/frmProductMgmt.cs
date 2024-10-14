@@ -36,14 +36,6 @@ namespace ACP
             //dgvProduct.Columns["desc"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             //dgvProduct.Columns["isConcession"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //dgvProduct.Columns["transDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvProduct.Columns["itemDesc"].HeaderText = "Item description";
-            dgvProduct.Columns["suppID"].HeaderText = "Supplier ID";
-            dgvProduct.Columns["name"].HeaderText = "Name";
-            dgvProduct.Columns["prodTypeDesc"].HeaderText = "Product type";
-            dgvProduct.Columns["prodSubTypeDesc"].HeaderText = "Product type";
-            dgvProduct.Columns["pDimension"].HeaderText = "Product dimension group";
-            dgvProduct.Columns["desc"].HeaderText = "Sub category";
-            dgvProduct.Columns["transDate"].HeaderText = "Date created";
 
             //dgvProduct.DataSource = (from a in db.vwProductLists 
             //                         select new 
@@ -201,7 +193,7 @@ namespace ACP
 
                 //Id.productID = row.Cells["Barcode"].Value.ToString();
                 Id.SKU = row.Cells["SKU"].Value.ToString();
-                Id.globalString2 = row.Cells["itemDesc"].Value.ToString();
+                Id.globalString2 = row.Cells["Product description"].Value.ToString();
                 if (dgvProduct.SelectedRows.Count > 0)
                 {
                     
@@ -223,32 +215,51 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Id.button = "Update";
             if(dgvProduct.SelectedRows.Count > 0)
             {
+                Id.button = "Update";
                 frmModifyProd modyProd = new frmModifyProd();
                 modyProd.btnCreate.Text = "Update";
                 modyProd.btnClose.Text = "Close";
                 modyProd.lblProdDetails.Enabled = true;
-                int rowIndex = dgvProduct.SelectedRows[0].Index;
 
-                modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
-                Id.RIDL = Convert.ToInt64(dgvProduct.Rows[rowIndex].Cells["RID"].Value);
-                DataTable dt = pc.fetchDept("sp_catValidation", "rid", Id.RIDL);
-                
-                foreach(DataRow dr in dt.Rows)
+
+                DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList", Id.SKU);
+
+                foreach(DataRow row in dt.Rows)
                 {
-                    modyProd.txtDepartment.Text = dr["dept_desc"].ToString();
+                    modyProd.txtCategory.Text = row["Subcategory code"].ToString();
+                    Id.RIDL = Convert.ToInt64(row["RID"]);
+                    modyProd.txtDepartment.Text = row["Department"].ToString();
+                    modyProd.cmbBrand.Text = row["bDesc"].ToString();
+                    modyProd.cmbProdType.Text = row["Product type"].ToString();
+                    modyProd.cmbProdSubType.Text = row["Product sub type"].ToString();
+                    modyProd.cmbProdDimension.Text = row["Product dimension group"].ToString();
+                    modyProd.txtSKU.Text = row["SKU"].ToString();
+                    modyProd.txtProdName.Text = row["Product description"].ToString();
+                    modyProd.txtSupplier.Text = row["Supplier ID"].ToString();
+                    Id.suppID = row["Supplier ID"].ToString();
+                    modyProd.cbConcession.Checked = Convert.ToBoolean(row["isConcession"]);
                 }
-                modyProd.cmbBrand.Text = dgvProduct.Rows[rowIndex].Cells["bDesc"].Value.ToString();
-                modyProd.cmbProdType.Text = dgvProduct.Rows[rowIndex].Cells["prodTypeDesc"].Value.ToString();
-                modyProd.cmbProdSubType.Text = dgvProduct.Rows[rowIndex].Cells["prodSubTypeDesc"].Value.ToString();
-                modyProd.cmbProdDimension.Text = dgvProduct.Rows[rowIndex].Cells["pDimension"].Value.ToString();
-                modyProd.txtSKU.Text = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
-                modyProd.txtProdName.Text = dgvProduct.Rows[rowIndex].Cells["itemDesc"].Value.ToString();
-                modyProd.txtSupplier.Text = dgvProduct.Rows[rowIndex].Cells["name"].Value.ToString();
-                Id.suppID = dgvProduct.Rows[rowIndex].Cells["suppID"].Value.ToString();
-                modyProd.cbConcession.Checked = Convert.ToBoolean(dgvProduct.Rows[rowIndex].Cells["isConcession"].Value);
+                //int rowIndex = dgvProduct.SelectedRows[0].Index;
+
+                //modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
+                //Id.RIDL = Convert.ToInt64(dgvProduct.Rows[rowIndex].Cells["RID"].Value);
+                //DataTable dt = pc.fetchDept("sp_catValidation", "rid", Id.RIDL);
+                
+                //foreach(DataRow dr in dt.Rows)
+                //{
+                //    modyProd.txtDepartment.Text = dr["dept_desc"].ToString();
+                //}
+                //modyProd.cmbBrand.Text = dgvProduct.Rows[rowIndex].Cells["bDesc"].Value.ToString();
+                //modyProd.cmbProdType.Text = dgvProduct.Rows[rowIndex].Cells["prodTypeDesc"].Value.ToString();
+                //modyProd.cmbProdSubType.Text = dgvProduct.Rows[rowIndex].Cells["prodSubTypeDesc"].Value.ToString();
+                //modyProd.cmbProdDimension.Text = dgvProduct.Rows[rowIndex].Cells["pDimension"].Value.ToString();
+                //modyProd.txtSKU.Text = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
+                //modyProd.txtProdName.Text = dgvProduct.Rows[rowIndex].Cells["itemDesc"].Value.ToString();
+                //modyProd.txtSupplier.Text = dgvProduct.Rows[rowIndex].Cells["name"].Value.ToString();
+                //Id.suppID = dgvProduct.Rows[rowIndex].Cells["suppID"].Value.ToString();
+                //modyProd.cbConcession.Checked = Convert.ToBoolean(dgvProduct.Rows[rowIndex].Cells["isConcession"].Value);
 
                 DialogResult res = modyProd.ShowDialog();
                 if(res == DialogResult.OK)

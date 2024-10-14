@@ -349,6 +349,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -369,6 +370,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -419,6 +421,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -469,7 +472,7 @@
         <Top>0.15972in</Top>
         <Left>0.12151in</Left>
         <Height>0.5625in</Height>
-        <Width>7.8793in</Width>
+        <Width>7.87929in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -553,8 +556,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.2639in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.25001in</Top>
+            <Left>1.30728in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <Style>
@@ -587,8 +590,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.47917in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.46528in</Top>
+            <Left>1.30728in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>1</ZIndex>
@@ -623,8 +626,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.69445in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.68056in</Top>
+            <Left>1.30728in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -658,8 +661,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.90973in</Top>
-            <Left>0.13826in</Left>
+            <Top>0.89584in</Top>
+            <Left>1.30728in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>3</ZIndex>
@@ -694,8 +697,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>1.12501in</Top>
-            <Left>0.13826in</Left>
+            <Top>1.11112in</Top>
+            <Left>1.30728in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>4</ZIndex>
@@ -730,8 +733,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.2639in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.25001in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>5</ZIndex>
@@ -766,8 +769,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.47917in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.46528in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>6</ZIndex>
@@ -803,8 +806,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.70834in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.69445in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>7</ZIndex>
@@ -839,8 +842,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.90973in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.89584in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>8</ZIndex>
@@ -876,8 +879,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>1.12501in</Top>
-            <Left>1.17993in</Left>
+            <Top>1.11112in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>9</ZIndex>
@@ -911,7 +914,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.06252in</Top>
+            <Top>0.04863in</Top>
+            <Left>1.16902in</Left>
             <Height>0.1875in</Height>
             <Width>1.13826in</Width>
             <ZIndex>10</ZIndex>
@@ -936,6 +940,7 @@
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
+                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -945,8 +950,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox47</rd:DefaultName>
-            <Top>0.06252in</Top>
-            <Left>1.17993in</Left>
+            <Top>0.04863in</Top>
+            <Left>2.34895in</Left>
             <Height>0.1875in</Height>
             <Width>1in</Width>
             <ZIndex>11</ZIndex>
@@ -1030,47 +1035,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
-        <Top>2.31251in</Top>
-        <Left>0.12151in</Left>
-        <Height>0.17707in</Height>
+        <Top>2.12501in</Top>
+        <Left>0.77429in</Left>
+        <Height>0.36458in</Height>
         <Width>3.72127in</Width>
         <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox87">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=": " + First(Fields!desc.Value, "retailPrice")</Value>
-                <Style>
-                  <FontFamily>Segoe UI</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <Format>dd/MM/yyyy</Format>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox21</rd:DefaultName>
-        <Top>2.12501in</Top>
-        <Left>0.72012in</Left>
-        <Height>0.1875in</Height>
-        <Width>3.08238in</Width>
-        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1086,7 +1055,7 @@
         <Left>0.12151in</Left>
         <Height>0in</Height>
         <Width>7.8793in</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1098,7 +1067,7 @@
     <Height>2.60416in</Height>
     <Style />
   </Body>
-  <Width>8.32167in</Width>
+  <Width>8.0925in</Width>
   <Page>
     <PageHeader>
       <Height>2.56154in</Height>
@@ -2121,6 +2090,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
+          <Top>0in</Top>
           <Left>7.02128in</Left>
           <Height>0.1875in</Height>
           <Width>0.84373in</Width>
