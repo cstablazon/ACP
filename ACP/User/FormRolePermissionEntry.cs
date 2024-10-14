@@ -46,6 +46,8 @@ namespace ACP.User
             // Ensure the TreeView is refreshed
             tvFormPermissions.Refresh();
 
+            dgvUsers.Columns["DeleteColumn"].Visible = false;
+
             // Debug: Output the number of checked nodes after populating
             System.Diagnostics.Debug.WriteLine(string.Format("Number of checked nodes on load: {0}", CountCheckedNodes(tvFormPermissions.Nodes)));
 
