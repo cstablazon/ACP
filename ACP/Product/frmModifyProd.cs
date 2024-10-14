@@ -473,6 +473,8 @@ namespace ACP
                             lblProdDetails.Enabled = true;
                             btnClose.Text = "Close";
                             MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Hide();
+                            this.DialogResult = DialogResult.OK;
                         }
                     }
                     else
@@ -523,6 +525,8 @@ namespace ACP
                         lblProdDetails.Enabled = true;
                         btnClose.Text = "Close";
                         MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
+                        this.DialogResult = DialogResult.OK;
                     }
 
                 }
@@ -534,8 +538,6 @@ namespace ACP
                     decimal? factor, costPrice, inventoryCost, retailPrice;
                     bool? isDiscountable;
                     bool isActive;
-                    pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
-                    Id.SKU = txtSKU.Text;
 
                     //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
                     for (int i = 0; dgvBarcode.Rows.Count > i; i++)
@@ -585,6 +587,9 @@ namespace ACP
                             pc.createUpdateBarcode("Create", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
                         }
                     }
+
+                    pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
+                    Id.SKU = txtSKU.Text;
                     //Check if po_lines are existing in datagridview . If not delete line in po_line table
                     DataTable dtLines = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", txtSKU.Text);
                     bool isExist = true;
