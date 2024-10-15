@@ -115,7 +115,7 @@
             this.MinimizeBox = false;
             this.Name = "FormRolePermissionEntry";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormRolePermissionEntry";
+            this.Text = "l";
             this.Load += new System.EventHandler(this.FormRolePermissionEntry_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.groupBox1.ResumeLayout(false);
