@@ -9,7 +9,7 @@ using System.Drawing;
 namespace ACP
 {
     class ControlUtility
-    {
+    { //for comment
         // Static method to apply red border
         public static void ApplyRedBorder(Control control, string errorKey)
         {
