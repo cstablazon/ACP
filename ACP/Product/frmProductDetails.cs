@@ -151,6 +151,11 @@ namespace ACP
                 txtRetailP.Text = 0.ToString("N2");
                 txtInventoryCost.Text = 0.ToString("N2");
             }
+            else if(btnCreate.Text == "Update")
+            {
+                txtBarcode.Enabled = false;
+                cbAutoGenerate.Enabled = false;
+            }
             //txtFactor.Text = 0.ToString("N2");
             txtFactor.Enabled = false;
             discountCriteria();
@@ -2279,6 +2284,11 @@ namespace ACP
         private void frmProductDetails_FormClosing(object sender, FormClosingEventArgs e)
         {
             btnClose.PerformClick();
+        }
+
+        private void disableKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

@@ -329,6 +329,9 @@ namespace ACP
             if(Id.button == "Update")
             {
                 fetchBarcode();
+                txtSKU.Enabled = false;
+                cbSKU.Enabled = false;
+                
             }
             else if(Id.button == "Create")
             {
@@ -2116,6 +2119,11 @@ namespace ACP
             details.btnClose.Text = "Close";
             details.ShowDialog();
 
+        }
+
+        private void disableKey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
