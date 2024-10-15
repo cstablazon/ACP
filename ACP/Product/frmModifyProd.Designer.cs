@@ -199,6 +199,7 @@
             this.cmbProdDimension.TabIndex = 93;
             this.cmbProdDimension.SelectedIndexChanged += new System.EventHandler(this.cmbProdDimension_SelectedIndexChanged);
             this.cmbProdDimension.Enter += new System.EventHandler(this.cmbProdDimension_Enter);
+            this.cmbProdDimension.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.cmbProdDimension.Leave += new System.EventHandler(this.cmbProdDimension_Leave);
             this.cmbProdDimension.MouseHover += new System.EventHandler(this.cmbProdDimension_MouseHover);
             // 
@@ -241,6 +242,7 @@
             this.txtSupplier.Click += new System.EventHandler(this.txtSupplier_Click);
             this.txtSupplier.TextChanged += new System.EventHandler(this.txtSupplier_TextChanged);
             this.txtSupplier.Enter += new System.EventHandler(this.txtSupplier_Enter);
+            this.txtSupplier.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.txtSupplier.Leave += new System.EventHandler(this.txtSupplier_Leave);
             this.txtSupplier.MouseHover += new System.EventHandler(this.txtSupplier_MouseHover);
             // 
@@ -254,6 +256,7 @@
             this.txtCategory.Click += new System.EventHandler(this.txtCategory_Click);
             this.txtCategory.TextChanged += new System.EventHandler(this.txtCategory_TextChanged);
             this.txtCategory.Enter += new System.EventHandler(this.txtCategory_Enter);
+            this.txtCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.txtCategory.Leave += new System.EventHandler(this.txtCategory_Leave);
             this.txtCategory.MouseHover += new System.EventHandler(this.txtCategory_MouseHover);
             // 
@@ -269,6 +272,7 @@
             this.cmbBrand.Size = new System.Drawing.Size(191, 23);
             this.cmbBrand.TabIndex = 84;
             this.cmbBrand.Enter += new System.EventHandler(this.cmbBrand_Enter);
+            this.cmbBrand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // cbSKU
             // 
@@ -322,6 +326,7 @@
             this.cmbProdSubType.TabIndex = 6;
             this.cmbProdSubType.SelectedIndexChanged += new System.EventHandler(this.cmbProdSubType_SelectedIndexChanged);
             this.cmbProdSubType.Enter += new System.EventHandler(this.cmbProdSubType_Enter);
+            this.cmbProdSubType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.cmbProdSubType.Leave += new System.EventHandler(this.cmbProdSubType_Leave);
             this.cmbProdSubType.MouseHover += new System.EventHandler(this.cmbProdSubType_MouseHover);
             // 
@@ -345,6 +350,7 @@
             this.cmbProdType.TabIndex = 5;
             this.cmbProdType.SelectedIndexChanged += new System.EventHandler(this.cmbProdType_SelectedIndexChanged);
             this.cmbProdType.Enter += new System.EventHandler(this.cmbProdType_Enter);
+            this.cmbProdType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.cmbProdType.Leave += new System.EventHandler(this.cmbProdType_Leave);
             this.cmbProdType.MouseHover += new System.EventHandler(this.cmbProdType_MouseHover);
             // 

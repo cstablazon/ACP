@@ -81,7 +81,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.cmbIssueLocation = new System.Windows.Forms.ComboBox();
             this.txtConfig = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.txtPurchaseDiscount = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
@@ -89,6 +88,7 @@
             this.txtSite = new System.Windows.Forms.TextBox();
             this.txtWarehouse = new System.Windows.Forms.TextBox();
             this.txtIssueLoc = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label28
@@ -174,6 +174,7 @@
             this.cmbItemModel.Size = new System.Drawing.Size(124, 23);
             this.cmbItemModel.TabIndex = 11;
             this.cmbItemModel.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbItemModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label38
             // 
@@ -218,6 +219,7 @@
             this.cmbCharges.Size = new System.Drawing.Size(125, 23);
             this.cmbCharges.TabIndex = 7;
             this.cmbCharges.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbCharges.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label39
             // 
@@ -265,6 +267,7 @@
             this.cmbPOunit.SelectionChangeCommitted += new System.EventHandler(this.cmbPOunit_SelectionChangeCommitted);
             this.cmbPOunit.SelectedValueChanged += new System.EventHandler(this.cmbPOunit_SelectedValueChanged);
             this.cmbPOunit.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbPOunit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.cmbPOunit.Leave += new System.EventHandler(this.cmbPOunit_Leave);
             this.cmbPOunit.MouseHover += new System.EventHandler(this.cmbPOunit_MouseHover);
             // 
@@ -320,6 +323,7 @@
             this.cmbRetailUnit.SelectionChangeCommitted += new System.EventHandler(this.cmbRetailUnit_SelectionChangeCommitted);
             this.cmbRetailUnit.SelectedValueChanged += new System.EventHandler(this.cmbRetailUnit_SelectedValueChanged);
             this.cmbRetailUnit.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbRetailUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             this.cmbRetailUnit.Leave += new System.EventHandler(this.cmbRetailUnit_Leave);
             this.cmbRetailUnit.MouseHover += new System.EventHandler(this.cmbRetailUnit_MouseHover);
             // 
@@ -427,6 +431,7 @@
             this.txtInventoryCost.Size = new System.Drawing.Size(125, 23);
             this.txtInventoryCost.TabIndex = 126;
             this.txtInventoryCost.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.txtInventoryCost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label6
             // 
@@ -448,6 +453,7 @@
             this.txtBMRX.Click += new System.EventHandler(this.txtBMRX_Click);
             this.txtBMRX.TextChanged += new System.EventHandler(this.txtBMRX_TextChanged);
             this.txtBMRX.Enter += new System.EventHandler(this.txtBMRX_Enter);
+            this.txtBMRX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // txtPrivilege
             // 
@@ -458,6 +464,7 @@
             this.txtPrivilege.TabIndex = 129;
             this.txtPrivilege.Click += new System.EventHandler(this.txtPrivilege_Click);
             this.txtPrivilege.Enter += new System.EventHandler(this.txtPrivilege_Enter);
+            this.txtPrivilege.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label4
             // 
@@ -478,6 +485,7 @@
             this.cmbBOM.Size = new System.Drawing.Size(125, 23);
             this.cmbBOM.TabIndex = 131;
             this.cmbBOM.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbBOM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label7
             // 
@@ -508,6 +516,7 @@
             this.cmbPurchaseTax.Size = new System.Drawing.Size(124, 23);
             this.cmbPurchaseTax.TabIndex = 135;
             this.cmbPurchaseTax.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbPurchaseTax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label8
             // 
@@ -528,6 +537,7 @@
             this.cmbSalesTax.Size = new System.Drawing.Size(124, 23);
             this.cmbSalesTax.TabIndex = 137;
             this.cmbSalesTax.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            this.cmbSalesTax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // label10
             // 
@@ -627,19 +637,10 @@
             this.txtConfig.Name = "txtConfig";
             this.txtConfig.Size = new System.Drawing.Size(125, 23);
             this.txtConfig.TabIndex = 149;
+            this.txtConfig.Visible = false;
             this.txtConfig.Click += new System.EventHandler(this.txtConfig_Click);
             this.txtConfig.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.txtConfig.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConfig_KeyPress);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(286, 488);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(84, 15);
-            this.label17.TabIndex = 150;
-            this.label17.Text = "Configuration:";
             // 
             // label16
             // 
@@ -660,6 +661,7 @@
             this.txtPurchaseDiscount.TabIndex = 152;
             this.txtPurchaseDiscount.Click += new System.EventHandler(this.txtPurchaseDiscount_Click);
             this.txtPurchaseDiscount.Enter += new System.EventHandler(this.txtPurchaseDiscount_Enter);
+            this.txtPurchaseDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
             // btnClose
             // 
@@ -725,6 +727,17 @@
             this.txtIssueLoc.TabIndex = 157;
             this.txtIssueLoc.Click += new System.EventHandler(this.txtIssueLoc_Click);
             this.txtIssueLoc.Enter += new System.EventHandler(this.hidePopupForms_Enter);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(286, 488);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(84, 15);
+            this.label17.TabIndex = 150;
+            this.label17.Text = "Configuration:";
+            this.label17.Visible = false;
             // 
             // frmProductDetails
             // 
@@ -857,7 +870,6 @@
         public System.Windows.Forms.Label label14;
         public System.Windows.Forms.ComboBox cmbIssueLocation;
         public System.Windows.Forms.TextBox txtConfig;
-        public System.Windows.Forms.Label label17;
         public System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox txtPurchaseDiscount;
         public System.Windows.Forms.CheckBox cbNotDiscountable;
@@ -866,6 +878,7 @@
         public System.Windows.Forms.TextBox txtIssueLoc;
         public System.Windows.Forms.Button btnClose;
         public System.Windows.Forms.CheckBox cbAutoGenerate;
+        public System.Windows.Forms.Label label17;
 
     }
 }
