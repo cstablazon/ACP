@@ -165,6 +165,16 @@ namespace ACP
             dgvBarcode.Columns["userID"].Visible = false;
             dgvBarcode.Columns["chargeID"].Visible = false;
         }
+
+        private void fetchKitComponent()
+        {
+            DataTable dt = pc.fetchComponentSetupByBarcode("sp_componentSetup", "fetchComponentSetup", Id.barcode);
+            dgvKitComponents.DataSource = dt;
+
+            dgvKitComponents.Columns["kitID"].Visible = false;
+            dgvKitComponents.Columns["masterBarcode"].Visible = false;
+            dgvKitComponents.Columns["userID"].Visible = false;
+        }
         
         private void fetchBarcode()
         {
@@ -427,54 +437,73 @@ namespace ACP
                         }
                         else
                         {
-                            pc.createUpdateProduct("tempUpdate", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
-                            //Id.SKU = txtSKU.Text;
-
-                            foreach (DataGridViewRow row in dgvBarcode.Rows)
+                            if (dgvKitComponents.Rows.Count > 0)
                             {
-                                barcode = row.Cells["Barcode"].Value.ToString();
-                                SKU = txtSKU.Text;
-                                itemModelID = row.Cells["Item model ID"].Value.ToString();
-                                chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
-                                PID = Convert.ToInt64(row.Cells["PID"].Value);
-                                BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
-                                LID = row.Cells["LID"].Value.ToString();
-                                if (string.IsNullOrEmpty(row.Cells["discountID"].Value as string))
-                                {
-                                    discountID = null;
-                                }
-                                else
-                                {
-                                    discountID = Convert.ToInt32(row.Cells["discountID"].Value);
-                                }
-                                CPuomID = Convert.ToInt32(row.Cells["CPuomID"].Value);
-                                RPuomID = Convert.ToInt32(row.Cells["RPuomID"].Value);
-                                BOMid = Convert.ToInt32(row.Cells["BOMid"].Value);
-                                if (string.IsNullOrEmpty(row.Cells["factor"].Value as string))
-                                {
-                                    factor = null;
-                                }
-                                else
-                                {
-                                    factor = Convert.ToDecimal(row.Cells["factor"].Value);
-                                }
-                                retailPrice = Convert.ToDecimal(row.Cells["Retail price"].Value);
-                                costPrice = Convert.ToDecimal(row.Cells["Cost price"].Value);
-                                inventoryCost = Convert.ToDecimal(row.Cells["Inventory cost"].Value);
-                                posDesc = row.Cells["Product description"].Value.ToString();
-                                salesTax = row.Cells["Sales tax"].Value.ToString();
-                                purchaseTax = row.Cells["Purchase tax"].Value.ToString();
-                                isDiscountable = Convert.ToBoolean(row.Cells["isDiscountable"].Value);
-                                isActive = true;
+                                pc.createUpdateProduct("tempUpdate", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
+                                //Id.SKU = txtSKU.Text;
 
-                                pc.createUpdateBarcode("Create", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+                                foreach (DataGridViewRow row in dgvBarcode.Rows)
+                                {
+                                    barcode = row.Cells["Barcode"].Value.ToString();
+                                    SKU = txtSKU.Text;
+                                    itemModelID = row.Cells["Item model ID"].Value.ToString();
+                                    chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                                    PID = Convert.ToInt64(row.Cells["PID"].Value);
+                                    BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
+                                    LID = row.Cells["LID"].Value.ToString();
+                                    if (string.IsNullOrEmpty(row.Cells["discountID"].Value as string))
+                                    {
+                                        discountID = null;
+                                    }
+                                    else
+                                    {
+                                        discountID = Convert.ToInt32(row.Cells["discountID"].Value);
+                                    }
+                                    CPuomID = Convert.ToInt32(row.Cells["CPuomID"].Value);
+                                    RPuomID = Convert.ToInt32(row.Cells["RPuomID"].Value);
+                                    BOMid = Convert.ToInt32(row.Cells["BOMid"].Value);
+                                    if (string.IsNullOrEmpty(row.Cells["factor"].Value as string))
+                                    {
+                                        factor = null;
+                                    }
+                                    else
+                                    {
+                                        factor = Convert.ToDecimal(row.Cells["factor"].Value);
+                                    }
+                                    retailPrice = Convert.ToDecimal(row.Cells["Retail price"].Value);
+                                    costPrice = Convert.ToDecimal(row.Cells["Cost price"].Value);
+                                    inventoryCost = Convert.ToDecimal(row.Cells["Inventory cost"].Value);
+                                    posDesc = row.Cells["Product description"].Value.ToString();
+                                    salesTax = row.Cells["Sales tax"].Value.ToString();
+                                    purchaseTax = row.Cells["Purchase tax"].Value.ToString();
+                                    isDiscountable = Convert.ToBoolean(row.Cells["isDiscountable"].Value);
+                                    isActive = true;
 
+                                    pc.createUpdateBarcode("Create", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+
+                                }
+                                foreach (DataGridViewRow row in dgvKitComponents.Rows)
+                                {
+                                    Id.kitID = pc.autoInc("kitID", "componentSetup");
+                                    decimal qty = Convert.ToDecimal(row.Cells["Quantity"].Value);
+                                    string prodBarcode = row.Cells["Product barcode"].Value.ToString();
+                                    pc.createUpdateComponent("Create", Id.kitID, Id.barcode, prodBarcode, qty, Id.userID);
+                                }
+
+                                lblProdDetails.Enabled = true;
+                                btnClose.Text = "Close";
+                                MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Hide();
+                                this.DialogResult = DialogResult.OK;
+                                Id.dt.Rows.Clear();
+                                Id.dt.Columns.Clear();
+                                Id.dTable.Rows.Clear();
+                                Id.dTable.Columns.Clear();
                             }
-                            lblProdDetails.Enabled = true;
-                            btnClose.Text = "Close";
-                            MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Hide();
-                            this.DialogResult = DialogResult.OK;
+                            else
+                            {
+                                MessageBox.Show("Kit components is required for Product master", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
                     else
@@ -527,6 +556,10 @@ namespace ACP
                         MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();
                         this.DialogResult = DialogResult.OK;
+                        Id.dt.Rows.Clear();
+                        Id.dt.Columns.Clear();
+                        Id.dTable.Rows.Clear();
+                        Id.dTable.Columns.Clear();
                     }
 
                 }
@@ -614,9 +647,20 @@ namespace ACP
                         }
                     }
 
+                    if(cmbProdSubType.Text == "Product master")
+                    {
+                        if(!string.IsNullOrEmpty(cmbProdDimension.Text))
+                        {
+                            //pc.createUpdateComponent("Create", kitID, Id.barcode, txtBarcode.Text, quantity, Id.userID);
+                        }
+                    }
                     MessageBox.Show("Successfull updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     this.DialogResult = DialogResult.OK;
+                    Id.dt.Rows.Clear();
+                    Id.dt.Columns.Clear();
+                    Id.dTable.Rows.Clear();
+                    Id.dTable.Columns.Clear();
                 }
             }
             else
@@ -753,15 +797,6 @@ namespace ACP
             //        Id.shown = true;
             //    }
             //}
-        }
-        private void toolStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
 
         private void tsBtnNewBarcode_Click(object sender, EventArgs e)
@@ -1808,13 +1843,19 @@ namespace ACP
                 Id.barcode = row.Cells["barcode"].Value.ToString();
                 if(dgvBarcode.SelectedRows.Count > 0)
                 {
+                    DataTable dt = pc.fetchComponentSetupByBarcode("sp_componentSetup", "fetchComponentSetup", Id.barcode);
                     if (cmbProdSubType.Text == "Product master")
                     {
-                        btnKitSetup.Enabled = true;
-                    }
-                    else
-                    {
-                        btnKitSetup.Enabled = false;
+                        if (Id.dTable.Rows.Count > 0)
+                        {
+                            dgvKitComponents.DataSource = Id.dTable;
+                            previousRowIndex = e.RowIndex;
+                        }
+                        else
+                        {
+                            dgvKitComponents.DataSource = dt;
+                        }
+                        //btnKitSetup.Enabled = true;
                     }
                     tsbEdit.Enabled = true;
                     tsbDeleteBarcode.Enabled = true;
@@ -2116,6 +2157,76 @@ namespace ACP
             details.btnClose.Text = "Close";
             details.ShowDialog();
 
+        }
+
+        private void dgvKitComponents_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvKitComponents.ClearSelection();
+        }
+
+        private void tsbNewKit_Click(object sender, EventArgs e)
+        {
+            if (cmbProdSubType.Text == "Product master")
+            {
+                if (dgvBarcode.SelectedRows.Count > 0)
+                {
+                    Id.kitID = pc.autoInc("kitID", "componentSetup");
+                    frmKitComponents kit = new frmKitComponents();
+                    kit.btnCreate.Text = "Create";
+                    DialogResult res = kit.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        dgvKitComponents.DataSource = Id.dTable;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Product sub type must be Product master", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void tsbDeleteKit_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Are you sure to delete Kit component?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (res == DialogResult.Yes)
+            {
+                if (dgvKitComponents.SelectedRows.Count > 0)
+                {
+                    dgvKitComponents.Rows.RemoveAt(dgvKitComponents.SelectedRows[0].Index);
+                }
+            }
+        }
+
+        int previousRowIndex, currentRowIndex;
+        private void dgvBarcode_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if(cmbProdSubType.Text == "Product master")
+            {
+                if(Id.dTable.Rows.Count > 0)
+                {
+                    DialogResult res = MessageBox.Show("Disregard changes in Kit Components?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if(res == DialogResult.Yes)
+                    {
+                        DataTable dt = pc.fetchComponentSetupByBarcode("sp_componentSetup", "fetchComponentSetup", Id.barcode);
+                        dgvKitComponents.DataSource = dt;
+                    }
+                    else
+                    {
+                        dgvBarcode.Rows[previousRowIndex].Selected = true;
+                    }
+                    
+                }
+            }
         }
     }
 }

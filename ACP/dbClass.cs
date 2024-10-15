@@ -79,6 +79,20 @@ namespace ACP
             return dt;
         }
 
+        public DataTable fetchComponentSetupByBarcode(string query, string action, string barcode)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@action", action);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
         public DataTable fetchRecordsForProduct(string query, string tableName, string action, string columnValue)
         {
             SqlConnection conn = getConnection();

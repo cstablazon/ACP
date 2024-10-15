@@ -67,16 +67,6 @@
             this.tsbView = new System.Windows.Forms.ToolStripButton();
             this.dgvBarcode = new System.Windows.Forms.DataGridView();
             this.lblProdDetails = new System.Windows.Forms.Label();
-            this.pFinancials = new System.Windows.Forms.Panel();
-            this.label56 = new System.Windows.Forms.Label();
-            this.cbSalesTax = new System.Windows.Forms.ComboBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.cbPurchaseTax = new System.Windows.Forms.ComboBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.cbItemGroup = new System.Windows.Forms.ComboBox();
-            this.lblFinancials = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -101,13 +91,20 @@
             this.btnNewBarcode = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblKitComponents = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvKitComponents = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbNewKit = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditKit = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteKit = new System.Windows.Forms.ToolStripButton();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
             this.pGeneral.SuspendLayout();
             this.pProdCategory.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).BeginInit();
-            this.pFinancials.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -115,6 +112,10 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKitComponents)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -127,11 +128,11 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.pGeneral);
             this.flowLayoutPanel1.Controls.Add(this.pProdCategory);
-            this.flowLayoutPanel1.Controls.Add(this.pFinancials);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 477);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(975, 578);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
@@ -167,7 +168,7 @@
             this.pGeneral.MaximumSize = new System.Drawing.Size(950, 258);
             this.pGeneral.MinimumSize = new System.Drawing.Size(854, 20);
             this.pGeneral.Name = "pGeneral";
-            this.pGeneral.Size = new System.Drawing.Size(950, 258);
+            this.pGeneral.Size = new System.Drawing.Size(950, 169);
             this.pGeneral.TabIndex = 0;
             this.pGeneral.Paint += new System.Windows.Forms.PaintEventHandler(this.pGeneral_Paint);
             this.pGeneral.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pGeneral_MouseDown);
@@ -465,11 +466,11 @@
             this.pProdCategory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pProdCategory.Controls.Add(this.groupBox1);
             this.pProdCategory.Controls.Add(this.lblProdDetails);
-            this.pProdCategory.Location = new System.Drawing.Point(3, 267);
-            this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
-            this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
+            this.pProdCategory.Location = new System.Drawing.Point(3, 178);
+            this.pProdCategory.MaximumSize = new System.Drawing.Size(950, 320);
+            this.pProdCategory.MinimumSize = new System.Drawing.Size(950, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 20);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 320);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -558,6 +559,7 @@
             this.dgvBarcode.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellClick);
             this.dgvBarcode.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellContentClick);
             this.dgvBarcode.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellDoubleClick);
+            this.dgvBarcode.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellLeave);
             this.dgvBarcode.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellValueChanged);
             this.dgvBarcode.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvBarcode_DataBindingComplete);
             // 
@@ -577,124 +579,6 @@
             this.lblProdDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblProdDetails.Click += new System.EventHandler(this.lblProdDetails_Click);
             this.lblProdDetails.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblProdDetails_MouseDown);
-            // 
-            // pFinancials
-            // 
-            this.pFinancials.BackColor = System.Drawing.Color.White;
-            this.pFinancials.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pFinancials.Controls.Add(this.label56);
-            this.pFinancials.Controls.Add(this.cbSalesTax);
-            this.pFinancials.Controls.Add(this.label48);
-            this.pFinancials.Controls.Add(this.cbPurchaseTax);
-            this.pFinancials.Controls.Add(this.label52);
-            this.pFinancials.Controls.Add(this.label53);
-            this.pFinancials.Controls.Add(this.label54);
-            this.pFinancials.Controls.Add(this.cbItemGroup);
-            this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 293);
-            this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
-            this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
-            this.pFinancials.Name = "pFinancials";
-            this.pFinancials.Size = new System.Drawing.Size(950, 20);
-            this.pFinancials.TabIndex = 32;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.Location = new System.Drawing.Point(290, 25);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(125, 15);
-            this.label56.TabIndex = 32;
-            this.label56.Text = "Item Sales Tax Group";
-            // 
-            // cbSalesTax
-            // 
-            this.cbSalesTax.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSalesTax.FormattingEnabled = true;
-            this.cbSalesTax.Items.AddRange(new object[] {
-            "IVAT"});
-            this.cbSalesTax.Location = new System.Drawing.Point(400, 79);
-            this.cbSalesTax.Name = "cbSalesTax";
-            this.cbSalesTax.Size = new System.Drawing.Size(123, 23);
-            this.cbSalesTax.TabIndex = 32;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(291, 80);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(55, 15);
-            this.label48.TabIndex = 30;
-            this.label48.Text = "Sales tax:";
-            // 
-            // cbPurchaseTax
-            // 
-            this.cbPurchaseTax.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPurchaseTax.FormattingEnabled = true;
-            this.cbPurchaseTax.Items.AddRange(new object[] {
-            "OVAT"});
-            this.cbPurchaseTax.Location = new System.Drawing.Point(400, 46);
-            this.cbPurchaseTax.Name = "cbPurchaseTax";
-            this.cbPurchaseTax.Size = new System.Drawing.Size(123, 23);
-            this.cbPurchaseTax.TabIndex = 31;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(12, 28);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(75, 15);
-            this.label52.TabIndex = 23;
-            this.label52.Text = "Cost Posting";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label53.Location = new System.Drawing.Point(290, 50);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(77, 15);
-            this.label53.TabIndex = 22;
-            this.label53.Text = "Purchase tax:";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label54.Location = new System.Drawing.Point(12, 53);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(69, 15);
-            this.label54.TabIndex = 21;
-            this.label54.Text = "Item group:";
-            // 
-            // cbItemGroup
-            // 
-            this.cbItemGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbItemGroup.FormattingEnabled = true;
-            this.cbItemGroup.Location = new System.Drawing.Point(98, 50);
-            this.cbItemGroup.Name = "cbItemGroup";
-            this.cbItemGroup.Size = new System.Drawing.Size(123, 23);
-            this.cbItemGroup.TabIndex = 30;
-            // 
-            // lblFinancials
-            // 
-            this.lblFinancials.AutoSize = true;
-            this.lblFinancials.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblFinancials.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblFinancials.Enabled = false;
-            this.lblFinancials.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinancials.Image = global::ACP.Properties.Resources.arrowRight10px;
-            this.lblFinancials.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblFinancials.Location = new System.Drawing.Point(0, 0);
-            this.lblFinancials.Name = "lblFinancials";
-            this.lblFinancials.Size = new System.Drawing.Size(81, 15);
-            this.lblFinancials.TabIndex = 29;
-            this.lblFinancials.Text = "    3 Financials";
-            this.lblFinancials.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblFinancials.Click += new System.EventHandler(this.lblFinancials_Click);
             // 
             // btnCreate
             // 
@@ -740,7 +624,7 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 626);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 727);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(987, 22);
             this.statusStrip1.TabIndex = 3;
@@ -806,7 +690,6 @@
             // 
             // btnKitSetup
             // 
-            this.btnKitSetup.Enabled = false;
             this.btnKitSetup.FlatAppearance.BorderSize = 0;
             this.btnKitSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKitSetup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -991,10 +874,113 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnCreate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 587);
+            this.panel1.Location = new System.Drawing.Point(0, 688);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(987, 39);
             this.panel1.TabIndex = 98;
+            // 
+            // lblKitComponents
+            // 
+            this.lblKitComponents.AutoSize = true;
+            this.lblKitComponents.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblKitComponents.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblKitComponents.Enabled = false;
+            this.lblKitComponents.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKitComponents.Image = global::ACP.Properties.Resources.arrowRight10px;
+            this.lblKitComponents.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblKitComponents.Location = new System.Drawing.Point(0, 0);
+            this.lblKitComponents.Name = "lblKitComponents";
+            this.lblKitComponents.Size = new System.Drawing.Size(117, 15);
+            this.lblKitComponents.TabIndex = 29;
+            this.lblKitComponents.Text = "    3 Kit components";
+            this.lblKitComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.toolStrip1);
+            this.groupBox2.Controls.Add(this.dgvKitComponents);
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(3, 18);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(936, 277);
+            this.groupBox2.TabIndex = 72;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Additional Information and Barcode";
+            // 
+            // dgvKitComponents
+            // 
+            this.dgvKitComponents.AllowUserToAddRows = false;
+            this.dgvKitComponents.AllowUserToDeleteRows = false;
+            this.dgvKitComponents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvKitComponents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvKitComponents.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvKitComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKitComponents.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvKitComponents.Location = new System.Drawing.Point(3, 57);
+            this.dgvKitComponents.MultiSelect = false;
+            this.dgvKitComponents.Name = "dgvKitComponents";
+            this.dgvKitComponents.ReadOnly = true;
+            this.dgvKitComponents.RowHeadersVisible = false;
+            this.dgvKitComponents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvKitComponents.Size = new System.Drawing.Size(930, 217);
+            this.dgvKitComponents.TabIndex = 0;
+            this.dgvKitComponents.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvKitComponents_DataBindingComplete);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbNewKit,
+            this.tsbEditKit,
+            this.tsbDeleteKit});
+            this.toolStrip1.Location = new System.Drawing.Point(3, 18);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(930, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // tsbNewKit
+            // 
+            this.tsbNewKit.Image = ((System.Drawing.Image)(resources.GetObject("tsbNewKit.Image")));
+            this.tsbNewKit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNewKit.Name = "tsbNewKit";
+            this.tsbNewKit.Size = new System.Drawing.Size(51, 22);
+            this.tsbNewKit.Text = "New";
+            this.tsbNewKit.Click += new System.EventHandler(this.tsbNewKit_Click);
+            // 
+            // tsbEditKit
+            // 
+            this.tsbEditKit.Enabled = false;
+            this.tsbEditKit.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditKit.Image")));
+            this.tsbEditKit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditKit.Name = "tsbEditKit";
+            this.tsbEditKit.Size = new System.Drawing.Size(47, 22);
+            this.tsbEditKit.Text = "Edit";
+            // 
+            // tsbDeleteKit
+            // 
+            this.tsbDeleteKit.Enabled = false;
+            this.tsbDeleteKit.Image = ((System.Drawing.Image)(resources.GetObject("tsbDeleteKit.Image")));
+            this.tsbDeleteKit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteKit.Name = "tsbDeleteKit";
+            this.tsbDeleteKit.Size = new System.Drawing.Size(60, 22);
+            this.tsbDeleteKit.Text = "Delete";
+            this.tsbDeleteKit.Click += new System.EventHandler(this.tsbDeleteKit_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.groupBox2);
+            this.panel5.Controls.Add(this.lblKitComponents);
+            this.panel5.Location = new System.Drawing.Point(3, 504);
+            this.panel5.MaximumSize = new System.Drawing.Size(955, 300);
+            this.panel5.MinimumSize = new System.Drawing.Size(854, 20);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(950, 20);
+            this.panel5.TabIndex = 33;
+            this.panel5.Visible = false;
             // 
             // frmModifyProd
             // 
@@ -1002,7 +988,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(987, 648);
+            this.ClientSize = new System.Drawing.Size(987, 749);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -1027,8 +1013,6 @@
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).EndInit();
-            this.pFinancials.ResumeLayout(false);
-            this.pFinancials.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -1040,6 +1024,13 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKitComponents)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1049,9 +1040,6 @@
 
         public System.Windows.Forms.TextBox txtProdName;
         public System.Windows.Forms.TextBox txtSKU;
-        public System.Windows.Forms.ComboBox cbSalesTax;
-        public System.Windows.Forms.ComboBox cbPurchaseTax;
-        public System.Windows.Forms.ComboBox cbItemGroup;
         public System.Windows.Forms.ComboBox cmbProdType;
         public System.Windows.Forms.ComboBox cmbProdSubType;
         public System.Windows.Forms.CheckBox cbConcession;
@@ -1070,13 +1058,6 @@
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        public System.Windows.Forms.Panel pFinancials;
-        public System.Windows.Forms.Label label56;
-        public System.Windows.Forms.Label label48;
-        public System.Windows.Forms.Label label52;
-        public System.Windows.Forms.Label label53;
-        public System.Windows.Forms.Label label54;
-        public System.Windows.Forms.Label lblFinancials;
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label label8;
@@ -1119,5 +1100,13 @@
         private System.Windows.Forms.ToolStripButton tsbEdit;
         private System.Windows.Forms.ToolStripButton tsbView;
         private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tsbNewKit;
+        private System.Windows.Forms.ToolStripButton tsbEditKit;
+        private System.Windows.Forms.ToolStripButton tsbDeleteKit;
+        public System.Windows.Forms.DataGridView dgvKitComponents;
+        public System.Windows.Forms.Label lblKitComponents;
     }
 }

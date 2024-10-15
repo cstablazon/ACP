@@ -452,7 +452,7 @@
             this.pHeader.MaximumSize = new System.Drawing.Size(1111, 470);
             this.pHeader.MinimumSize = new System.Drawing.Size(2, 22);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1086, 222);
+            this.pHeader.Size = new System.Drawing.Size(1086, 470);
             this.pHeader.TabIndex = 0;
             // 
             // cmbDiscountType
@@ -1091,7 +1091,7 @@
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.Image = global::ACP.Properties.Resources.arrowDown10px;
+            this.lblHeader.Image = global::ACP.Properties.Resources.arrowRight10px;
             this.lblHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblHeader.Location = new System.Drawing.Point(3, 0);
             this.lblHeader.Name = "lblHeader";
@@ -1107,11 +1107,11 @@
             this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
-            this.pLines.Location = new System.Drawing.Point(3, 231);
+            this.pLines.Location = new System.Drawing.Point(3, 479);
             this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 91);
+            this.pLines.Size = new System.Drawing.Size(1104, 304);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1227,7 +1227,7 @@
             this.panel6.Controls.Add(this.txtPurchaseDiscount);
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 328);
+            this.panel6.Location = new System.Drawing.Point(3, 789);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
@@ -1322,7 +1322,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 356);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 817);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;

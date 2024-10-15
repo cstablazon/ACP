@@ -2185,63 +2185,63 @@ namespace ACP
 
         private void txtConfig_Click(object sender, EventArgs e)
         {
-            if (Id.button == "Create")
-            {
-                frmKitComponents kit = new frmKitComponents();
-                if (!string.IsNullOrEmpty(txtConfig.Text) || !string.IsNullOrWhiteSpace(txtConfig.Text))
-                {
-                    MessageBox.Show("a");
-                    int kitID = Convert.ToInt32(txtConfig.Text);
+            //if (Id.button == "Create")
+            //{
+            //    frmKitComponents kit = new frmKitComponents();
+            //    if (!string.IsNullOrEmpty(txtConfig.Text) || !string.IsNullOrWhiteSpace(txtConfig.Text))
+            //    {
+            //        MessageBox.Show("a");
+            //        int kitID = Convert.ToInt32(txtConfig.Text);
 
-                    foreach(DataRow row in Id.dt.Rows)
-                    {
-                        kit.dgvComponents.Rows.Add(row["code"], row["barcode"], row["description"], row["qty"], row["unitID"], row["unit"]);
-                    }
-                    //var objGet = db.componentSetups.Where(a => a.kitID == kitID);
-                    //if (objGet.Any())
-                    //{
-                    //    MessageBox.Show("b");
-                    //    var objGetKit = (from a in db.componentSetups
-                    //                     join b in db.barcodes on a.prodBarcode equals b.barcode1
-                    //                     join c in db.UOMs on b.RPuomID equals c.uomID
-                    //                     where a.code == objGet.SingleOrDefault().code
-                    //                     select new 
-                    //                     {
-                    //                         a.kitID,
-                    //                         a.code,
-                    //                         a.prodBarcode,
-                    //                         b.posDesc,
-                    //                         a.qty,
-                    //                         b.RPuomID,
-                    //                         c.uomDesc
-                    //                     }).ToList();
-                            //db.componentSetups.Where(a => a.code == objGet.SingleOrDefault().code).ToList();
+            //        foreach(DataRow row in Id.dt.Rows)
+            //        {
+            //            kit.dgvComponents.Rows.Add(row["code"], row["barcode"], row["description"], row["qty"], row["unitID"], row["unit"]);
+            //        }
+            //        //var objGet = db.componentSetups.Where(a => a.kitID == kitID);
+            //        //if (objGet.Any())
+            //        //{
+            //        //    MessageBox.Show("b");
+            //        //    var objGetKit = (from a in db.componentSetups
+            //        //                     join b in db.barcodes on a.prodBarcode equals b.barcode1
+            //        //                     join c in db.UOMs on b.RPuomID equals c.uomID
+            //        //                     where a.code == objGet.SingleOrDefault().code
+            //        //                     select new 
+            //        //                     {
+            //        //                         a.kitID,
+            //        //                         a.code,
+            //        //                         a.prodBarcode,
+            //        //                         b.posDesc,
+            //        //                         a.qty,
+            //        //                         b.RPuomID,
+            //        //                         c.uomDesc
+            //        //                     }).ToList();
+            //                //db.componentSetups.Where(a => a.code == objGet.SingleOrDefault().code).ToList();
 
-                    //    foreach(var item in objGetKit)
-                    //    {
-                    //        kit.dgvComponents.Rows.Add(item.prodBarcode, item.posDesc, item.qty, item.RPuomID, item.uomDesc);
-                    //    }
-                    //}
-                    kit.ShowDialog();
-                }
-                else
-                {
-                    DialogResult res = kit.ShowDialog();
-                    if (res == DialogResult.OK)
-                    {
-                        txtConfig.Text = Id.kitCode;
-                    }
-                }
-            }
-            else if(Id.button == "Update")
-            {
-                frmKitComponents kit = new frmKitComponents();
-                DialogResult res = kit.ShowDialog();
-                if (res == DialogResult.OK)
-                {
-                    txtConfig.Text = Id.kitCode;
-                }
-            }
+            //        //    foreach(var item in objGetKit)
+            //        //    {
+            //        //        kit.dgvComponents.Rows.Add(item.prodBarcode, item.posDesc, item.qty, item.RPuomID, item.uomDesc);
+            //        //    }
+            //        //}
+            //        kit.ShowDialog();
+            //    }
+            //    else
+            //    {
+            //        DialogResult res = kit.ShowDialog();
+            //        if (res == DialogResult.OK)
+            //        {
+            //            txtConfig.Text = Id.kitCode;
+            //        }
+            //    }
+            //}
+            //else if(Id.button == "Update")
+            //{
+            //    frmKitComponents kit = new frmKitComponents();
+            //    DialogResult res = kit.ShowDialog();
+            //    if (res == DialogResult.OK)
+            //    {
+            //        txtConfig.Text = Id.kitCode;
+            //    }
+            //}
         }
 
         private void txtBMRX_TextChanged(object sender, EventArgs e)

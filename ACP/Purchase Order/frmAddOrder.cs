@@ -138,14 +138,14 @@ namespace ACP
 
         private void lblHeader_Click(object sender, EventArgs e)
         {
-            dropdown = "Header";
-            timer1.Start();
+            //dropdown = "Header";
+            //timer1.Start();
         }
 
         private void lblLines_Click(object sender, EventArgs e)
         {
-            dropdown = "Lines";
-            timer1.Start();
+            //dropdown = "Lines";
+            //timer1.Start();
         }
 
         //public void supplier()

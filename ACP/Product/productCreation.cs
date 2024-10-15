@@ -59,6 +59,11 @@ namespace ACP
         {
             return db.fetchComponentSetup(sp, action);
         }
+
+        public DataTable fetchComponentSetupByBarcode(string sp, string action, string barcode)
+        {
+            return db.fetchComponentSetupByBarcode(sp, action, barcode);
+        }
 //Department hierarchy
         public DataTable fetchDept(string sp, string action, long? RID)
         {

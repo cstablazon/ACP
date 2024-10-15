@@ -15,6 +15,7 @@ namespace ACP
         public static int CPuomID, RPuomID, iGlobalID, kitID, userID, addressID, contactID, contactTypeID, payID, brandID;
         public static int? discountID;
         public static DataTable dt = new DataTable();
+        public static DataTable dTable = new DataTable();
         //public static DataTable dtBarcode = new DataTable();
         public static long? RIDL, bmrxID, privilegeID, ID;
         public static decimal percent;

@@ -55,24 +55,24 @@ namespace ACP
             //}
         }
 
-        private void fetchComponent()
-        {
-            DataTable dt = pc.fetchComponentSetup("sp_componentSetup", "fetchComponentSetup");
+        //private void fetchComponent()
+        //{
+        //    DataTable dt = pc.fetchComponentSetup("sp_componentSetup", "fetchComponentSetup");
 
-            dgvComponents.DataSource = dt;
+        //    dgvComponents.DataSource = dt;
 
-            dgvComponents.Columns["kitID"].Visible = false;
-            dgvComponents.Columns["RPuomID"].Visible = false;
-            dgvComponents.Columns["masterBarcode"].HeaderText = "Master barcode";
-            dgvComponents.Columns["prodBarcode"].HeaderText = "Product barcode";
-            dgvComponents.Columns["qty"].HeaderText = "Quantity";
-            dgvComponents.Columns["masterBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvComponents.Columns["prodBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvComponents.Columns["Product description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvComponents.Columns["qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvComponents.Columns["Retail Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //    dgvComponents.Columns["kitID"].Visible = false;
+        //    dgvComponents.Columns["RPuomID"].Visible = false;
+        //    dgvComponents.Columns["masterBarcode"].HeaderText = "Master barcode";
+        //    dgvComponents.Columns["prodBarcode"].HeaderText = "Product barcode";
+        //    dgvComponents.Columns["qty"].HeaderText = "Quantity";
+        //    dgvComponents.Columns["masterBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        //    dgvComponents.Columns["prodBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        //    dgvComponents.Columns["Product description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        //    dgvComponents.Columns["qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //    dgvComponents.Columns["Retail Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-        }
+        //}
 
         private void autoCompleteBarcode()
         {
@@ -151,7 +151,7 @@ namespace ACP
         {
             autoCompleteBarcode();
             txtQty.Text = 0.ToString("N2");
-            fetchComponent();
+            //fetchComponent();
             //if (Id.button == "Create")
             //{
             //    autoInc();
@@ -174,19 +174,156 @@ namespace ACP
         bool isBlank = true;
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if(btnCreate.Text == "Create")
+            if(Id.button == "Create")
             {
-                autoInc();
-                decimal quantity = Convert.ToDecimal(txtQty.Text);
-                pc.createUpdateComponent("Create",kitID, Id.barcode, txtBarcode.Text, quantity, Id.userID);
-                MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetchComponent();
-                disableAndClear();
-            }
-            else if(btnCreate.Text == "Update")
-            {
+                if(btnCreate.Text == "Create")
+                {
+                    if(Id.dTable.Rows.Count > 0)
+                    {
+                        if(Id.dTable.Select("Product barcode = '" + txtBarcode.Text + "'").Any())
+                        {
+                            MessageBox.Show("" + txtBarcode.Text + " already exist in Barcode line", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            DataRow dRow = Id.dTable.NewRow();
 
+                        }
+                    }
+                    else
+                    {
+                        Id.dTable.Columns.Clear();
+                        Id.dTable.Rows.Clear();
+                        Id.dTable.Columns.Add("kitID", typeof(string));
+                        Id.dTable.Columns.Add("masterBarcode", typeof(string));
+                        Id.dTable.Columns.Add("Product barcode", typeof(string));
+                        Id.dTable.Columns.Add("Quantity", typeof(decimal));
+                        Id.dTable.Columns.Add("userID", typeof(int));
+
+                        DataRow dRow = Id.dTable.NewRow();
+                        dRow[0] = Id.kitID;
+                        dRow[1] = Id.barcode;
+                        dRow[2] = txtBarcode.Text;
+                        dRow[3] = txtQty.Text = 0.ToString("N2");
+                        dRow[4] = Id.userID;
+
+                        Id.dTable.Rows.Add(dRow);
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
+                    }
+                }
+                else if(btnCreate.Text == "Update")
+                {
+                    foreach(DataRow row in Id.dTable.Rows)
+                    {
+                        if(row["kitID"] == Id.kitID.ToString())
+                        {
+                            row["Product barcode"] = txtBarcode.Text;
+                            row["Quantity"] = txtQty.Text = 0.ToString("N2");
+                        }
+                    }
+                    this.DialogResult = DialogResult.OK;
+                    this.Hide();
+                }
             }
+            else if(Id.button == "Update")
+            {
+                if(btnCreate.Text == "Create")
+                {
+                    if(Id.dTable.Rows.Count > 0)
+                    {
+                        DataRow dRow = Id.dTable.NewRow();
+                        if(Id.dTable.Select("Product barcode = '" + txtBarcode.Text + "'").Any())
+                        {
+                            MessageBox.Show("" + txtBarcode.Text + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            dRow[0] = Id.kitID.ToString();
+                            dRow[1] = Id.barcode;
+                            dRow[2] = txtBarcode.Text;
+                            dRow[3] = txtQty.Text = 0.ToString("N2");
+                            dRow[4] = Id.userID;
+
+                            Id.dTable.Rows.Add(dRow);
+                            //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
+                            this.Hide();
+                        }
+                    }
+                    else
+                    {
+                        DataTable dt = pc.fetchComponentSetupByBarcode("sp_componentSetup", "fetchComponentSetup", Id.barcode);
+                        Id.dTable.Columns.Clear();
+                        Id.dTable.Rows.Clear();
+                        Id.dTable.Columns.Add("kitID", typeof(string));
+                        Id.dTable.Columns.Add("masterBarcode", typeof(string));
+                        Id.dTable.Columns.Add("Product barcode", typeof(string));
+                        Id.dTable.Columns.Add("Quantity", typeof(decimal));
+                        Id.dTable.Columns.Add("userID", typeof(int));
+
+                        DataRow dRow = Id.dTable.NewRow();
+                        foreach(DataRow imp in dt.Rows)
+                        {
+                            Id.dTable.ImportRow(imp);
+                        }
+                        if(Id.dTable.Select("Product barcode = '" + txtBarcode.Text + "'").Any())
+                        {
+                            MessageBox.Show("" + txtBarcode.Text + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            dRow[0] = Id.kitID.ToString();
+                            dRow[1] = Id.barcode;
+                            dRow[2] = txtBarcode.Text;
+                            dRow[3] = txtQty.Text = 0.ToString("N2");
+                            dRow[4] = Id.userID;
+
+                            Id.dTable.Rows.Add(dRow);
+                            this.DialogResult = DialogResult.OK;
+                            this.Hide();
+                        }
+                    }
+                }
+                else if(btnCreate.Text == "Update")
+                {
+                    DataTable dt = pc.fetchComponentSetupByBarcode("sp_componentSetup", "fetchComponentSetup", Id.barcode);
+                    Id.dTable.Columns.Clear();
+                    Id.dTable.Rows.Clear();
+                    Id.dTable.Columns.Add("kitID", typeof(string));
+                    Id.dTable.Columns.Add("masterBarcode", typeof(string));
+                    Id.dTable.Columns.Add("Product barcode", typeof(string));
+                    Id.dTable.Columns.Add("Quantity", typeof(decimal));
+                    Id.dTable.Columns.Add("userID", typeof(int));
+
+                    foreach (DataRow imp in dt.Rows)
+                    {
+                        Id.dTable.ImportRow(imp);
+                    }
+
+                    DataRow dRow = Id.dTable.Select("Product barcode = '" + txtBarcode.Text + "'").FirstOrDefault();
+                    if(dRow != null)
+                    {
+                        dRow["Product barcode"] = txtBarcode.Text;
+                        dRow["Quantity"] = txtQty.Text = 0.ToString("N2");
+                    }
+                    this.DialogResult = DialogResult.OK;
+                    this.Hide();
+                }
+            }
+            //if(btnCreate.Text == "Create")
+            //{
+            //    autoInc();
+            //    decimal quantity = Convert.ToDecimal(txtQty.Text);
+            //    pc.createUpdateComponent("Create",kitID, Id.barcode, txtBarcode.Text, quantity, Id.userID);
+            //    MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    fetchComponent();
+            //    disableAndClear();
+            //}
+            //else if(btnCreate.Text == "Update")
+            //{
+
+            //}
             //if (Id.button == "Create")
             //{
             //    MessageBox.Show("a");
@@ -281,17 +418,6 @@ namespace ACP
             //        dgvComponents.CurrentCell = dgvComponents.Rows[rowIndex].Cells["barcode"];
             //    }
             //}
-        }
-
-        private void tsbDeleteBarcode_Click(object sender, EventArgs e)
-        {
-            if(dgvComponents.SelectedRows.Count > 0)
-            {
-                if (Id.button == "Create")
-                {
-                    dgvComponents.Rows.RemoveAt(dgvComponents.SelectedRows[0].Index);
-                }
-            }
         }
 
         private void tsBtnNew_Click(object sender, EventArgs e)
