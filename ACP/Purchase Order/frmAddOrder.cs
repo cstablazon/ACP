@@ -25,18 +25,20 @@ namespace ACP
             deliveryAdd();
             modeOfDelivery();
             fetch_pool();
+            approvedBy();
+            orderedBy();
         }
 
-        public void autocomplete()
-        {
-            //DataTable dt = po.fetch_supplier();
-            //AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+        //public void autocomplete()
+        //{
+        //    //DataTable dt = po.fetch_supplier();
+        //    //AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
 
-            //foreach (DataRow rows in dt.Rows)
-            //{
-            //    coll.Add(rows["suppID"].ToString());
-            //}
-        }
+        //    //foreach (DataRow rows in dt.Rows)
+        //    //{
+        //    //    coll.Add(rows["suppID"].ToString());
+        //    //}
+        //}
 
         public void fetch_pool() 
         {
@@ -283,6 +285,22 @@ namespace ACP
             t.SelectionStart = t.Text.Length;
         }
 
+        private void approvedBy()
+        {
+            DataSet ds = po.cbRecords("personsInfo", "fetchOwner", "Fullname");
+            cmbApprovedBy.DataSource = ds.Tables["Fullname"];
+            cmbApprovedBy.DisplayMember = "Fullname";
+            cmbApprovedBy.ValueMember = "Fullname";
+        }
+
+        private void orderedBy()
+        {
+            DataSet ds = po.cbRecords("personsInfo", "fetchDepartmentHead", "Fullname");
+            cmbOrderedBy.DataSource = ds.Tables["Fullname"];
+            cmbOrderedBy.DisplayMember = "Fullname";
+            cmbOrderedBy.ValueMember = "Fullname";
+        }
+
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
             if(Id.button == "Create")
@@ -296,14 +314,14 @@ namespace ACP
                 cmbPool.Text = "";
                 cmbMOD.Text = "";
                 cmbDeliveryAdd.Text = "";
+                cmbOrderedBy.Text = "";
+                cmbApprovedBy.Text = "";
             }
             //orderNo();
             //readOnly();
             //editableDGV();
             //supplier();
-            
-            autocomplete();
-        //   fetch_poolID();
+            //fetch_poolID();
             if(Id.button == "Create")
             {
                 //lblLines.Enabled = false;
@@ -338,10 +356,7 @@ namespace ACP
 
         private void cbPool_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
             fetch_poolID();
-            //MessageBox.Show(cbPool.Text);
         }
 
         private void btnApproval_Click(object sender, EventArgs e)
@@ -422,6 +437,10 @@ namespace ACP
         {
             if (dgvLines.Rows.Count > 0)
             {
+                int modID = Convert.ToInt32(cmbMOD.SelectedValue);
+                int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
+                int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
+                decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
                 if (Id.button.Equals("Create"))
                 {
                     if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
@@ -431,10 +450,7 @@ namespace ACP
                     }
                     else
                     {
-                        int modID = Convert.ToInt32(cmbMOD.SelectedValue);
-                        int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
-                        int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
-                        decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
+                        
 
 
                         bool isEmpty = false;
@@ -456,7 +472,7 @@ namespace ACP
                         }
                         else
                         {
-                            po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, Id.userID);
+                            po.createUpdatePurchaseOrder("tempUpdate", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
                             for (int i = 0; dgvLines.Rows.Count > i; i++)
                             {
                                 string barcode = dgvLines.Rows[i].Cells["Barcode"].Value.ToString();
@@ -536,6 +552,18 @@ namespace ACP
                                 po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
                             }
                         }
+
+                        if (cmbDiscountType.Text == "Peso discount")
+                        {
+                            if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
+                            {
+                                decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                po.createUpdatePesoDiscount("Update", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                            }
+                        }
+
+                        po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
 
                         //Check if po_lines are existing in datagridview . If not delete line in po_line table
                         DataTable dtLines = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", txtOrderNo.Text);
@@ -733,87 +761,15 @@ namespace ACP
                     dgvLines.DataSource = Id.dt;
                     dgvLines.Columns["lineID"].Visible = false;
                     dgvLines.Columns["Order No."].Visible = false;
-                    //fetchPOlines();
-                    //foreach(DataGridViewRow row in lines.dgvNewItems.Rows)
-                    //{
-                    //    if (row.Cells["qty"].Value == null)
-                    //    {
-
-                    //    }
-                    //    else
-                    //    {
-                    //        //barcode = row.Cells["Barcode"].Value.ToString();
-                    //        //productDesc = row.Cells["Product_description"].Value.ToString();
-                    //        //qty = Convert.ToDecimal(row.Cells["qty"].Value);
-                    //        //var objCol = db.vwProducts.Where(a => a.Barcode.Equals(barcode)).SingleOrDefault();
-                    //        //RID = objCol.RID;
-                    //        //unit = objCol.Unit;
-                    //        //unitPrice = Convert.ToDecimal(objCol.Cost_price);
-                    //        //retailPrice = Convert.ToDecimal(objCol.Retail_price);
-                    //        //lineDisc = Convert.ToDecimal(objCol.lineDisc);
-                    //        //discPrice = (lineDisc / 100) * (qty * unitPrice);
-                    //        //netAmount = (qty * unitPrice) - discPrice;
-                    //        //var objDept = db.sp_catValidation("rid", RID);
-
-                    //        //dgvLines.Rows.Add(i++, barcode, productDesc, qty, objDept.SingleOrDefault().dept_desc, unit, unitPrice, retailPrice, lineDisc, Math.Round(netAmount, 2));
-                    //    }
-                    //}
                     
                 }
-                //frmAddLines sorting = new frmAddLines();
-                //sorting.ShowDialog();
+                
             }
         }
 
-        //public AutoCompleteStringCollection SKUline()
-        //{
-        //    AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
-        //    var data =(from a in db.vwProducts where a.suppID == cmbSuppID.Text select a.SKU).ToArray();
-        //    if(!string.IsNullOrEmpty(cmbSuppID.Text))
-        //    {
-        //        acsc.AddRange(data);
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    return acsc;
-        //}
-
         private void dgvLines_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            //if (dgvLines.CurrentCell.ColumnIndex == 1)
-            //{
-
-            //    if (string.IsNullOrEmpty(txtSuppID.Text))
-            //    {
-            //        MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        txtSuppID.Focus();
-            //    }
-            //    //else if (string.IsNullOrEmpty(Id.skuLine))
-            //    //{
-            //    //    MessageBox.Show("SKU is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    //}
-            //    else
-            //    {
-            //        //this.barcode.DataSource = (from a in db.vwProducts where a.suppID == cmbSuppID.Text select a).ToList();
-            //        //this.barcode.ValueMember = "barcode";
-            //        //this.barcode.DisplayMember = "barcode";
-            //    }
-            //    e.CellStyle.BackColor = this.dgvLines.DefaultCellStyle.BackColor;
-            //    //}
-
-            //}
-            //else if (dgvLines.CurrentCell.ColumnIndex == 2)
-            //{
-            //    int rowIndex = dgvLines.CurrentRow.Index;
-            //    if (string.IsNullOrEmpty(dgvLines.Rows[rowIndex].Cells["barcode"].Value as String))
-            //    {
-            //        MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
-            //        e.CellStyle.BackColor = Color.White;
-            //    }
-            //}
+            
         }
         long lineID;
         private void dgvLines_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -823,7 +779,6 @@ namespace ACP
                 DataGridViewRow row = dgvLines.Rows[e.RowIndex];
                 if(dgvLines.SelectedRows.Count > 0)
                 {
-                    //lineID = Convert.ToInt64(row.Cells["lineID"].Value);
 
                     tsbRemove.Enabled = true;
                 }
@@ -847,71 +802,6 @@ namespace ACP
                     }
                 }
             }
-            //decimal costPrice, retailPrice, lineDisc;
-            //if (e.ColumnIndex == 3 && e.RowIndex != -1)
-            //{
-            //    Cursor.Current = Cursors.IBeam;
-            //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
-            //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value.ToString()))
-            //    {
-            //        string barcodeLine = row.Cells["barcode"].Value.ToString();
-            //        DataTable dt = po.fetchProductLine("sp_purchaseOrderOperations", "purchaseOrder", "fetchProductLine2", txtSuppID.Text, barcodeLine);
-            //        if(dt.Rows.Count > 0)
-            //        {
-            //            foreach(DataRow dRow in dt.Rows)
-            //            {
-            //                row.Cells["Product description"].Value = dRow["posDesc"];
-            //                row.Cells["Dept class code"].Value = dRow["dept_code"];
-            //                row.Cells["Unit"].Value = dRow["poUnit"];
-            //                row.Cells["Cost price"].Value = dRow["costPrice"];
-            //                row.Cells["Retail price"].Value = dRow["retailPrice"];
-            //                row.Cells["Discount percent"].Value = Convert.ToDecimal(dRow["percentage"]) * 100;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            row.Cells["barcode"].Value = "";
-            //        }
-            //        //string barcodeLine = row.Cells["barcode"].Value.ToString();
-            //        //var prodCol = (from a in db.vwProducts where a.Barcode == barcodeLine select a);
-            //        //if (prodCol.Any())
-            //        //{
-            //        //    long rid = prodCol.SingleOrDefault().RID;
-            //        //    var objDept = db.sp_catValidation("rid", rid).SingleOrDefault();
-            //        //    costPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Cost_price);
-            //        //    retailPrice = Convert.ToDecimal(prodCol.SingleOrDefault().Retail_price);
-            //        //    //lineDisc = Convert.ToDecimal(prodCol.SingleOrDefault().lineDisc);
-            //        //    row.Cells["department"].Value = objDept.subcat_desc;
-            //        //    row.Cells["po_unit"].Value = prodCol.SingleOrDefault().PO_Unit;
-            //        //    row.Cells["po_price"].Value = costPrice;
-            //        //    //row.Cells["lineDisc"].Value = lineDisc;
-            //        //    row.Cells["retailPrice"].Value = retailPrice;
-            //        //}
-            //        //else
-            //        //{
-            //        //    MessageBox.Show("Barcode doesn't exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        //    row.Cells["barcode"].Value = "";
-            //        //}
-
-            //        //discPrice = (Convert.ToDecimal(row.Cells["lineDisc"].Value) / 100) * (Convert.ToDecimal(row.Cells["qty"].Value) * Convert.ToDecimal(row.Cells["po_price"].Value));
-            //    }
-            //}
-            //if (e.ColumnIndex == 4 && e.RowIndex != -1)
-            //{
-            //    int rowIndex = dgvLines.CurrentRow.Index;
-            //    DataGridViewRow row = dgvLines.Rows[e.RowIndex];
-            //    if (!string.IsNullOrEmpty(row.Cells["barcode"].Value as String))
-            //    {
-            //        row.Cells["Net amount"].Value = Convert.ToDecimal(row.Cells["Quantity"].Value) * Convert.ToDecimal(row.Cells["Cost price"].Value) - (Convert.ToDecimal(row.Cells["Discount percent"].Value) / 100) * (Convert.ToDecimal(row.Cells["Quantity"].Value) * Convert.ToDecimal(row.Cells["Cost price"].Value));
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Fill up barcode first", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        dgvLines.CurrentCell = dgvLines.Rows[rowIndex].Cells["barcode"];
-            //    }
-            //}
-
         }
 
         private void cmbPool_SelectionChangeCommitted(object sender, EventArgs e)
@@ -923,10 +813,6 @@ namespace ACP
             DataRow[] dr = dt.Select("poolID = '" + cmbPool.SelectedValue + "'");
 
             txtPoolDesc.Text = dr[0]["Pool"].ToString();
-            //string pool = cmbPool.GetItemText(cmbPool.SelectedValue);
-            //var pDesc = (from a in db.C_pool where a.poolID == pool select a).SingleOrDefault();
-
-            //txtPoolDesc.Text = pDesc.poolDesc;
         }
 
         private void tsbRemove_Click(object sender, EventArgs e)
@@ -937,21 +823,12 @@ namespace ACP
                 int rowIndex = dgvLines.SelectedRows[0].Index;
 
                 dgvLines.Rows.RemoveAt(rowIndex);
-                //long lineID = Convert.ToInt64(dgvLines.Rows[rowIndex].Cells["lineID"].Value);
-                //po.deletePOline("sp_purchaseOrderOperations", "POlines", "Delete", lineID);
-
-                //MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //fetchPOlines();
-                //tsbRemove.Enabled = false;
             }
         }
 
         private void tsbAddLine_Click(object sender, EventArgs e)
         {
             dgvLines.Rows.Add();
-            //int n = dgvLines.Rows.Add();
-            //var maxID = dgvLines.Rows.Cast<DataGridViewRow>().Max(a => Convert.ToInt32(a.Cells["lineID"].Value));
-            //dgvLines.Rows[n].Cells["lineID"].Value = maxID + 1;
         }
         int x, y;
         string pName;
@@ -1486,9 +1363,9 @@ namespace ACP
 
         private void dgvLines_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 4 && e.RowIndex != dgvLines.NewRowIndex)
+            if (e.ColumnIndex == 5 && e.RowIndex != dgvLines.NewRowIndex)
             {
-                if (dgvLines.Rows[e.RowIndex].Cells[4].Value != null)
+                if (dgvLines.Rows[e.RowIndex].Cells[5].Value != null)
                 {
                     double qty = double.Parse(e.Value.ToString());
                     e.Value = qty.ToString("N2");

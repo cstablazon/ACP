@@ -50,6 +50,7 @@ namespace ACP
                 {
                     int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
                     supClass.createUpdateContact("contactDIR", "Create", null, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchContact();
                     disableAndClear();
                 }
@@ -57,6 +58,7 @@ namespace ACP
                 {
                     int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
                     supClass.createUpdateContact("contactDIR", "Update", Id.contactID, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
+                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchContact();
                     disableAndClear();
                 }
@@ -160,13 +162,17 @@ namespace ACP
 
         private void btnConDelete_Click(object sender, EventArgs e)
         {
-            int contactID = Convert.ToInt32(Id.contactID);
-            supClass.deleteContact("contactDIR", "Delete", Id.contactID);
-
-            fetchContact();
-            disableAndClear();
-            btnConEdit.Enabled = false;
-            btnConDelete.Enabled = false;
+            DialogResult res = MessageBox.Show("Are you sure to delete contact?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                int contactID = Convert.ToInt32(Id.contactID);
+                supClass.deleteContact("contactDIR", "Delete", Id.contactID);
+                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                fetchContact();
+                disableAndClear();
+                btnConEdit.Enabled = false;
+                btnConDelete.Enabled = false;
+            }
         }
 
         private void cmbCtype_SelectedIndexChanged(object sender, EventArgs e)

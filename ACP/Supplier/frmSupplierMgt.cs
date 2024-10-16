@@ -42,17 +42,17 @@ namespace ACP
             //dgvSupplier.Columns.Insert(9, cbActive);
             //dgvSupplier.Columns[9].DataPropertyName = "isActive";
 
-            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSupplier.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSupplier.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSupplier.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSupplier.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSupplier.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSupplier.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSupplier.Columns[6].HeaderText = "Item tax";
             dgvSupplier.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvSupplier.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSupplier.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSupplier.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         public void fetchSupplier()
         {

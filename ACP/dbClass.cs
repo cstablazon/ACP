@@ -163,7 +163,7 @@ namespace ACP
             SqlConnection conn = getConnection();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@tableName", tableName);
+            //cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
             cmd.Parameters.AddWithValue("@suppID", suppID);
             cmd.Parameters.AddWithValue("@code", code);

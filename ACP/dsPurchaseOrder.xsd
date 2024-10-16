@@ -57,6 +57,9 @@
               <Mapping SourceColumn="retailUnit" DataSetColumn="retailUnit" />
               <Mapping SourceColumn="retailPrice" DataSetColumn="retailPrice" />
               <Mapping SourceColumn="netAmount" DataSetColumn="netAmount" />
+              <Mapping SourceColumn="orderedBy" DataSetColumn="orderedBy" />
+              <Mapping SourceColumn="ApprovedBy" DataSetColumn="ApprovedBy" />
+              <Mapping SourceColumn="Fullname" DataSetColumn="Fullname" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -68,7 +71,7 @@
   <xs:element name="dsPurchaseOrder" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="dsPurchaseOrder" msprop:Generator_UserDSName="dsPurchaseOrder">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="sp_reportPO" msprop:Generator_TableClassName="sp_reportPODataTable" msprop:Generator_TableVarName="tablesp_reportPO" msprop:Generator_TablePropName="sp_reportPO" msprop:Generator_RowDeletingName="sp_reportPORowDeleting" msprop:Generator_RowChangingName="sp_reportPORowChanging" msprop:Generator_RowEvHandlerName="sp_reportPORowChangeEventHandler" msprop:Generator_RowDeletedName="sp_reportPORowDeleted" msprop:Generator_UserTableName="sp_reportPO" msprop:Generator_RowChangedName="sp_reportPORowChanged" msprop:Generator_RowEvArgName="sp_reportPORowChangeEvent" msprop:Generator_RowClassName="sp_reportPORow">
+        <xs:element name="sp_reportPO" msprop:Generator_TableClassName="sp_reportPODataTable" msprop:Generator_TableVarName="tablesp_reportPO" msprop:Generator_RowChangedName="sp_reportPORowChanged" msprop:Generator_TablePropName="sp_reportPO" msprop:Generator_RowDeletingName="sp_reportPORowDeleting" msprop:Generator_RowChangingName="sp_reportPORowChanging" msprop:Generator_RowEvHandlerName="sp_reportPORowChangeEventHandler" msprop:Generator_RowDeletedName="sp_reportPORowDeleted" msprop:Generator_RowClassName="sp_reportPORow" msprop:Generator_UserTableName="sp_reportPO" msprop:Generator_RowEvArgName="sp_reportPORowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="orderNo" msprop:Generator_ColumnVarNameInTable="columnorderNo" msprop:Generator_ColumnPropNameInRow="orderNo" msprop:Generator_ColumnPropNameInTable="orderNoColumn" msprop:Generator_UserColumnName="orderNo" minOccurs="0">
@@ -220,6 +223,27 @@
               </xs:element>
               <xs:element name="retailPrice" msprop:Generator_ColumnVarNameInTable="columnretailPrice" msprop:Generator_ColumnPropNameInRow="retailPrice" msprop:Generator_ColumnPropNameInTable="retailPriceColumn" msprop:Generator_UserColumnName="retailPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="netAmount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnetAmount" msprop:Generator_ColumnPropNameInRow="netAmount" msprop:Generator_ColumnPropNameInTable="netAmountColumn" msprop:Generator_UserColumnName="netAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="orderedBy" msprop:Generator_ColumnVarNameInTable="columnorderedBy" msprop:Generator_ColumnPropNameInRow="orderedBy" msprop:Generator_ColumnPropNameInTable="orderedByColumn" msprop:Generator_UserColumnName="orderedBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ApprovedBy" msprop:Generator_ColumnVarNameInTable="columnApprovedBy" msprop:Generator_ColumnPropNameInRow="ApprovedBy" msprop:Generator_ColumnPropNameInTable="ApprovedByColumn" msprop:Generator_UserColumnName="ApprovedBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fullname" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFullname" msprop:Generator_ColumnPropNameInRow="Fullname" msprop:Generator_ColumnPropNameInTable="FullnameColumn" msprop:Generator_UserColumnName="Fullname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="102" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

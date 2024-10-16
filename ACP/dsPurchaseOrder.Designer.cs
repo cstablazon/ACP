@@ -349,6 +349,12 @@ namespace ACP {
             
             private global::System.Data.DataColumn columnnetAmount;
             
+            private global::System.Data.DataColumn columnorderedBy;
+            
+            private global::System.Data.DataColumn columnApprovedBy;
+            
+            private global::System.Data.DataColumn columnFullname;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public sp_reportPODataTable() {
@@ -664,6 +670,30 @@ namespace ACP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn orderedByColumn {
+                get {
+                    return this.columnorderedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ApprovedByColumn {
+                get {
+                    return this.columnApprovedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FullnameColumn {
+                get {
+                    return this.columnFullname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -734,7 +764,10 @@ namespace ACP {
                         decimal costPrice, 
                         string retailUnit, 
                         decimal retailPrice, 
-                        decimal netAmount) {
+                        decimal netAmount, 
+                        string orderedBy, 
+                        string ApprovedBy, 
+                        string Fullname) {
                 sp_reportPORow rowsp_reportPORow = ((sp_reportPORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         orderNo,
@@ -771,7 +804,10 @@ namespace ACP {
                         costPrice,
                         retailUnit,
                         retailPrice,
-                        netAmount};
+                        netAmount,
+                        orderedBy,
+                        ApprovedBy,
+                        Fullname};
                 rowsp_reportPORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsp_reportPORow);
                 return rowsp_reportPORow;
@@ -829,6 +865,9 @@ namespace ACP {
                 this.columnretailUnit = base.Columns["retailUnit"];
                 this.columnretailPrice = base.Columns["retailPrice"];
                 this.columnnetAmount = base.Columns["netAmount"];
+                this.columnorderedBy = base.Columns["orderedBy"];
+                this.columnApprovedBy = base.Columns["ApprovedBy"];
+                this.columnFullname = base.Columns["Fullname"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -904,6 +943,12 @@ namespace ACP {
                 base.Columns.Add(this.columnretailPrice);
                 this.columnnetAmount = new global::System.Data.DataColumn("netAmount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnetAmount);
+                this.columnorderedBy = new global::System.Data.DataColumn("orderedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnorderedBy);
+                this.columnApprovedBy = new global::System.Data.DataColumn("ApprovedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnApprovedBy);
+                this.columnFullname = new global::System.Data.DataColumn("Fullname", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFullname);
                 this.columnorderNo.MaxLength = 10;
                 this.columnSKU.MaxLength = 10;
                 this.columnBarcode.AllowDBNull = false;
@@ -932,6 +977,10 @@ namespace ACP {
                 this.columnpoUnit.MaxLength = 50;
                 this.columnretailUnit.MaxLength = 50;
                 this.columnnetAmount.ReadOnly = true;
+                this.columnorderedBy.MaxLength = 50;
+                this.columnApprovedBy.MaxLength = 50;
+                this.columnFullname.ReadOnly = true;
+                this.columnFullname.MaxLength = 102;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1624,6 +1673,54 @@ namespace ACP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string orderedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tablesp_reportPO.orderedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'orderedBy\' in table \'sp_reportPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesp_reportPO.orderedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ApprovedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tablesp_reportPO.ApprovedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ApprovedBy\' in table \'sp_reportPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesp_reportPO.ApprovedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Fullname {
+                get {
+                    try {
+                        return ((string)(this[this.tablesp_reportPO.FullnameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Fullname\' in table \'sp_reportPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesp_reportPO.FullnameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsorderNoNull() {
                 return this.IsNull(this.tablesp_reportPO.orderNoColumn);
             }
@@ -2017,6 +2114,42 @@ namespace ACP {
             public void SetnetAmountNull() {
                 this[this.tablesp_reportPO.netAmountColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsorderedByNull() {
+                return this.IsNull(this.tablesp_reportPO.orderedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetorderedByNull() {
+                this[this.tablesp_reportPO.orderedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsApprovedByNull() {
+                return this.IsNull(this.tablesp_reportPO.ApprovedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetApprovedByNull() {
+                this[this.tablesp_reportPO.ApprovedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFullnameNull() {
+                return this.IsNull(this.tablesp_reportPO.FullnameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFullnameNull() {
+                this[this.tablesp_reportPO.FullnameColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -2213,6 +2346,9 @@ namespace ACP.dsPurchaseOrderTableAdapters {
             tableMapping.ColumnMappings.Add("retailUnit", "retailUnit");
             tableMapping.ColumnMappings.Add("retailPrice", "retailPrice");
             tableMapping.ColumnMappings.Add("netAmount", "netAmount");
+            tableMapping.ColumnMappings.Add("orderedBy", "orderedBy");
+            tableMapping.ColumnMappings.Add("ApprovedBy", "ApprovedBy");
+            tableMapping.ColumnMappings.Add("Fullname", "Fullname");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

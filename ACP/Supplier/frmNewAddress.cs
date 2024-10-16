@@ -30,6 +30,7 @@ namespace ACP
                 if(Id.button == "Create")
                 {
                     supClass.createUpdateAddress("addressDIR", "Create", null, txtInfo.ToTitleCase(txtAddress.Text), Id.suppID, txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchAddress();
                     disableAndClear();
 
@@ -37,6 +38,7 @@ namespace ACP
                 else if(Id.button == "Update")
                 {
                     supClass.createUpdateAddress("addressDIR", "Update", Id.addressID, txtInfo.ToTitleCase(txtAddress.Text), "", txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
+                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchAddress();
                     disableAndClear();
                 }

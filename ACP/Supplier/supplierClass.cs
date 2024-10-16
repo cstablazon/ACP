@@ -165,10 +165,6 @@ namespace ACP
         public void createUpdateSupplier(string tableName, string action, string suppID, string itemTaxID, int? payID, int? sGroupID, string name, string rType, string agent, string RID, bool isDistributor, bool isActive, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -187,8 +183,7 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery(); 
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            
             conn.Close();
         }
         //Update supplier/distributor/principal
@@ -216,10 +211,10 @@ namespace ACP
         public void deleteSupplier(string tableName, string action, string suppID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -228,8 +223,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@suppID", suppID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
     //End of Supplier CRUD
@@ -239,10 +234,10 @@ namespace ACP
         public void createUpdateAddress(string tableName, string action, int? addressID, string address, string suppID, string city, string province, string purpose, bool isPrimary, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -258,18 +253,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deleteAddress(string tableName, string action, int addressID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -278,8 +273,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@addressID", addressID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
     //End of address CRUD
@@ -289,10 +284,10 @@ namespace ACP
         public void createUpdateContact(string tableName, string action, int? contactID, string TID, int? typeID, string contactDesc, bool isPrimary, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -306,18 +301,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deleteContact(string tableName, string action, int contactID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -326,8 +321,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@contactID", contactID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
     //End of contact CRUD
@@ -336,10 +331,10 @@ namespace ACP
         public void createUpdateContactType(string tableName, string action, int? typeID, string contactTypeDesc, int? userID)
         {
             SqlConnection conn = db.getConnection(); 
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -350,18 +345,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deleteContactType(string tableName, string action, int typeID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -370,8 +365,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@typeID", typeID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
     //End of contact Type CRUD
@@ -384,10 +379,10 @@ namespace ACP
         public void createUpdatePaymentTerm(string tableName, string action, int? payID, string payDesc, string days, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -398,18 +393,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@days", days);
             cmd.Parameters.AddWithValue("@userID", userID);
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deletePaymentTerm(string tableName, string action, int payID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -418,8 +413,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@payID", payID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
         //End of payment term CRUD
@@ -429,10 +424,10 @@ namespace ACP
         public void createUpdateItemTax(string tableName, string action, string itemtaxID, string taxID, string taxDesc, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -444,18 +439,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deleteItemTax(string tableName, string action, string itemtaxID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -464,8 +459,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@itemtaxID", itemtaxID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 //END OF ITEMSALESTAXGROUP
@@ -474,10 +469,10 @@ namespace ACP
         public void createUpdateItemTaxSetup(string tableName, string action, int SID, string itemtaxID, string name, decimal percent, int? userID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -490,18 +485,18 @@ namespace ACP
             cmd.Parameters.AddWithValue("@userID", userID);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 
         public void deleteItemTaxSetup(string tableName, string action, int SID)
         {
             SqlConnection conn = db.getConnection();
-            conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
-            {
-                printOutput += e.Message;
-            };
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
             conn.Open();
             SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -510,8 +505,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@SID", SID);
 
             cmd.ExecuteScalar();
-            MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            printOutput = "";
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
             conn.Close();
         }
 //END OF TAXSETUP CRUD

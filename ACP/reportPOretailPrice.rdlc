@@ -370,7 +370,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2090,7 +2089,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
-          <Top>0in</Top>
           <Left>7.02128in</Left>
           <Height>0.1875in</Height>
           <Width>0.84373in</Width>
@@ -2112,7 +2110,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>LAO, SONNY T.</Value>
+                  <Value>=First(Fields!ApprovedBy.Value, "retailPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2292,7 +2290,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Felisida, Anamarie Valenzuela</Value>
+                  <Value>=First(Fields!orderedBy.Value, "retailPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2328,7 +2326,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Edaño, Judy Lynn</Value>
+                  <Value>=First(Fields!Fullname.Value, "retailPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2525,6 +2523,18 @@
         <Field Name="netAmount">
           <DataField>netAmount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="orderedBy">
+          <DataField>orderedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ApprovedBy">
+          <DataField>ApprovedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fullname">
+          <DataField>Fullname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

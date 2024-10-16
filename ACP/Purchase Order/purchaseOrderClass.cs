@@ -48,7 +48,7 @@ namespace ACP
         }
 
 //CRUD
-        public void createUpdatePurchaseOrder(string action, string orderNo, string poType, int modID, string poolID, decimal? seasonalDiscount, int delAddressID, DateTime? deliveryDate, DateTime? cancelDate, string status, string remarks, int? userID)
+        public void createUpdatePurchaseOrder(string action, string orderNo, string poType, int modID, string poolID, decimal? seasonalDiscount, int delAddressID, DateTime? deliveryDate, DateTime? cancelDate, string status, string remarks, string orderedBy, string approvedBy, int? userID)
         {
             SqlConnection conn = db.getConnection();
             conn.Open();

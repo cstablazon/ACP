@@ -26,7 +26,7 @@ namespace ACP
         public void newItems()
         {
             dgvNewItems.Columns.Clear();
-            DataTable dt = po.fetchProductLine("sp_purchaseOrderOperations", "purchaseOrder", "fetchProductLine", Id.suppID, txtDepartment.Text);
+            DataTable dt = po.fetchProductLine("sp_purchaseOrder", "", "fetchProductLine", Id.suppID, txtDepartment.Text);
 
             
             //DataTable catDT = po.fetchCategoryHierarchy("sp_purchaseOrderOperations", "categoryHierarchy", "code", null, txtDepartment.Text);

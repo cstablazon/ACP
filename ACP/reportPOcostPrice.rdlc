@@ -2186,7 +2186,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>LAO, SONNY T.</Value>
+                  <Value>=First(Fields!ApprovedBy.Value, "costPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2366,7 +2366,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Felisida, Anamarie Valenzuela</Value>
+                  <Value>=First(Fields!orderedBy.Value, "costPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2402,7 +2402,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Edaño, Judy Lynn</Value>
+                  <Value>=First(Fields!Fullname.Value, "costPrice")</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
                     <FontSize>8pt</FontSize>
@@ -2598,6 +2598,18 @@
         <Field Name="netAmount">
           <DataField>netAmount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="orderedBy">
+          <DataField>orderedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ApprovedBy">
+          <DataField>ApprovedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fullname">
+          <DataField>Fullname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

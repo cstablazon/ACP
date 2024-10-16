@@ -102,26 +102,13 @@ namespace ACP
 
         private void txtUsername_Leave(object sender, EventArgs e)
         {
-            if(txtUsername.Text.Equals(""))
+            if (string.IsNullOrEmpty(txtUsername.Text))
             {
-                pName = "uNameError";
-                oW = txtUsername.Size.Width;
-                oH = txtUsername.Size.Height;
-                x = txtUsername.Location.X - 2;
-                y = txtUsername.Location.Y - 2;
-                w = oW + 4;
-                h = oH + 4;
-                Controls.RemoveByKey("uNameError");
-                redBorder();
-                //txtUsername.BorderStyle = BorderStyle.None;
-                //txtUsername.Multiline = true;
-                txtUsername.Size = new System.Drawing.Size(oW, oH);
+                ControlUtility.ApplyRedBorder(txtUsername, "uNameError");
             }
             else
             {
-                Controls.RemoveByKey("uNameError");
-                //txtUsername.Multiline = false;
-                //txtUsername.BorderStyle = BorderStyle.Fixed3D;
+                ControlUtility.ClearRedBorder(txtUsername, "uNameError");
             }
         }
 

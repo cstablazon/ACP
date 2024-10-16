@@ -93,7 +93,13 @@ namespace ACP
 
         private void frmAddSupplier_Load(object sender, EventArgs e)
         {
-
+            if(Id.button == "Create")
+            {
+                cmbGroup.Text = "";
+                cmbPayTerms.Text = "";
+                cmbType.Text = "";
+                cmbItemTax.Text = "";
+            }
         }
         public void clear()
         {
@@ -142,41 +148,58 @@ namespace ACP
             {
                 if (Id.button.Equals("Create"))
                 {
-                    if (txtSupCode.BorderStyle == BorderStyle.None && txtName.BorderStyle == BorderStyle.None)
+                    if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
                     {
-                        MessageBox.Show("Supplier already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtSupCode.Focus();
                     }
-                    else if (txtSupCode.BorderStyle == BorderStyle.None && txtName.BorderStyle == BorderStyle.Fixed3D)
+                    else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
                     {
-                        MessageBox.Show("Supplier code already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtSupCode.Focus();
                     }
-                    else if (txtSupCode.BorderStyle == BorderStyle.Fixed3D && txtName.BorderStyle == BorderStyle.None)
+                    else if (string.IsNullOrEmpty(cmbItemTax.Text) || string.IsNullOrWhiteSpace(cmbItemTax.Text))
                     {
-                        MessageBox.Show("Supplier name already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtName.Focus();
+                        MessageBox.Show("Sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbItemTax.Focus();
+                    }
+                    else if (string.IsNullOrEmpty(cmbType.Text) || string.IsNullOrWhiteSpace(cmbType.Text))
+                    {
+                        MessageBox.Show("Record type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbType.Focus();
+                    }
+                    else if (string.IsNullOrEmpty(cmbGroup.Text) || string.IsNullOrWhiteSpace(cmbGroup.Text))
+                    {
+                        MessageBox.Show("Group type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbGroup.Focus();
                     }
                     else
                     {
-                        string itemTax = cmbItemTax.SelectedValue.ToString();
-                        int? payID;
-                        int? sGroupID;
-                        if (!string.IsNullOrEmpty(cmbPayTerms.Text) || !string.IsNullOrEmpty(cmbGroup.Text) || !string.IsNullOrWhiteSpace(cmbPayTerms.Text) || !string.IsNullOrWhiteSpace(cmbGroup.Text))
+                        if (!db.suppliers.Any(a => a.suppID == txtSupCode.Text))
                         {
-                            payID = Convert.ToInt32(cmbPayTerms.SelectedValue); 
-                            sGroupID = Convert.ToInt32(cmbGroup.SelectedValue);
+                            string itemTax = cmbItemTax.SelectedValue.ToString();
+                            int? payID;
+                            int? sGroupID;
+                            if (!string.IsNullOrEmpty(cmbPayTerms.Text) || !string.IsNullOrEmpty(cmbGroup.Text) || !string.IsNullOrWhiteSpace(cmbPayTerms.Text) || !string.IsNullOrWhiteSpace(cmbGroup.Text))
+                            {
+                                payID = Convert.ToInt32(cmbPayTerms.SelectedValue);
+                                sGroupID = Convert.ToInt32(cmbGroup.SelectedValue);
+                            }
+                            else
+                            {
+                                payID = null;
+                                sGroupID = null;
+                            }
+                            supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, itemTax, payID, sGroupID, txtName.Text, txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text), null, true, true, Id.userID);
+
+                            MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
+                            this.Hide();
                         }
                         else
                         {
-                            payID = null;
-                            sGroupID = null;
+                            MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, itemTax, payID, sGroupID, txtName.Text, txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text), null, true, true, Id.userID);
-
-                        this.DialogResult = DialogResult.OK;
-                        this.Hide();
-
                     }
                 }
                 else if (Id.button.Equals("Update"))
@@ -194,17 +217,55 @@ namespace ACP
                         payID = null;
                         sGroupID = null;
                     }
-                    DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
-                    foreach(DataRow row in dt.Rows)
+                    if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
                     {
-                        suppRID = row["RID"].ToString();
-                        isDistributor = Convert.ToBoolean(row["isDistributor"]);
-                        isActive = Convert.ToBoolean(row["isActive"]);
-                        userID = Convert.ToInt32(row["userID"]);
+                        MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSupCode.Focus();
                     }
-                    supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text, itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text), suppRID, isDistributor, isActive, userID);
-                    this.DialogResult = DialogResult.OK;
-                    this.Hide();
+                    else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
+                    {
+                        MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSupCode.Focus();
+                    }
+                    else if (string.IsNullOrEmpty(cmbItemTax.Text) || string.IsNullOrWhiteSpace(cmbItemTax.Text))
+                    {
+                        MessageBox.Show("Sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbItemTax.Focus();
+                    }
+                    else if (string.IsNullOrEmpty(cmbType.Text) || string.IsNullOrWhiteSpace(cmbType.Text))
+                    {
+                        MessageBox.Show("Record type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbType.Focus();
+                    }
+                    else if (string.IsNullOrEmpty(cmbGroup.Text) || string.IsNullOrWhiteSpace(cmbGroup.Text))
+                    {
+                        MessageBox.Show("Group type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmbGroup.Focus();
+                    }
+                    else
+                    {
+                        var objExcept = db.suppliers.Where(a => a.suppID == Id.suppID);
+                        if (!db.suppliers.Except(objExcept).Any(a => a.suppID == txtSupCode.Text))
+                        {
+                            DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                suppRID = row["RID"].ToString();
+                                isDistributor = Convert.ToBoolean(row["isDistributor"]);
+                                isActive = Convert.ToBoolean(row["isActive"]);
+                                userID = Convert.ToInt32(row["userID"]);
+                            }
+                            supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text, itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text), suppRID, isDistributor, isActive, userID);
+
+                            MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
                 }
             }
         }
@@ -455,11 +516,12 @@ namespace ACP
 
         private void txtSupCode_MouseHover(object sender, EventArgs e)
         {
+            var objExcept = db.suppliers.Where(a => a.suppID == Id.suppID);
             if (txtSupCode.Text.Equals(""))
             {
                 toolTip1.Show("Supplier ID is required", txtSupCode);
             }
-            else if (db.suppliers.Any(a => a.suppID == txtSupCode.Text))
+            else if (db.suppliers.Except(objExcept).Any(a => a.suppID == txtSupCode.Text))
             {
                 toolTip1.Show("Supplier ID already in use", txtSupCode);
             }

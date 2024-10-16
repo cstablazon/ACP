@@ -147,7 +147,7 @@ namespace ACP
                         payID = null;
                     }
                     supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, null, payID, null, txtInfo.ToTitleCase(txtName.Text), null, txtInfo.ToTitleCase(txtAgent.Text), txtDistriID.Text, false, true, Id.userID);
-
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchPrincipal();
                     autoInc();
                     noPrincipal();
@@ -187,7 +187,7 @@ namespace ACP
                                 userID = Convert.ToInt32(row["userID"]);
                             }
                             supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text, itemTaxId, paytermId, suppGroupId, txtInfo.ToTitleCase(txtName.Text), suppRtype, txtInfo.ToTitleCase(txtAgent.Text), txtDistriID.Text, isDistributor, isActive, userID);
-
+                            MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                             this.Hide();
                         }
@@ -206,7 +206,7 @@ namespace ACP
                             //objUpdate.payID = payID;
                             objUpdate.name = char.ToUpper(txtName.Text[0]) + txtName.Text.Substring(1);
                             objUpdate.agent = agent;
-
+                            MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             db.SaveChanges();
                             fetchPrincipal();
                             txtName.Clear();

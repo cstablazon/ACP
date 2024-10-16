@@ -106,6 +106,7 @@
     <Compile Include="contactType.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ControlUtility.cs" />
     <Compile Include="C_pool.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>

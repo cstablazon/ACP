@@ -41,34 +41,34 @@
             this.setAsInactiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.header = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.btnContact = new System.Windows.Forms.Button();
+            this.btnAddress = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnAddPrincipal = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnSuppDel = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnNewProd = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbSearchFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddPrincipal = new System.Windows.Forms.Button();
             this.cmbDisplay = new System.Windows.Forms.ComboBox();
             this.lblDisplay = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnSuppDel = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnAddress = new System.Windows.Forms.Button();
-            this.btnContact = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).BeginInit();
             this.cmsStatus.SuspendLayout();
             this.header.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -176,6 +176,177 @@
             this.header.Size = new System.Drawing.Size(1059, 87);
             this.header.TabIndex = 8;
             // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.btnContact);
+            this.panel5.Controls.Add(this.btnAddress);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.btnAddPrincipal);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(352, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(245, 87);
+            this.panel5.TabIndex = 41;
+            // 
+            // btnContact
+            // 
+            this.btnContact.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnContact.Enabled = false;
+            this.btnContact.FlatAppearance.BorderSize = 0;
+            this.btnContact.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnContact.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnContact.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContact.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContact.ForeColor = System.Drawing.Color.Crimson;
+            this.btnContact.Image = ((System.Drawing.Image)(resources.GetObject("btnContact.Image")));
+            this.btnContact.Location = new System.Drawing.Point(169, 4);
+            this.btnContact.Name = "btnContact";
+            this.btnContact.Size = new System.Drawing.Size(65, 56);
+            this.btnContact.TabIndex = 45;
+            this.btnContact.Text = "Contact";
+            this.btnContact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnContact.UseVisualStyleBackColor = true;
+            this.btnContact.Click += new System.EventHandler(this.btnContact_Click);
+            // 
+            // btnAddress
+            // 
+            this.btnAddress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddress.Enabled = false;
+            this.btnAddress.FlatAppearance.BorderSize = 0;
+            this.btnAddress.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAddress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnAddress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddress.ForeColor = System.Drawing.Color.Crimson;
+            this.btnAddress.Image = ((System.Drawing.Image)(resources.GetObject("btnAddress.Image")));
+            this.btnAddress.Location = new System.Drawing.Point(98, 4);
+            this.btnAddress.Name = "btnAddress";
+            this.btnAddress.Size = new System.Drawing.Size(65, 58);
+            this.btnAddress.TabIndex = 41;
+            this.btnAddress.Text = "Address";
+            this.btnAddress.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddress.UseVisualStyleBackColor = true;
+            this.btnAddress.Click += new System.EventHandler(this.btnAddress_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Crimson;
+            this.label4.Location = new System.Drawing.Point(51, 65);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(146, 17);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Additional Information";
+            // 
+            // btnAddPrincipal
+            // 
+            this.btnAddPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddPrincipal.Enabled = false;
+            this.btnAddPrincipal.FlatAppearance.BorderSize = 0;
+            this.btnAddPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAddPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnAddPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPrincipal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPrincipal.ForeColor = System.Drawing.Color.Crimson;
+            this.btnAddPrincipal.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPrincipal.Image")));
+            this.btnAddPrincipal.Location = new System.Drawing.Point(5, 4);
+            this.btnAddPrincipal.Name = "btnAddPrincipal";
+            this.btnAddPrincipal.Size = new System.Drawing.Size(87, 56);
+            this.btnAddPrincipal.TabIndex = 44;
+            this.btnAddPrincipal.Text = "Principal list";
+            this.btnAddPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddPrincipal.UseVisualStyleBackColor = true;
+            this.btnAddPrincipal.Click += new System.EventHandler(this.btnAddPrincipal_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.btnSuppDel);
+            this.panel4.Controls.Add(this.btnEdit);
+            this.panel4.Controls.Add(this.btnRefresh);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(145, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(207, 87);
+            this.panel4.TabIndex = 39;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Crimson;
+            this.label3.Location = new System.Drawing.Point(78, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 17);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Actions";
+            // 
+            // btnSuppDel
+            // 
+            this.btnSuppDel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSuppDel.Enabled = false;
+            this.btnSuppDel.FlatAppearance.BorderSize = 0;
+            this.btnSuppDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSuppDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSuppDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSuppDel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuppDel.ForeColor = System.Drawing.Color.Crimson;
+            this.btnSuppDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSuppDel.Image")));
+            this.btnSuppDel.Location = new System.Drawing.Point(63, 3);
+            this.btnSuppDel.Name = "btnSuppDel";
+            this.btnSuppDel.Size = new System.Drawing.Size(60, 56);
+            this.btnSuppDel.TabIndex = 39;
+            this.btnSuppDel.Text = "\r\nDelete";
+            this.btnSuppDel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSuppDel.UseVisualStyleBackColor = true;
+            this.btnSuppDel.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.Enabled = false;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.ForeColor = System.Drawing.Color.Crimson;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEdit.Location = new System.Drawing.Point(7, 2);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(50, 56);
+            this.btnEdit.TabIndex = 38;
+            this.btnEdit.Text = "\r\nEdit";
+            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.Crimson;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(129, 4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(65, 56);
+            this.btnRefresh.TabIndex = 40;
+            this.btnRefresh.Text = "\r\nRefresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -270,26 +441,6 @@
             this.label1.Text = "Search filter:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnAddPrincipal
-            // 
-            this.btnAddPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddPrincipal.Enabled = false;
-            this.btnAddPrincipal.FlatAppearance.BorderSize = 0;
-            this.btnAddPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnAddPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnAddPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPrincipal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPrincipal.ForeColor = System.Drawing.Color.Crimson;
-            this.btnAddPrincipal.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPrincipal.Image")));
-            this.btnAddPrincipal.Location = new System.Drawing.Point(5, 4);
-            this.btnAddPrincipal.Name = "btnAddPrincipal";
-            this.btnAddPrincipal.Size = new System.Drawing.Size(87, 56);
-            this.btnAddPrincipal.TabIndex = 44;
-            this.btnAddPrincipal.Text = "Principal list";
-            this.btnAddPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAddPrincipal.UseVisualStyleBackColor = true;
-            this.btnAddPrincipal.Click += new System.EventHandler(this.btnAddPrincipal_Click);
-            // 
             // cmbDisplay
             // 
             this.cmbDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -344,157 +495,6 @@
             this.txtSearch.TabIndex = 41;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.ForeColor = System.Drawing.Color.Crimson;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(129, 4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(65, 56);
-            this.btnRefresh.TabIndex = 40;
-            this.btnRefresh.Text = "\r\nRefresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnSuppDel
-            // 
-            this.btnSuppDel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSuppDel.Enabled = false;
-            this.btnSuppDel.FlatAppearance.BorderSize = 0;
-            this.btnSuppDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnSuppDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnSuppDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuppDel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSuppDel.ForeColor = System.Drawing.Color.Crimson;
-            this.btnSuppDel.Image = ((System.Drawing.Image)(resources.GetObject("btnSuppDel.Image")));
-            this.btnSuppDel.Location = new System.Drawing.Point(63, 3);
-            this.btnSuppDel.Name = "btnSuppDel";
-            this.btnSuppDel.Size = new System.Drawing.Size(60, 56);
-            this.btnSuppDel.TabIndex = 39;
-            this.btnSuppDel.Text = "\r\nDelete";
-            this.btnSuppDel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSuppDel.UseVisualStyleBackColor = true;
-            this.btnSuppDel.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.Enabled = false;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.ForeColor = System.Drawing.Color.Crimson;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEdit.Location = new System.Drawing.Point(7, 2);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(50, 56);
-            this.btnEdit.TabIndex = 38;
-            this.btnEdit.Text = "\r\nEdit";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.btnSuppDel);
-            this.panel4.Controls.Add(this.btnEdit);
-            this.panel4.Controls.Add(this.btnRefresh);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(145, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(207, 87);
-            this.panel4.TabIndex = 39;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Crimson;
-            this.label3.Location = new System.Drawing.Point(78, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 17);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Actions";
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.btnContact);
-            this.panel5.Controls.Add(this.btnAddress);
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.btnAddPrincipal);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(352, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(245, 87);
-            this.panel5.TabIndex = 41;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Crimson;
-            this.label4.Location = new System.Drawing.Point(51, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(146, 17);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Additional Information";
-            // 
-            // btnAddress
-            // 
-            this.btnAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddress.Enabled = false;
-            this.btnAddress.FlatAppearance.BorderSize = 0;
-            this.btnAddress.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnAddress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnAddress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddress.ForeColor = System.Drawing.Color.Crimson;
-            this.btnAddress.Image = ((System.Drawing.Image)(resources.GetObject("btnAddress.Image")));
-            this.btnAddress.Location = new System.Drawing.Point(98, 4);
-            this.btnAddress.Name = "btnAddress";
-            this.btnAddress.Size = new System.Drawing.Size(65, 58);
-            this.btnAddress.TabIndex = 41;
-            this.btnAddress.Text = "Address";
-            this.btnAddress.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAddress.UseVisualStyleBackColor = true;
-            this.btnAddress.Click += new System.EventHandler(this.btnAddress_Click);
-            // 
-            // btnContact
-            // 
-            this.btnContact.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnContact.Enabled = false;
-            this.btnContact.FlatAppearance.BorderSize = 0;
-            this.btnContact.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnContact.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnContact.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContact.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContact.ForeColor = System.Drawing.Color.Crimson;
-            this.btnContact.Image = ((System.Drawing.Image)(resources.GetObject("btnContact.Image")));
-            this.btnContact.Location = new System.Drawing.Point(169, 4);
-            this.btnContact.Name = "btnContact";
-            this.btnContact.Size = new System.Drawing.Size(65, 56);
-            this.btnContact.TabIndex = 45;
-            this.btnContact.Text = "Contact";
-            this.btnContact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnContact.UseVisualStyleBackColor = true;
-            this.btnContact.Click += new System.EventHandler(this.btnContact_Click);
-            // 
             // frmSupplierMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,12 +516,12 @@
             this.cmsStatus.ResumeLayout(false);
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

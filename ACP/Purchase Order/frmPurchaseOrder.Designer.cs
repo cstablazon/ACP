@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPurchaseOrder));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -53,18 +52,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dgvPO = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
-            this.pLines = new System.Windows.Forms.Panel();
-            this.dgvLines = new System.Windows.Forms.DataGridView();
-            this.lineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.costPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.retailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lineDisc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.netAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -73,8 +60,6 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO)).BeginInit();
-            this.pLines.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -353,20 +338,21 @@
             this.dgvPO.AllowUserToDeleteRows = false;
             this.dgvPO.AllowUserToResizeColumns = false;
             this.dgvPO.AllowUserToResizeRows = false;
-            this.dgvPO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvPO.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPO.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPO.BackgroundColor = System.Drawing.Color.White;
             this.dgvPO.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPO.Location = new System.Drawing.Point(0, 154);
+            this.dgvPO.Location = new System.Drawing.Point(0, 153);
             this.dgvPO.MultiSelect = false;
             this.dgvPO.Name = "dgvPO";
             this.dgvPO.ReadOnly = true;
             this.dgvPO.RowHeadersVisible = false;
             this.dgvPO.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPO.Size = new System.Drawing.Size(983, 416);
+            this.dgvPO.Size = new System.Drawing.Size(983, 569);
             this.dgvPO.TabIndex = 14;
             this.dgvPO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO_CellClick);
             this.dgvPO.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPO_CellDoubleClick);
@@ -386,135 +372,11 @@
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // pLines
-            // 
-            this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pLines.Controls.Add(this.dgvLines);
-            this.pLines.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pLines.Location = new System.Drawing.Point(0, 576);
-            this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(994, 158);
-            this.pLines.TabIndex = 15;
-            this.pLines.Visible = false;
-            // 
-            // dgvLines
-            // 
-            this.dgvLines.AllowUserToAddRows = false;
-            this.dgvLines.AllowUserToDeleteRows = false;
-            this.dgvLines.AllowUserToResizeColumns = false;
-            this.dgvLines.AllowUserToResizeRows = false;
-            this.dgvLines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvLines.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvLines.BackgroundColor = System.Drawing.Color.White;
-            this.dgvLines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.lineID,
-            this.barcode,
-            this.productDesc,
-            this.subCategory,
-            this.costUnit,
-            this.costPrice,
-            this.retailPrice,
-            this.lineDisc,
-            this.netAmount,
-            this.remarks});
-            this.dgvLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLines.EnableHeadersVisualStyles = false;
-            this.dgvLines.Location = new System.Drawing.Point(0, 0);
-            this.dgvLines.MultiSelect = false;
-            this.dgvLines.Name = "dgvLines";
-            this.dgvLines.ReadOnly = true;
-            this.dgvLines.RowHeadersVisible = false;
-            this.dgvLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLines.Size = new System.Drawing.Size(992, 156);
-            this.dgvLines.TabIndex = 12;
-            this.dgvLines.Visible = false;
-            // 
-            // lineID
-            // 
-            this.lineID.HeaderText = "Line ID";
-            this.lineID.Name = "lineID";
-            this.lineID.ReadOnly = true;
-            this.lineID.Width = 62;
-            // 
-            // barcode
-            // 
-            this.barcode.HeaderText = "Barcode";
-            this.barcode.Name = "barcode";
-            this.barcode.ReadOnly = true;
-            this.barcode.Width = 73;
-            // 
-            // productDesc
-            // 
-            this.productDesc.HeaderText = "Product Description";
-            this.productDesc.Name = "productDesc";
-            this.productDesc.ReadOnly = true;
-            this.productDesc.Width = 123;
-            // 
-            // subCategory
-            // 
-            this.subCategory.HeaderText = "Sub category";
-            this.subCategory.Name = "subCategory";
-            this.subCategory.ReadOnly = true;
-            this.subCategory.Width = 91;
-            // 
-            // costUnit
-            // 
-            this.costUnit.HeaderText = "Unit";
-            this.costUnit.Name = "costUnit";
-            this.costUnit.ReadOnly = true;
-            this.costUnit.Width = 54;
-            // 
-            // costPrice
-            // 
-            this.costPrice.HeaderText = "Cost price";
-            this.costPrice.Name = "costPrice";
-            this.costPrice.ReadOnly = true;
-            this.costPrice.Width = 77;
-            // 
-            // retailPrice
-            // 
-            this.retailPrice.HeaderText = "Retail price";
-            this.retailPrice.Name = "retailPrice";
-            this.retailPrice.ReadOnly = true;
-            this.retailPrice.Width = 82;
-            // 
-            // lineDisc
-            // 
-            this.lineDisc.HeaderText = "Line disc";
-            this.lineDisc.Name = "lineDisc";
-            this.lineDisc.ReadOnly = true;
-            this.lineDisc.Width = 70;
-            // 
-            // netAmount
-            // 
-            this.netAmount.HeaderText = "Net amount";
-            this.netAmount.Name = "netAmount";
-            this.netAmount.ReadOnly = true;
-            this.netAmount.Width = 86;
-            // 
-            // remarks
-            // 
-            this.remarks.HeaderText = "Remarks";
-            this.remarks.Name = "remarks";
-            this.remarks.ReadOnly = true;
-            this.remarks.Width = 75;
-            // 
             // frmPurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 734);
-            this.Controls.Add(this.pLines);
             this.Controls.Add(this.dgvPO);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.comboBox1);
@@ -539,8 +401,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPO)).EndInit();
-            this.pLines.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -571,18 +431,6 @@
         public System.Windows.Forms.Button btnConfirm;
         public System.Windows.Forms.Button btnPOreport;
         public System.Windows.Forms.Button btnReceive;
-        private System.Windows.Forms.Panel pLines;
-        private System.Windows.Forms.DataGridView dgvLines;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDesc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn costUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn costPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn retailPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineDisc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn netAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remarks;
 
 
     }

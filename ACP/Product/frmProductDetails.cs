@@ -1003,7 +1003,7 @@ namespace ACP
                             {
                                 if (dRow["Barcode"] == Id.barcode)
                                 {
-                                    dRow["Barcode"] = txtBarcode.Text;
+                                    dRow["Barcode"] = txtBarcode.Text; 
                                     dRow["Item model ID"] = itemModelID;
                                     dRow["chargeID"] = chargeID;
                                     dRow["Charge description"] = cmbCharges.Text;

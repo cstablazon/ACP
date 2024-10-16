@@ -44,6 +44,7 @@ namespace ACP
                 if (Id.button.Equals("Create"))
                 {
                     supClass.createUpdateContactType("contactType", "Create", null, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
+                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetch_contactType();
                     refresh();
                     
@@ -51,6 +52,7 @@ namespace ACP
                 else if(Id.button.Equals("Update"))
                 {
                     supClass.createUpdateContactType("contactType", "Update", Id.contactTypeID, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
+                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetch_contactType();
                     refresh();
                 }
