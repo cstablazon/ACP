@@ -1293,17 +1293,37 @@ namespace ACP
             
         }
 
+        //private void tv_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        //{
+        //        var category = (from a in db.hierarchies where a.RID == Id.RIDL select a).FirstOrDefault();
+        //        if(!string.IsNullOrEmpty(category.rType))
+        //        {
+        //            txtCategory.Text = category.code.Trim();
+        //            var dept = db.sp_catValidation("rid", Id.RIDL);
+        //            //txtCategory.Text = dept.subcat_code.Trim();
+        //            txtDepartment.Text = dept.FirstOrDefault().dept_desc;
+        //            ////p.Hide();
+        //            //hideCat = true;
+        //            txtCategory.BorderStyle = BorderStyle.Fixed3D;
+        //            p.Hide();
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Please select under subcategory", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //}
+
         private void tv_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-                var category = (from a in db.hierarchies where a.RID == Id.RIDL select a).SingleOrDefault();
-                if(!string.IsNullOrEmpty(category.rType))
+            var category = (from a in db.hierarchies where a.RID == Id.RIDL select a).FirstOrDefault();
+
+            if (category != null)
+            {
+                if (!string.IsNullOrEmpty(category.rType))
                 {
                     txtCategory.Text = category.code.Trim();
                     var dept = db.sp_catValidation("rid", Id.RIDL);
-                    //txtCategory.Text = dept.subcat_code.Trim();
                     txtDepartment.Text = dept.FirstOrDefault().dept_desc;
-                    ////p.Hide();
-                    //hideCat = true;
                     txtCategory.BorderStyle = BorderStyle.Fixed3D;
                     p.Hide();
                 }
@@ -1311,6 +1331,11 @@ namespace ACP
                 {
                     MessageBox.Show("Please select under subcategory", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Category not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         DataGridView dgvSupplier = new DataGridView();

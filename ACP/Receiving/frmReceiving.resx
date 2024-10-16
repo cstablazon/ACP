@@ -137,6 +137,28 @@
         SUVORK5CYII=
 </value>
   </data>
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOYSURBVFhH7ZZJ
+        TBNRGMeJiRcTb55qTExMPCsoLijgwuJAbV04uEQTYwCXVlmEQguWqIhIgA60FoFCKaQQRcSpoIKy1gXx
+        4FVjTDx48AJU6Q5/36szpqWNBorGRP7JP5M38/J9v7d9byKWtKS5qsncG2/ISjW0K6R9c12duW9ceXTX
+        B8G0HaofdeslsYwPOT9pMhPVplwxLCVpQS47lYDje6N/mrZD9aM2F0gH+ZDz018HiMnn7sXkPzDxzR8A
+        OX8RYIeCG4wv6sfOwp4vMXkPtlKABjkTMugfBaCOU/UhJbflfXVmAswKSVBQQ/Z+X1LBtD23j+AFAQje
+        XdANhew0mrJS0H35cMgEv3NYAD6T2TiQq4fmHINmAtJOZqRTdRD3iw/5oDj1r8HCB+DN5NSj9+pRdBal
+        oS1PSmYlFbdlDHRnkqA9m4gOhTQ8gM1yc+m23E7EKnuDku8seAi2tBhTnBK2nsuYflKK6cfX8O3RFXzt
+        KcHHthxozySGBxCT17gyUm5Kj5Kb3kZndYAcS8QWPvI9JdksJrtVcAxUAm9MxK28TfC+asJn7jr055LD
+        A/BXpLwtKllW9Xaz3IhomRFWQyEZ9fWA5PZhHdiMBDLyJDReYNClOrR4AFS0DpRlSKBVX8SURYWZMcPP
+        5IIHKjMCjql/baAOG4COcLDiJOz9NwISz75uJk+TbxZ0Z5PA8QChHDYA3flO39r/SD7zygD703I4nlX4
+        2s3KE0EjF7woAORKJjNQDudQNdxWPTkFxfC+aIDj6U1g3ITpIR05hkkwZqeCXl7k+g2wMUvcwoecn+j/
+        AIWg/tSe/849ooODQMyMNcE1qrfT0bus9S7Py0av0C+UaRw+5MJl49Sr3CPaCeIOsgTf3KM1t5yjtaxn
+        mI3ju/xbcjzT7HEN1xR5rNo7ntHabtcQmw+ol/GfF0efOfUK5yBb7xm5xXmGa0vcA1Ub6Hv3SI0xsFgJ
+        m7dxejXLII6TIt4S6E1m8fw3KinL58koMUs2opBkdqzZ63mud9C6Qcu2PwA1Bdh2T7I4ABhPXz5pUabZ
+        LEWd9r4yJ9kfBKYlKKm/KcD6htSgWVgQgL/oclCYrwTG0V/udFt1vmJFgbzP6+Aa0kyQ970UgHpdXQo2
+        msXYcnc/tndJEGUWP+ZDhS8KY+NUUhunzCPLcGyiS7GW/xQhqhOvEGkT16yuYjaIapkEEcscEbH7zos0
+        yTv4Lkv6bxUR8R10dHNBYniHTQAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnReceive.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
@@ -210,28 +232,6 @@
         sxP6fvXm/mErT0nXfthKl2SgGLgZhEnmzP1tk0u6ExPj5bmw1uZiTdwVDydNjed25riS0FOFnngQ1gFU
         sKSScHIWMEiAYX/iSvB4R/oX8s4kC1sxJVtRptEYBwcl42sItjIlN/S+TKPxF1LagpGIs/W5AAAAAElF
         TkSuQmCC
-</value>
-  </data>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOYSURBVFhH7ZZJ
-        TBNRGMeJiRcTb55qTExMPCsoLijgwuJAbV04uEQTYwCXVlmEQguWqIhIgA60FoFCKaQQRcSpoIKy1gXx
-        4FVjTDx48AJU6Q5/36szpqWNBorGRP7JP5M38/J9v7d9byKWtKS5qsncG2/ISjW0K6R9c12duW9ceXTX
-        B8G0HaofdeslsYwPOT9pMhPVplwxLCVpQS47lYDje6N/mrZD9aM2F0gH+ZDz018HiMnn7sXkPzDxzR8A
-        OX8RYIeCG4wv6sfOwp4vMXkPtlKABjkTMugfBaCOU/UhJbflfXVmAswKSVBQQ/Z+X1LBtD23j+AFAQje
-        XdANhew0mrJS0H35cMgEv3NYAD6T2TiQq4fmHINmAtJOZqRTdRD3iw/5oDj1r8HCB+DN5NSj9+pRdBal
-        oS1PSmYlFbdlDHRnkqA9m4gOhTQ8gM1yc+m23E7EKnuDku8seAi2tBhTnBK2nsuYflKK6cfX8O3RFXzt
-        KcHHthxozySGBxCT17gyUm5Kj5Kb3kZndYAcS8QWPvI9JdksJrtVcAxUAm9MxK28TfC+asJn7jr055LD
-        A/BXpLwtKllW9Xaz3IhomRFWQyEZ9fWA5PZhHdiMBDLyJDReYNClOrR4AFS0DpRlSKBVX8SURYWZMcPP
-        5IIHKjMCjql/baAOG4COcLDiJOz9NwISz75uJk+TbxZ0Z5PA8QChHDYA3flO39r/SD7zygD703I4nlX4
-        2s3KE0EjF7woAORKJjNQDudQNdxWPTkFxfC+aIDj6U1g3ITpIR05hkkwZqeCXl7k+g2wMUvcwoecn+j/
-        AIWg/tSe/849ooODQMyMNcE1qrfT0bus9S7Py0av0C+UaRw+5MJl49Sr3CPaCeIOsgTf3KM1t5yjtaxn
-        mI3ju/xbcjzT7HEN1xR5rNo7ntHabtcQmw+ol/GfF0efOfUK5yBb7xm5xXmGa0vcA1Ub6Hv3SI0xsFgJ
-        m7dxejXLII6TIt4S6E1m8fw3KinL58koMUs2opBkdqzZ63mud9C6Qcu2PwA1Bdh2T7I4ABhPXz5pUabZ
-        LEWd9r4yJ9kfBKYlKKm/KcD6htSgWVgQgL/oclCYrwTG0V/udFt1vmJFgbzP6+Aa0kyQ970UgHpdXQo2
-        msXYcnc/tndJEGUWP+ZDhS8KY+NUUhunzCPLcGyiS7GW/xQhqhOvEGkT16yuYjaIapkEEcscEbH7zos0
-        yTv4Lkv6bxUR8R10dHNBYniHTQAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPostingReceipt));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dgvReceipt = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dgvLines = new System.Windows.Forms.DataGridView();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.tsPosting = new System.Windows.Forms.ToolStrip();
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
+            this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbCancel = new System.Windows.Forms.ToolStripButton();
+            this.dgvReceipt = new System.Windows.Forms.DataGridView();
             this.orderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +47,8 @@
             this.vanNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateArrived = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cartons = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tsbNew = new System.Windows.Forms.ToolStripButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvLines = new System.Windows.Forms.DataGridView();
             this.lineID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,13 +62,15 @@
             this.disc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.netAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tsPosting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceipt)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).BeginInit();
-            this.tsPosting.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -105,6 +105,50 @@
             this.tabPage3.Text = "Overview";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // tsPosting
+            // 
+            this.tsPosting.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbPrint,
+            this.tsbNew,
+            this.tsbCancel});
+            this.tsPosting.Location = new System.Drawing.Point(3, 3);
+            this.tsPosting.Name = "tsPosting";
+            this.tsPosting.Size = new System.Drawing.Size(971, 25);
+            this.tsPosting.TabIndex = 16;
+            this.tsPosting.Text = "toolStrip1";
+            // 
+            // tsbPrint
+            // 
+            this.tsbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbPrint.Enabled = false;
+            this.tsbPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbPrint.Image")));
+            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPrint.Name = "tsbPrint";
+            this.tsbPrint.Size = new System.Drawing.Size(82, 22);
+            this.tsbPrint.Text = "Preview/Print";
+            // 
+            // tsbNew
+            // 
+            this.tsbNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbNew.Enabled = false;
+            this.tsbNew.Image = ((System.Drawing.Image)(resources.GetObject("tsbNew.Image")));
+            this.tsbNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNew.Name = "tsbNew";
+            this.tsbNew.Size = new System.Drawing.Size(35, 22);
+            this.tsbNew.Text = "New";
+            this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
+            // 
+            // tsbCancel
+            // 
+            this.tsbCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbCancel.Enabled = false;
+            this.tsbCancel.Image = ((System.Drawing.Image)(resources.GetObject("tsbCancel.Image")));
+            this.tsbCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCancel.Name = "tsbCancel";
+            this.tsbCancel.Size = new System.Drawing.Size(47, 22);
+            this.tsbCancel.Text = "Cancel";
+            this.tsbCancel.Click += new System.EventHandler(this.tsbCancel_Click);
+            // 
             // dgvReceipt
             // 
             this.dgvReceipt.AllowUserToAddRows = false;
@@ -136,6 +180,59 @@
             this.dgvReceipt.TabIndex = 15;
             this.dgvReceipt.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceipt_CellClick);
             this.dgvReceipt.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvReceipt_DataBindingComplete);
+            // 
+            // orderNo
+            // 
+            this.orderNo.HeaderText = "Purchase order";
+            this.orderNo.Name = "orderNo";
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.Width = 61;
+            // 
+            // invoice
+            // 
+            this.invoice.HeaderText = "Product receipt";
+            this.invoice.Name = "invoice";
+            this.invoice.Width = 101;
+            // 
+            // orderType
+            // 
+            this.orderType.HeaderText = "Order type";
+            this.orderType.Name = "orderType";
+            this.orderType.Width = 80;
+            // 
+            // acrNo
+            // 
+            this.acrNo.HeaderText = "ACR No.";
+            this.acrNo.Name = "acrNo";
+            this.acrNo.Width = 69;
+            // 
+            // voyageNo
+            // 
+            this.voyageNo.HeaderText = "Voyage No.";
+            this.voyageNo.Name = "voyageNo";
+            this.voyageNo.Width = 83;
+            // 
+            // vanNo
+            // 
+            this.vanNo.HeaderText = "Van No.";
+            this.vanNo.Name = "vanNo";
+            this.vanNo.Width = 51;
+            // 
+            // dateArrived
+            // 
+            this.dateArrived.HeaderText = "Date arrived";
+            this.dateArrived.Name = "dateArrived";
+            this.dateArrived.Width = 87;
+            // 
+            // cartons
+            // 
+            this.cartons.HeaderText = "Cartons";
+            this.cartons.Name = "cartons";
+            this.cartons.Width = 72;
             // 
             // tabPage4
             // 
@@ -192,147 +289,12 @@
             this.dgvLines.TabIndex = 13;
             this.dgvLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLines_DataBindingComplete);
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(829, 426);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(83, 30);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(918, 426);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(79, 30);
-            this.btnClose.TabIndex = 8;
-            this.btnClose.Text = " Cancel";
-            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // tsPosting
-            // 
-            this.tsPosting.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbPrint,
-            this.tsbNew,
-            this.tsbCancel});
-            this.tsPosting.Location = new System.Drawing.Point(3, 3);
-            this.tsPosting.Name = "tsPosting";
-            this.tsPosting.Size = new System.Drawing.Size(971, 25);
-            this.tsPosting.TabIndex = 16;
-            this.tsPosting.Text = "toolStrip1";
-            // 
-            // tsbPrint
-            // 
-            this.tsbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbPrint.Enabled = false;
-            this.tsbPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbPrint.Image")));
-            this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPrint.Name = "tsbPrint";
-            this.tsbPrint.Size = new System.Drawing.Size(82, 22);
-            this.tsbPrint.Text = "Preview/Print";
-            // 
-            // tsbCancel
-            // 
-            this.tsbCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCancel.Enabled = false;
-            this.tsbCancel.Image = ((System.Drawing.Image)(resources.GetObject("tsbCancel.Image")));
-            this.tsbCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCancel.Name = "tsbCancel";
-            this.tsbCancel.Size = new System.Drawing.Size(47, 22);
-            this.tsbCancel.Text = "Cancel";
-            this.tsbCancel.Click += new System.EventHandler(this.tsbCancel_Click);
-            // 
-            // orderNo
-            // 
-            this.orderNo.HeaderText = "Purchase order";
-            this.orderNo.Name = "orderNo";
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.Width = 61;
-            // 
-            // invoice
-            // 
-            this.invoice.HeaderText = "Product receipt";
-            this.invoice.Name = "invoice";
-            this.invoice.Width = 101;
-            // 
-            // orderType
-            // 
-            this.orderType.HeaderText = "Order type";
-            this.orderType.Name = "orderType";
-            this.orderType.Width = 80;
-            // 
-            // acrNo
-            // 
-            this.acrNo.HeaderText = "ACR No.";
-            this.acrNo.Name = "acrNo";
-            this.acrNo.Width = 69;
-            // 
-            // voyageNo
-            // 
-            this.voyageNo.HeaderText = "Voyage No.";
-            this.voyageNo.Name = "voyageNo";
-            this.voyageNo.Width = 83;
-            // 
-            // vanNo
-            // 
-            this.vanNo.HeaderText = "Van No.";
-            this.vanNo.Name = "vanNo";
-            this.vanNo.Width = 51;
-            // 
-            // dateArrived
-            // 
-            this.dateArrived.HeaderText = "Date arrived";
-            this.dateArrived.Name = "dateArrived";
-            this.dateArrived.Width = 87;
-            // 
-            // cartons
-            // 
-            this.cartons.HeaderText = "Cartons";
-            this.cartons.Name = "cartons";
-            this.cartons.Width = 72;
-            // 
-            // tsbNew
-            // 
-            this.tsbNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbNew.Enabled = false;
-            this.tsbNew.Image = ((System.Drawing.Image)(resources.GetObject("tsbNew.Image")));
-            this.tsbNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbNew.Name = "tsbNew";
-            this.tsbNew.Size = new System.Drawing.Size(35, 22);
-            this.tsbNew.Text = "New";
-            this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
-            // 
             // lineID
             // 
             this.lineID.HeaderText = "Line ID";
             this.lineID.Name = "lineID";
             this.lineID.ReadOnly = true;
-            this.lineID.Width = 67;
+            this.lineID.Width = 62;
             // 
             // SKU
             // 
@@ -418,6 +380,44 @@
             this.remarks.ReadOnly = true;
             this.remarks.Width = 75;
             // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(829, 426);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(83, 30);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(132)))), ((int)(((byte)(227)))));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.SlateGray;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(918, 426);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(79, 30);
+            this.btnClose.TabIndex = 8;
+            this.btnClose.Text = " Cancel";
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // frmPostingReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -438,11 +438,11 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tsPosting.ResumeLayout(false);
+            this.tsPosting.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceipt)).EndInit();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLines)).EndInit();
-            this.tsPosting.ResumeLayout(false);
-            this.tsPosting.PerformLayout();
             this.ResumeLayout(false);
 
         }
