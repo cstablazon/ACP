@@ -68,9 +68,9 @@ namespace ACP
             dgvComponents.Columns["qty"].HeaderText = "Quantity";
             dgvComponents.Columns["masterBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvComponents.Columns["prodBarcode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvComponents.Columns["Product description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvComponents.Columns["Product description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvComponents.Columns["qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvComponents.Columns["Retail Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvComponents.Columns["Retail Unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -329,7 +329,7 @@ namespace ACP
                 {
                     foreach(DataRow row in dt.Rows)
                     {
-                        txtProdDesc.Text = row["Product description"].ToString();
+                        txtProdDesc.Text = row["PosDesc"].ToString();
                         txtUOM.Text = row["Retail Unit"].ToString();
                     }
                 }
