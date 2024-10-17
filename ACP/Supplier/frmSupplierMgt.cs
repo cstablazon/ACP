@@ -3,14 +3,16 @@ using System.Data;
 using System.Windows.Forms;
 using System.Linq;
 using System.Drawing;
+using ACP.User;
 
 namespace ACP
 {
     public partial class frmSupplierMgt : Form
     {
-        supplierClass supClass = new supplierClass(); 
+        supplierClass supClass = new supplierClass();
+        UserPermissionManager _userPermission;
         acpEntities db = new acpEntities();
-        public frmSupplierMgt()
+        public frmSupplierMgt(int userId)
         {
             InitializeComponent();
             cmbDisplay.Text = "Distributor";
@@ -18,6 +20,7 @@ namespace ACP
             //fetchRecord();
             Id.globalString = "";
             Id.groupID = "";
+            _userPermission = new UserPermissionManager(userId);
         }
         private void frmSupplierMgt_Load(object sender, EventArgs e)
         {
@@ -84,18 +87,26 @@ namespace ACP
 
         private void btadd_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            frmAddSupplier supplier = new frmAddSupplier();
-
-            DialogResult res = supplier.ShowDialog();
-            if(res == DialogResult.OK)
+            if (_userPermission.CanPerformOperation("Supplier Management Form", "Create"))
             {
-                fetchSupplier();
-                btnEdit.Enabled = false;
-                btnSuppDel.Enabled = false;
-                btnAddress.Enabled = false;
-                btnContact.Enabled = false;
+                Id.button = "Create";
+                frmAddSupplier supplier = new frmAddSupplier();
+
+                DialogResult res = supplier.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    fetchSupplier();
+                    btnEdit.Enabled = false;
+                    btnSuppDel.Enabled = false;
+                    btnAddress.Enabled = false;
+                    btnContact.Enabled = false;
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         
@@ -103,57 +114,65 @@ namespace ACP
         {
             if (dgvSupplier.SelectedRows.Count > 0)
             {
-                Id.button = "Update";
-
-                if (Id.isDistri == true)
+                if (_userPermission.CanPerformOperation("Supplier Management Form", "Update"))
                 {
-                    frmAddSupplier supplier = new frmAddSupplier();
-                    DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        supplier.cmbGroup.Text = row["Group"].ToString();
-                        supplier.cmbPayTerms.Text = row["Payment_term"].ToString();
-                        supplier.txtSupCode.Text = row["Supplier_ID"].ToString();
-                        supplier.cmbType.Text = row["Record_type"].ToString();
-                        supplier.cmbItemTax.Text = row["itemTaxID"].ToString();
-                        supplier.txtName.Text = row["Name"].ToString();
-                        supplier.txtAgent.Text = row["Agent"].ToString();
-                    }
-                    DialogResult res = supplier.ShowDialog();
+                    Id.button = "Update";
 
-                    if (res == DialogResult.OK)
+                    if (Id.isDistri == true)
                     {
-                        fetchSupplier();
-                        btnEdit.Enabled = false;
-                        btnSuppDel.Enabled = false;
-                        btnAddress.Enabled = false;
-                        btnContact.Enabled = false;
-                        dgvSupplier.ClearSelection();
+                        frmAddSupplier supplier = new frmAddSupplier();
+                        DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            supplier.cmbGroup.Text = row["Group"].ToString();
+                            supplier.cmbPayTerms.Text = row["Payment_term"].ToString();
+                            supplier.txtSupCode.Text = row["Supplier_ID"].ToString();
+                            supplier.cmbType.Text = row["Record_type"].ToString();
+                            supplier.cmbItemTax.Text = row["itemTaxID"].ToString();
+                            supplier.txtName.Text = row["Name"].ToString();
+                            supplier.txtAgent.Text = row["Agent"].ToString();
+                        }
+                        DialogResult res = supplier.ShowDialog();
+
+                        if (res == DialogResult.OK)
+                        {
+                            fetchSupplier();
+                            btnEdit.Enabled = false;
+                            btnSuppDel.Enabled = false;
+                            btnAddress.Enabled = false;
+                            btnContact.Enabled = false;
+                            dgvSupplier.ClearSelection();
+                        }
+                    }
+                    else
+                    {
+                        frmPrincipal principal = new frmPrincipal();
+                        DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            principal.tabControl1.TabPages.RemoveAt(0);
+                            principal.txtDistriID.Text = row["RID"].ToString();
+                            principal.txtDistriName.Text = row["Distributor"].ToString();
+                            principal.txtSupCode.Text = row["Supplier_ID"].ToString();
+                            principal.cmbPayTerms.Text = row["Payment_term"].ToString();
+                            principal.txtName.Text = row["Name"].ToString();
+                            principal.txtAgent.Text = row["Agent"].ToString();
+                        }
+                        DialogResult res = principal.ShowDialog();
+                        if (res == DialogResult.OK)
+                        {
+                            fetchSupplier();
+                            btnEdit.Enabled = false;
+                            btnSuppDel.Enabled = false;
+                            dgvSupplier.ClearSelection();
+                        }
                     }
                 }
                 else
                 {
-                    frmPrincipal principal = new frmPrincipal();
-                    DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        principal.tabControl1.TabPages.RemoveAt(0);
-                        principal.txtDistriID.Text = row["RID"].ToString();
-                        principal.txtDistriName.Text = row["Distributor"].ToString();
-                        principal.txtSupCode.Text = row["Supplier_ID"].ToString();
-                        principal.cmbPayTerms.Text = row["Payment_term"].ToString();
-                        principal.txtName.Text = row["Name"].ToString();
-                        principal.txtAgent.Text = row["Agent"].ToString();
-                    }
-                    DialogResult res = principal.ShowDialog();
-                    if(res == DialogResult.OK)
-                    {
-                        fetchSupplier();
-                        btnEdit.Enabled = false;
-                        btnSuppDel.Enabled = false;
-                        dgvSupplier.ClearSelection();
-                    }
+                    MessageBox.Show("You don't have permission to update a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                
             }
         }
 

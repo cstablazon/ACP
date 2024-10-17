@@ -1313,6 +1313,8 @@ namespace ACP
         //        }
         //}
 
+
+
         private void tv_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             var category = (from a in db.hierarchies where a.RID == Id.RIDL select a).FirstOrDefault();
