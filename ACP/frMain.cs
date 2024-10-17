@@ -68,7 +68,7 @@ namespace ACP
                 case "supp":
                     if (_permissionManager.CanOpenForm("Supplier Management Form"))
                     {
-                        frmSupplierMgt sup = new frmSupplierMgt { TopLevel = false };
+                        frmSupplierMgt sup = new frmSupplierMgt(Program.CurrentUserId) { TopLevel = false };
                         pBody.Controls.Clear();
                         pBody.Controls.Add(sup);
                         sup.BringToFront();

@@ -41,6 +41,7 @@ namespace ACP
                 if (loginResult.Success)
                 {
                     MessageBox.Show(string.Format("Welcome, {0} {1}!", loginResult.FirstName, loginResult.LastName));
+                    Program.CurrentUserId = loginResult.UserId;
                     // Create and show the MainForm, passing the login result
                     frMain mainForm = new frMain(loginResult);
                     mainForm.Show();
