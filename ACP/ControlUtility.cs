@@ -36,6 +36,7 @@ namespace ACP
         public static void ClearRedBorder(Control control, string errorKey)
         {
             // Find and remove the red border panel with the given errorKey
+
             var existingPanels = control.Parent.Controls.Find(errorKey, false);
             if (existingPanels.Length > 0)
             {
@@ -52,6 +53,7 @@ namespace ACP
                 TextBox textBox = (TextBox)control;
                 textBox.BorderStyle = BorderStyle.FixedSingle; // Reset TextBox style
             }
+            
         }
     }
 }

@@ -128,7 +128,7 @@ namespace ACP
             {
                 MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (txtName.Text.Equals(""))
+            else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -146,20 +146,29 @@ namespace ACP
                     {
                         payID = null;
                     }
-                    supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, null, payID, null, txtInfo.ToTitleCase(txtName.Text), null, txtInfo.ToTitleCase(txtAgent.Text), txtDistriID.Text, false, true, Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchPrincipal();
-                    autoInc();
-                    noPrincipal();
-                    blankCMB();
-                    txtName.Clear();
-                    txtAgent.Clear();
+
+                    if (db.suppliers.Where(a => a.RID == txtDistriID.Text && a.name == txtName.Text).Any())
+                    {
+                        MessageBox.Show("Principal name under " + txtDistriName.Text + " already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, null, payID, null, txtInfo.ToTitleCase(txtName.Text), null, txtInfo.ToTitleCase(txtAgent.Text), txtDistriID.Text, false, true, Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchPrincipal();
+                        autoInc();
+                        noPrincipal();
+                        blankCMB();
+                        txtName.Clear();
+                        txtAgent.Clear();
+                    }
                 }
                 else if (Id.button.Equals("Update"))
                 {
-                    if (string.IsNullOrEmpty(txtName.Text))
+                    var objExcept = db.suppliers.Where(a => a.suppID == Id.principalID);
+                    if (db.suppliers.Except(objExcept).Where(a => a.RID == txtDistriID.Text && a.name == txtName.Text).Any())
                     {
-                        MessageBox.Show("Name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Principal name under " + txtDistriName.Text + " already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtName.Focus();
                     }
                     else
