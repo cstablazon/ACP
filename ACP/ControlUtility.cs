@@ -33,27 +33,59 @@ namespace ACP
         }
 
         // Static method to remove red border
+        //public static void ClearRedBorder(Control control, string errorKey)
+        //{
+        //    // Find and remove the red border panel with the given errorKey
+
+        //    var existingPanels = control.Parent.Controls.Find(errorKey, false);
+        //    if (existingPanels.Length > 0)
+        //    {
+        //        control.Parent.Controls.Remove(existingPanels[0]); // Remove the first found panel with the errorKey
+        //    }
+
+        //    if (control is ComboBox)
+        //    {
+        //        ComboBox comboBox = (ComboBox)control;
+        //        comboBox.FlatStyle = FlatStyle.Standard; // Reset ComboBox style
+        //    }
+        //    else if (control is TextBox)
+        //    {
+        //        TextBox textBox = (TextBox)control;
+        //        textBox.BorderStyle = BorderStyle.FixedSingle; // Reset TextBox style
+        //    }
+            
+        //}
+
         public static void ClearRedBorder(Control control, string errorKey)
         {
-            // Find and remove the red border panel with the given errorKey
+            // Store the focus state before making changes
+            bool hadFocus = control.Focused;
 
+            // Find and remove the red border panel with the given errorKey
             var existingPanels = control.Parent.Controls.Find(errorKey, false);
             if (existingPanels.Length > 0)
             {
-                control.Parent.Controls.Remove(existingPanels[0]); // Remove the first found panel with the errorKey
+                // Ensure the control stays in front
+                control.BringToFront();
+                control.Parent.Controls.Remove(existingPanels[0]);
             }
 
             if (control is ComboBox)
             {
                 ComboBox comboBox = (ComboBox)control;
-                comboBox.FlatStyle = FlatStyle.Standard; // Reset ComboBox style
+                comboBox.FlatStyle = FlatStyle.Standard;
             }
             else if (control is TextBox)
             {
                 TextBox textBox = (TextBox)control;
-                textBox.BorderStyle = BorderStyle.FixedSingle; // Reset TextBox style
+                textBox.BorderStyle = BorderStyle.FixedSingle;
             }
-            
+
+            // If the control had focus, ensure it maintains proper tab behavior
+            if (hadFocus)
+            {
+                control.Parent.SelectNextControl(control, true, true, true, true);
+            }
         }
     }
 }

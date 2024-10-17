@@ -14,10 +14,12 @@ namespace ACP
     {
         acpEntities db = new acpEntities();
         supplierClass supClass = new supplierClass();
+        UserPermissionManager _userPermission;
         public frmNewContact()
         {
             InitializeComponent();
             contactType();
+            _userPermission = new UserPermissionManager(Program.CurrentUserId);
         }
 
         private void disableAndClear()
@@ -71,8 +73,16 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            isPrimary();
-            createUpdate();
+            if (_userPermission.CanPerformOperation("Contact Management Form", "Create"))
+            {
+                isPrimary();
+                createUpdate();
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void contactType()
@@ -147,32 +157,48 @@ namespace ACP
 
         private void btnConEdit_Click(object sender, EventArgs e)
         {
-            if (dgvCon.SelectedRows.Count > 0)
+            if (_userPermission.CanPerformOperation("Contact Management Form", "Update"))
             {
-                Id.button = "Update";
-                btnCreate.Text = "Update";
+                if (dgvCon.SelectedRows.Count > 0)
+                {
+                    Id.button = "Update";
+                    btnCreate.Text = "Update";
 
-                int rowIndex = dgvCon.SelectedRows[0].Index;
-                Id.contactID = Convert.ToInt32(dgvCon.Rows[rowIndex].Cells["contactID"].Value);
-                cmbCtype.Text = dgvCon.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
-                txtDesc.Text = dgvCon.Rows[rowIndex].Cells["Contact information"].Value.ToString();
-                cbPrimary.Checked = Convert.ToBoolean(dgvCon.Rows[rowIndex].Cells["isPrimary"].Value);
+                    int rowIndex = dgvCon.SelectedRows[0].Index;
+                    Id.contactID = Convert.ToInt32(dgvCon.Rows[rowIndex].Cells["contactID"].Value);
+                    cmbCtype.Text = dgvCon.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
+                    txtDesc.Text = dgvCon.Rows[rowIndex].Cells["Contact information"].Value.ToString();
+                    cbPrimary.Checked = Convert.ToBoolean(dgvCon.Rows[rowIndex].Cells["isPrimary"].Value);
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to update a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnConDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure to delete contact?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (res == DialogResult.Yes)
+            if (_userPermission.CanPerformOperation("Contact Management Form", "Delete"))
             {
-                int contactID = Convert.ToInt32(Id.contactID);
-                supClass.deleteContact("contactDIR", "Delete", Id.contactID);
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetchContact();
-                disableAndClear();
-                btnConEdit.Enabled = false;
-                btnConDelete.Enabled = false;
+                DialogResult res = MessageBox.Show("Are you sure to delete contact?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    int contactID = Convert.ToInt32(Id.contactID);
+                    supClass.deleteContact("contactDIR", "Delete", Id.contactID);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetchContact();
+                    disableAndClear();
+                    btnConEdit.Enabled = false;
+                    btnConDelete.Enabled = false;
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to delete a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void cmbCtype_SelectedIndexChanged(object sender, EventArgs e)

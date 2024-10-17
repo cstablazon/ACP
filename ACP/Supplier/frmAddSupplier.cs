@@ -664,7 +664,7 @@ namespace ACP
             if (Application.OpenForms.OfType<frmPrincipal>().Count() == 1)
                 Application.OpenForms.OfType<frmPrincipal>().First().Close();
 
-            frmPrincipal principal = new frmPrincipal();
+            frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
             principal.txtDistriName.BorderStyle = BorderStyle.Fixed3D;
             this.Hide();
             principal.ShowDialog();

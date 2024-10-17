@@ -42,6 +42,7 @@ namespace ACP
                 {
                     MessageBox.Show(string.Format("Welcome, {0} {1}!", loginResult.FirstName, loginResult.LastName));
                     Program.CurrentUserId = loginResult.UserId;
+                    Id.userID = loginResult.UserId;
                     // Create and show the MainForm, passing the login result
                     frMain mainForm = new frMain(loginResult);
                     mainForm.Show();
@@ -101,17 +102,7 @@ namespace ACP
             Controls.Add(p);
         }
 
-        private void txtUsername_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtUsername.Text))
-            {
-                ControlUtility.ApplyRedBorder(txtUsername, "uNameError");
-            }
-            else
-            {
-                ControlUtility.ClearRedBorder(txtUsername, "uNameError");
-            }
-        }
+       
 
         private void txtUsername_MouseHover(object sender, EventArgs e)
         {
@@ -224,6 +215,18 @@ namespace ACP
             int num = pc.autoInc("SKU", "product");
             string tempNum = string.Format("{0:0000000}", num);
             MessageBox.Show(tempNum);
+        }
+
+        private void txtUsername_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsername.Text))
+            {
+                ControlUtility.ApplyRedBorder(txtUsername, "uNameError");
+            }
+            else
+            {
+                ControlUtility.ClearRedBorder(txtUsername, "uNameError");
+            }
         }
     }
 }

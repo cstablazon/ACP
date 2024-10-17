@@ -146,7 +146,7 @@ namespace ACP
                     }
                     else
                     {
-                        frmPrincipal principal = new frmPrincipal();
+                        frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
                         DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
                         foreach (DataRow row in dt.Rows)
                         {
@@ -237,19 +237,28 @@ namespace ACP
        
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure you want to delete ?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (res == DialogResult.Yes)
+            if(_userPermission.CanPerformOperation("Supplier Management Form", "Delete"))
             {
-                supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
+                DialogResult res = MessageBox.Show("Are you sure you want to delete ?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetchSupplier();
-                btnEdit.Enabled = false;
-                btnSuppDel.Enabled = false;
-                btnAddress.Enabled = false;
-                btnContact.Enabled = false;
+                if (res == DialogResult.Yes)
+                {
+                    supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
+
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetchSupplier();
+                    btnEdit.Enabled = false;
+                    btnSuppDel.Enabled = false;
+                    btnAddress.Enabled = false;
+                    btnContact.Enabled = false;
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to delete a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+            
         }
 
         int x, y;
@@ -460,36 +469,44 @@ namespace ACP
 
         private void btnAddPrincipal_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            Id.param = "mngmtToPrincipal";
-            frmPrincipal principal = new frmPrincipal();
-            principal.txtDistriID.Text = Id.suppID;
-            principal.lblDistriName.Text = Id.distriName;
-            principal.txtDistriName.Text = Id.distriName;
-            //principal.btnChangeDistri.Visible = false;
+            if (_userPermission.CanOpenForm("Principal Management Form"))
+            {
+                Id.button = "Create";
+                Id.param = "mngmtToPrincipal";
+                frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
+                principal.txtDistriID.Text = Id.suppID;
+                principal.lblDistriName.Text = Id.distriName;
+                principal.txtDistriName.Text = Id.distriName;
+                //principal.btnChangeDistri.Visible = false;
 
-            //principal.tabControl1.TabPages.RemoveAt(1);
-            //principal.tabControl1.TabPages.RemoveAt(1);
+                //principal.tabControl1.TabPages.RemoveAt(1);
+                //principal.tabControl1.TabPages.RemoveAt(1);
 
-            principal.btnClear.Location = new Point(769, 15);
-            principal.btnSave.Location = new Point(769, 55);
-            //principal.dgvPrincipal.DataSource = (from a in db.vwPrincipals
-            //                           where a.RID.Equals(Id.suppID)
-            //                           select new
-            //                           {
-            //                               a.Supplier_ID,
-            //                               a.Name,
-            //                               a.Agent,
-            //                               a.Date_created,
-            //                               a.isActive
-            //                           }).ToList();
+                principal.btnClear.Location = new Point(769, 15);
+                principal.btnSave.Location = new Point(769, 55);
+                //principal.dgvPrincipal.DataSource = (from a in db.vwPrincipals
+                //                           where a.RID.Equals(Id.suppID)
+                //                           select new
+                //                           {
+                //                               a.Supplier_ID,
+                //                               a.Name,
+                //                               a.Agent,
+                //                               a.Date_created,
+                //                               a.isActive
+                //                           }).ToList();
 
 
-            principal.ShowDialog();
-            btnEdit.Enabled = false;
-            btnSuppDel.Enabled = false;
-            btnAddress.Enabled = false;
-            btnContact.Enabled = false;
+                principal.ShowDialog();
+                btnEdit.Enabled = false;
+                btnSuppDel.Enabled = false;
+                btnAddress.Enabled = false;
+                btnContact.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to open the form Principal.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void dgvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -651,18 +668,34 @@ namespace ACP
 
         private void btnAddress_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            frmNewAddress address = new frmNewAddress();
-            address.btnCreate.Text = "Create";
-            address.ShowDialog();
+            if (_userPermission.CanOpenForm("Address Management Form"))
+            {
+                Id.button = "Create";
+                frmNewAddress address = new frmNewAddress();
+                address.btnCreate.Text = "Create";
+                address.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to open the form Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnContact_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            frmNewContact contact = new frmNewContact();
-            contact.btnCreate.Text = "Create";
-            contact.ShowDialog();
+            if (_userPermission.CanOpenForm("Contact Management Form"))
+            {
+                Id.button = "Create";
+                frmNewContact contact = new frmNewContact();
+                contact.btnCreate.Text = "Create";
+                contact.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to open the form Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }
