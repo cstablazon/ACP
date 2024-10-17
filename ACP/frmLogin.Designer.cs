@@ -51,8 +51,9 @@
             this.txtUsername.Size = new System.Drawing.Size(260, 25);
             this.txtUsername.TabIndex = 2;
             this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
-            this.txtUsername.Leave += new System.EventHandler(this.txtUsername_Leave);
+            //this.txtUsername.Leave += new System.EventHandler(this.txtUsername_Leave);
             this.txtUsername.MouseHover += new System.EventHandler(this.txtUsername_MouseHover);
+            this.txtUsername.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsername_Validating);
             // 
             // label1
             // 

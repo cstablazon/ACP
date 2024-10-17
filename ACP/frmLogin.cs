@@ -101,17 +101,7 @@ namespace ACP
             Controls.Add(p);
         }
 
-        private void txtUsername_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtUsername.Text))
-            {
-                ControlUtility.ApplyRedBorder(txtUsername, "uNameError");
-            }
-            else
-            {
-                ControlUtility.ClearRedBorder(txtUsername, "uNameError");
-            }
-        }
+       
 
         private void txtUsername_MouseHover(object sender, EventArgs e)
         {
@@ -224,6 +214,18 @@ namespace ACP
             int num = pc.autoInc("SKU", "product");
             string tempNum = string.Format("{0:0000000}", num);
             MessageBox.Show(tempNum);
+        }
+
+        private void txtUsername_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUsername.Text))
+            {
+                ControlUtility.ApplyRedBorder(txtUsername, "uNameError");
+            }
+            else
+            {
+                ControlUtility.ClearRedBorder(txtUsername, "uNameError");
+            }
         }
     }
 }
