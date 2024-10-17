@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ACP.User;
 
 namespace ACP
 {
@@ -15,10 +16,12 @@ namespace ACP
     {
         acpEntities db = new acpEntities();
         supplierClass supClass = new supplierClass();
+        UserPermissionManager _userPermission;
         TextInfo txtInfo = CultureInfo.CurrentCulture.TextInfo;
-        public frmPrincipal()
+        public frmPrincipal(int userId)
         {
             InitializeComponent();
+            _userPermission = new UserPermissionManager(userId);
         }
 
         
@@ -231,7 +234,14 @@ namespace ACP
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            createUpdate();
+            if (_userPermission.CanPerformOperation("Principal Management Form", "Create"))
+            {
+                createUpdate();
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new Principal.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void dgvPrincipal_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -262,30 +272,38 @@ namespace ACP
         
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dgvPrincipal.SelectedRows.Count > 0)
+            if (_userPermission.CanPerformOperation("Principal Management Form", "Update"))
             {
-                btnSave.Text = "Update";
-                Id.button = "Update";
-                if(dgvPrincipal.SelectedRows.Count > 0)
+                if (dgvPrincipal.SelectedRows.Count > 0)
                 {
-                    int rowIndex = dgvPrincipal.SelectedRows[0].Index;
+                    btnSave.Text = "Update";
+                    Id.button = "Update";
+                    if (dgvPrincipal.SelectedRows.Count > 0)
+                    {
+                        int rowIndex = dgvPrincipal.SelectedRows[0].Index;
 
-                    txtSupCode.Text = dgvPrincipal.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
-                    cmbPayTerms.Text = dgvPrincipal.Rows[rowIndex].Cells["Payment_term"].Value.ToString();
-                    txtName.Text = dgvPrincipal.Rows[rowIndex].Cells["Name"].Value.ToString();
-                    txtAgent.Text = dgvPrincipal.Rows[rowIndex].Cells["Agent"].Value.ToString();
+                        txtSupCode.Text = dgvPrincipal.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
+                        cmbPayTerms.Text = dgvPrincipal.Rows[rowIndex].Cells["Payment_term"].Value.ToString();
+                        txtName.Text = dgvPrincipal.Rows[rowIndex].Cells["Name"].Value.ToString();
+                        txtAgent.Text = dgvPrincipal.Rows[rowIndex].Cells["Agent"].Value.ToString();
+                    }
+                    //var editPrincipal = (from a in db.vwPrincipals where a.Supplier_ID == Id.principalID select a).SingleOrDefault();
+
+                    ////cmbPayTerms.Text = editPrincipal.Payment_term;
+                    //txtSupCode.Text = editPrincipal.Supplier_ID;
+                    //txtName.Text = editPrincipal.Name;
+                    //txtAgent.Text = editPrincipal.Agent;
                 }
-                //var editPrincipal = (from a in db.vwPrincipals where a.Supplier_ID == Id.principalID select a).SingleOrDefault();
-
-                ////cmbPayTerms.Text = editPrincipal.Payment_term;
-                //txtSupCode.Text = editPrincipal.Supplier_ID;
-                //txtName.Text = editPrincipal.Name;
-                //txtAgent.Text = editPrincipal.Agent;
+                else
+                {
+                    MessageBox.Show("Please select principal to edit", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
-                MessageBox.Show("Please select principal to edit", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You don't have permission to update a Principal.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
             
         }
 
@@ -733,7 +751,7 @@ namespace ACP
         Form distriForm = new Form();
         private void changeMultiPrincipal()
         {
-            frmPrincipal principal = new frmPrincipal();
+            frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
             distriForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             distriForm.MinimizeBox = false;
             distriForm.MaximizeBox = false;
@@ -784,7 +802,7 @@ namespace ACP
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             DialogResult dRes = MessageBox.Show("Change distributor to "+Id.globalString+"?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            frmPrincipal principal = new frmPrincipal();
+            frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
             if (dRes == DialogResult.Yes)
             {
                 if (btnSelect.Text.Equals("Cancel"))
@@ -895,19 +913,21 @@ namespace ACP
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Delete principal?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(res == DialogResult.Yes)
+            if (_userPermission.CanPerformOperation("Principal Management Form", "Delete"))
             {
-                //if (Id.button.Equals("Create"))
-                //{
-                //    if (dgvPrincipal.SelectedRows.Count > 0)
-                //    {
-                //        dgvPrincipal.Rows.RemoveAt(dgvPrincipal.SelectedRows[0].Index);
+                DialogResult res = MessageBox.Show("Delete principal?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    //if (Id.button.Equals("Create"))
+                    //{
+                    //    if (dgvPrincipal.SelectedRows.Count > 0)
+                    //    {
+                    //        dgvPrincipal.Rows.RemoveAt(dgvPrincipal.SelectedRows[0].Index);
 
-                //    }
-                //}
-                //if (Id.button.Equals("Create"))
-                //{
+                    //    }
+                    //}
+                    //if (Id.button.Equals("Create"))
+                    //{
                     if (!string.IsNullOrEmpty(Id.principalID))
                     {
                         if (btnSelect.Text.Equals("Cancel"))
@@ -929,8 +949,8 @@ namespace ACP
                             //db.SaveChanges();
                             MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             fetchPrincipal();
-                        } 
-                        else if(btnSelect.Text.Equals("Select"))
+                        }
+                        else if (btnSelect.Text.Equals("Select"))
                         {
                             supClass.deleteSupplier("Supplier", "Delete", Id.principalID);
                             //var objDel = db.suppliers.Where(a => a.suppID.Equals(Id.principalID)).SingleOrDefault();
@@ -946,8 +966,14 @@ namespace ACP
                     {
                         MessageBox.Show("Please select principal", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                //}
+                    //}
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to delete a Principal.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         
         }
 

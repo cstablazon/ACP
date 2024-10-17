@@ -57,13 +57,20 @@ namespace ACP
 
                 case "catHierarchy":
 
-                    frmCatHierarchy prodierar = new frmCatHierarchy { TopLevel = false };
-                    pBody.Controls.Clear();
-                    pBody.Controls.Add(prodierar);
-                    prodierar.BringToFront();
-                    prodierar.Show();
-                    break;
+                    if (_permissionManager.CanOpenForm("Hierarchy Form"))
+                    {
+                        frmCatHierarchy prodierar = new frmCatHierarchy { TopLevel = false };
+                        pBody.Controls.Clear();
+                        pBody.Controls.Add(prodierar);
+                        prodierar.BringToFront();
+                        prodierar.Show();                      
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to open the Hierarchy Form.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
 
+                    break;
 
                 case "supp":
                     if (_permissionManager.CanOpenForm("Supplier Management Form"))

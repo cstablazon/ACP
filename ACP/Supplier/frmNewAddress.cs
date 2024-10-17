@@ -15,12 +15,14 @@ namespace ACP
     {
         acpEntities db = new acpEntities();
         supplierClass supClass = new supplierClass();
+        UserPermissionManager _userPermission;
         TextInfo txtInfo = CultureInfo.CurrentCulture.TextInfo;
         string msg;
         public frmNewAddress()
         {
             InitializeComponent();
             cmbPurpose.Focus();
+            _userPermission = new UserPermissionManager(Program.CurrentUserId);
         }
 
         private void createUpdate()
@@ -96,8 +98,16 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            isPrimary();
-            createUpdate();
+            if (_userPermission.CanPerformOperation("Address Management Form", "Create"))
+            {
+                isPrimary();
+                createUpdate();
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void rbYes_CheckedChanged(object sender, EventArgs e)
@@ -190,36 +200,52 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvAddress.SelectedRows.Count > 0)
+            if (_userPermission.CanPerformOperation("Address Management Form", "Update"))
             {
-                Id.button = "Update";
-                btnCreate.Text = "Update";
+                if (dgvAddress.SelectedRows.Count > 0)
+                {
+                    Id.button = "Update";
+                    btnCreate.Text = "Update";
 
-                int rowIndex = dgvAddress.SelectedRows[0].Index;
-                Id.addressID = Convert.ToInt32(dgvAddress.Rows[rowIndex].Cells["addressID"].Value);
-                txtAddress.Text = dgvAddress.Rows[rowIndex].Cells["address"].Value.ToString();
-                txtCity.Text = dgvAddress.Rows[rowIndex].Cells["city"].Value.ToString();
-                txtProvince.Text = dgvAddress.Rows[rowIndex].Cells["province"].Value.ToString();
-                cmbPurpose.Text = dgvAddress.Rows[rowIndex].Cells["purpose"].Value.ToString();
-                cbPrimary.Checked = Convert.ToBoolean(dgvAddress.Rows[rowIndex].Cells["isPrimary"].Value);
+                    int rowIndex = dgvAddress.SelectedRows[0].Index;
+                    Id.addressID = Convert.ToInt32(dgvAddress.Rows[rowIndex].Cells["addressID"].Value);
+                    txtAddress.Text = dgvAddress.Rows[rowIndex].Cells["address"].Value.ToString();
+                    txtCity.Text = dgvAddress.Rows[rowIndex].Cells["city"].Value.ToString();
+                    txtProvince.Text = dgvAddress.Rows[rowIndex].Cells["province"].Value.ToString();
+                    cmbPurpose.Text = dgvAddress.Rows[rowIndex].Cells["purpose"].Value.ToString();
+                    cbPrimary.Checked = Convert.ToBoolean(dgvAddress.Rows[rowIndex].Cells["isPrimary"].Value);
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to update Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvAddress.SelectedRows.Count > 0)
+            if (_userPermission.CanPerformOperation("Address Management Form", "Delete"))
             {
-                DialogResult res = MessageBox.Show("Are you sure to delete address?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
+                if (dgvAddress.SelectedRows.Count > 0)
                 {
-                    supClass.deleteAddress("addressDIR", "Delete", Id.addressID);
+                    DialogResult res = MessageBox.Show("Are you sure to delete address?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (res == DialogResult.Yes)
+                    {
+                        supClass.deleteAddress("addressDIR", "Delete", Id.addressID);
 
-                    fetchAddress();
-                    disableAndClear();
-                    btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
+                        fetchAddress();
+                        disableAndClear();
+                        btnEdit.Enabled = false;
+                        btnDelete.Enabled = false;
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }
