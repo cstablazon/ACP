@@ -65,6 +65,8 @@ namespace ACP
             cmd.Parameters.AddWithValue("@cancelDate", cancelDate);
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@remarks", remarks);
+            cmd.Parameters.AddWithValue("@orderedBy", orderedBy);
+            cmd.Parameters.AddWithValue("@approvedBy", approvedBy);
             cmd.Parameters.AddWithValue("@userID", userID);
 
             var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);

@@ -343,7 +343,7 @@ namespace ACP
             
             dgvBarcode.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvBarcode, true, null);
             dgvBarcode.ClearSelection();
-             flowLayoutPanel1.Height = 376;
+             //flowLayoutPanel1.Height = 376;
 
         }
 
@@ -478,6 +478,7 @@ namespace ACP
                             MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Hide();
                             this.DialogResult = DialogResult.OK;
+                            Id.globalString = null;
                         }
                     }
                     else
@@ -530,6 +531,7 @@ namespace ACP
                         MessageBox.Show("Successfull created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();
                         this.DialogResult = DialogResult.OK;
+                        Id.globalString = null;
                     }
 
                 }
@@ -620,6 +622,7 @@ namespace ACP
                     MessageBox.Show("Successfull updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
                     this.DialogResult = DialogResult.OK;
+                    Id.globalString = null;
                 }
             }
             else
@@ -690,8 +693,8 @@ namespace ACP
         }
         private void lblProdDetails_Click(object sender, EventArgs e)
         {
-            Id.dropdown = "Product Details";
-            timer1.Start();
+            //Id.dropdown = "Product Details";
+            //timer1.Start();
         }
         private void lblInventory_Click_1(object sender, EventArgs e)
         {
@@ -1423,14 +1426,14 @@ namespace ACP
             {
                 if (txtSearch.Text.Equals(""))
                 {
-                    DataTable dt = supClass.fetchSupplier("fetchSupplier", "");
-                    dgvSupplier.DataSource = dt;
-                    //dgvSupplier.DataSource = (from a in db.suppliers
-                    //                          select new
-                    //                          {
-                    //                              a.suppID,
-                    //                              a.name
-                    //                          }).ToList();
+                    //DataTable dt = supClass.fetchSupplier("fetchSupplier", "");
+                    //dgvSupplier.DataSource = dt;
+                    dgvSupplier.DataSource = (from a in db.suppliers
+                                              select new
+                                              {
+                                                  a.suppID,
+                                                  a.name
+                                              }).ToList();
                 }
                 else
                 {

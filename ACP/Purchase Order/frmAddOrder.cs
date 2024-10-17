@@ -17,6 +17,7 @@ namespace ACP
         acpEntities db = new acpEntities();
         barcodeClass code = new barcodeClass();
         purchaseOrderClass po = new purchaseOrderClass();
+        supplierClass supClass = new supplierClass();
         public frmAddOrder()
         {
             InitializeComponent();
@@ -301,8 +302,15 @@ namespace ACP
             cmbOrderedBy.ValueMember = "Fullname";
         }
 
+        private void hide_Enter(object sender, EventArgs e)
+        {
+            p.Hide();
+        }
+
         private void frmAddOrder_Load(object sender, EventArgs e)
         {
+            supplier();
+            p.Hide();
             if(Id.button == "Create")
             {
                 txtTotalDiscount.Text = 0.ToString("N2");
@@ -443,16 +451,13 @@ namespace ACP
                 decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
                 if (Id.button.Equals("Create"))
                 {
-                    if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPayTerm.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
+                    if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
                     {
 
                         MessageBox.Show("Please fill up all necessary information");
                     }
                     else
                     {
-                        
-
-
                         bool isEmpty = false;
                         for (int i = 0; dgvLines.Rows.Count > i; i++)
                         {
@@ -941,6 +946,7 @@ namespace ACP
             cmbFilter.Items.Add("Supplier_ID");
             cmbFilter.Items.Add("Name");
 
+
             //dgvSupplier.Dock = DockStyle.Fill;
             //dgvSupplier.BringToFront();
             dgvSupplier.Dock = DockStyle.Bottom;
@@ -961,6 +967,7 @@ namespace ACP
             p.Controls.Add(txtSearch);
             p.Controls.Add(cmbFilter);
             p.Controls.Add(dgvSupplier);
+
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -1064,12 +1071,20 @@ namespace ACP
                 txtSuppID.Text = row.Cells["suppID"].Value.ToString();
                 txtName.Text = row.Cells["name"].Value.ToString();
                 //var suppDetails = db.suppliers.Where(a => a.suppID.Equals(Id.suppID)).SingleOrDefault();
-                var suppDetails = db.suppliers.Join(db.paymentTerms, s => s.payID,
-                    a => a.payID, (s, a) => new { s = s, a = a }).Where(sa => sa.s.suppID.Equals(Id.suppID)).SingleOrDefault();
-                txtPayTerm.Text = suppDetails.a.payDesc;
-                txtAgent.Text = suppDetails.s.agent;
+                //var suppDetails = db.suppliers.Join(db.paymentTerms, s => s.payID,
+                //    a => a.payID, (s, a) => new { s = s, a = a }).Where(sa => sa.s.suppID.Equals(Id.suppID)).FirstOrDefault();
+
+                DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                foreach(DataRow dRow in dt.Rows)
+                {
+                    txtPayTerm.Text = dRow["Payment_term"].ToString();
+                    txtAgent.Text = dRow["agent"].ToString();
+                }
+                
+                
                 txtSuppID.BorderStyle = BorderStyle.Fixed3D;
-                pHeader.Controls.RemoveByKey("pSupplier");
+                p.Hide();
+                //pHeader.Controls.RemoveByKey("pSupplier");
 
                 //if(Id.button.Equals("changeDistri"))
                 //{
@@ -1083,17 +1098,22 @@ namespace ACP
             }
         }
 
-        private void txtSuppID_Click(object sender, EventArgs e)
+        private void supplier()
         {
             supplierForm();
             pHeader.Controls.Add(p);
             p.BorderStyle = BorderStyle.FixedSingle;
             dgvSupplier.Size = new System.Drawing.Size(400, 174);
-            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvSupplier.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvSupplier.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvSupplier.Columns[0].HeaderText = "Supplier ID";
             dgvSupplier.Columns[1].HeaderText = "Name";
             p.BringToFront();
+        }
+
+        private void txtSuppID_Click(object sender, EventArgs e)
+        {
+            p.Show();
         }
 
         private void txtSuppID_Leave(object sender, EventArgs e)
@@ -1378,6 +1398,16 @@ namespace ACP
         private void button1_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void frmAddOrder_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btnClose.PerformClick();
+        }
+
+        private void txtSuppID_Enter(object sender, EventArgs e)
+        {
+        
         }
 
        

@@ -378,7 +378,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 133);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 531);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 800);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // pHeader
@@ -464,6 +464,7 @@
             this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
             this.cmbDiscountType.TabIndex = 152;
             this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
+            this.cmbDiscountType.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label40
             // 
@@ -485,7 +486,7 @@
             this.txtPriceUnit.Size = new System.Drawing.Size(182, 23);
             this.txtPriceUnit.TabIndex = 150;
             this.txtPriceUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPriceUnit.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPriceUnit.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPriceUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
             this.txtPriceUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
             // 
@@ -509,7 +510,7 @@
             this.txtPesoDiscount.Size = new System.Drawing.Size(182, 23);
             this.txtPesoDiscount.TabIndex = 148;
             this.txtPesoDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPesoDiscount.Enter += new System.EventHandler(this.txtDecimal_Enter);
+            this.txtPesoDiscount.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPesoDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
             this.txtPesoDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
             // 
@@ -531,6 +532,7 @@
             this.dtpEntry.Name = "dtpEntry";
             this.dtpEntry.Size = new System.Drawing.Size(223, 21);
             this.dtpEntry.TabIndex = 143;
+            this.dtpEntry.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label1
             // 
@@ -552,6 +554,7 @@
             this.txtSuppID.TabIndex = 141;
             this.txtSuppID.Click += new System.EventHandler(this.txtSuppID_Click);
             this.txtSuppID.TextChanged += new System.EventHandler(this.txtSuppID_TextChanged);
+            this.txtSuppID.Enter += new System.EventHandler(this.txtSuppID_Enter);
             this.txtSuppID.Leave += new System.EventHandler(this.txtSuppID_Leave);
             this.txtSuppID.MouseHover += new System.EventHandler(this.txtSuppID_MouseHover);
             // 
@@ -564,6 +567,7 @@
             this.cmbDeliveryAdd.Size = new System.Drawing.Size(223, 24);
             this.cmbDeliveryAdd.TabIndex = 139;
             this.cmbDeliveryAdd.SelectionChangeCommitted += new System.EventHandler(this.cmbDeliveryAdd_SelectionChangeCommitted);
+            this.cmbDeliveryAdd.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbDeliveryAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbDeliveryAdd_KeyPress);
             this.cmbDeliveryAdd.Leave += new System.EventHandler(this.cmbDeliveryAdd_Leave);
             this.cmbDeliveryAdd.MouseHover += new System.EventHandler(this.cmbDeliveryAdd_MouseHover);
@@ -586,6 +590,7 @@
             this.rtxtRemarks.Size = new System.Drawing.Size(203, 172);
             this.rtxtRemarks.TabIndex = 137;
             this.rtxtRemarks.Text = "";
+            this.rtxtRemarks.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label31
             // 
@@ -606,6 +611,7 @@
             this.cmbCheckedBy.Name = "cmbCheckedBy";
             this.cmbCheckedBy.Size = new System.Drawing.Size(203, 24);
             this.cmbCheckedBy.TabIndex = 135;
+            this.cmbCheckedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // cmbApprovedBy
             // 
@@ -617,6 +623,7 @@
             this.cmbApprovedBy.Name = "cmbApprovedBy";
             this.cmbApprovedBy.Size = new System.Drawing.Size(203, 24);
             this.cmbApprovedBy.TabIndex = 134;
+            this.cmbApprovedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label30
             // 
@@ -659,6 +666,7 @@
             this.cmbOrderedBy.Name = "cmbOrderedBy";
             this.cmbOrderedBy.Size = new System.Drawing.Size(203, 24);
             this.cmbOrderedBy.TabIndex = 130;
+            this.cmbOrderedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // cmbEncodedBy
             // 
@@ -668,6 +676,7 @@
             this.cmbEncodedBy.Name = "cmbEncodedBy";
             this.cmbEncodedBy.Size = new System.Drawing.Size(203, 24);
             this.cmbEncodedBy.TabIndex = 129;
+            this.cmbEncodedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label32
             // 
@@ -699,6 +708,7 @@
             this.cmbDepartment.Name = "cmbDepartment";
             this.cmbDepartment.Size = new System.Drawing.Size(203, 24);
             this.cmbDepartment.TabIndex = 126;
+            this.cmbDepartment.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label34
             // 
@@ -730,6 +740,7 @@
             this.rtxtAddress.Size = new System.Drawing.Size(223, 180);
             this.rtxtAddress.TabIndex = 123;
             this.rtxtAddress.Text = "";
+            this.rtxtAddress.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label23
             // 
@@ -752,6 +763,7 @@
             this.cmbMOD.TabIndex = 120;
             this.cmbMOD.SelectedIndexChanged += new System.EventHandler(this.cbMode_SelectedIndexChanged);
             this.cmbMOD.SelectionChangeCommitted += new System.EventHandler(this.cmbMOD_SelectionChangeCommitted);
+            this.cmbMOD.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbMOD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbMOD_KeyPress);
             this.cmbMOD.Leave += new System.EventHandler(this.cmbMOD_Leave);
             this.cmbMOD.MouseHover += new System.EventHandler(this.cmbMOD_MouseHover);
@@ -763,6 +775,7 @@
             this.dtpCancel.Name = "dtpCancel";
             this.dtpCancel.Size = new System.Drawing.Size(223, 21);
             this.dtpCancel.TabIndex = 119;
+            this.dtpCancel.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // dtpDelivery
             // 
@@ -771,6 +784,7 @@
             this.dtpDelivery.Name = "dtpDelivery";
             this.dtpDelivery.Size = new System.Drawing.Size(223, 21);
             this.dtpDelivery.TabIndex = 118;
+            this.dtpDelivery.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label22
             // 
@@ -824,6 +838,7 @@
             this.txtPoolDesc.ReadOnly = true;
             this.txtPoolDesc.Size = new System.Drawing.Size(223, 23);
             this.txtPoolDesc.TabIndex = 111;
+            this.txtPoolDesc.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPoolDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPoolDesc_KeyPress);
             // 
             // label25
@@ -848,6 +863,7 @@
             this.cmbPool.SelectedIndexChanged += new System.EventHandler(this.cbPool_SelectedIndexChanged);
             this.cmbPool.SelectionChangeCommitted += new System.EventHandler(this.cmbPool_SelectionChangeCommitted);
             this.cmbPool.SelectedValueChanged += new System.EventHandler(this.cmbPool_SelectedValueChanged);
+            this.cmbPool.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbPool.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbPool_KeyPress);
             this.cmbPool.Leave += new System.EventHandler(this.cmbPool_Leave);
             this.cmbPool.MouseHover += new System.EventHandler(this.cmbPool_MouseHover);
@@ -883,6 +899,7 @@
             this.txtTotalDiscount.Size = new System.Drawing.Size(182, 23);
             this.txtTotalDiscount.TabIndex = 106;
             this.txtTotalDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotalDiscount.Enter += new System.EventHandler(this.hide_Enter);
             this.txtTotalDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
             this.txtTotalDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDecimal_KeyPress);
             // 
@@ -906,6 +923,7 @@
             this.txtPercentage.Size = new System.Drawing.Size(182, 23);
             this.txtPercentage.TabIndex = 104;
             this.txtPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPercentage.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label16
             // 
@@ -926,6 +944,7 @@
             this.cmbCashDiscount.Name = "cmbCashDiscount";
             this.cmbCashDiscount.Size = new System.Drawing.Size(182, 24);
             this.cmbCashDiscount.TabIndex = 102;
+            this.cmbCashDiscount.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label17
             // 
@@ -1058,6 +1077,7 @@
             this.cmbPOtype.Size = new System.Drawing.Size(182, 24);
             this.cmbPOtype.TabIndex = 90;
             this.cmbPOtype.SelectionChangeCommitted += new System.EventHandler(this.cmbPOtype_SelectionChangeCommitted);
+            this.cmbPOtype.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbPOtype.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbPOtype_KeyPress);
             this.cmbPOtype.Leave += new System.EventHandler(this.cmbPOtype_Leave);
             this.cmbPOtype.MouseHover += new System.EventHandler(this.cmbPOtype_MouseHover);
@@ -1105,10 +1125,10 @@
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
             this.pLines.Location = new System.Drawing.Point(3, 479);
-            this.pLines.MaximumSize = new System.Drawing.Size(1104, 304);
+            this.pLines.MaximumSize = new System.Drawing.Size(1086, 304);
             this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 163);
+            this.pLines.Size = new System.Drawing.Size(1086, 304);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1224,7 +1244,7 @@
             this.panel6.Controls.Add(this.txtPurchaseDiscount);
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 648);
+            this.panel6.Location = new System.Drawing.Point(3, 789);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
@@ -1313,7 +1333,7 @@
             this.panel8.Controls.Add(this.btnClose);
             this.panel8.Controls.Add(this.btnCreate);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 665);
+            this.panel8.Location = new System.Drawing.Point(0, 933);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1111, 35);
             this.panel8.TabIndex = 7;
@@ -1375,6 +1395,7 @@
             this.Name = "frmAddOrder";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddOrder_FormClosing);
             this.Load += new System.EventHandler(this.frmAddOrder_Load);
             this.tabPanel.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

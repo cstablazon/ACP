@@ -98,6 +98,9 @@ namespace ACP
             //frmNewProduct modify = new frmNewProduct();
             modify.btnCreate.Text = "Create";
             modify.btnClose.Text = "Cancel";
+            Id.dt.Rows.Clear();
+            Id.dt.Columns.Clear();
+            Id.isConcession = false;
             DialogResult res = modify.ShowDialog();
             if(res == DialogResult.OK)
             {
@@ -223,8 +226,8 @@ namespace ACP
                 modyProd.btnClose.Text = "Close";
                 modyProd.lblProdDetails.Enabled = true;
 
-
-                DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList", Id.SKU);
+                MessageBox.Show(Id.SKU);
+                DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
 
                 foreach(DataRow row in dt.Rows)
                 {

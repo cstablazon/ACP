@@ -79,10 +79,6 @@
             this.lblFinancials = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
@@ -108,7 +104,6 @@
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).BeginInit();
             this.pFinancials.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -131,7 +126,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 477);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 600);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
@@ -472,10 +467,10 @@
             this.pProdCategory.Controls.Add(this.groupBox1);
             this.pProdCategory.Controls.Add(this.lblProdDetails);
             this.pProdCategory.Location = new System.Drawing.Point(3, 267);
-            this.pProdCategory.MaximumSize = new System.Drawing.Size(955, 320);
+            this.pProdCategory.MaximumSize = new System.Drawing.Size(950, 320);
             this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 20);
+            this.pProdCategory.Size = new System.Drawing.Size(950, 320);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -573,7 +568,6 @@
             this.lblProdDetails.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblProdDetails.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblProdDetails.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProdDetails.Image = global::ACP.Properties.Resources.arrowRight10px;
             this.lblProdDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblProdDetails.Location = new System.Drawing.Point(0, 0);
             this.lblProdDetails.Name = "lblProdDetails";
@@ -597,7 +591,7 @@
             this.pFinancials.Controls.Add(this.label54);
             this.pFinancials.Controls.Add(this.cbItemGroup);
             this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(3, 293);
+            this.pFinancials.Location = new System.Drawing.Point(959, 3);
             this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
             this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
             this.pFinancials.Name = "pFinancials";
@@ -712,7 +706,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(807, 3);
+            this.btnCreate.Location = new System.Drawing.Point(790, 3);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 96;
@@ -731,7 +725,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(896, 3);
+            this.btnClose.Location = new System.Drawing.Point(879, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 97;
@@ -739,36 +733,6 @@
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 626);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(987, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(30, 17);
-            this.toolStripStatusLabel1.Text = "User";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(31, 17);
-            this.toolStripStatusLabel2.Text = "Date";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel3.Text = "Status";
             // 
             // errorProvider1
             // 
@@ -780,7 +744,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(987, 10);
+            this.panel2.Size = new System.Drawing.Size(970, 10);
             this.panel2.TabIndex = 4;
             // 
             // panel3
@@ -792,7 +756,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 10);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(987, 88);
+            this.panel3.Size = new System.Drawing.Size(970, 88);
             this.panel3.TabIndex = 10;
             // 
             // panel4
@@ -997,9 +961,9 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnCreate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 587);
+            this.panel1.Location = new System.Drawing.Point(0, 704);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(987, 39);
+            this.panel1.Size = new System.Drawing.Size(970, 39);
             this.panel1.TabIndex = 98;
             // 
             // frmModifyProd
@@ -1011,9 +975,8 @@
             this.ClientSize = new System.Drawing.Size(987, 648);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1035,8 +998,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).EndInit();
             this.pFinancials.ResumeLayout(false);
             this.pFinancials.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -1047,7 +1008,6 @@
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1072,10 +1032,6 @@
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label14;
         public System.Windows.Forms.Label label12;
-        public System.Windows.Forms.StatusStrip statusStrip1;
-        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         public System.Windows.Forms.Panel pFinancials;
         public System.Windows.Forms.Label label56;
         public System.Windows.Forms.Label label48;

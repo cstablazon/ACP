@@ -25,6 +25,7 @@ namespace ACP
             DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPO");
             dgvPO.DataSource = dt;
 
+            dgvPO.Columns["poType"].HeaderText = "PO Type";
             dgvPO.Columns["order No."].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPO.Columns["Supplier ID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPO.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
