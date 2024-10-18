@@ -31,9 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvPrincipal = new System.Windows.Forms.DataGridView();
             this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setAsActiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setAsInactiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnCdistri = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDistriID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,21 +65,13 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btnDel = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnCdistri = new System.Windows.Forms.Button();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.dgvPrincipal = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.panel2.SuspendLayout();
-            this.cmsStatus.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
+            this.cmsStatus.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -85,6 +85,55 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(864, 635);
             this.panel2.TabIndex = 13;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.tabControl1.Location = new System.Drawing.Point(12, 328);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(844, 304);
+            this.tabControl1.TabIndex = 23;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dgvPrincipal);
+            this.tabPage1.Controls.Add(this.panel7);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(836, 278);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Principal Information";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvPrincipal
+            // 
+            this.dgvPrincipal.AllowUserToAddRows = false;
+            this.dgvPrincipal.AllowUserToDeleteRows = false;
+            this.dgvPrincipal.AllowUserToResizeColumns = false;
+            this.dgvPrincipal.AllowUserToResizeRows = false;
+            this.dgvPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPrincipal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPrincipal.BackgroundColor = System.Drawing.Color.White;
+            this.dgvPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPrincipal.ContextMenuStrip = this.cmsStatus;
+            this.dgvPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvPrincipal.Location = new System.Drawing.Point(2, 47);
+            this.dgvPrincipal.MultiSelect = false;
+            this.dgvPrincipal.Name = "dgvPrincipal";
+            this.dgvPrincipal.ReadOnly = true;
+            this.dgvPrincipal.RowHeadersVisible = false;
+            this.dgvPrincipal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPrincipal.Size = new System.Drawing.Size(827, 224);
+            this.dgvPrincipal.TabIndex = 23;
+            this.dgvPrincipal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrincipal_CellClick);
+            this.dgvPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrincipal_CellDoubleClick);
+            this.dgvPrincipal.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPrincipal_DataBindingComplete);
             // 
             // cmsStatus
             // 
@@ -108,6 +157,97 @@
             this.setAsInactiveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.setAsInactiveToolStripMenuItem.Text = "Set as Inactive";
             this.setAsInactiveToolStripMenuItem.Click += new System.EventHandler(this.setAsInactiveToolStripMenuItem_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.btnSelect);
+            this.panel7.Controls.Add(this.btnCdistri);
+            this.panel7.Controls.Add(this.btnEdit);
+            this.panel7.Controls.Add(this.btnDel);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(830, 41);
+            this.panel7.TabIndex = 1;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelect.FlatAppearance.BorderSize = 0;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSelect.Image = global::ACP.Properties.Resources.check_mark__2_;
+            this.btnSelect.Location = new System.Drawing.Point(4, 3);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(80, 35);
+            this.btnSelect.TabIndex = 35;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // btnCdistri
+            // 
+            this.btnCdistri.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCdistri.Enabled = false;
+            this.btnCdistri.FlatAppearance.BorderSize = 0;
+            this.btnCdistri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnCdistri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnCdistri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCdistri.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCdistri.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCdistri.Image = ((System.Drawing.Image)(resources.GetObject("btnCdistri.Image")));
+            this.btnCdistri.Location = new System.Drawing.Point(261, 3);
+            this.btnCdistri.Name = "btnCdistri";
+            this.btnCdistri.Size = new System.Drawing.Size(161, 35);
+            this.btnCdistri.TabIndex = 34;
+            this.btnCdistri.Text = "Change distributor";
+            this.btnCdistri.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCdistri.UseVisualStyleBackColor = true;
+            this.btnCdistri.Click += new System.EventHandler(this.btnCdistri_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.Enabled = false;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(88, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(80, 35);
+            this.btnEdit.TabIndex = 33;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDel.Enabled = false;
+            this.btnDel.FlatAppearance.BorderSize = 0;
+            this.btnDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDel.Image = ((System.Drawing.Image)(resources.GetObject("btnDel.Image")));
+            this.btnDel.Location = new System.Drawing.Point(172, 3);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(87, 35);
+            this.btnDel.TabIndex = 32;
+            this.btnDel.Text = "Delete";
+            this.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // groupBox1
             // 
@@ -376,145 +516,6 @@
             this.panel1.Size = new System.Drawing.Size(864, 2);
             this.panel1.TabIndex = 12;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dgvPrincipal);
-            this.tabPage1.Controls.Add(this.panel7);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(836, 278);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Principal Information";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.btnSelect);
-            this.panel7.Controls.Add(this.btnCdistri);
-            this.panel7.Controls.Add(this.btnEdit);
-            this.panel7.Controls.Add(this.btnDel);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(3, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(830, 41);
-            this.panel7.TabIndex = 1;
-            // 
-            // btnDel
-            // 
-            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDel.Enabled = false;
-            this.btnDel.FlatAppearance.BorderSize = 0;
-            this.btnDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDel.Image = ((System.Drawing.Image)(resources.GetObject("btnDel.Image")));
-            this.btnDel.Location = new System.Drawing.Point(172, 3);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(87, 35);
-            this.btnDel.TabIndex = 32;
-            this.btnDel.Text = "Delete";
-            this.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDel.UseVisualStyleBackColor = true;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.Enabled = false;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(88, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(80, 35);
-            this.btnEdit.TabIndex = 33;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnCdistri
-            // 
-            this.btnCdistri.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCdistri.Enabled = false;
-            this.btnCdistri.FlatAppearance.BorderSize = 0;
-            this.btnCdistri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnCdistri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnCdistri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCdistri.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCdistri.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCdistri.Image = ((System.Drawing.Image)(resources.GetObject("btnCdistri.Image")));
-            this.btnCdistri.Location = new System.Drawing.Point(261, 3);
-            this.btnCdistri.Name = "btnCdistri";
-            this.btnCdistri.Size = new System.Drawing.Size(161, 35);
-            this.btnCdistri.TabIndex = 34;
-            this.btnCdistri.Text = "Change distributor";
-            this.btnCdistri.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCdistri.UseVisualStyleBackColor = true;
-            this.btnCdistri.Click += new System.EventHandler(this.btnCdistri_Click);
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelect.FlatAppearance.BorderSize = 0;
-            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSelect.Image = global::ACP.Properties.Resources.check_mark__2_;
-            this.btnSelect.Location = new System.Drawing.Point(4, 3);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(80, 35);
-            this.btnSelect.TabIndex = 35;
-            this.btnSelect.Text = "Select";
-            this.btnSelect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
-            // dgvPrincipal
-            // 
-            this.dgvPrincipal.AllowUserToAddRows = false;
-            this.dgvPrincipal.AllowUserToDeleteRows = false;
-            this.dgvPrincipal.AllowUserToResizeColumns = false;
-            this.dgvPrincipal.AllowUserToResizeRows = false;
-            this.dgvPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPrincipal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPrincipal.BackgroundColor = System.Drawing.Color.White;
-            this.dgvPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPrincipal.ContextMenuStrip = this.cmsStatus;
-            this.dgvPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvPrincipal.Location = new System.Drawing.Point(2, 47);
-            this.dgvPrincipal.MultiSelect = false;
-            this.dgvPrincipal.Name = "dgvPrincipal";
-            this.dgvPrincipal.RowHeadersVisible = false;
-            this.dgvPrincipal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrincipal.Size = new System.Drawing.Size(827, 224);
-            this.dgvPrincipal.TabIndex = 23;
-            this.dgvPrincipal.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrincipal_CellClick);
-            this.dgvPrincipal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPrincipal_CellDoubleClick);
-            this.dgvPrincipal.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPrincipal_DataBindingComplete);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.tabControl1.Location = new System.Drawing.Point(12, 328);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(844, 304);
-            this.tabControl1.TabIndex = 23;
-            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,13 +535,13 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.panel2.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).EndInit();
             this.cmsStatus.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

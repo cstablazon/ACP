@@ -360,7 +360,7 @@
                               <Value>=Fields!SKU.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -393,7 +393,7 @@
                               <Value>=Fields!posDesc.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -426,7 +426,7 @@
                               <Value>=Fields!dept_code.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -459,7 +459,7 @@
                               <Value>=Fields!qty.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>n2</Format>
                               </Style>
                             </TextRun>
@@ -495,7 +495,7 @@
                               <Value>=Fields!lineDiscount.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -530,7 +530,7 @@
                               <Value>=Fields!poUnit.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -565,7 +565,7 @@
                               <Value>=Fields!costPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>n2</Format>
                               </Style>
                             </TextRun>
@@ -601,7 +601,7 @@
                               <Value>=Fields!retailPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>n2</Format>
                               </Style>
                             </TextRun>
@@ -637,7 +637,7 @@
                               <Value>=Fields!Amount.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>n2</Format>
                               </Style>
                             </TextRun>
@@ -682,6 +682,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -1236,6 +1237,7 @@
       </Textbox>
       <Line Name="Line1">
         <Top>2.54166in</Top>
+        <Left>0.11282in</Left>
         <Height>0in</Height>
         <Width>7.82707in</Width>
         <ZIndex>4</ZIndex>
@@ -1282,13 +1284,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2.59375in</Height>
+    <Height>2.55208in</Height>
     <Style />
   </Body>
   <Width>8.14305in</Width>
   <Page>
     <PageHeader>
-      <Height>2.52807in</Height>
+      <Height>2.71557in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2120,7 +2122,7 @@
           <rd:DefaultName>Textbox21</rd:DefaultName>
           <Top>2.13446in</Top>
           <Left>6.39999in</Left>
-          <Height>0.35194in</Height>
+          <Height>0.53944in</Height>
           <Width>1.58334in</Width>
           <ZIndex>22</ZIndex>
           <Style>
@@ -2380,7 +2382,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
-          <Top>0.66206in</Top>
+          <Top>0.60651in</Top>
           <Left>0.21676in</Left>
           <Height>0.1875in</Height>
           <Width>0.50406in</Width>
@@ -2416,7 +2418,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
-          <Top>0.84956in</Top>
+          <Top>0.79401in</Top>
           <Left>0.21676in</Left>
           <Height>0.1875in</Height>
           <Width>4.76131in</Width>
@@ -2452,7 +2454,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
-          <Top>1.03706in</Top>
+          <Top>0.98151in</Top>
           <Left>0.21676in</Left>
           <Height>0.1875in</Height>
           <Width>4.76131in</Width>
@@ -2488,7 +2490,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
-          <Top>1.22456in</Top>
+          <Top>1.16901in</Top>
           <Left>0.21676in</Left>
           <Height>0.1875in</Height>
           <Width>4.76131in</Width>

@@ -376,15 +376,14 @@
             this.flowLayoutPanel1.Controls.Add(this.pHeader);
             this.flowLayoutPanel1.Controls.Add(this.pLines);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 133);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 800);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 532);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // pHeader
             // 
-            this.pHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pHeader.Controls.Add(this.cmbDiscountType);
             this.pHeader.Controls.Add(this.label40);
@@ -445,11 +444,10 @@
             this.pHeader.Controls.Add(this.label9);
             this.pHeader.Controls.Add(this.label6);
             this.pHeader.Controls.Add(this.lblHeader);
+            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(3, 3);
-            this.pHeader.MaximumSize = new System.Drawing.Size(1111, 470);
-            this.pHeader.MinimumSize = new System.Drawing.Size(2, 22);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1086, 470);
+            this.pHeader.Size = new System.Drawing.Size(1111, 470);
             this.pHeader.TabIndex = 0;
             // 
             // cmbDiscountType
@@ -463,6 +461,8 @@
             this.cmbDiscountType.Name = "cmbDiscountType";
             this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
             this.cmbDiscountType.TabIndex = 152;
+            this.cmbDiscountType.SelectedIndexChanged += new System.EventHandler(this.cmbDiscountType_SelectedIndexChanged);
+            this.cmbDiscountType.SelectionChangeCommitted += new System.EventHandler(this.cmbDiscountType_SelectionChangeCommitted);
             this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
             this.cmbDiscountType.Enter += new System.EventHandler(this.hide_Enter);
             // 
@@ -1119,16 +1119,13 @@
             // 
             // pLines
             // 
-            this.pLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pLines.Controls.Add(this.groupBox1);
             this.pLines.Controls.Add(this.lblLines);
+            this.pLines.Dock = System.Windows.Forms.DockStyle.Top;
             this.pLines.Location = new System.Drawing.Point(3, 479);
-            this.pLines.MaximumSize = new System.Drawing.Size(1086, 304);
-            this.pLines.MinimumSize = new System.Drawing.Size(2, 22);
             this.pLines.Name = "pLines";
-            this.pLines.Size = new System.Drawing.Size(1086, 304);
+            this.pLines.Size = new System.Drawing.Size(1086, 350);
             this.pLines.TabIndex = 1;
             // 
             // groupBox1
@@ -1244,7 +1241,7 @@
             this.panel6.Controls.Add(this.txtPurchaseDiscount);
             this.panel6.Controls.Add(this.groupBox2);
             this.panel6.Controls.Add(this.lblLineDetails);
-            this.panel6.Location = new System.Drawing.Point(3, 789);
+            this.panel6.Location = new System.Drawing.Point(3, 835);
             this.panel6.MaximumSize = new System.Drawing.Size(1086, 134);
             this.panel6.MinimumSize = new System.Drawing.Size(2, 22);
             this.panel6.Name = "panel6";
@@ -1333,7 +1330,7 @@
             this.panel8.Controls.Add(this.btnClose);
             this.panel8.Controls.Add(this.btnCreate);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 933);
+            this.panel8.Location = new System.Drawing.Point(0, 665);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1111, 35);
             this.panel8.TabIndex = 7;
@@ -1395,6 +1392,7 @@
             this.Name = "frmAddOrder";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddOrder_FormClosing);
             this.Load += new System.EventHandler(this.frmAddOrder_Load);
             this.tabPanel.ResumeLayout(false);

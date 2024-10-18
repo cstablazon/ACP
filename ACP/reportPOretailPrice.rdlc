@@ -461,6 +461,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -1069,7 +1070,7 @@
   <Width>8.0925in</Width>
   <Page>
     <PageHeader>
-      <Height>2.56154in</Height>
+      <Height>2.71779in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1901,7 +1902,7 @@
           <rd:DefaultName>Textbox21</rd:DefaultName>
           <Top>2.14016in</Top>
           <Left>6.39999in</Left>
-          <Height>0.35194in</Height>
+          <Height>0.53944in</Height>
           <Width>1.58334in</Width>
           <ZIndex>22</ZIndex>
           <Style>
@@ -2089,6 +2090,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox47</rd:DefaultName>
+          <Top>0in</Top>
           <Left>7.02128in</Left>
           <Height>0.1875in</Height>
           <Width>0.84373in</Width>

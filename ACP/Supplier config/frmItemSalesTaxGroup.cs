@@ -165,6 +165,7 @@ namespace ACP
             }
             else
             {
+                this.DialogResult = DialogResult.OK;
                 this.Hide();
             }
         }

@@ -540,6 +540,8 @@ namespace ACP
                     }
                     else
                     {
+                        DataTable dTable = po.fetchPOline("sp_purchaseOrderOperations", "purchaseOrder", "fetchPesoDiscountByOrderNo", txtOrderNo.Text);
+                        DataTable dTable2 = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
                         string barcode;
                         decimal qty;
                         //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
@@ -562,9 +564,58 @@ namespace ACP
                         {
                             if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
                             {
-                                decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
-                                decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                po.createUpdatePesoDiscount("Update", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                if (dTable2.Select("orderNo = '" + txtOrderNo.Text + "'").Any())
+                                {
+                                    string sDiscount = null;
+                                    foreach (DataRow dRow in dTable2.Rows)
+                                    {
+                                        sDiscount = dRow["seasonalDiscount"].ToString();
+                                        if(sDiscount != null)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (sDiscount == "0.00")
+                                    {
+                                        if (dTable.Rows.Count > 0)
+                                        {
+                                            decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                            decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                            po.createUpdatePesoDiscount("Update", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                        }
+                                        else
+                                        {
+                                            decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                            decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                            po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit,   Id.userID);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                        decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                        po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                        seasonalDiscount = 0.00m;
+                                        po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                                    }
+                                }
+                            }
+                        }
+                        else if(cmbDiscountType.Text == "Seasonal discount")
+                        {
+                            if(txtTotalDiscount.Text != "0.00")
+                            {
+                                if (dTable.Rows.Count > 0)
+                                {
+                                    decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                    decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                    po.createUpdatePesoDiscount("Delete", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                                }
+                                else
+                                {
+                                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                                }
                             }
                         }
 
@@ -760,6 +811,27 @@ namespace ACP
                 int i = 1;
                 frmPOlines lines = new frmPOlines();
                 DialogResult res = lines.ShowDialog();
+                //if(dgvLines.Rows.Count > 0)
+                //{
+                //    Id.dt.Columns.Clear();
+                //    Id.dt.Rows.Clear();
+                //    Id.dt.Columns.Add("lineID", typeof(int));
+                //    Id.dt.Columns.Add("order No.", typeof(string));
+                //    Id.dt.Columns.Add("Barcode", typeof(string));
+                //    Id.dt.Columns.Add("Product description", typeof(string));
+                //    Id.dt.Columns.Add("Dept class code", typeof(string));
+                //    Id.dt.Columns.Add("Quantity", typeof(decimal));
+                //    Id.dt.Columns.Add("Purchase unit", typeof(string));
+                //    Id.dt.Columns.Add("Cost price", typeof(decimal));
+                //    Id.dt.Columns.Add("Retail price", typeof(decimal));
+                //    Id.dt.Columns.Add("Discount percent", typeof(decimal));
+                //    Id.dt.Columns.Add("Net amount", typeof(decimal));
+                //    DataRow dRow = Id.dt.NewRow();
+                //    foreach(DataRow row in dgvLines.Rows)
+                //    {
+                //        Id.dt.ImportRow(row);
+                //    }
+                //}
                 if(res == DialogResult.OK)
                 {
 
@@ -826,7 +898,7 @@ namespace ACP
             if(res == DialogResult.Yes)
             {
                 int rowIndex = dgvLines.SelectedRows[0].Index;
-
+                //Id.dt.Rows.RemoveAt(rowIndex);
                 dgvLines.Rows.RemoveAt(rowIndex);
             }
         }
@@ -1408,6 +1480,16 @@ namespace ACP
         private void txtSuppID_Enter(object sender, EventArgs e)
         {
         
+        }
+
+        private void cmbDiscountType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbDiscountType_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
         }
 
        

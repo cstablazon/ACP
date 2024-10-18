@@ -40,6 +40,8 @@ namespace ACP
         private void btnNewOder_Click(object sender, EventArgs e)
         {
             Id.button = "Create";
+            Id.dt.Columns.Clear();
+            Id.dt.Rows.Clear();
             frmAddOrder order = new frmAddOrder();
             po.createUpdatePurchaseOrder("Create", null, null, 0, null, null, 0, null, null, "Draft", null, null, null, Id.userID);
             order.txtOrderNo.Text = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
@@ -105,6 +107,8 @@ namespace ACP
             Id.button = "Update";
             if(dgvPO.SelectedRows.Count > 0)
             {
+                Id.dt.Rows.Clear();
+                Id.dt.Columns.Clear();
                 frmAddOrder addOrder = new frmAddOrder();
                 addOrder.btnCreate.Text = "Update";
                 addOrder.btnClose.Text = "Close";
@@ -120,21 +124,25 @@ namespace ACP
                     addOrder.txtName.Text = row["name"].ToString();
                     addOrder.txtAgent.Text = row["agent"].ToString();
                     addOrder.txtPayTerm.Text = row["payDesc"].ToString();
-                    if (!string.IsNullOrEmpty(row["seasonalDiscount"].ToString()) || row["seasonalDiscount"].ToString() != "0.00" && string.IsNullOrEmpty(row["payDesc"].ToString()))
+                    if (row["seasonalDiscount"].ToString() != "0.00")
                     {
+                        MessageBox.Show("1");
                         addOrder.cmbDiscountType.Text = "Seasonal discount";
-
+                        addOrder.txtTotalDiscount.Text = row["seasonalDiscount"].ToString();
                         addOrder.txtPesoDiscount.Text = 0.ToString("N2");
                         addOrder.txtPriceUnit.Text = 0.ToString("N2");
                     }
-                    else if (string.IsNullOrEmpty(row["seasonalDiscount"].ToString()) || row["seasonalDiscount"].ToString() == "0.00" && !string.IsNullOrEmpty(row["payDesc"].ToString()) || row["payDesc"].ToString() != "0.00")
+                    else if (row["pesoDisc"].ToString() != "0.00")
                     {
+                        MessageBox.Show("2");
                         addOrder.cmbDiscountType.Text = "Peso discount";
-
+                        addOrder.txtPesoDiscount.Text = row["pesoDisc"].ToString();
+                        addOrder.txtPriceUnit.Text = row["priceUnit"].ToString();
                         addOrder.txtTotalDiscount.Text = 0.ToString("N2");
                     }
                     else
                     {
+                        MessageBox.Show("3");
                         addOrder.cmbDiscountType.Text = "";
 
                         addOrder.txtTotalDiscount.Text = 0.ToString("N2");

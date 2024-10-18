@@ -69,16 +69,15 @@ namespace ACP
             cmd.Parameters.AddWithValue("@approvedBy", approvedBy);
             cmd.Parameters.AddWithValue("@userID", userID);
 
-            var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
+            
             if (Id.button == "Create")
             {
+                var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
                 returnPara.Direction = ParameterDirection.ReturnValue;
-            }
-            cmd.ExecuteNonQuery();
-            if (Id.button == "Create")
-            {
+                cmd.ExecuteNonQuery();
                 Id.autoIncOrderNo = returnPara.Value.ToString();
             }
+            cmd.ExecuteNonQuery();
             conn.Close();
         }
 
@@ -108,16 +107,16 @@ namespace ACP
             cmd.Parameters.AddWithValue("@priceUnit", priceUnit);
             cmd.Parameters.AddWithValue("@userID", userID);
 
-            var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
+            
             if (Id.button == "Create")
             {
+                var returnPara = cmd.Parameters.Add("@autoIncSKU", SqlDbType.NVarChar);
                 returnPara.Direction = ParameterDirection.ReturnValue;
-            }
-            cmd.ExecuteNonQuery();
-            if (Id.button == "Create")
-            {
+                cmd.ExecuteNonQuery();
                 Id.autoIncOrderNo = returnPara.Value.ToString();
             }
+            cmd.ExecuteNonQuery();
+            
             conn.Close();
         }
 
