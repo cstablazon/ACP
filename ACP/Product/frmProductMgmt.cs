@@ -9,11 +9,12 @@ namespace ACP
     public partial class frmProductMgmt : Form
     {
         productCreation pc = new productCreation();
+        UserPermissionManager _userPermission;
         acpEntities db = new acpEntities();
         public frmProductMgmt()
         {
             InitializeComponent();
-           
+            _userPermission = new UserPermissionManager(Program.CurrentUserId);
         }
 
         public void productList()
@@ -88,24 +89,32 @@ namespace ACP
 
         private void btnNewProd_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            //int autoIncSKU = pc.autoInc("SKU", "product");
-            //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
-            //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
-            pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
-            Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
-            frmModifyProd modify = new frmModifyProd();
-            //frmNewProduct modify = new frmNewProduct();
-            modify.btnCreate.Text = "Create";
-            modify.btnClose.Text = "Cancel";
-            Id.dt.Rows.Clear();
-            Id.dt.Columns.Clear();
-            Id.isConcession = false;
-            DialogResult res = modify.ShowDialog();
-            if(res == DialogResult.OK)
+            if (_userPermission.CanPerformOperation("Product Management Form", "Create"))
             {
-                productList();
+                Id.button = "Create";
+                //int autoIncSKU = pc.autoInc("SKU", "product");
+                //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
+                //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
+                pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
+                Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
+                frmModifyProd modify = new frmModifyProd();
+                //frmNewProduct modify = new frmNewProduct();
+                modify.btnCreate.Text = "Create";
+                modify.btnClose.Text = "Cancel";
+                Id.dt.Rows.Clear();
+                Id.dt.Columns.Clear();
+                Id.isConcession = false;
+                DialogResult res = modify.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    productList();
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to create new Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         //Product Info
         //Id.desc2 = "@SKU";
         //Id.desc3 = "@suppID";
@@ -218,32 +227,48 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dgvProduct.SelectedRows.Count > 0)
+            if (_userPermission.CanPerformOperation("Product Management Form", "Update"))
             {
-                Id.button = "Update";
-                frmModifyProd modyProd = new frmModifyProd();
-                modyProd.btnCreate.Text = "Update";
-                modyProd.btnClose.Text = "Close";
-                modyProd.lblProdDetails.Enabled = true;
-
-                MessageBox.Show(Id.SKU);
-                DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
-
-                foreach(DataRow row in dt.Rows)
+                if (dgvProduct.SelectedRows.Count > 0)
                 {
-                    modyProd.txtCategory.Text = row["Subcategory code"].ToString();
-                    Id.RIDL = Convert.ToInt64(row["RID"]);
-                    modyProd.txtDepartment.Text = row["Department"].ToString();
-                    modyProd.cmbBrand.Text = row["bDesc"].ToString();
-                    modyProd.cmbProdType.Text = row["Product type"].ToString();
-                    modyProd.cmbProdSubType.Text = row["Product sub type"].ToString();
-                    modyProd.cmbProdDimension.Text = row["Product dimension group"].ToString();
-                    modyProd.txtSKU.Text = row["SKU"].ToString();
-                    modyProd.txtProdName.Text = row["Product description"].ToString();
-                    modyProd.txtSupplier.Text = row["Supplier ID"].ToString();
-                    Id.suppID = row["Supplier ID"].ToString();
-                    modyProd.cbConcession.Checked = Convert.ToBoolean(row["isConcession"]);
-                }
+                    Id.button = "Update";
+                    frmModifyProd modyProd = new frmModifyProd();
+                    modyProd.btnCreate.Text = "Update";
+                    modyProd.btnClose.Text = "Close";
+                    modyProd.lblProdDetails.Enabled = true;
+
+                    MessageBox.Show(Id.SKU);
+                    DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        modyProd.txtCategory.Text = row["Subcategory code"].ToString();
+                        Id.RIDL = Convert.ToInt64(row["RID"]);
+                        modyProd.txtDepartment.Text = row["Department"].ToString();
+                        modyProd.cmbBrand.Text = row["bDesc"].ToString();
+                        modyProd.cmbProdType.Text = row["Product type"].ToString();
+                        modyProd.cmbProdSubType.Text = row["Product sub type"].ToString();
+                        modyProd.cmbProdDimension.Text = row["Product dimension group"].ToString();
+                        modyProd.txtSKU.Text = row["SKU"].ToString();
+                        modyProd.txtProdName.Text = row["Product description"].ToString();
+                        modyProd.txtSupplier.Text = row["Supplier ID"].ToString();
+                        Id.suppID = row["Supplier ID"].ToString();
+                        modyProd.cbConcession.Checked = Convert.ToBoolean(row["isConcession"]);
+                    }
+
+                    DialogResult res = modyProd.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        productList();
+                        btnEdit.Enabled = false;
+                        btnDelete.Enabled = false;
+                    }
+            }
+            else
+            {
+                MessageBox.Show("You don't have permission to update a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
                 //int rowIndex = dgvProduct.SelectedRows[0].Index;
 
                 //modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
@@ -264,13 +289,7 @@ namespace ACP
                 //Id.suppID = dgvProduct.Rows[rowIndex].Cells["suppID"].Value.ToString();
                 //modyProd.cbConcession.Checked = Convert.ToBoolean(dgvProduct.Rows[rowIndex].Cells["isConcession"].Value);
 
-                DialogResult res = modyProd.ShowDialog();
-                if(res == DialogResult.OK)
-                {
-                    productList();
-                    btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
-                }
+                
                 //var product = db.vwProducts.Where(a => a.SKU.Equals(Id.productID)).FirstOrDefault();
                 //bool isConcession = Convert.ToBoolean(product.isConcession);
                 //var chTree = db.sp_catValidation("rid", product.RID).SingleOrDefault();
@@ -297,14 +316,22 @@ namespace ACP
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(res == DialogResult.Yes)
+            if (_userPermission.CanPerformOperation("Product Management Form", "Delete"))
             {
-                pc.deleteProduct("sp_Product", "Product", "Delete", Id.SKU);
-                productList();
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
+                DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    pc.deleteProduct("sp_Product", "Product", "Delete", Id.SKU);
+                    productList();
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                }
             }
+            else
+            {
+                MessageBox.Show("You don't have permission to delete a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnKitSetup_Click(object sender, EventArgs e)
