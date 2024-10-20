@@ -826,13 +826,18 @@ namespace ACP
                 //        Id.dt.ImportRow(row);
                 //    }
                 //}
-                if(res == DialogResult.OK)
+                if(Id.button == "Create")
                 {
-
-                    dgvLines.DataSource = Id.dt;
-                    dgvLines.Columns["lineID"].Visible = false;
-                    dgvLines.Columns["Order No."].Visible = false;
-                    
+                    if (res == DialogResult.OK)
+                    {
+                        dgvLines.DataSource = Id.dt;
+                        dgvLines.Columns["lineID"].Visible = false;
+                        dgvLines.Columns["Order No."].Visible = false;
+                    }
+                }
+                else if(Id.button == "Update")
+                {
+                    fetchPOlines();
                 }
                 
             }
@@ -892,8 +897,19 @@ namespace ACP
             if(res == DialogResult.Yes)
             {
                 int rowIndex = dgvLines.SelectedRows[0].Index;
-                //Id.dt.Rows.RemoveAt(rowIndex);
-                dgvLines.Rows.RemoveAt(rowIndex);
+                if(Id.button == "Create")
+                {
+                    //Id.dt.Rows.RemoveAt(rowIndex);
+                    dgvLines.Rows.RemoveAt(rowIndex);
+                }
+                else if(Id.button == "Update")
+                {
+                    string barcode = dgvLines.Rows[rowIndex].Cells["Barcode"].Value.ToString();
+                    po.deletePOline("Delete", barcode, Id.orderNo);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetchPOlines();
+                }
+                
             }
         }
 

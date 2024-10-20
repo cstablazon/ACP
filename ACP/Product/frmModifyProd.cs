@@ -41,7 +41,6 @@ namespace ACP
                 if (dropdownBtn)
                 {
                     pGeneral.Height += 20;
-                    flowLayoutPanel1.Height += 15;
                     if (pGeneral.Height == pGeneral.MaximumSize.Height)
                     {
                         lblGeneral.Image = Properties.Resources.arrowDown10px;
@@ -52,7 +51,6 @@ namespace ACP
                 else
                 {
                     pGeneral.Height -= 20;
-                    flowLayoutPanel1.Height -= 15;
                     if (pGeneral.Height == pGeneral.MinimumSize.Height)
                     {
                         lblGeneral.Image = Properties.Resources.arrowRight10px;
@@ -66,7 +64,6 @@ namespace ACP
                 if (dropdownBtn2)
                 {
                     pProdCategory.Height -= 20;
-                    flowLayoutPanel1.Height -= 20;
                     if (pProdCategory.Height == pProdCategory.MinimumSize.Height)
                     {
                         lblProdDetails.Image = Properties.Resources.arrowRight10px;
@@ -77,37 +74,10 @@ namespace ACP
                 else
                 {
                     pProdCategory.Height += 20;
-                    flowLayoutPanel1.Height += 20;
                     if (pProdCategory.Height == pProdCategory.MaximumSize.Height)
                     {
                         lblProdDetails.Image = Properties.Resources.arrowDown10px;
                         dropdownBtn2 = true;
-                        timer1.Stop();
-                    }
-                }
-            }
-            else if (Id.dropdown == "Financials")
-            {
-                if (dropdownBtn6)
-                {
-                    pFinancials.Height -= 20;
-                    flowLayoutPanel1.Height -= 19;
-                    if (pFinancials.Height == pFinancials.MinimumSize.Height)
-                    {
-                        lblFinancials.Image = Properties.Resources.arrowRight10px;
-                        dropdownBtn6 = false;
-                        timer1.Stop();
-                    }
-
-                }
-                else
-                {
-                    pFinancials.Height += 20;
-                    flowLayoutPanel1.Height += 19;
-                    if (pFinancials.Height == pFinancials.MaximumSize.Height)
-                    {
-                        lblFinancials.Image = Properties.Resources.arrowDown10px;
-                        dropdownBtn6 = true;
                         timer1.Stop();
                     }
                 }
@@ -545,79 +515,79 @@ namespace ACP
                     bool isActive;
 
                     //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
-                    for (int i = 0; dgvBarcode.Rows.Count > i; i++)
-                    {
-                        string prodBarcode = dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString();
-                        barcode = dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString();
-                        SKU = txtSKU.Text;
-                        itemModelID = dgvBarcode.Rows[i].Cells["Item model ID"].Value.ToString();
-                        chargeID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["chargeID"].Value);
-                        PID = Convert.ToInt64(dgvBarcode.Rows[i].Cells["PID"].Value);
-                        BMRXID = Convert.ToInt64(dgvBarcode.Rows[i].Cells["BMRXID"].Value);
-                        LID = dgvBarcode.Rows[i].Cells["LID"].Value.ToString();
-                        if (string.IsNullOrEmpty(dgvBarcode.Rows[i].Cells["discountID"].Value as string))
-                        {
-                            discountID = null;
-                        }
-                        else
-                        {
-                            discountID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["discountID"].Value);
-                        }
-                        CPuomID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["CPuomID"].Value);
-                        RPuomID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["RPuomID"].Value);
-                        BOMid = Convert.ToInt32(dgvBarcode.Rows[i].Cells["BOMid"].Value);
-                        if (string.IsNullOrEmpty(dgvBarcode.Rows[i].Cells["factor"].Value as string))
-                        {
-                            factor = null;
-                        }
-                        else
-                        {
-                            factor = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["factor"].Value);
-                        }
-                        retailPrice = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Retail price"].Value);
-                        costPrice = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Cost price"].Value);
-                        inventoryCost = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Inventory cost"].Value);
-                        posDesc = dgvBarcode.Rows[i].Cells["Product description"].Value.ToString();
-                        salesTax = dgvBarcode.Rows[i].Cells["Sales tax"].Value.ToString();
-                        purchaseTax = dgvBarcode.Rows[i].Cells["Purchase tax"].Value.ToString();
-                        isDiscountable = Convert.ToBoolean(dgvBarcode.Rows[i].Cells["isDiscountable"].Value);
-                        isActive = true;
-                        DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", prodBarcode);
-                        if (dt.Rows.Count > 0)
-                        {
-                            pc.createUpdateBarcode("Update", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
-                        }
-                        else
-                        {
-                            pc.createUpdateBarcode("Create", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
-                        }
-                    }
+                    //for (int i = 0; dgvBarcode.Rows.Count > i; i++)
+                    //{
+                    //    string prodBarcode = dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString();
+                    //    barcode = dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString();
+                    //    SKU = txtSKU.Text;
+                    //    itemModelID = dgvBarcode.Rows[i].Cells["Item model ID"].Value.ToString();
+                    //    chargeID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["chargeID"].Value);
+                    //    PID = Convert.ToInt64(dgvBarcode.Rows[i].Cells["PID"].Value);
+                    //    BMRXID = Convert.ToInt64(dgvBarcode.Rows[i].Cells["BMRXID"].Value);
+                    //    LID = dgvBarcode.Rows[i].Cells["LID"].Value.ToString();
+                    //    if (string.IsNullOrEmpty(dgvBarcode.Rows[i].Cells["discountID"].Value as string))
+                    //    {
+                    //        discountID = null;
+                    //    }
+                    //    else
+                    //    {
+                    //        discountID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["discountID"].Value);
+                    //    }
+                    //    CPuomID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["CPuomID"].Value);
+                    //    RPuomID = Convert.ToInt32(dgvBarcode.Rows[i].Cells["RPuomID"].Value);
+                    //    BOMid = Convert.ToInt32(dgvBarcode.Rows[i].Cells["BOMid"].Value);
+                    //    if (string.IsNullOrEmpty(dgvBarcode.Rows[i].Cells["factor"].Value as string))
+                    //    {
+                    //        factor = null;
+                    //    }
+                    //    else
+                    //    {
+                    //        factor = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["factor"].Value);
+                    //    }
+                    //    retailPrice = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Retail price"].Value);
+                    //    costPrice = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Cost price"].Value);
+                    //    inventoryCost = Convert.ToDecimal(dgvBarcode.Rows[i].Cells["Inventory cost"].Value);
+                    //    posDesc = dgvBarcode.Rows[i].Cells["Product description"].Value.ToString();
+                    //    salesTax = dgvBarcode.Rows[i].Cells["Sales tax"].Value.ToString();
+                    //    purchaseTax = dgvBarcode.Rows[i].Cells["Purchase tax"].Value.ToString();
+                    //    isDiscountable = Convert.ToBoolean(dgvBarcode.Rows[i].Cells["isDiscountable"].Value);
+                    //    isActive = true;
+                    //    DataTable dt = pc.fetchBarcodeById("sp_Product", "Barcode", "fetchBarcodeById", prodBarcode);
+                    //    if (dt.Rows.Count > 0)
+                    //    {
+                    //        pc.createUpdateBarcode("Update", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+                    //    }
+                    //    else
+                    //    {
+                    //        pc.createUpdateBarcode("Create", barcode, SKU, itemModelID, chargeID, PID, BMRXID, LID, discountID, CPuomID, RPuomID, BOMid, factor, retailPrice, costPrice, inventoryCost, posDesc, salesTax, purchaseTax, isDiscountable, isActive, Id.userID, barcode);
+                    //    }
+                    //}
 
                     pc.createUpdateProduct("Update", Id.SKU, txtSKU.Text, Id.RIDL, prodTypeID, prodSubTypeID, Id.suppID, brandID, cmbProdDimension.Text, txtProdName.Text, cbConcession.Checked, Id.userID);
                     Id.SKU = txtSKU.Text;
                     //Check if po_lines are existing in datagridview . If not delete line in po_line table
-                    DataTable dtLines = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", txtSKU.Text);
-                    bool isExist = true;
-                    foreach (DataRow row in dtLines.Rows)
-                    {
-                        for (int i = 0; dgvBarcode.Rows.Count > i; i++)
-                        {
-                            if (row["Barcode"].ToString() == dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString())
-                            {
-                                isExist = true;
-                                break;
-                            }
-                            else
-                            {
-                                isExist = false;
-                            }
-                        }
-                        if (!isExist)
-                        {
+                    //DataTable dtLines = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", txtSKU.Text);
+                    //bool isExist = true;
+                    //foreach (DataRow row in dtLines.Rows)
+                    //{
+                    //    for (int i = 0; dgvBarcode.Rows.Count > i; i++)
+                    //    {
+                    //        if (row["Barcode"].ToString() == dgvBarcode.Rows[i].Cells["Barcode"].Value.ToString())
+                    //        {
+                    //            isExist = true;
+                    //            break;
+                    //        }
+                    //        else
+                    //        {
+                    //            isExist = false;
+                    //        }
+                    //    }
+                    //    if (!isExist)
+                    //    {
 
-                            pc.deleteBarcode("sp_Product", "Barcode", "Delete", row["Barcode"].ToString());
-                        }
-                    }
+                    //        pc.deleteBarcode("sp_Product", "Barcode", "Delete", row["Barcode"].ToString());
+                    //    }
+                    //}
 
                     MessageBox.Show("Successfull updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
@@ -785,34 +755,41 @@ namespace ACP
             //int autoIncBarcode = pc.autoInc("barcode", "barcode");
             //Id.barcode = string.Format("{0:0000000000000}", autoIncBarcode);
             //pc.createUpdateBarcode("Barcode", "Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
-            if(additionalInfo.ShowDialog() == DialogResult.OK) 
+            if (Id.button == "Create")
             {
-                dgvBarcode.DataSource = Id.dt;
-                barcodeHideColumn();
-                //dgvBarcode.Columns["chargeID"].Visible = false;
-                //dgvBarcode.Columns["PID"].Visible = false;
-                //dgvBarcode.Columns["BMRXID"].Visible = false;
-                ////dgvBarcode.Columns["LID"].Visible = false;
-                //dgvBarcode.Columns["discountID"].Visible = false;
-                //dgvBarcode.Columns["CPuomID"].Visible = false;
-                //dgvBarcode.Columns["RPuomID"].Visible = false;
-                //dgvBarcode.Columns["BOMid"].Visible = false;
-                //dgvBarcode.Columns["userID"].Visible = false;
-                //foreach(DataRow row in Id.dt.Rows)
-                //{
-                //    dgvBarcode.Rows.Add(row["barcode"], row["SKU"], row["itemModelID"], row["chargeID"], row["PID"], row["BMRXID"], row["LID"], row["discountID"], row["CPuomID"], row["RPuomID"], row["BOMid"], row["factor"], row["retailPrice"], row["costPrice"], row["inventoryCost"], row["posDesc"], row["salesTax"], row["purchaseTax"], row["isDiscountable"], row["isActive"]);
-                //}
+                if (additionalInfo.ShowDialog() == DialogResult.OK)
+                {
+                    dgvBarcode.DataSource = Id.dt;
+                    barcodeHideColumn();
+                    //dgvBarcode.Columns["chargeID"].Visible = false;
+                    //dgvBarcode.Columns["PID"].Visible = false;
+                    //dgvBarcode.Columns["BMRXID"].Visible = false;
+                    ////dgvBarcode.Columns["LID"].Visible = false;
+                    //dgvBarcode.Columns["discountID"].Visible = false;
+                    //dgvBarcode.Columns["CPuomID"].Visible = false;
+                    //dgvBarcode.Columns["RPuomID"].Visible = false;
+                    //dgvBarcode.Columns["BOMid"].Visible = false;
+                    //dgvBarcode.Columns["userID"].Visible = false;
+                    //foreach(DataRow row in Id.dt.Rows)
+                    //{
+                    //    dgvBarcode.Rows.Add(row["barcode"], row["SKU"], row["itemModelID"], row["chargeID"], row["PID"], row["BMRXID"], row["LID"], row["discountID"], row["CPuomID"], row["RPuomID"], row["BOMid"], row["factor"], row["retailPrice"], row["costPrice"], row["inventoryCost"], row["posDesc"], row["salesTax"], row["purchaseTax"], row["isDiscountable"], row["isActive"]);
+                    //}
 
-                //if (Id.button == "Create")
-                //{
-                //    dgvBarcode.DataSource = Id.dtBarcode;
-                //    //dgvBarcode.Rows.Add(additionalInfo.txtBarcode.Text, char.ToUpper(additionalInfo.txtPosDesc.Text[0]) + additionalInfo.txtPosDesc.Text.Substring(1), additionalInfo.cmbPOunit.SelectedValue, additionalInfo.cmbPOunit.Text, additionalInfo.txtPOcostP.Text, additionalInfo.txtFactor.Text, additionalInfo.cmbRetailUnit.SelectedValue, additionalInfo.cmbRetailUnit.Text, additionalInfo.txtRetailP.Text, additionalInfo.txtInventoryCost.Text, Id.discountID, additionalInfo.txtPurchaseDiscount.Text, additionalInfo.cmbPurchaseTax.SelectedValue, additionalInfo.cmbSalesTax.SelectedValue, Id.bmrxID, additionalInfo.txtBMRX.Text, Id.privilegeID, additionalInfo.txtPrivilege.Text, additionalInfo.cmbItemModel.SelectedValue, additionalInfo.cmbItemModel.Text, additionalInfo.cbNotDiscountable.Checked, true, additionalInfo.cmbCharges.SelectedValue, additionalInfo.cmbCharges.Text, additionalInfo.txtConfig.Text, Id.LID, additionalInfo.txtIssueLoc.Text, additionalInfo.txtSite.Text, Id.whID, additionalInfo.txtWarehouse.Text);
-                //    barcodeHideColumn();
-                //}
-                //else if(Id.button == "Update")
-                //{
-                   // fetchBarcode();
-                //}
+                    //if (Id.button == "Create")
+                    //{
+                    //    dgvBarcode.DataSource = Id.dtBarcode;
+                    //    //dgvBarcode.Rows.Add(additionalInfo.txtBarcode.Text, char.ToUpper(additionalInfo.txtPosDesc.Text[0]) + additionalInfo.txtPosDesc.Text.Substring(1), additionalInfo.cmbPOunit.SelectedValue, additionalInfo.cmbPOunit.Text, additionalInfo.txtPOcostP.Text, additionalInfo.txtFactor.Text, additionalInfo.cmbRetailUnit.SelectedValue, additionalInfo.cmbRetailUnit.Text, additionalInfo.txtRetailP.Text, additionalInfo.txtInventoryCost.Text, Id.discountID, additionalInfo.txtPurchaseDiscount.Text, additionalInfo.cmbPurchaseTax.SelectedValue, additionalInfo.cmbSalesTax.SelectedValue, Id.bmrxID, additionalInfo.txtBMRX.Text, Id.privilegeID, additionalInfo.txtPrivilege.Text, additionalInfo.cmbItemModel.SelectedValue, additionalInfo.cmbItemModel.Text, additionalInfo.cbNotDiscountable.Checked, true, additionalInfo.cmbCharges.SelectedValue, additionalInfo.cmbCharges.Text, additionalInfo.txtConfig.Text, Id.LID, additionalInfo.txtIssueLoc.Text, additionalInfo.txtSite.Text, Id.whID, additionalInfo.txtWarehouse.Text);
+                    //    barcodeHideColumn();
+                    //}
+                    //else if(Id.button == "Update")
+                    //{
+                    // fetchBarcode();
+                    //}
+                }
+            }
+            else if(Id.button == "Update")
+            {
+                fetchBarcode();
             }
             //dgvBarcode.Rows.Add();
         }
@@ -1672,14 +1649,26 @@ namespace ACP
 
         private void tsbDeleteBarcode_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (res == DialogResult.Yes)
+           
+            if (Id.button == "Create")
             {
-                dgvBarcode.Rows.RemoveAt(dgvBarcode.SelectedRows[0].Index);
-                //pc.deleteProduct("sp_Product", "Barcode", "Delete", Id.SKU);
-                //fetchBarcode();
-                tsbDeleteBarcode.Enabled = false;
-                tsbEdit.Enabled = false;
+                DialogResult res = MessageBox.Show("Are you sure to delete this barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    dgvBarcode.Rows.RemoveAt(dgvBarcode.SelectedRows[0].Index);
+                    //pc.deleteProduct("sp_Product", "Barcode", "Delete", Id.SKU);
+                    //fetchBarcode();
+                    tsbDeleteBarcode.Enabled = false;
+                    tsbEdit.Enabled = false;
+                }
+            }
+            else if(Id.button == "Update")
+            {
+                DialogResult res = MessageBox.Show("Are you sure to delete this barcode? This action cannot be undo", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                pc.deleteProduct("sp_Product", "Barcode", "Delete", Id.SKU);
+                MessageBox.Show("Successfully deleted?", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                fetchBarcode();
+
             }
             //DialogResult res = MessageBox.Show("Delete barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             //if(res == DialogResult.Yes)
@@ -2026,12 +2015,19 @@ namespace ACP
                 details.cmbCharges.Text = dgvBarcode.Rows[rowIndex].Cells["Charge description"].Value.ToString();
 
                 DialogResult res = details.ShowDialog();
-                if(res == DialogResult.OK)
+                if (Id.button == "Create")
                 {
-                    dgvBarcode.DataSource = Id.dt;
-                    tsbEdit.Enabled = false;
-                    tsbDeleteBarcode.Enabled = false;
-                    //barcodeHideColumn();
+                    if (res == DialogResult.OK)
+                    {
+                        dgvBarcode.DataSource = Id.dt;
+                        tsbEdit.Enabled = false;
+                        tsbDeleteBarcode.Enabled = false;
+                        //barcodeHideColumn();
+                    }
+                }
+                else if(Id.button == "Update")
+                {
+                    fetchBarcode();
                 }
                 
                 //Id.button = "Update";

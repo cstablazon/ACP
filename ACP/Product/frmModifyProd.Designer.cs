@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmModifyProd));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pGeneral = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.cmbProdDimension = new System.Windows.Forms.ComboBox();
@@ -67,16 +66,6 @@
             this.tsbView = new System.Windows.Forms.ToolStripButton();
             this.dgvBarcode = new System.Windows.Forms.DataGridView();
             this.lblProdDetails = new System.Windows.Forms.Label();
-            this.pFinancials = new System.Windows.Forms.Panel();
-            this.label56 = new System.Windows.Forms.Label();
-            this.cbSalesTax = new System.Windows.Forms.ComboBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.cbPurchaseTax = new System.Windows.Forms.ComboBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.cbItemGroup = new System.Windows.Forms.ComboBox();
-            this.lblFinancials = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -97,13 +86,11 @@
             this.btnNewBarcode = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1.SuspendLayout();
             this.pGeneral.SuspendLayout();
             this.pProdCategory.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).BeginInit();
-            this.pFinancials.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -116,18 +103,6 @@
             // 
             this.timer1.Interval = 5;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.pGeneral);
-            this.flowLayoutPanel1.Controls.Add(this.pProdCategory);
-            this.flowLayoutPanel1.Controls.Add(this.pFinancials);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 104);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(955, 600);
-            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // pGeneral
             // 
@@ -158,11 +133,10 @@
             this.pGeneral.Controls.Add(this.label7);
             this.pGeneral.Controls.Add(this.txtProdName);
             this.pGeneral.Controls.Add(this.label3);
-            this.pGeneral.Location = new System.Drawing.Point(3, 3);
-            this.pGeneral.MaximumSize = new System.Drawing.Size(950, 258);
-            this.pGeneral.MinimumSize = new System.Drawing.Size(854, 20);
+            this.pGeneral.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pGeneral.Location = new System.Drawing.Point(0, 98);
             this.pGeneral.Name = "pGeneral";
-            this.pGeneral.Size = new System.Drawing.Size(950, 258);
+            this.pGeneral.Size = new System.Drawing.Size(1197, 258);
             this.pGeneral.TabIndex = 0;
             this.pGeneral.Paint += new System.Windows.Forms.PaintEventHandler(this.pGeneral_Paint);
             this.pGeneral.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pGeneral_MouseDown);
@@ -466,11 +440,10 @@
             this.pProdCategory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pProdCategory.Controls.Add(this.groupBox1);
             this.pProdCategory.Controls.Add(this.lblProdDetails);
-            this.pProdCategory.Location = new System.Drawing.Point(3, 267);
-            this.pProdCategory.MaximumSize = new System.Drawing.Size(950, 320);
-            this.pProdCategory.MinimumSize = new System.Drawing.Size(854, 20);
+            this.pProdCategory.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pProdCategory.Location = new System.Drawing.Point(0, 356);
             this.pProdCategory.Name = "pProdCategory";
-            this.pProdCategory.Size = new System.Drawing.Size(950, 320);
+            this.pProdCategory.Size = new System.Drawing.Size(1197, 348);
             this.pProdCategory.TabIndex = 1;
             this.pProdCategory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pProdCategory_MouseDown);
             // 
@@ -478,10 +451,11 @@
             // 
             this.groupBox1.Controls.Add(this.toolStrip3);
             this.groupBox1.Controls.Add(this.dgvBarcode);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(9, 30);
+            this.groupBox1.Location = new System.Drawing.Point(0, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(936, 285);
+            this.groupBox1.Size = new System.Drawing.Size(1195, 331);
             this.groupBox1.TabIndex = 71;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Additional Information and Barcode";
@@ -496,7 +470,7 @@
             this.tsbView});
             this.toolStrip3.Location = new System.Drawing.Point(3, 18);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(930, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(1189, 25);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             this.toolStrip3.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip3_ItemClicked);
@@ -554,7 +528,7 @@
             this.dgvBarcode.ReadOnly = true;
             this.dgvBarcode.RowHeadersVisible = false;
             this.dgvBarcode.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBarcode.Size = new System.Drawing.Size(930, 236);
+            this.dgvBarcode.Size = new System.Drawing.Size(1189, 282);
             this.dgvBarcode.TabIndex = 0;
             this.dgvBarcode.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellClick);
             this.dgvBarcode.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBarcode_CellContentClick);
@@ -578,124 +552,6 @@
             this.lblProdDetails.Click += new System.EventHandler(this.lblProdDetails_Click);
             this.lblProdDetails.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblProdDetails_MouseDown);
             // 
-            // pFinancials
-            // 
-            this.pFinancials.BackColor = System.Drawing.Color.White;
-            this.pFinancials.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pFinancials.Controls.Add(this.label56);
-            this.pFinancials.Controls.Add(this.cbSalesTax);
-            this.pFinancials.Controls.Add(this.label48);
-            this.pFinancials.Controls.Add(this.cbPurchaseTax);
-            this.pFinancials.Controls.Add(this.label52);
-            this.pFinancials.Controls.Add(this.label53);
-            this.pFinancials.Controls.Add(this.label54);
-            this.pFinancials.Controls.Add(this.cbItemGroup);
-            this.pFinancials.Controls.Add(this.lblFinancials);
-            this.pFinancials.Location = new System.Drawing.Point(959, 3);
-            this.pFinancials.MaximumSize = new System.Drawing.Size(955, 130);
-            this.pFinancials.MinimumSize = new System.Drawing.Size(854, 20);
-            this.pFinancials.Name = "pFinancials";
-            this.pFinancials.Size = new System.Drawing.Size(950, 20);
-            this.pFinancials.TabIndex = 32;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.Location = new System.Drawing.Point(290, 25);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(125, 15);
-            this.label56.TabIndex = 32;
-            this.label56.Text = "Item Sales Tax Group";
-            // 
-            // cbSalesTax
-            // 
-            this.cbSalesTax.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSalesTax.FormattingEnabled = true;
-            this.cbSalesTax.Items.AddRange(new object[] {
-            "IVAT"});
-            this.cbSalesTax.Location = new System.Drawing.Point(400, 79);
-            this.cbSalesTax.Name = "cbSalesTax";
-            this.cbSalesTax.Size = new System.Drawing.Size(123, 23);
-            this.cbSalesTax.TabIndex = 32;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(291, 80);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(55, 15);
-            this.label48.TabIndex = 30;
-            this.label48.Text = "Sales tax:";
-            // 
-            // cbPurchaseTax
-            // 
-            this.cbPurchaseTax.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPurchaseTax.FormattingEnabled = true;
-            this.cbPurchaseTax.Items.AddRange(new object[] {
-            "OVAT"});
-            this.cbPurchaseTax.Location = new System.Drawing.Point(400, 46);
-            this.cbPurchaseTax.Name = "cbPurchaseTax";
-            this.cbPurchaseTax.Size = new System.Drawing.Size(123, 23);
-            this.cbPurchaseTax.TabIndex = 31;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(12, 28);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(75, 15);
-            this.label52.TabIndex = 23;
-            this.label52.Text = "Cost Posting";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label53.Location = new System.Drawing.Point(290, 50);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(77, 15);
-            this.label53.TabIndex = 22;
-            this.label53.Text = "Purchase tax:";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label54.Location = new System.Drawing.Point(12, 53);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(69, 15);
-            this.label54.TabIndex = 21;
-            this.label54.Text = "Item group:";
-            // 
-            // cbItemGroup
-            // 
-            this.cbItemGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbItemGroup.FormattingEnabled = true;
-            this.cbItemGroup.Location = new System.Drawing.Point(98, 50);
-            this.cbItemGroup.Name = "cbItemGroup";
-            this.cbItemGroup.Size = new System.Drawing.Size(123, 23);
-            this.cbItemGroup.TabIndex = 30;
-            // 
-            // lblFinancials
-            // 
-            this.lblFinancials.AutoSize = true;
-            this.lblFinancials.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblFinancials.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblFinancials.Enabled = false;
-            this.lblFinancials.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinancials.Image = global::ACP.Properties.Resources.arrowRight10px;
-            this.lblFinancials.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblFinancials.Location = new System.Drawing.Point(0, 0);
-            this.lblFinancials.Name = "lblFinancials";
-            this.lblFinancials.Size = new System.Drawing.Size(81, 15);
-            this.lblFinancials.TabIndex = 29;
-            this.lblFinancials.Text = "    3 Financials";
-            this.lblFinancials.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblFinancials.Click += new System.EventHandler(this.lblFinancials_Click);
-            // 
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -706,7 +562,7 @@
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
-            this.btnCreate.Location = new System.Drawing.Point(790, 3);
+            this.btnCreate.Location = new System.Drawing.Point(1017, 3);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(83, 30);
             this.btnCreate.TabIndex = 96;
@@ -725,7 +581,7 @@
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(879, 3);
+            this.btnClose.Location = new System.Drawing.Point(1106, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
             this.btnClose.TabIndex = 97;
@@ -744,7 +600,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(970, 10);
+            this.panel2.Size = new System.Drawing.Size(1197, 10);
             this.panel2.TabIndex = 4;
             // 
             // panel3
@@ -756,7 +612,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 10);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(970, 88);
+            this.panel3.Size = new System.Drawing.Size(1197, 88);
             this.panel3.TabIndex = 10;
             // 
             // panel4
@@ -961,9 +817,9 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnCreate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 704);
+            this.panel1.Location = new System.Drawing.Point(0, 710);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(970, 39);
+            this.panel1.Size = new System.Drawing.Size(1197, 39);
             this.panel1.TabIndex = 98;
             // 
             // frmModifyProd
@@ -972,11 +828,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(987, 648);
+            this.ClientSize = new System.Drawing.Size(1197, 749);
+            this.Controls.Add(this.pProdCategory);
+            this.Controls.Add(this.pGeneral);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -984,9 +841,9 @@
             this.Name = "frmModifyProd";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmModifyProd_FormClosing);
             this.Load += new System.EventHandler(this.frmModifyProd_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.pGeneral.ResumeLayout(false);
             this.pGeneral.PerformLayout();
             this.pProdCategory.ResumeLayout(false);
@@ -996,8 +853,6 @@
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcode)).EndInit();
-            this.pFinancials.ResumeLayout(false);
-            this.pFinancials.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -1015,16 +870,12 @@
 
         public System.Windows.Forms.TextBox txtProdName;
         public System.Windows.Forms.TextBox txtSKU;
-        public System.Windows.Forms.ComboBox cbSalesTax;
-        public System.Windows.Forms.ComboBox cbPurchaseTax;
-        public System.Windows.Forms.ComboBox cbItemGroup;
         public System.Windows.Forms.ComboBox cmbProdType;
         public System.Windows.Forms.ComboBox cmbProdSubType;
         public System.Windows.Forms.CheckBox cbConcession;
         public System.Windows.Forms.CheckBox cbSKU;
         public System.Windows.Forms.Label lblGeneral;
         public System.Windows.Forms.Timer timer1;
-        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         public System.Windows.Forms.Panel pGeneral;
         public System.Windows.Forms.Label label3;
         public System.Windows.Forms.Panel pProdCategory;
@@ -1032,13 +883,6 @@
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label14;
         public System.Windows.Forms.Label label12;
-        public System.Windows.Forms.Panel pFinancials;
-        public System.Windows.Forms.Label label56;
-        public System.Windows.Forms.Label label48;
-        public System.Windows.Forms.Label label52;
-        public System.Windows.Forms.Label label53;
-        public System.Windows.Forms.Label label54;
-        public System.Windows.Forms.Label lblFinancials;
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label label8;

@@ -1103,13 +1103,13 @@
             this.dgvLines.BackgroundColor = System.Drawing.Color.White;
             this.dgvLines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLines.Location = new System.Drawing.Point(3, 18);
+            this.dgvLines.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvLines.Location = new System.Drawing.Point(3, 46);
             this.dgvLines.MultiSelect = false;
             this.dgvLines.Name = "dgvLines";
             this.dgvLines.RowHeadersVisible = false;
             this.dgvLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLines.Size = new System.Drawing.Size(1352, 188);
+            this.dgvLines.Size = new System.Drawing.Size(1352, 160);
             this.dgvLines.TabIndex = 3;
             this.dgvLines.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLines_CellClick);
             this.dgvLines.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLines_CellFormatting);

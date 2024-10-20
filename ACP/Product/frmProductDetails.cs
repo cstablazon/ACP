@@ -473,7 +473,7 @@ namespace ACP
 
         }
 
-        int discountID;
+        int? discountID;
         private void dgvPurchaseDiscount_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -859,11 +859,11 @@ namespace ACP
         {
             string itemModelID = cmbItemModel.SelectedValue.ToString();
                 int? chargeID = Convert.ToInt32(cmbCharges.SelectedValue);
-                int CPuomID = Convert.ToInt32(cmbPOunit.SelectedValue);
-                int RPuomID = Convert.ToInt32(cmbRetailUnit.SelectedValue);
-                int bomID = Convert.ToInt32(cmbBOM.SelectedValue);
+                int? CPuomID = Convert.ToInt32(cmbPOunit.SelectedValue);
+                int? RPuomID = Convert.ToInt32(cmbRetailUnit.SelectedValue);
+                int? bomID = Convert.ToInt32(cmbBOM.SelectedValue);
                 decimal? factor, costPrice, inventoryCost;
-                decimal retailPrice = Convert.ToDecimal(txtRetailP.Text);
+                decimal? retailPrice = Convert.ToDecimal(txtRetailP.Text);
 
                 if (cmbPOunit.Text != cmbRetailUnit.Text)
                 {
@@ -1066,221 +1066,224 @@ namespace ACP
                 {
                     if(btnCreate.Text == "Create")
                     {
-                        if (Id.dt.Rows.Count > 0)
+                        //if (Id.dt.Rows.Count > 0)
+                        //{
+                        DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+                            //DataRow dRow = Id.dt.NewRow();
+                        if (dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
                         {
-                            
-                            DataRow dRow = Id.dt.NewRow();
-                            if (Id.dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
-                            {
-                                MessageBox.Show("" + barcode + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-                                dRow[0] = txtBarcode.Text;
-                                dRow[1] = txtPosDesc.Text;
-                                dRow[2] = CPuomID;
-                                dRow[3] = cmbPOunit.Text;
-                                dRow[4] = costPrice;
-                                dRow[5] = factor ?? (object)DBNull.Value;
-                                dRow[6] = RPuomID;
-                                dRow[7] = cmbRetailUnit.Text;
-                                dRow[8] = retailPrice;
-                                dRow[9] = bomID;
-                                dRow[10] = cmbBOM.Text;
-                                dRow[11] = inventoryCost;
-                                dRow[12] = discountID;
-                                dRow[13] = txtPurchaseDiscount.Text;
-                                dRow[14] = bmrxID;
-                                dRow[15] = txtBMRX.Text;
-                                dRow[16] = privilegeID;
-                                dRow[17] = txtPrivilege.Text;
-                                dRow[18] = itemModelID;
-                                dRow[19] = chargeID;
-                                dRow[20] = cmbCharges.Text;
-                                dRow[21] = LID;
-                                dRow[22] = txtIssueLoc.Text;
-                                dRow[23] = txtWarehouse.Text;
-                                dRow[24] = txtSite.Text;
-                                dRow[25] = cmbSalesTax.Text;
-                                dRow[26] = cmbPurchaseTax.Text;
-                                dRow[27] = cbNotDiscountable.Checked;
-                                dRow[28] = true;
-                                dRow[29] = Id.userID;
-                                Id.dt.Rows.Add(dRow);
-                                //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.DialogResult = DialogResult.OK;
-                                this.Hide();
-                            }
+                            MessageBox.Show("" + barcode + " already exist in Barcode Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("1");
-                            DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
-                            Id.dt.Columns.Clear();
-                            Id.dt.Rows.Clear();
-                            Id.dt.Columns.Add("Barcode", typeof(string));
-                            Id.dt.Columns.Add("Product description", typeof(string));
-                            Id.dt.Columns.Add("CPuomID", typeof(int));
-                            Id.dt.Columns.Add("Purchase unit", typeof(string));
-                            Id.dt.Columns.Add("Cost price", typeof(decimal));
-                            Id.dt.Columns.Add("factor", typeof(decimal));
-                            Id.dt.Columns.Add("RPuomID", typeof(int));
-                            Id.dt.Columns.Add("Retail unit", typeof(string));
-                            Id.dt.Columns.Add("Retail price", typeof(decimal));
-                            Id.dt.Columns.Add("BOMid", typeof(int));
-                            Id.dt.Columns.Add("BOM unit", typeof(string));
-                            Id.dt.Columns.Add("Inventory cost", typeof(decimal));
-                            Id.dt.Columns.Add("discountID", typeof(int));
-                            Id.dt.Columns.Add("Purchase discount", typeof(string));
-                            Id.dt.Columns.Add("BMRXID", typeof(long));
-                            Id.dt.Columns.Add("BMRX", typeof(string));
-                            Id.dt.Columns.Add("PID", typeof(long));
-                            Id.dt.Columns.Add("Privilege setup", typeof(string));
-                            Id.dt.Columns.Add("Item model ID", typeof(string));
-                            Id.dt.Columns.Add("chargeID", typeof(int));
-                            Id.dt.Columns.Add("Charge description", typeof(string));
-                            Id.dt.Columns.Add("LID", typeof(long));
-                            Id.dt.Columns.Add("Issue location", typeof(string));
-                            Id.dt.Columns.Add("Warehouse", typeof(string));
-                            Id.dt.Columns.Add("Site", typeof(string));
-                            Id.dt.Columns.Add("Sales tax", typeof(string));
-                            Id.dt.Columns.Add("Purchase tax", typeof(string));
-                            Id.dt.Columns.Add("isDiscountable", typeof(bool));
-                            Id.dt.Columns.Add("isActive", typeof(bool));
-                            Id.dt.Columns.Add("userID", typeof(int));
-
-                            DataRow dRow = Id.dt.NewRow();
-                            foreach(DataRow imp in dt.Rows)
-                            {
-                                Id.dt.ImportRow(imp);
-
-                                MessageBox.Show("2");
-                            }
-                            if (Id.dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
-                            {
-                                MessageBox.Show("" + barcode + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            {
-
-                                MessageBox.Show("3");
-                                dRow[0] = txtBarcode.Text;
-                                dRow[1] = txtPosDesc.Text;
-                                dRow[2] = CPuomID;
-                                dRow[3] = cmbPOunit.Text;
-                                dRow[4] = costPrice;
-                                dRow[5] = factor ?? (object)DBNull.Value;
-                                dRow[6] = RPuomID;
-                                dRow[7] = cmbRetailUnit.Text;
-                                dRow[8] = retailPrice;
-                                dRow[9] = bomID;
-                                dRow[10] = cmbBOM.Text;
-                                dRow[11] = inventoryCost;
-                                dRow[12] = discountID;
-                                dRow[13] = txtPurchaseDiscount.Text;
-                                dRow[14] = bmrxID;
-                                dRow[15] = txtBMRX.Text;
-                                dRow[16] = privilegeID;
-                                dRow[17] = txtPrivilege.Text;
-                                dRow[18] = itemModelID;
-                                dRow[19] = chargeID;
-                                dRow[20] = cmbCharges.Text;
-                                dRow[21] = LID;
-                                dRow[22] = txtIssueLoc.Text;
-                                dRow[23] = txtWarehouse.Text;
-                                dRow[24] = txtSite.Text;
-                                dRow[25] = cmbSalesTax.Text;
-                                dRow[26] = cmbPurchaseTax.Text;
-                                dRow[27] = cbNotDiscountable.Checked;
-                                dRow[28] = true;
-                                dRow[29] = Id.userID;
-                                Id.dt.Rows.Add(dRow);
+                            pc.createUpdateBarcode("Create", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, txtBarcode.Text);
+                            MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //dRow[0] = txtBarcode.Text;
+                                //dRow[1] = txtPosDesc.Text;
+                                //dRow[2] = CPuomID;
+                                //dRow[3] = cmbPOunit.Text;
+                                //dRow[4] = costPrice;
+                                //dRow[5] = factor ?? (object)DBNull.Value;
+                                //dRow[6] = RPuomID;
+                                //dRow[7] = cmbRetailUnit.Text;
+                                //dRow[8] = retailPrice;
+                                //dRow[9] = bomID;
+                                //dRow[10] = cmbBOM.Text;
+                                //dRow[11] = inventoryCost;
+                                //dRow[12] = discountID;
+                                //dRow[13] = txtPurchaseDiscount.Text;
+                                //dRow[14] = bmrxID;
+                                //dRow[15] = txtBMRX.Text;
+                                //dRow[16] = privilegeID;
+                                //dRow[17] = txtPrivilege.Text;
+                                //dRow[18] = itemModelID;
+                                //dRow[19] = chargeID;
+                                //dRow[20] = cmbCharges.Text;
+                                //dRow[21] = LID;
+                                //dRow[22] = txtIssueLoc.Text;
+                                //dRow[23] = txtWarehouse.Text;
+                                //dRow[24] = txtSite.Text;
+                                //dRow[25] = cmbSalesTax.Text;
+                                //dRow[26] = cmbPurchaseTax.Text;
+                                //dRow[27] = cbNotDiscountable.Checked;
+                                //dRow[28] = true;
+                                //dRow[29] = Id.userID;
+                                //Id.dt.Rows.Add(dRow);
                                 //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.DialogResult = DialogResult.OK;
                                 this.Hide();
                             }
-                        }
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("1");
+                        //    DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+                        //    Id.dt.Columns.Clear();
+                        //    Id.dt.Rows.Clear();
+                        //    Id.dt.Columns.Add("Barcode", typeof(string));
+                        //    Id.dt.Columns.Add("Product description", typeof(string));
+                        //    Id.dt.Columns.Add("CPuomID", typeof(int));
+                        //    Id.dt.Columns.Add("Purchase unit", typeof(string));
+                        //    Id.dt.Columns.Add("Cost price", typeof(decimal));
+                        //    Id.dt.Columns.Add("factor", typeof(decimal));
+                        //    Id.dt.Columns.Add("RPuomID", typeof(int));
+                        //    Id.dt.Columns.Add("Retail unit", typeof(string));
+                        //    Id.dt.Columns.Add("Retail price", typeof(decimal));
+                        //    Id.dt.Columns.Add("BOMid", typeof(int));
+                        //    Id.dt.Columns.Add("BOM unit", typeof(string));
+                        //    Id.dt.Columns.Add("Inventory cost", typeof(decimal));
+                        //    Id.dt.Columns.Add("discountID", typeof(int));
+                        //    Id.dt.Columns.Add("Purchase discount", typeof(string));
+                        //    Id.dt.Columns.Add("BMRXID", typeof(long));
+                        //    Id.dt.Columns.Add("BMRX", typeof(string));
+                        //    Id.dt.Columns.Add("PID", typeof(long));
+                        //    Id.dt.Columns.Add("Privilege setup", typeof(string));
+                        //    Id.dt.Columns.Add("Item model ID", typeof(string));
+                        //    Id.dt.Columns.Add("chargeID", typeof(int));
+                        //    Id.dt.Columns.Add("Charge description", typeof(string));
+                        //    Id.dt.Columns.Add("LID", typeof(long));
+                        //    Id.dt.Columns.Add("Issue location", typeof(string));
+                        //    Id.dt.Columns.Add("Warehouse", typeof(string));
+                        //    Id.dt.Columns.Add("Site", typeof(string));
+                        //    Id.dt.Columns.Add("Sales tax", typeof(string));
+                        //    Id.dt.Columns.Add("Purchase tax", typeof(string));
+                        //    Id.dt.Columns.Add("isDiscountable", typeof(bool));
+                        //    Id.dt.Columns.Add("isActive", typeof(bool));
+                        //    Id.dt.Columns.Add("userID", typeof(int));
+
+                        //    DataRow dRow = Id.dt.NewRow();
+                        //    foreach(DataRow imp in dt.Rows)
+                        //    {
+                        //        Id.dt.ImportRow(imp);
+
+                        //        MessageBox.Show("2");
+                        //    }
+                        //    if (Id.dt.Select("barcode = '" + txtBarcode.Text + "'").Any())
+                        //    {
+                        //        MessageBox.Show("" + barcode + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    }
+                        //    else
+                        //    {
+
+                        //        MessageBox.Show("3");
+                        //        dRow[0] = txtBarcode.Text;
+                        //        dRow[1] = txtPosDesc.Text;
+                        //        dRow[2] = CPuomID;
+                        //        dRow[3] = cmbPOunit.Text;
+                        //        dRow[4] = costPrice;
+                        //        dRow[5] = factor ?? (object)DBNull.Value;
+                        //        dRow[6] = RPuomID;
+                        //        dRow[7] = cmbRetailUnit.Text;
+                        //        dRow[8] = retailPrice;
+                        //        dRow[9] = bomID;
+                        //        dRow[10] = cmbBOM.Text;
+                        //        dRow[11] = inventoryCost;
+                        //        dRow[12] = discountID;
+                        //        dRow[13] = txtPurchaseDiscount.Text;
+                        //        dRow[14] = bmrxID;
+                        //        dRow[15] = txtBMRX.Text;
+                        //        dRow[16] = privilegeID;
+                        //        dRow[17] = txtPrivilege.Text;
+                        //        dRow[18] = itemModelID;
+                        //        dRow[19] = chargeID;
+                        //        dRow[20] = cmbCharges.Text;
+                        //        dRow[21] = LID;
+                        //        dRow[22] = txtIssueLoc.Text;
+                        //        dRow[23] = txtWarehouse.Text;
+                        //        dRow[24] = txtSite.Text;
+                        //        dRow[25] = cmbSalesTax.Text;
+                        //        dRow[26] = cmbPurchaseTax.Text;
+                        //        dRow[27] = cbNotDiscountable.Checked;
+                        //        dRow[28] = true;
+                        //        dRow[29] = Id.userID;
+                        //        Id.dt.Rows.Add(dRow);
+                        //        //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //        this.DialogResult = DialogResult.OK;
+                        //        this.Hide();
+                        //    }
+                        //}
                     }
                     else if(btnCreate.Text == "Update")
                     {
+                        pc.createUpdateBarcode("Update", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, txtBarcode.Text);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("4");
+                        //DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
+                        //Id.dt.Columns.Clear();
+                        //Id.dt.Rows.Clear();
+                        //Id.dt.Columns.Add("Barcode", typeof(string));
+                        //Id.dt.Columns.Add("Product description", typeof(string));
+                        //Id.dt.Columns.Add("CPuomID", typeof(int));
+                        //Id.dt.Columns.Add("Purchase unit", typeof(string));
+                        //Id.dt.Columns.Add("Cost price", typeof(decimal));
+                        //Id.dt.Columns.Add("factor", typeof(decimal));
+                        //Id.dt.Columns.Add("RPuomID", typeof(int));
+                        //Id.dt.Columns.Add("Retail unit", typeof(string));
+                        //Id.dt.Columns.Add("Retail price", typeof(decimal));
+                        //Id.dt.Columns.Add("BOMid", typeof(int));
+                        //Id.dt.Columns.Add("BOM unit", typeof(string));
+                        //Id.dt.Columns.Add("Inventory cost", typeof(decimal));
+                        //Id.dt.Columns.Add("discountID", typeof(int));
+                        //Id.dt.Columns.Add("Purchase discount", typeof(string));
+                        //Id.dt.Columns.Add("BMRXID", typeof(long));
+                        //Id.dt.Columns.Add("BMRX", typeof(string));
+                        //Id.dt.Columns.Add("PID", typeof(long));
+                        //Id.dt.Columns.Add("Privilege setup", typeof(string));
+                        //Id.dt.Columns.Add("Item model ID", typeof(string));
+                        //Id.dt.Columns.Add("chargeID", typeof(int));
+                        //Id.dt.Columns.Add("Charge description", typeof(string));
+                        //Id.dt.Columns.Add("LID", typeof(long));
+                        //Id.dt.Columns.Add("Issue location", typeof(string));
+                        //Id.dt.Columns.Add("Warehouse", typeof(string));
+                        //Id.dt.Columns.Add("Site", typeof(string));
+                        //Id.dt.Columns.Add("Sales tax", typeof(string));
+                        //Id.dt.Columns.Add("Purchase tax", typeof(string));
+                        //Id.dt.Columns.Add("isDiscountable", typeof(bool));
+                        //Id.dt.Columns.Add("isActive", typeof(bool));
+                        //Id.dt.Columns.Add("userID", typeof(int));
 
-                        MessageBox.Show("4");
-                        DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchBarcodeList", Id.SKU);
-                        Id.dt.Columns.Clear();
-                        Id.dt.Rows.Clear();
-                        Id.dt.Columns.Add("Barcode", typeof(string));
-                        Id.dt.Columns.Add("Product description", typeof(string));
-                        Id.dt.Columns.Add("CPuomID", typeof(int));
-                        Id.dt.Columns.Add("Purchase unit", typeof(string));
-                        Id.dt.Columns.Add("Cost price", typeof(decimal));
-                        Id.dt.Columns.Add("factor", typeof(decimal));
-                        Id.dt.Columns.Add("RPuomID", typeof(int));
-                        Id.dt.Columns.Add("Retail unit", typeof(string));
-                        Id.dt.Columns.Add("Retail price", typeof(decimal));
-                        Id.dt.Columns.Add("BOMid", typeof(int));
-                        Id.dt.Columns.Add("BOM unit", typeof(string));
-                        Id.dt.Columns.Add("Inventory cost", typeof(decimal));
-                        Id.dt.Columns.Add("discountID", typeof(int));
-                        Id.dt.Columns.Add("Purchase discount", typeof(string));
-                        Id.dt.Columns.Add("BMRXID", typeof(long));
-                        Id.dt.Columns.Add("BMRX", typeof(string));
-                        Id.dt.Columns.Add("PID", typeof(long));
-                        Id.dt.Columns.Add("Privilege setup", typeof(string));
-                        Id.dt.Columns.Add("Item model ID", typeof(string));
-                        Id.dt.Columns.Add("chargeID", typeof(int));
-                        Id.dt.Columns.Add("Charge description", typeof(string));
-                        Id.dt.Columns.Add("LID", typeof(long));
-                        Id.dt.Columns.Add("Issue location", typeof(string));
-                        Id.dt.Columns.Add("Warehouse", typeof(string));
-                        Id.dt.Columns.Add("Site", typeof(string));
-                        Id.dt.Columns.Add("Sales tax", typeof(string));
-                        Id.dt.Columns.Add("Purchase tax", typeof(string));
-                        Id.dt.Columns.Add("isDiscountable", typeof(bool));
-                        Id.dt.Columns.Add("isActive", typeof(bool));
-                        Id.dt.Columns.Add("userID", typeof(int));
+                        //foreach (DataRow imp in dt.Rows)
+                        //{
+                        //    Id.dt.ImportRow(imp);
 
-                        foreach (DataRow imp in dt.Rows)
-                        {
-                            Id.dt.ImportRow(imp);
+                        //    MessageBox.Show("2");
+                        //}
+                        //DataRow dRow = Id.dt.Select("Barcode = '" + Id.barcode + "'").FirstOrDefault();
+                        //    if (dRow != null)
+                        //    {
 
-                            MessageBox.Show("2");
-                        }
-                        DataRow dRow = Id.dt.Select("Barcode = '" + Id.barcode + "'").FirstOrDefault();
-                            if (dRow != null)
-                            {
-
-                                MessageBox.Show("5");
-                                dRow["Barcode"] = txtBarcode.Text;
-                                dRow["Item model ID"] = itemModelID;
-                                dRow["chargeID"] = chargeID;
-                                dRow["Charge description"] = cmbCharges.Text;
-                                dRow["PID"] = Id.privilegeID;
-                                dRow["Privilege setup"] = txtPrivilege.Text;
-                                dRow["BMRXID"] = Id.bmrxID;
-                                dRow["BMRX"] = txtBMRX.Text;
-                                dRow["LID"] = Id.LID;
-                                dRow["Issue location"] = txtIssueLoc.Text;
-                                dRow["Warehouse"] = txtWarehouse.Text;
-                                dRow["Site"] = txtSite.Text;
-                                dRow["discountID"] = discountID;
-                                dRow["Purchase discount"] = txtPurchaseDiscount.Text;
-                                dRow["CPuomID"] = CPuomID;
-                                dRow["Purchase unit"] = cmbPOunit.Text;
-                                dRow["Cost price"] = costPrice;
-                                dRow["Inventory cost"] = inventoryCost;
-                                dRow["RPuomID"] = RPuomID;
-                                dRow["Retail unit"] = cmbRetailUnit.Text;
-                                dRow["Retail price"] = retailPrice;
-                                dRow["BOMid"] = bomID;
-                                dRow["BOM unit"] = cmbBOM.Text;
-                                dRow["factor"] = factor ?? (object)DBNull.Value;
-                                dRow["Product description"] = txtPosDesc.Text;
-                                dRow["Sales tax"] = cmbSalesTax.Text;
-                                dRow["Purchase tax"] = cmbPurchaseTax.Text;
-                                dRow["isDiscountable"] = cbNotDiscountable.Checked;
+                        //        MessageBox.Show("5");
+                        //        dRow["Barcode"] = txtBarcode.Text;
+                        //        dRow["Item model ID"] = itemModelID;
+                        //        dRow["chargeID"] = chargeID;
+                        //        dRow["Charge description"] = cmbCharges.Text;
+                        //        dRow["PID"] = Id.privilegeID;
+                        //        dRow["Privilege setup"] = txtPrivilege.Text;
+                        //        dRow["BMRXID"] = Id.bmrxID;
+                        //        dRow["BMRX"] = txtBMRX.Text;
+                        //        dRow["LID"] = Id.LID;
+                        //        dRow["Issue location"] = txtIssueLoc.Text;
+                        //        dRow["Warehouse"] = txtWarehouse.Text;
+                        //        dRow["Site"] = txtSite.Text;
+                        //        dRow["discountID"] = discountID;
+                        //        dRow["Purchase discount"] = txtPurchaseDiscount.Text;
+                        //        dRow["CPuomID"] = CPuomID;
+                        //        dRow["Purchase unit"] = cmbPOunit.Text;
+                        //        dRow["Cost price"] = costPrice;
+                        //        dRow["Inventory cost"] = inventoryCost;
+                        //        dRow["RPuomID"] = RPuomID;
+                        //        dRow["Retail unit"] = cmbRetailUnit.Text;
+                        //        dRow["Retail price"] = retailPrice;
+                        //        dRow["BOMid"] = bomID;
+                        //        dRow["BOM unit"] = cmbBOM.Text;
+                        //        dRow["factor"] = factor ?? (object)DBNull.Value;
+                        //        dRow["Product description"] = txtPosDesc.Text;
+                        //        dRow["Sales tax"] = cmbSalesTax.Text;
+                        //        dRow["Purchase tax"] = cmbPurchaseTax.Text;
+                        //        dRow["isDiscountable"] = cbNotDiscountable.Checked;
 
                             
-                        }
+                        //}
                         this.DialogResult = DialogResult.OK;
                         this.Hide();
                     }
