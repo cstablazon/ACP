@@ -62,7 +62,6 @@ namespace ACP
                 if (dropdownBtn)
                 {
                      pHeader.Height += 20;
-                    flowLayoutPanel1.Height += 15;
                     if (pHeader.Height == pHeader.MaximumSize.Height)
                     {
                         lblHeader.Image = Properties.Resources.arrowDown10px;
@@ -73,7 +72,6 @@ namespace ACP
                 else
                 {
                     pHeader.Height -= 20;
-                    flowLayoutPanel1.Height -= 15;
                     if (pHeader.Height == pHeader.MinimumSize.Height)
                     {
                         lblHeader.Image = Properties.Resources.arrowRight10px;
@@ -89,7 +87,6 @@ namespace ACP
                 if (dropdownBtn2)
                 {
                     pLines.Height -= 20;
-                    flowLayoutPanel1.Height -= 15;
                     if (pLines.Height == pLines.MinimumSize.Height)
                     {
                         lblLines.Image = Properties.Resources.arrowRight10px;
@@ -100,7 +97,6 @@ namespace ACP
                 else
                 {
                     pLines.Height += 20;
-                    flowLayoutPanel1.Height += 15;
                     if (pLines.Height == pLines.MaximumSize.Height)
                     {
                         lblLines.Image = Properties.Resources.arrowDown10px;
@@ -115,7 +111,7 @@ namespace ACP
                 if (dropdownBtn2)
                 {
                     pLines.Height -= 20;
-                    flowLayoutPanel1.Height -= 15;
+                   
                     if (pLines.Height == pLines.MinimumSize.Height)
                     {
                         lblLines.Image = Properties.Resources.arrowRight10px;
@@ -126,7 +122,7 @@ namespace ACP
                 else
                 {
                     pLines.Height += 20;
-                    flowLayoutPanel1.Height += 15;
+                    
                     if (pLines.Height == pLines.MaximumSize.Height)
                     {
                         lblLines.Image = Properties.Resources.arrowDown10px;
@@ -317,8 +313,6 @@ namespace ACP
                 txtPercentage.Text = 0.ToString("N2");
                 txtPesoDiscount.Text = 0.ToString("N2");
                 txtPriceUnit.Text = 0.ToString("N2");
-                txtDiscountDesc.Text = 0.ToString("N2");
-                txtPurchaseDiscount.Text = 0.ToString("N2");
                 cmbPool.Text = "";
                 cmbMOD.Text = "";
                 cmbDeliveryAdd.Text = "";

@@ -152,7 +152,6 @@ namespace ACP
                     addOrder.cmbPool.Text = row["poolID"].ToString();
                     addOrder.txtPoolDesc.Text = row["poolDesc"].ToString();
                     addOrder.cmbMOD.Text = row["modDesc"].ToString();
-                    addOrder.dtpEntry.Value = Convert.ToDateTime(row["transDate"]);
                     addOrder.dtpDelivery.Value = Convert.ToDateTime(row["deliveryDate"]);
                     addOrder.dtpCancel.Value = Convert.ToDateTime(row["cancelDate"]);
                     addOrder.cmbDeliveryAdd.Text = row["desc"].ToString();
