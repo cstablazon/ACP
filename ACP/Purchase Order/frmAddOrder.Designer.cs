@@ -1229,6 +1229,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Location = new System.Drawing.Point(243, 30);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddOrder";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
