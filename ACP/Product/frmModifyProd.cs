@@ -789,7 +789,10 @@ namespace ACP
             }
             else if(Id.button == "Update")
             {
-                fetchBarcode();
+                if (additionalInfo.ShowDialog() == DialogResult.OK)
+                {
+                    fetchBarcode();
+                }
             }
             //dgvBarcode.Rows.Add();
         }
@@ -1664,11 +1667,13 @@ namespace ACP
             }
             else if(Id.button == "Update")
             {
-                DialogResult res = MessageBox.Show("Are you sure to delete this barcode? This action cannot be undo", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                pc.deleteProduct("sp_Product", "Barcode", "Delete", Id.SKU);
-                MessageBox.Show("Successfully deleted?", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetchBarcode();
-
+                DialogResult res = MessageBox.Show("Are you sure to delete this barcode? This action cannot be undone", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(res == DialogResult.Yes)
+                {
+                    pc.deleteBarcode("sp_Product", "Barcode", "Delete", Id.barcode);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetchBarcode();
+                }
             }
             //DialogResult res = MessageBox.Show("Delete barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             //if(res == DialogResult.Yes)

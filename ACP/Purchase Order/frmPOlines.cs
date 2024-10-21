@@ -453,23 +453,22 @@ namespace ACP
                         if (!string.IsNullOrEmpty(dgvNewItems.Rows[i].Cells["qtyCol"].Value as string))
                         {
                             string barcode = dgvNewItems.Rows[i].Cells["barcode"].Value.ToString();
-                            if (Id.dt.Select("barcode = '" + barcode + "'").Any())
+                            if (dt.Select("barcode = '" + barcode + "'").Any())
                             {
                                 MessageBox.Show("" + barcode + " already exist in P.O. Lines", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
-                                for (int j = 0; dgvNewItems.Rows.Count > j; j++)
-                                {
-                                    string prodBarcode = dgvNewItems.Rows[i].Cells["Barcode"].Value.ToString();
-                                    decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["Quantity"].Value);
-                                    po.createUpdatePOlines("Create", Id.orderNo, prodBarcode, qty, Id.userID);
-                                }
+                                string prodBarcode = dgvNewItems.Rows[i].Cells["Barcode"].Value.ToString();
+                                decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
+                                po.createUpdatePOlines("Create", Id.orderNo, prodBarcode, qty, Id.userID);
+                                MessageBox.Show("Successfully added", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.DialogResult = DialogResult.OK;
+                                this.Hide();
                             }
                         }
                     }
-                    this.DialogResult = DialogResult.OK;
-                    this.Hide();
+                   
                     //if (Id.dt.Rows.Count > 0)
                     //{
                     //    DataTable dt = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", Id.orderNo);

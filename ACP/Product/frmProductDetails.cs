@@ -1076,7 +1076,7 @@ namespace ACP
                         }
                         else
                         {
-                            pc.createUpdateBarcode("Create", txtBarcode.Text, Id.SKU, itemModelID, chargeID, Id.privilegeID, Id.bmrxID, Id.LID, discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, txtBarcode.Text);
+                            pc.createUpdateBarcode("Create", txtBarcode.Text, Id.SKU, itemModelID, chargeID, privilegeID, bmrxID, LID, discountID, CPuomID, RPuomID, bomID, factor, retailPrice, costPrice, inventoryCost, txtPosDesc.Text, cmbSalesTax.Text, cmbPurchaseTax.Text, cbNotDiscountable.Checked, true, Id.userID, txtBarcode.Text);
                             MessageBox.Show("Successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //dRow[0] = txtBarcode.Text;
                                 //dRow[1] = txtPosDesc.Text;

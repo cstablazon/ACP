@@ -109,7 +109,7 @@
             this.tpNewItems.Location = new System.Drawing.Point(4, 24);
             this.tpNewItems.Name = "tpNewItems";
             this.tpNewItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tpNewItems.Size = new System.Drawing.Size(578, 380);
+            this.tpNewItems.Size = new System.Drawing.Size(578, 378);
             this.tpNewItems.TabIndex = 1;
             this.tpNewItems.Text = "New items";
             this.tpNewItems.UseVisualStyleBackColor = true;
@@ -130,7 +130,7 @@
             this.dgvNewItems.Name = "dgvNewItems";
             this.dgvNewItems.RowHeadersVisible = false;
             this.dgvNewItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNewItems.Size = new System.Drawing.Size(572, 374);
+            this.dgvNewItems.Size = new System.Drawing.Size(572, 372);
             this.dgvNewItems.TabIndex = 6;
             this.dgvNewItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.jm);
             this.dgvNewItems.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNewItems_CellFormatting);
