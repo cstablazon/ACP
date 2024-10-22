@@ -511,6 +511,7 @@
             this.tsbView.Name = "tsbView";
             this.tsbView.Size = new System.Drawing.Size(89, 22);
             this.tsbView.Text = "View details";
+            this.tsbView.Visible = false;
             this.tsbView.Click += new System.EventHandler(this.tsbView_Click);
             // 
             // dgvBarcode

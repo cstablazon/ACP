@@ -838,6 +838,7 @@ namespace ACP
                 else if(Id.button == "Update")
                 {
                     fetchPOlines();
+                    tsbRemove.Enabled = false;
                 }
                 
             }
@@ -901,6 +902,7 @@ namespace ACP
                 {
                     //Id.dt.Rows.RemoveAt(rowIndex);
                     dgvLines.Rows.RemoveAt(rowIndex);
+
                 }
                 else if(Id.button == "Update")
                 {
@@ -908,6 +910,7 @@ namespace ACP
                     po.deletePOline("Delete", barcode, Id.orderNo);
                     MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchPOlines();
+                    tsbRemove.Enabled = false;
                 }
                 
             }

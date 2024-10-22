@@ -131,6 +131,7 @@ namespace ACP
                     dgvSetup.DataSource = null;
                     disableAndClear();
                     btnCreate.Text = "Create";
+
                 }
             }
         }
@@ -158,16 +159,8 @@ namespace ACP
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (this.FormBorderStyle == System.Windows.Forms.FormBorderStyle.FixedSingle)
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Hide();
-            }
-            else
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Hide();
-            }
+            this.DialogResult = DialogResult.OK;
+            this.Hide();
         }
 
         private void dgvSetup_CellClick(object sender, DataGridViewCellEventArgs e)

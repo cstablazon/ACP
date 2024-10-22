@@ -147,6 +147,8 @@ namespace ACP
                 cmbBOM.Text = "";
                 cmbItemModel.Text = "";
                 cmbCharges.Text = "";
+                cmbPurchaseTax.Text = "";
+                cmbSalesTax.Text = "";
                 txtPOcostP.Text = 0.ToString("N2");
                 txtRetailP.Text = 0.ToString("N2");
                 txtInventoryCost.Text = 0.ToString("N2");
@@ -900,14 +902,14 @@ namespace ACP
                                 dRow[9] = bomID;
                                 dRow[10] = cmbBOM.Text;
                                 dRow[11] = inventoryCost;
-                                dRow[12] = discountID;
+                                dRow[12] = discountID ?? (object)DBNull.Value;
                                 dRow[13] = txtPurchaseDiscount.Text;
                                 dRow[14] = bmrxID;
                                 dRow[15] = txtBMRX.Text;
                                 dRow[16] = privilegeID;
                                 dRow[17] = txtPrivilege.Text;
                                 dRow[18] = itemModelID;
-                                dRow[19] = chargeID;
+                                dRow[19] = chargeID ?? (object)DBNull.Value;
                                 dRow[20] = cmbCharges.Text;
                                 dRow[21] = LID;
                                 dRow[22] = txtIssueLoc.Text;
@@ -972,14 +974,14 @@ namespace ACP
                             dRow[9] = bomID;
                             dRow[10] = cmbBOM.Text;
                             dRow[11] = inventoryCost;
-                            dRow[12] = discountID;
+                            dRow[12] = discountID ?? (object)DBNull.Value;
                             dRow[13] = txtPurchaseDiscount.Text;
                             dRow[14] = bmrxID;
                             dRow[15] = txtBMRX.Text;
                             dRow[16] = privilegeID;
                             dRow[17] = txtPrivilege.Text;
                             dRow[18] = itemModelID;
-                            dRow[19] = chargeID;
+                            dRow[19] = chargeID ?? (object)DBNull.Value;
                             dRow[20] = cmbCharges.Text;
                             dRow[21] = LID;
                             dRow[22] = txtIssueLoc.Text;
@@ -1005,7 +1007,7 @@ namespace ACP
                                 {
                                     dRow["Barcode"] = txtBarcode.Text; 
                                     dRow["Item model ID"] = itemModelID;
-                                    dRow["chargeID"] = chargeID;
+                                    dRow["chargeID"] = chargeID ?? (object)DBNull.Value;
                                     dRow["Charge description"] = cmbCharges.Text;
                                     dRow["PID"] = Id.privilegeID;
                                     dRow["Privilege setup"] = txtPrivilege.Text;
@@ -1015,7 +1017,7 @@ namespace ACP
                                     dRow["Issue location"] = txtIssueLoc.Text;
                                     dRow["Warehouse"] = txtWarehouse.Text;
                                     dRow["Site"] = txtSite.Text;
-                                    dRow["discountID"] = discountID;
+                                    dRow["discountID"] = discountID ?? (object)DBNull.Value;
                                     dRow["Purchase discount"] = txtPurchaseDiscount.Text;
                                     dRow["CPuomID"] = CPuomID;
                                     dRow["Purchase unit"] = cmbPOunit.Text;
@@ -1112,6 +1114,7 @@ namespace ACP
                                 //MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.DialogResult = DialogResult.OK;
                                 this.Hide();
+                                
                             }
                         //}
                         //else
@@ -1952,14 +1955,14 @@ namespace ACP
 
         private void txtFactor_MouseHover(object sender, EventArgs e)
         {
-            if(txtFactor.Visible == true && txtFactor.Text.Equals(""))
-            {
-                toolTip1.Show("Factor is required", txtFactor);
-            }
-            else
-            {
-                toolTip1.Hide(txtFactor);
-            }
+            //if(txtFactor.Visible == true && txtFactor.Text.Equals(""))
+            //{
+            //    toolTip1.Show("Factor is required", txtFactor);
+            //}
+            //else
+            //{
+            //    toolTip1.Hide(txtFactor);
+            //}
         }
 
         private void txtPOcostP_Leave(object sender, EventArgs e)

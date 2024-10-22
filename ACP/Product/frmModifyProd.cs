@@ -749,6 +749,7 @@ namespace ACP
             Id.privilegeID = null;
             Id.bmrxID = null;
             Id.discountID = null;
+            Id.percent = 1;
             Id.barcode = barcode.GenerateEan13();
             //pc.createUpdateBarcode("Create", Id.barcode, Id.SKU, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, true, Id.userID, Id.barcode);
             additionalInfo.txtPosDesc.Text = Id.globalString;
@@ -1661,8 +1662,6 @@ namespace ACP
                     dgvBarcode.Rows.RemoveAt(dgvBarcode.SelectedRows[0].Index);
                     //pc.deleteProduct("sp_Product", "Barcode", "Delete", Id.SKU);
                     //fetchBarcode();
-                    tsbDeleteBarcode.Enabled = false;
-                    tsbEdit.Enabled = false;
                 }
             }
             else if(Id.button == "Update")
@@ -1670,6 +1669,8 @@ namespace ACP
                 DialogResult res = MessageBox.Show("Are you sure to delete this barcode? This action cannot be undone", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(res == DialogResult.Yes)
                 {
+                    int rowIndex = dgvBarcode.SelectedRows[0].Index;
+                    Id.barcode = dgvBarcode.Rows[rowIndex].Cells["Barcode"].Value.ToString();
                     pc.deleteBarcode("sp_Product", "Barcode", "Delete", Id.barcode);
                     MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchBarcode();
@@ -1856,7 +1857,7 @@ namespace ACP
 
         private void dgvBarcode_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgvBarcode.ClearSelection();
+
         }
 
         private void pGeneral_MouseDown(object sender, MouseEventArgs e)
@@ -2025,8 +2026,6 @@ namespace ACP
                     if (res == DialogResult.OK)
                     {
                         dgvBarcode.DataSource = Id.dt;
-                        tsbEdit.Enabled = false;
-                        tsbDeleteBarcode.Enabled = false;
                         //barcodeHideColumn();
                     }
                 }

@@ -178,10 +178,6 @@ namespace ACP
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             productList();
-            int h, w;
-            w = dgvProduct.Size.Width;
-            h = 558;
-            dgvProduct.Size = new System.Drawing.Size(w, h);
         }
 
         private void dgvProduct_Paint(object sender, PaintEventArgs e)
@@ -194,7 +190,7 @@ namespace ACP
 
         private void dgvProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgvProduct.ClearSelection();
+
         }
 
         private void dgvProduct_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -232,6 +228,8 @@ namespace ACP
                 if (dgvProduct.SelectedRows.Count > 0)
                 {
                     Id.button = "Update";
+                    int rowIndex = dgvProduct.SelectedRows[0].Index;
+                    Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
                     frmModifyProd modyProd = new frmModifyProd();
                     modyProd.btnCreate.Text = "Update";
                     modyProd.btnClose.Text = "Close";
@@ -260,8 +258,6 @@ namespace ACP
                     if (res == DialogResult.OK)
                     {
                         productList();
-                        btnEdit.Enabled = false;
-                        btnDelete.Enabled = false;
                     }
             }
             else
@@ -321,10 +317,10 @@ namespace ACP
                 DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (res == DialogResult.Yes)
                 {
+                    int rowIndex = dgvProduct.SelectedRows[0].Index;
+                    Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
                     pc.deleteProduct("sp_Product", "Product", "Delete", Id.SKU);
                     productList();
-                    btnEdit.Enabled = false;
-                    btnDelete.Enabled = false;
                 }
             }
             else

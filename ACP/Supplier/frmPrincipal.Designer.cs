@@ -126,7 +126,6 @@
             this.dgvPrincipal.Location = new System.Drawing.Point(2, 47);
             this.dgvPrincipal.MultiSelect = false;
             this.dgvPrincipal.Name = "dgvPrincipal";
-            this.dgvPrincipal.ReadOnly = true;
             this.dgvPrincipal.RowHeadersVisible = false;
             this.dgvPrincipal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrincipal.Size = new System.Drawing.Size(827, 224);

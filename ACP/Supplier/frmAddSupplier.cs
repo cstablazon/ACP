@@ -190,7 +190,7 @@ namespace ACP
                                 payID = null;
                                 sGroupID = null;
                             }
-                            supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text, itemTax, payID, sGroupID, txtName.Text, txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text), null, true, true, Id.userID);
+                            supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text.Trim()), null, true, true, Id.userID);
 
                             MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
@@ -255,7 +255,7 @@ namespace ACP
                                 isActive = Convert.ToBoolean(row["isActive"]);
                                 userID = Convert.ToInt32(row["userID"]);
                             }
-                            supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text, itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text), suppRID, isDistributor, isActive, userID);
+                            supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text.Trim()), suppRID, isDistributor, isActive, userID);
 
                             MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
