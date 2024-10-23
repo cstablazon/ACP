@@ -39,19 +39,26 @@ namespace ACP
 
         private void btnNewOder_Click(object sender, EventArgs e)
         {
-            Id.button = "Create";
-            Id.dt.Columns.Clear();
-            Id.dt.Rows.Clear();
-            frmAddOrder order = new frmAddOrder();
-            po.createUpdatePurchaseOrder("Create", null, null, 0, null, null, 0, null, null, "Draft", null, null, null, Id.userID);
-            order.txtOrderNo.Text = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
-            Id.orderNo = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
-            order.btnCreate.Text = "Save";
-            order.btnClose.Text = "Cancel";
-            DialogResult res = order.ShowDialog();
-            if(res == DialogResult.OK)
+            try
             {
-                fetchPO();
+                Id.button = "Create";
+                Id.dt.Columns.Clear();
+                Id.dt.Rows.Clear();
+                frmAddOrder order = new frmAddOrder();
+                po.createUpdatePurchaseOrder("Create", null, null, 0, null, null, 0, null, null, "Draft", null, null, null, Id.userID);
+                order.txtOrderNo.Text = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
+                Id.orderNo = string.Format("{0:00000}", Convert.ToInt32(Id.autoIncOrderNo));
+                order.btnCreate.Text = "Save";
+                order.btnClose.Text = "Cancel";
+                DialogResult res = order.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    fetchPO();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -94,77 +101,88 @@ namespace ACP
         private void btnPOreport_Click(object sender, EventArgs e)
         {
             frmReports po = new frmReports();
+            int rowIndex = dgvPO.SelectedRows[0].Index;
+            Id.orderNo = dgvPO.Rows[rowIndex].Cells["Order No."].Value.ToString();
             po.ShowDialog();
         }
 
         private void dgvPO_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgvPO.ClearSelection();
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Id.button = "Update";
-            if(dgvPO.SelectedRows.Count > 0)
+            try
             {
-                Id.dt.Rows.Clear();
-                Id.dt.Columns.Clear();
-                frmAddOrder addOrder = new frmAddOrder();
-                addOrder.btnCreate.Text = "Update";
-                addOrder.btnClose.Text = "Close";
-                DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
-
-                DataRow[] dr = dt.Select("orderNo = '" + Id.orderNo + "'");
-
-                foreach(DataRow row in dr)
+                Id.button = "Update";
+                if (dgvPO.SelectedRows.Count > 0)
                 {
-                    addOrder.txtOrderNo.Text = row["orderNo"].ToString();
-                    addOrder.cmbPOtype.Text = row["poType"].ToString();
-                    addOrder.txtSuppID.Text = row["suppID"].ToString();
-                    addOrder.txtName.Text = row["name"].ToString();
-                    addOrder.txtAgent.Text = row["agent"].ToString();
-                    addOrder.txtPayTerm.Text = row["payDesc"].ToString();
-                    if (row["seasonalDiscount"].ToString() != "0.00")
-                    {
-                        MessageBox.Show("1");
-                        addOrder.cmbDiscountType.Text = "Seasonal discount";
-                        addOrder.txtTotalDiscount.Text = row["seasonalDiscount"].ToString();
-                        addOrder.txtPesoDiscount.Text = 0.ToString("N2");
-                        addOrder.txtPriceUnit.Text = 0.ToString("N2");
-                    }
-                    else if (row["pesoDisc"].ToString() != "0.00")
-                    {
-                        MessageBox.Show("2");
-                        addOrder.cmbDiscountType.Text = "Peso discount";
-                        addOrder.txtPesoDiscount.Text = row["pesoDisc"].ToString();
-                        addOrder.txtPriceUnit.Text = row["priceUnit"].ToString();
-                        addOrder.txtTotalDiscount.Text = 0.ToString("N2");
-                    }
-                    else
-                    {
-                        MessageBox.Show("3");
-                        addOrder.cmbDiscountType.Text = "";
+                    Id.dt.Rows.Clear();
+                    Id.dt.Columns.Clear();
+                    int rowIndex = dgvPO.SelectedRows[0].Index;
+                    Id.orderNo = dgvPO.Rows[rowIndex].Cells["Order No."].Value.ToString();
+                    frmAddOrder addOrder = new frmAddOrder();
+                    addOrder.btnCreate.Text = "Update";
+                    addOrder.btnClose.Text = "Close";
+                    DataTable dt = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
 
-                        addOrder.txtTotalDiscount.Text = 0.ToString("N2");
-                        addOrder.txtPesoDiscount.Text = 0.ToString("N2");
-                        addOrder.txtPriceUnit.Text = 0.ToString("N2");
+                    DataRow[] dr = dt.Select("orderNo = '" + Id.orderNo + "'");
+
+                    foreach (DataRow row in dr)
+                    {
+                        addOrder.txtOrderNo.Text = row["orderNo"].ToString();
+                        addOrder.cmbPOtype.Text = row["poType"].ToString();
+                        addOrder.txtSuppID.Text = row["suppID"].ToString();
+                        addOrder.txtName.Text = row["name"].ToString();
+                        addOrder.txtAgent.Text = row["agent"].ToString();
+                        addOrder.txtPayTerm.Text = row["payDesc"].ToString();
+                        if (row["seasonalDiscount"].ToString() != "0.00")
+                        {
+                            MessageBox.Show("1");
+                            addOrder.cmbDiscountType.Text = "Seasonal discount";
+                            addOrder.txtTotalDiscount.Text = row["seasonalDiscount"].ToString();
+                            addOrder.txtPesoDiscount.Text = 0.ToString("N2");
+                            addOrder.txtPriceUnit.Text = 0.ToString("N2");
+                        }
+                        else if (row["pesoDisc"].ToString() != "0.00")
+                        {
+                            MessageBox.Show("2");
+                            addOrder.cmbDiscountType.Text = "Peso discount";
+                            addOrder.txtPesoDiscount.Text = row["pesoDisc"].ToString();
+                            addOrder.txtPriceUnit.Text = row["priceUnit"].ToString();
+                            addOrder.txtTotalDiscount.Text = 0.ToString("N2");
+                        }
+                        else
+                        {
+                            MessageBox.Show("3");
+                            addOrder.cmbDiscountType.Text = "";
+
+                            addOrder.txtTotalDiscount.Text = 0.ToString("N2");
+                            addOrder.txtPesoDiscount.Text = 0.ToString("N2");
+                            addOrder.txtPriceUnit.Text = 0.ToString("N2");
+                        }
+                        addOrder.cmbPool.Text = row["poolID"].ToString();
+                        addOrder.txtPoolDesc.Text = row["poolDesc"].ToString();
+                        addOrder.cmbMOD.Text = row["modDesc"].ToString();
+                        addOrder.dtpDelivery.Value = Convert.ToDateTime(row["deliveryDate"]);
+                        addOrder.dtpCancel.Value = Convert.ToDateTime(row["cancelDate"]);
+                        addOrder.cmbDeliveryAdd.Text = row["desc"].ToString();
+                        addOrder.rtxtAddress.Text = row["address"].ToString() + ", " + row["City"].ToString() + ", " + row["Province"].ToString();
+                        addOrder.cmbOrderedBy.Text = row["orderedBy"].ToString();
+                        addOrder.cmbApprovedBy.Text = row["approvedBy"].ToString();
+                        addOrder.rtxtRemarks.Text = row["Remarks"].ToString();
                     }
-                    addOrder.cmbPool.Text = row["poolID"].ToString();
-                    addOrder.txtPoolDesc.Text = row["poolDesc"].ToString();
-                    addOrder.cmbMOD.Text = row["modDesc"].ToString();
-                    addOrder.dtpDelivery.Value = Convert.ToDateTime(row["deliveryDate"]);
-                    addOrder.dtpCancel.Value = Convert.ToDateTime(row["cancelDate"]);
-                    addOrder.cmbDeliveryAdd.Text = row["desc"].ToString();
-                    addOrder.rtxtAddress.Text = row["address"].ToString() + ", " + row["City"].ToString() + ", " + row["Province"].ToString();
-                    addOrder.cmbOrderedBy.Text = row["orderedBy"].ToString();
-                    addOrder.cmbApprovedBy.Text = row["approvedBy"].ToString();
-                    addOrder.rtxtRemarks.Text = row["Remarks"].ToString();
+                    DialogResult res = addOrder.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        fetchPO();
+                    }
                 }
-                DialogResult res = addOrder.ShowDialog();
-                if(res == DialogResult.OK)
-                {
-                    fetchPO();
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -238,6 +256,26 @@ namespace ACP
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             fetchPO();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult res = MessageBox.Show("Are you sure to delete this purchase order? This action cannot be undone", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    int rowIndex = dgvPO.SelectedRows[0].Index;
+                    Id.orderNo = dgvPO.Rows[rowIndex].Cells["Order No."].Value.ToString();
+                    po.deletePO("sp_purchaseOrderOperations", "Delete", Id.orderNo);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetchPO();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

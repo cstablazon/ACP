@@ -25,37 +25,45 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if(btnCreate.Text == "Create")
+            try
             {
-                if(!string.IsNullOrEmpty(txtName.Text) || !string.IsNullOrEmpty(txtPercent.Text))
+                if (btnCreate.Text == "Create")
                 {
-                    decimal percent = Convert.ToDecimal(txtPercent.Text);
-                    supClass.createUpdateItemTaxSetup("taxSetup", "Create", Id.iGlobalID, Id.itemTaxID, txtName.Text, percent, Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Hide();
+                    if (!string.IsNullOrEmpty(txtName.Text) || !string.IsNullOrEmpty(txtPercent.Text))
+                    {
+                        decimal percent = Convert.ToDecimal(txtPercent.Text);
+                        supClass.createUpdateItemTaxSetup("taxSetup", "Create", Id.iGlobalID, Id.itemTaxID, txtName.Text, percent, Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-                else
+                else if (btnCreate.Text == "Update")
                 {
-                    MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else if(btnCreate.Text == "Update")
-            {
-                if (!string.IsNullOrEmpty(txtName.Text) || !string.IsNullOrEmpty(txtPercent.Text))
-                {
-                    decimal percent = Convert.ToDecimal(txtPercent.Text);
-                    supClass.createUpdateItemTaxSetup("taxSetup", "Update", Id.iGlobalID, Id.itemTaxID, txtName.Text, percent, Id.userID);
-                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Hide();
-                }
+                    if (!string.IsNullOrEmpty(txtName.Text) || !string.IsNullOrEmpty(txtPercent.Text))
+                    {
+                        decimal percent = Convert.ToDecimal(txtPercent.Text);
+                        supClass.createUpdateItemTaxSetup("taxSetup", "Update", Id.iGlobalID, Id.itemTaxID, txtName.Text, percent, Id.userID);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
+                    }
 
-                else
-                {
-                    MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void txtPercent_KeyPress(object sender, KeyPressEventArgs e)

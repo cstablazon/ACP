@@ -437,353 +437,360 @@ namespace ACP
 
         public void createUpdate()
         {
-            if (dgvLines.Rows.Count > 0)
+            try
             {
-                int modID = Convert.ToInt32(cmbMOD.SelectedValue);
-                int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
-                int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
-                decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
-                if (Id.button.Equals("Create"))
+                if (dgvLines.Rows.Count > 0)
                 {
-                    if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
+                    int modID = Convert.ToInt32(cmbMOD.SelectedValue);
+                    int deliveryAddressID = Convert.ToInt32(cmbDeliveryAdd.SelectedValue);
+                    int discountID = Convert.ToInt32(cmbCashDiscount.SelectedValue);
+                    decimal seasonalDiscount = Convert.ToDecimal(txtTotalDiscount.Text);
+                    if (Id.button.Equals("Create"))
                     {
+                        if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
+                        {
 
-                        MessageBox.Show("Please fill up all necessary information");
-                    }
-                    else
-                    {
-                        bool isEmpty = false;
-                        for (int i = 0; dgvLines.Rows.Count > i; i++)
-                        {
-                            if (string.IsNullOrEmpty(dgvLines.Rows[i].Cells["Quantity"].Value.ToString()))
-                            {
-                                isEmpty = true;
-                                break;
-                            }
-                            else
-                            {
-                                isEmpty = false;
-                            }
-                        }
-                        if (isEmpty == true)
-                        {
-                            MessageBox.Show("Quantity is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Please fill up all necessary information");
                         }
                         else
                         {
-                            po.createUpdatePurchaseOrder("tempUpdate", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                            bool isEmpty = false;
                             for (int i = 0; dgvLines.Rows.Count > i; i++)
                             {
-                                string barcode = dgvLines.Rows[i].Cells["Barcode"].Value.ToString();
-                                decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
-                                po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
+                                if (string.IsNullOrEmpty(dgvLines.Rows[i].Cells["Quantity"].Value.ToString()))
+                                {
+                                    isEmpty = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    isEmpty = false;
+                                }
                             }
-                        }
-                        if (cmbDiscountType.Text == "Peso discount")
-                        {
-                            if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
+                            if (isEmpty == true)
                             {
-                                decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
-                                decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
-                            }
-                        }
-                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Hide();
-                        this.DialogResult = DialogResult.OK;
-                        //lblLines.Enabled = true;
-                        //purchase_order po = new purchase_order();
-                        //po.orderNo = txtOrderNo.Text;
-
-                        //po.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
-                        //po.poType = cmbPOtype.Text;
-                        //po.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
-                        //po.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
-                        //po.discountID = null;
-                        //po.deliveryDate = dtpDelivery.Value;
-                        //po.cancelDate = dtpCancel.Value;
-                        //po.salesTax = null;
-                        //po.status = "For approval";
-                        //po.remarks = rtxtRemarks.Text;
-                        //po.transDate = DateTime.Now;
-                        //po.userID = null;
-
-                        //db.purchase_order.Add(po);
-                        //db.SaveChanges();
-
-                        //for (int i = 0; dgvLines.Rows.Count > i; i++)
-                        //{
-                        //    PO_Line poLine = new PO_Line();
-
-                        //    poLine.orderNo = txtOrderNo.Text;
-                        //    poLine.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                        //    poLine.qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        //    poLine.transDate = DateTime.Now;
-                        //    poLine.userID = null;
-
-                        //    db.PO_Line.Add(poLine);
-                        //    db.SaveChanges();
-                        //}
-                    }
-                }
-                else if (Id.button.Equals("Update"))
-                {
-                    if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
-                    {
-                        MessageBox.Show("Please fill up all necessary information");
-                    }
-                    else
-                    {
-                        DataTable dTable = po.fetchPOline("sp_purchaseOrderOperations", "purchaseOrder", "fetchPesoDiscountByOrderNo", txtOrderNo.Text);
-                        DataTable dTable2 = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
-                        string barcode;
-                        decimal qty;
-                        //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
-                        for (int i = 0; dgvLines.Rows.Count > i; i++)
-                        {
-                            barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                            qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
-                            DataTable dt = po.fetchPOlineByBarcodeAndOrderNo("sp_purchaseOrderOperations", "POlines", "fetchPOlineByBarcodeAndOrderNo", barcode, txtOrderNo.Text);
-                            if (dt.Rows.Count > 0)
-                            {
-                                po.createUpdatePOlines("Update", txtOrderNo.Text, barcode, qty, Id.userID);
+                                MessageBox.Show("Quantity is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
-                                po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
-                            }
-                        }
-
-                        if (cmbDiscountType.Text == "Peso discount")
-                        {
-                            if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
-                            {
-                                if (dTable2.Select("orderNo = '" + txtOrderNo.Text + "'").Any())
+                                po.createUpdatePurchaseOrder("tempUpdate", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                                for (int i = 0; dgvLines.Rows.Count > i; i++)
                                 {
-                                    string sDiscount = null;
-                                    foreach (DataRow dRow in dTable2.Rows)
+                                    string barcode = dgvLines.Rows[i].Cells["Barcode"].Value.ToString();
+                                    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
+                                    po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
+                                }
+                            }
+                            if (cmbDiscountType.Text == "Peso discount")
+                            {
+                                if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
+                                {
+                                    decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                    decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                    po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                }
+                            }
+                            MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Hide();
+                            this.DialogResult = DialogResult.OK;
+                            //lblLines.Enabled = true;
+                            //purchase_order po = new purchase_order();
+                            //po.orderNo = txtOrderNo.Text;
+
+                            //po.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
+                            //po.poType = cmbPOtype.Text;
+                            //po.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
+                            //po.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
+                            //po.discountID = null;
+                            //po.deliveryDate = dtpDelivery.Value;
+                            //po.cancelDate = dtpCancel.Value;
+                            //po.salesTax = null;
+                            //po.status = "For approval";
+                            //po.remarks = rtxtRemarks.Text;
+                            //po.transDate = DateTime.Now;
+                            //po.userID = null;
+
+                            //db.purchase_order.Add(po);
+                            //db.SaveChanges();
+
+                            //for (int i = 0; dgvLines.Rows.Count > i; i++)
+                            //{
+                            //    PO_Line poLine = new PO_Line();
+
+                            //    poLine.orderNo = txtOrderNo.Text;
+                            //    poLine.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                            //    poLine.qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            //    poLine.transDate = DateTime.Now;
+                            //    poLine.userID = null;
+
+                            //    db.PO_Line.Add(poLine);
+                            //    db.SaveChanges();
+                            //}
+                        }
+                    }
+                    else if (Id.button.Equals("Update"))
+                    {
+                        if (string.IsNullOrEmpty(txtOrderNo.Text) || string.IsNullOrEmpty(cmbPOtype.Text) || string.IsNullOrEmpty(txtSuppID.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(cmbPool.Text) || string.IsNullOrEmpty(cmbMOD.Text) || string.IsNullOrEmpty(cmbDeliveryAdd.Text) || string.IsNullOrEmpty(rtxtAddress.Text))
+                        {
+                            MessageBox.Show("Please fill up all necessary information");
+                        }
+                        else
+                        {
+                            DataTable dTable = po.fetchPOline("sp_purchaseOrderOperations", "purchaseOrder", "fetchPesoDiscountByOrderNo", txtOrderNo.Text);
+                            DataTable dTable2 = po.fetchRecords("sp_purchaseOrderOperations", "purchaseOrder", "fetchPurchaseOrder");
+                            string barcode;
+                            decimal qty;
+                            //Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
+                            for (int i = 0; dgvLines.Rows.Count > i; i++)
+                            {
+                                barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                                qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["Quantity"].Value);
+                                DataTable dt = po.fetchPOlineByBarcodeAndOrderNo("sp_purchaseOrderOperations", "POlines", "fetchPOlineByBarcodeAndOrderNo", barcode, txtOrderNo.Text);
+                                if (dt.Rows.Count > 0)
+                                {
+                                    po.createUpdatePOlines("Update", txtOrderNo.Text, barcode, qty, Id.userID);
+                                }
+                                else
+                                {
+                                    po.createUpdatePOlines("Create", txtOrderNo.Text, barcode, qty, Id.userID);
+                                }
+                            }
+
+                            if (cmbDiscountType.Text == "Peso discount")
+                            {
+                                if (txtPesoDiscount.Text != "0.00" && txtPriceUnit.Text != "0.00")
+                                {
+                                    if (dTable2.Select("orderNo = '" + txtOrderNo.Text + "'").Any())
                                     {
-                                        sDiscount = dRow["seasonalDiscount"].ToString();
-                                        if(sDiscount != null)
+                                        string sDiscount = null;
+                                        foreach (DataRow dRow in dTable2.Rows)
                                         {
-                                            break;
+                                            sDiscount = dRow["seasonalDiscount"].ToString();
+                                            if (sDiscount != null)
+                                            {
+                                                break;
+                                            }
                                         }
-                                    }
-                                    if (sDiscount == "0.00")
-                                    {
-                                        if (dTable.Rows.Count > 0)
+                                        if (sDiscount == "0.00")
                                         {
-                                            decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
-                                            decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                            po.createUpdatePesoDiscount("Update", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                            if (dTable.Rows.Count > 0)
+                                            {
+                                                decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                                decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                                po.createUpdatePesoDiscount("Update", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                            }
+                                            else
+                                            {
+                                                decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
+                                                decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
+                                                po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                            }
                                         }
                                         else
                                         {
                                             decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
                                             decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                            po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit,   Id.userID);
+                                            po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                            seasonalDiscount = 0.00m;
+                                            po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
                                         }
                                     }
-                                    else
+                                }
+                            }
+                            else if (cmbDiscountType.Text == "Seasonal discount")
+                            {
+                                if (txtTotalDiscount.Text != "0.00")
+                                {
+                                    if (dTable.Rows.Count > 0)
                                     {
                                         decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
                                         decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                        po.createUpdatePesoDiscount("Create", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
-                                        seasonalDiscount = 0.00m;
+                                        po.createUpdatePesoDiscount("Delete", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
+                                        po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                                    }
+                                    else
+                                    {
                                         po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
                                     }
                                 }
                             }
-                        }
-                        else if(cmbDiscountType.Text == "Seasonal discount")
-                        {
-                            if(txtTotalDiscount.Text != "0.00")
-                            {
-                                if (dTable.Rows.Count > 0)
-                                {
-                                    decimal peso = Convert.ToDecimal(txtPesoDiscount.Text);
-                                    decimal priceUnit = Convert.ToDecimal(txtPriceUnit.Text);
-                                    po.createUpdatePesoDiscount("Delete", null, txtOrderNo.Text, peso, priceUnit, Id.userID);
-                                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
-                                }
-                                else
-                                {
-                                    po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
-                                }
-                            }
-                        }
 
-                        po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
+                            po.createUpdatePurchaseOrder("Update", txtOrderNo.Text, cmbPOtype.Text, modID, cmbPool.Text, seasonalDiscount, deliveryAddressID, dtpDelivery.Value, dtpCancel.Value, "Draft", rtxtRemarks.Text, cmbOrderedBy.Text, cmbApprovedBy.Text, Id.userID);
 
-                        //Check if po_lines are existing in datagridview . If not delete line in po_line table
-                        DataTable dtLines = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", txtOrderNo.Text);
-                        bool isExist = true;
-                        foreach (DataRow row in dtLines.Rows)
-                        {
-                            for (int i = 0; dgvLines.Rows.Count > i; i++)
+                            //Check if po_lines are existing in datagridview . If not delete line in po_line table
+                            DataTable dtLines = po.fetchPOline("sp_purchaseOrderOperations", "POlines", "fetchPOline", txtOrderNo.Text);
+                            bool isExist = true;
+                            foreach (DataRow row in dtLines.Rows)
                             {
-                                if (row["Barcode"].ToString() == dgvLines.Rows[i].Cells["Barcode"].Value.ToString())
+                                for (int i = 0; dgvLines.Rows.Count > i; i++)
                                 {
-                                    isExist = true;
-                                    break;
+                                    if (row["Barcode"].ToString() == dgvLines.Rows[i].Cells["Barcode"].Value.ToString())
+                                    {
+                                        isExist = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        isExist = false;
+                                    }
                                 }
-                                else
+
+
+                                if (!isExist)
                                 {
-                                    isExist = false;
+                                    po.deletePOline("Delete", row["Barcode"].ToString(), txtOrderNo.Text);
                                 }
                             }
 
+                            //int i = 0;
 
-                            if (!isExist)
-                            {
-                                po.deletePOline("Delete", row["Barcode"].ToString(), txtOrderNo.Text);
-                            }
+                            //Check if lines are existing in dgv
+                            //foreach(PO_Line lines in updateLines)
+                            //{
+
+                            //for (int i = 0; dgvLines.Rows.Count > i; i++)
+                            //{
+                            //MessageBox.Show(i.ToString());
+                            //if (lines.barcode != dgvLines.Rows[i].Cells["barcode"].Value as String)
+                            //{
+                            //    exist = false;
+                            //    MessageBox.Show(i.ToString());
+                            //    MessageBox.Show(lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + dgvLines.Rows.Count + " " + i);
+                            //    i++;
+                            //    //var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).FirstOrDefault();
+
+                            //    //db.PO_Line.Remove(objDel);
+                            //    //db.SaveChanges();
+                            //}
+                            //else
+                            //{
+                            //    i++;
+                            //    MessageBox.Show(lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + dgvLines.Rows.Count + " " + i);
+                            //    exist = true;
+                            //}
+
+                            //if(exist.Equals(true))
+                            //{
+                            //    var objUpdate = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).SingleOrDefault();
+                            //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            //    objUpdate.qty = qty;
+
+                            //    db.SaveChanges();
+                            //}
+                            //else
+                            //{
+                            //    var objDelete = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).SingleOrDefault();
+
+                            //    db.PO_Line.Remove(objDelete);
+                            //    db.SaveChanges();
+                            //}
+                            //else if (dgvLines.Rows[i].Cells["barcode"].Value as String != lines.barcode)
+                            //{
+                            //    PO_Line line = new PO_Line();
+                            //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            //    line.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                            //    line.qty = qty;
+                            //    line.transDate = DateTime.Now;
+
+                            //    db.PO_Line.Add(line);
+                            //    db.SaveChanges();
+                            //}
+                            //else if (dgvLines.Rows[i].Cells["barcode"].Value as String == lines.barcode)
+                            //{
+                            //    var updateLine = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).FirstOrDefault();
+
+                            //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            //    updateLine.qty = qty;
+
+                            //    db.SaveChanges();
+                            //}
+                            //}
+                            //}
+
+                            ////var update = db.purchase_order.Where(a => a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
+
+                            ////update.poType = cmbPOtype.Text;
+                            ////update.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
+                            ////update.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
+                            ////update.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
+                            ////update.deliveryDate = dtpDelivery.Value;
+                            ////update.cancelDate = dtpCancel.Value;
+
+                            ////var updateLines = db.PO_Line.Where(a => a.orderNo.Equals(txtOrderNo.Text)).ToList();
+
+                            //////Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
+                            ////string barcode;
+                            ////decimal qty;
+                            ////for (int i = 0; dgvLines.Rows.Count > i; i++)
+                            ////{
+                            ////    barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
+                            ////    var objExist = db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text));
+                            ////    if (objExist.Any())
+                            ////    {
+                            ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            ////        //objExist.FirstOrDefault().qty = qty;
+                            ////        db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text)).ToList().ForEach(b => { b.qty = qty; });
+
+                            ////    }
+                            ////    else
+                            ////    {
+                            ////        PO_Line line = new PO_Line();
+
+                            ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
+                            ////        line.orderNo = txtOrderNo.Text;
+                            ////        line.barcode = barcode;
+                            ////        line.qty = qty;
+                            ////        line.transDate = DateTime.Now;
+
+                            ////        db.PO_Line.Add(line);
+                            ////        db.SaveChanges();
+                            ////    }
+                            ////}
+
+                            //////Check if po_lines are existing in datagridview . If not delete line in po_line table
+                            ////bool isExist = true;
+                            ////foreach(PO_Line lines in updateLines)
+                            ////{
+                            ////    for (int i = 0; dgvLines.Rows.Count > i; i++ )
+                            ////    {
+                            ////        if(lines.barcode == dgvLines.Rows[i].Cells["barcode"].Value as String)
+                            ////        {
+                            ////            //MessageBox.Show("Equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() +" "+ i);
+                            ////            isExist = true;
+                            ////            break;
+                            ////        }
+                            ////        else
+                            ////        {
+                            ////            //MessageBox.Show("Not equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + i);
+                            ////            isExist = false;
+                            ////        }
+
+                            ////    }
+                            ////    if(!isExist)
+                            ////    {
+                            ////        var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode) && a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
+
+                            ////        db.PO_Line.Remove(objDel);
+                            ////        //db.SaveChanges();
+                            ////        //MessageBox.Show("Removed "+ lines.barcode, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ////    }
+                            ////}
+
+                            MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            db.SaveChanges();
+                            this.DialogResult = DialogResult.OK;
+                            this.Hide();
                         }
-
-                        //int i = 0;
-
-                        //Check if lines are existing in dgv
-                        //foreach(PO_Line lines in updateLines)
-                        //{
-
-                        //for (int i = 0; dgvLines.Rows.Count > i; i++)
-                        //{
-                        //MessageBox.Show(i.ToString());
-                        //if (lines.barcode != dgvLines.Rows[i].Cells["barcode"].Value as String)
-                        //{
-                        //    exist = false;
-                        //    MessageBox.Show(i.ToString());
-                        //    MessageBox.Show(lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + dgvLines.Rows.Count + " " + i);
-                        //    i++;
-                        //    //var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).FirstOrDefault();
-
-                        //    //db.PO_Line.Remove(objDel);
-                        //    //db.SaveChanges();
-                        //}
-                        //else
-                        //{
-                        //    i++;
-                        //    MessageBox.Show(lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + dgvLines.Rows.Count + " " + i);
-                        //    exist = true;
-                        //}
-
-                        //if(exist.Equals(true))
-                        //{
-                        //    var objUpdate = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).SingleOrDefault();
-                        //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        //    objUpdate.qty = qty;
-
-                        //    db.SaveChanges();
-                        //}
-                        //else
-                        //{
-                        //    var objDelete = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).SingleOrDefault();
-
-                        //    db.PO_Line.Remove(objDelete);
-                        //    db.SaveChanges();
-                        //}
-                        //else if (dgvLines.Rows[i].Cells["barcode"].Value as String != lines.barcode)
-                        //{
-                        //    PO_Line line = new PO_Line();
-                        //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        //    line.barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                        //    line.qty = qty;
-                        //    line.transDate = DateTime.Now;
-
-                        //    db.PO_Line.Add(line);
-                        //    db.SaveChanges();
-                        //}
-                        //else if (dgvLines.Rows[i].Cells["barcode"].Value as String == lines.barcode)
-                        //{
-                        //    var updateLine = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode)).FirstOrDefault();
-
-                        //    decimal qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        //    updateLine.qty = qty;
-
-                        //    db.SaveChanges();
-                        //}
-                        //}
-                        //}
-
-                        ////var update = db.purchase_order.Where(a => a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
-
-                        ////update.poType = cmbPOtype.Text;
-                        ////update.modID = cmbMOD.GetItemText(cmbMOD.SelectedValue);
-                        ////update.poolID = cmbPool.GetItemText(cmbPool.SelectedValue);
-                        ////update.delAddressID = cmbDeliveryAdd.GetItemText(cmbDeliveryAdd.SelectedValue);
-                        ////update.deliveryDate = dtpDelivery.Value;
-                        ////update.cancelDate = dtpCancel.Value;
-
-                        ////var updateLines = db.PO_Line.Where(a => a.orderNo.Equals(txtOrderNo.Text)).ToList();
-
-                        //////Check if dgv rows are existing in po_line tablethen update qty if not. Add the new row to the database
-                        ////string barcode;
-                        ////decimal qty;
-                        ////for (int i = 0; dgvLines.Rows.Count > i; i++)
-                        ////{
-                        ////    barcode = dgvLines.Rows[i].Cells["barcode"].Value.ToString();
-                        ////    var objExist = db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text));
-                        ////    if (objExist.Any())
-                        ////    {
-                        ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        ////        //objExist.FirstOrDefault().qty = qty;
-                        ////        db.PO_Line.Where(a => a.barcode.Equals(barcode) && a.orderNo.Equals(txtOrderNo.Text)).ToList().ForEach(b => { b.qty = qty; });
-
-                        ////    }
-                        ////    else
-                        ////    {
-                        ////        PO_Line line = new PO_Line();
-
-                        ////        qty = Convert.ToDecimal(dgvLines.Rows[i].Cells["qty"].Value);
-                        ////        line.orderNo = txtOrderNo.Text;
-                        ////        line.barcode = barcode;
-                        ////        line.qty = qty;
-                        ////        line.transDate = DateTime.Now;
-
-                        ////        db.PO_Line.Add(line);
-                        ////        db.SaveChanges();
-                        ////    }
-                        ////}
-
-                        //////Check if po_lines are existing in datagridview . If not delete line in po_line table
-                        ////bool isExist = true;
-                        ////foreach(PO_Line lines in updateLines)
-                        ////{
-                        ////    for (int i = 0; dgvLines.Rows.Count > i; i++ )
-                        ////    {
-                        ////        if(lines.barcode == dgvLines.Rows[i].Cells["barcode"].Value as String)
-                        ////        {
-                        ////            //MessageBox.Show("Equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() +" "+ i);
-                        ////            isExist = true;
-                        ////            break;
-                        ////        }
-                        ////        else
-                        ////        {
-                        ////            //MessageBox.Show("Not equals " + lines.barcode + " " + dgvLines.Rows[i].Cells["barcode"].Value.ToString() + " " + i);
-                        ////            isExist = false;
-                        ////        }
-
-                        ////    }
-                        ////    if(!isExist)
-                        ////    {
-                        ////        var objDel = db.PO_Line.Where(a => a.barcode.Equals(lines.barcode) && a.orderNo.Equals(txtOrderNo.Text)).SingleOrDefault();
-
-                        ////        db.PO_Line.Remove(objDel);
-                        ////        //db.SaveChanges();
-                        ////        //MessageBox.Show("Removed "+ lines.barcode, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ////    }
-                        ////}
-
-                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        db.SaveChanges();
-                        this.DialogResult = DialogResult.OK;
-                        this.Hide();
                     }
                 }
+                else
+                {
+                    MessageBox.Show("P.O. line is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("P.O. line is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -794,53 +801,60 @@ namespace ACP
 
         private void tsbAddLines_Click(object sender, EventArgs e)
         {
-            if (txtSuppID.Text.Equals(""))
+            try
             {
-                MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                string barcode, RID, unit, productDesc;
-                decimal unitPrice, retailPrice, qty, netAmount, discPrice, lineDisc;
-                int i = 1;
-                frmPOlines lines = new frmPOlines();
-                DialogResult res = lines.ShowDialog();
-                //if(dgvLines.Rows.Count > 0)
-                //{
-                //    Id.dt.Columns.Clear();
-                //    Id.dt.Rows.Clear();
-                //    Id.dt.Columns.Add("lineID", typeof(int));
-                //    Id.dt.Columns.Add("order No.", typeof(string));
-                //    Id.dt.Columns.Add("Barcode", typeof(string));
-                //    Id.dt.Columns.Add("Product description", typeof(string));
-                //    Id.dt.Columns.Add("Dept class code", typeof(string));
-                //    Id.dt.Columns.Add("Quantity", typeof(decimal));
-                //    Id.dt.Columns.Add("Purchase unit", typeof(string));
-                //    Id.dt.Columns.Add("Cost price", typeof(decimal));
-                //    Id.dt.Columns.Add("Retail price", typeof(decimal));
-                //    Id.dt.Columns.Add("Discount percent", typeof(decimal));
-                //    Id.dt.Columns.Add("Net amount", typeof(decimal));
-                //    DataRow dRow = Id.dt.NewRow();
-                //    foreach(DataRow row in dgvLines.Rows)
-                //    {
-                //        Id.dt.ImportRow(row);
-                //    }
-                //}
-                if(Id.button == "Create")
+                if (txtSuppID.Text.Equals(""))
                 {
-                    if (res == DialogResult.OK)
+                    MessageBox.Show("Supplier ID is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    string barcode, RID, unit, productDesc;
+                    decimal unitPrice, retailPrice, qty, netAmount, discPrice, lineDisc;
+                    int i = 1;
+                    frmPOlines lines = new frmPOlines();
+                    DialogResult res = lines.ShowDialog();
+                    //if(dgvLines.Rows.Count > 0)
+                    //{
+                    //    Id.dt.Columns.Clear();
+                    //    Id.dt.Rows.Clear();
+                    //    Id.dt.Columns.Add("lineID", typeof(int));
+                    //    Id.dt.Columns.Add("order No.", typeof(string));
+                    //    Id.dt.Columns.Add("Barcode", typeof(string));
+                    //    Id.dt.Columns.Add("Product description", typeof(string));
+                    //    Id.dt.Columns.Add("Dept class code", typeof(string));
+                    //    Id.dt.Columns.Add("Quantity", typeof(decimal));
+                    //    Id.dt.Columns.Add("Purchase unit", typeof(string));
+                    //    Id.dt.Columns.Add("Cost price", typeof(decimal));
+                    //    Id.dt.Columns.Add("Retail price", typeof(decimal));
+                    //    Id.dt.Columns.Add("Discount percent", typeof(decimal));
+                    //    Id.dt.Columns.Add("Net amount", typeof(decimal));
+                    //    DataRow dRow = Id.dt.NewRow();
+                    //    foreach(DataRow row in dgvLines.Rows)
+                    //    {
+                    //        Id.dt.ImportRow(row);
+                    //    }
+                    //}
+                    if (Id.button == "Create")
                     {
-                        dgvLines.DataSource = Id.dt;
-                        dgvLines.Columns["lineID"].Visible = false;
-                        dgvLines.Columns["Order No."].Visible = false;
+                        if (res == DialogResult.OK)
+                        {
+                            dgvLines.DataSource = Id.dt;
+                            dgvLines.Columns["lineID"].Visible = false;
+                            dgvLines.Columns["Order No."].Visible = false;
+                        }
                     }
+                    else if (Id.button == "Update")
+                    {
+                        fetchPOlines();
+                        tsbRemove.Enabled = false;
+                    }
+
                 }
-                else if(Id.button == "Update")
-                {
-                    fetchPOlines();
-                    tsbRemove.Enabled = false;
-                }
-                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -868,17 +882,17 @@ namespace ACP
 
         private void dgvLines_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (Id.button == "Update")
-            {
-                if (e.ColumnIndex == 2 && e.RowIndex != dgvLines.NewRowIndex)
-                {
-                    if (dgvLines.Rows[e.RowIndex].Cells[2].Value != null)
-                    {
-                        double qty = double.Parse(dgvLines.Rows[e.RowIndex].Cells[4].Value.ToString());
-                        dgvLines.Rows[e.RowIndex].Cells[4].Value = qty.ToString("N2");
-                    }
-                }
-            }
+            //if (Id.button == "Update")
+            //{
+            //    if (e.ColumnIndex == 2 && e.RowIndex != dgvLines.NewRowIndex)
+            //    {
+            //        if (dgvLines.Rows[e.RowIndex].Cells[2].Value != null)
+            //        {
+            //            double qty = double.Parse(dgvLines.Rows[e.RowIndex].Cells[4].Value.ToString());
+            //            dgvLines.Rows[e.RowIndex].Cells[4].Value = qty.ToString("N2");
+            //        }
+            //    }
+            //}
         }
 
         private void cmbPool_SelectionChangeCommitted(object sender, EventArgs e)
@@ -894,25 +908,31 @@ namespace ACP
 
         private void tsbRemove_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Remove product line?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(res == DialogResult.Yes)
+            try
             {
-                int rowIndex = dgvLines.SelectedRows[0].Index;
-                if(Id.button == "Create")
+                DialogResult res = MessageBox.Show("Remove product line?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
                 {
-                    //Id.dt.Rows.RemoveAt(rowIndex);
-                    dgvLines.Rows.RemoveAt(rowIndex);
+                    int rowIndex = dgvLines.SelectedRows[0].Index;
+                    if (Id.button == "Create")
+                    {
+                        //Id.dt.Rows.RemoveAt(rowIndex);
+                        dgvLines.Rows.RemoveAt(rowIndex);
+
+                    }
+                    else if (Id.button == "Update")
+                    {
+                        string barcode = dgvLines.Rows[rowIndex].Cells["Barcode"].Value.ToString();
+                        po.deletePOline("Delete", barcode, Id.orderNo);
+                        MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchPOlines();
+                    }
 
                 }
-                else if(Id.button == "Update")
-                {
-                    string barcode = dgvLines.Rows[rowIndex].Cells["Barcode"].Value.ToString();
-                    po.deletePOline("Delete", barcode, Id.orderNo);
-                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchPOlines();
-                    tsbRemove.Enabled = false;
-                }
-                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -1413,7 +1433,7 @@ namespace ACP
 
         private void dgvLines_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgvLines.ClearSelection();
+
         }
 
         private void lblLineDetails_Click(object sender, EventArgs e)
@@ -1451,7 +1471,7 @@ namespace ACP
                 DialogResult res = MessageBox.Show("Cancel creation of purchase order? This will not be saved", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (res == DialogResult.Yes)
                 {
-                    po.deletePO("sp_purchaseOrder", "Delete", txtOrderNo.Text);
+                    po.deletePO("sp_purchaseOrder", "tempDelete", txtOrderNo.Text);
                     this.Hide();
                 }
             }

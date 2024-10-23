@@ -111,6 +111,11 @@ namespace ACP
 
 
 //Retreive
+        public DataTable ifTransExist(string action, string suppID)
+        {
+            return db.ifTransExist("sp_Validation", action, suppID);
+        }
+
         //Supplier/Principal/Distributor
         public DataTable fetchSupplier(string action, string RID)
         {
@@ -120,6 +125,11 @@ namespace ACP
         public DataTable getSupplierById(string action, string suppId)
         {
             return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, "", "", "", "");
+        }
+
+        public DataTable getSupplierByRID(string action, string suppId)
+        {
+            return db.fetchSupplierByRID("sp_Supplier", "Supplier", action, suppId);
         }
 
         //Name validation for updating supplier
@@ -227,6 +237,26 @@ namespace ACP
             //printOutput = "";
             conn.Close();
         }
+
+        public void deleteSupplierByRID(string tableName, string action, string RID)
+        {
+            SqlConnection conn = db.getConnection();
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", RID);
+
+            cmd.ExecuteScalar();
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
+            conn.Close();
+        }
     //End of Supplier CRUD
 
     //Address CRUD
@@ -277,6 +307,26 @@ namespace ACP
             //printOutput = "";
             conn.Close();
         }
+
+        public void deleteAddressByTID(string tableName, string action, string TID)
+        {
+            SqlConnection conn = db.getConnection();
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", TID);
+
+            cmd.ExecuteScalar();
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
+            conn.Close();
+        }
     //End of address CRUD
 
     //Contact CRUD
@@ -319,6 +369,26 @@ namespace ACP
             cmd.Parameters.AddWithValue("@tableName", tableName);
             cmd.Parameters.AddWithValue("@action", action);
             cmd.Parameters.AddWithValue("@contactID", contactID);
+
+            cmd.ExecuteScalar();
+            //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //printOutput = "";
+            conn.Close();
+        }
+
+        public void deleteContactByTID(string tableName, string action, string TID)
+        {
+            SqlConnection conn = db.getConnection();
+            //conn.InfoMessage += (object obj, SqlInfoMessageEventArgs e) =>
+            //{
+            //    printOutput += e.Message;
+            //};
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", TID);
 
             cmd.ExecuteScalar();
             //MessageBox.Show(printOutput, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -60,9 +60,6 @@ namespace ACP
         }
         public void fetchSupplier()
         {
-            
-            btnAddPrincipal.Enabled = false;
-            btnSuppDel.Enabled = false; 
             if (cmbDisplay.Text == "All")
             {
                 DataTable dt = supClass.fetchSupplier("fetchSupplier", "");
@@ -113,68 +110,76 @@ namespace ACP
         
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvSupplier.SelectedRows.Count > 0)
+            try
             {
-                if (_userPermission.CanPerformOperation("Supplier Management Form", "Update"))
+                if (dgvSupplier.SelectedRows.Count > 0)
                 {
-                    Id.button = "Update";
-                    int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                    Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
-                    if (Id.isDistri == true)
+                    if (_userPermission.CanPerformOperation("Supplier Management Form", "Update"))
                     {
-                        frmAddSupplier supplier = new frmAddSupplier();
-                        DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
-                        foreach (DataRow row in dt.Rows)
+                        Id.button = "Update";
+                        int rowIndex = dgvSupplier.SelectedRows[0].Index;
+                        Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
+                        Id.isDistri = Convert.ToBoolean(dgvSupplier.Rows[rowIndex].Cells["isDistributor"].Value);
+                        if (Id.isDistri == true)
                         {
-                            supplier.cmbGroup.Text = row["Group"].ToString();
-                            supplier.cmbPayTerms.Text = row["Payment_term"].ToString();
-                            supplier.txtSupCode.Text = row["Supplier_ID"].ToString();
-                            supplier.cmbType.Text = row["Record_type"].ToString();
-                            supplier.cmbItemTax.Text = row["itemTaxID"].ToString();
-                            supplier.txtName.Text = row["Name"].ToString();
-                            supplier.txtAgent.Text = row["Agent"].ToString();
-                        }
-                        DialogResult res = supplier.ShowDialog();
+                            frmAddSupplier supplier = new frmAddSupplier();
+                            DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                supplier.cmbGroup.Text = row["Group"].ToString();
+                                supplier.cmbPayTerms.Text = row["Payment_term"].ToString();
+                                supplier.txtSupCode.Text = row["Supplier_ID"].ToString();
+                                supplier.cmbType.Text = row["Record_type"].ToString();
+                                supplier.cmbItemTax.Text = row["itemTaxID"].ToString();
+                                supplier.txtName.Text = row["Name"].ToString();
+                                supplier.txtAgent.Text = row["Agent"].ToString();
+                            }
+                            DialogResult res = supplier.ShowDialog();
 
-                        if (res == DialogResult.OK)
+                            if (res == DialogResult.OK)
+                            {
+                                fetchSupplier();
+                                //btnEdit.Enabled = false;
+                                //btnSuppDel.Enabled = false;
+                                //btnAddress.Enabled = false;
+                                //btnContact.Enabled = false;
+                                //dgvSupplier.ClearSelection();
+                            }
+                        }
+                        else
                         {
-                            fetchSupplier();
-                            //btnEdit.Enabled = false;
-                            //btnSuppDel.Enabled = false;
-                            //btnAddress.Enabled = false;
-                            //btnContact.Enabled = false;
-                            //dgvSupplier.ClearSelection();
+                            frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
+                            DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                principal.tabControl1.TabPages.RemoveAt(0);
+                                principal.txtDistriID.Text = row["RID"].ToString();
+                                principal.txtDistriName.Text = row["Distributor"].ToString();
+                                principal.txtSupCode.Text = row["Supplier_ID"].ToString();
+                                principal.cmbPayTerms.Text = row["Payment_term"].ToString();
+                                principal.txtName.Text = row["Name"].ToString();
+                                principal.txtAgent.Text = row["Agent"].ToString();
+                            }
+                            DialogResult res = principal.ShowDialog();
+                            if (res == DialogResult.OK)
+                            {
+                                fetchSupplier();
+                                //btnEdit.Enabled = false;
+                                //btnSuppDel.Enabled = false;
+                                //dgvSupplier.ClearSelection();
+                            }
                         }
                     }
                     else
                     {
-                        frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
-                        DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
-                        foreach (DataRow row in dt.Rows)
-                        {
-                            principal.tabControl1.TabPages.RemoveAt(0);
-                            principal.txtDistriID.Text = row["RID"].ToString();
-                            principal.txtDistriName.Text = row["Distributor"].ToString();
-                            principal.txtSupCode.Text = row["Supplier_ID"].ToString();
-                            principal.cmbPayTerms.Text = row["Payment_term"].ToString();
-                            principal.txtName.Text = row["Name"].ToString();
-                            principal.txtAgent.Text = row["Agent"].ToString();
-                        }
-                        DialogResult res = principal.ShowDialog();
-                        if (res == DialogResult.OK)
-                        {
-                            fetchSupplier();
-                            //btnEdit.Enabled = false;
-                            //btnSuppDel.Enabled = false;
-                            //dgvSupplier.ClearSelection();
-                        }
+                        MessageBox.Show("You don't have permission to update a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
+
                 }
-                else
-                {
-                    MessageBox.Show("You don't have permission to update a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -239,29 +244,50 @@ namespace ACP
        
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(_userPermission.CanPerformOperation("Supplier Management Form", "Delete"))
+            try
             {
-                DialogResult res = MessageBox.Show("Are you sure you want to delete ?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (res == DialogResult.Yes)
+                if (_userPermission.CanPerformOperation("Supplier Management Form", "Delete"))
                 {
-                    int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                    Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
-                    supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
+                    DialogResult res = MessageBox.Show("Are you sure you want to delete ?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchSupplier();
-                    //btnEdit.Enabled = false;
-                    //btnSuppDel.Enabled = false;
-                    //btnAddress.Enabled = false;
-                    //btnContact.Enabled = false;
+                    if (res == DialogResult.Yes)
+                    {
+                        DataTable dTable = supClass.ifTransExist("fetchProductBySupplier", Id.suppID);
+                        if (dTable.Rows.Count > 0)
+                        {
+                            MessageBox.Show("Unable to delete because supplier is linked to a product", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            int rowIndex = dgvSupplier.SelectedRows[0].Index;
+                            Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
+                            DataTable dt = supClass.getSupplierByRID("fetchSupplierByRID", Id.suppID);
+                            foreach (DataRow dRow in dt.Rows)
+                            {
+                                string id = dRow["Supplier_ID"].ToString();
+                                supClass.deleteContactByTID("ContactDIR", "deleteByTID", id);
+                                supClass.deleteAddressByTID("addressDIR", "deleteByTID", id);
+                            }
+                            supClass.deleteSupplierByRID("Supplier", "deleteByRID", Id.suppID);
+                            supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
+                            MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            fetchSupplier();
+                            //btnEdit.Enabled = false;
+                            //btnSuppDel.Enabled = false;
+                            //btnAddress.Enabled = false;
+                            //btnContact.Enabled = false;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to delete a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to delete a supplier.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
             
         }
 
@@ -474,40 +500,50 @@ namespace ACP
         {
             if (_userPermission.CanOpenForm("Principal Management Form"))
             {
-                Id.button = "Create";
-                Id.param = "mngmtToPrincipal";
-                frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
                 int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
-                principal.txtDistriID.Text = Id.suppID;
-                principal.lblDistriName.Text = Id.distriName;
-                principal.txtDistriName.Text = Id.distriName;
-                //principal.btnChangeDistri.Visible = false;
+                if (dgvSupplier.Rows[rowIndex].Cells["isDistributor"].Value.ToString() == "True")
+                {
+                    Id.button = "Create";
+                    Id.param = "mngmtToPrincipal";
+                    Id.isDistri = Convert.ToBoolean(dgvSupplier.Rows[rowIndex].Cells["isDistributor"].Value);
+                    Id.distriName = dgvSupplier.Rows[rowIndex].Cells["Name"].Value.ToString();
+                    frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
+                    Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
+                    principal.txtDistriID.Text = Id.suppID;
+                    principal.lblDistriName.Text = Id.distriName;
+                    principal.txtDistriName.Text = Id.distriName;
+                    //principal.btnChangeDistri.Visible = false;
 
-                //principal.tabControl1.TabPages.RemoveAt(1);
-                //principal.tabControl1.TabPages.RemoveAt(1);
+                    //principal.tabControl1.TabPages.RemoveAt(1);
+                    //principal.tabControl1.TabPages.RemoveAt(1);
 
-                principal.btnClear.Location = new Point(769, 15);
-                principal.btnSave.Location = new Point(769, 55);
-                //principal.dgvPrincipal.DataSource = (from a in db.vwPrincipals
-                //                           where a.RID.Equals(Id.suppID)
-                //                           select new
-                //                           {
-                //                               a.Supplier_ID,
-                //                               a.Name,
-                //                               a.Agent,
-                //                               a.Date_created,
-                //                               a.isActive
-                //                           }).ToList();
+                    principal.btnClear.Location = new Point(769, 15);
+                    principal.btnSave.Location = new Point(769, 55);
+                    //principal.dgvPrincipal.DataSource = (from a in db.vwPrincipals
+                    //                           where a.RID.Equals(Id.suppID)
+                    //                           select new
+                    //                           {
+                    //                               a.Supplier_ID,
+                    //                               a.Name,
+                    //                               a.Agent,
+                    //                               a.Date_created,
+                    //                               a.isActive
+                    //                           }).ToList();
 
 
-                principal.ShowDialog();
-                fetchSupplier();
-                //btnEdit.Enabled = false;
-                //btnSuppDel.Enabled = false;
-                //btnAddress.Enabled = false;
-                //btnContact.Enabled = false;
-                //btnAddPrincipal.Enabled = false;
+                    principal.ShowDialog();
+                    fetchSupplier();
+                    //btnEdit.Enabled = false;
+                    //btnSuppDel.Enabled = false;
+                    //btnAddress.Enabled = false;
+                    //btnContact.Enabled = false;
+                    //btnAddPrincipal.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Select a distributor", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
             }
             else
             {
@@ -526,26 +562,26 @@ namespace ACP
                 Id.distriName = row.Cells["Name"].Value.ToString();
                 if (dgvSupplier.SelectedRows.Count > 0)
                 {
-                    btnEdit.Enabled = true;
-                    btnSuppDel.Enabled = true;
-                    btnAddress.Enabled = true;
-                    btnContact.Enabled = true;
+                    //btnEdit.Enabled = true;
+                    //btnSuppDel.Enabled = true;
+                    //btnAddress.Enabled = true;
+                    //btnContact.Enabled = true;
                     Id.isDistri = Convert.ToBoolean(row.Cells["isDistributor"].Value);
                     if (row.Cells["isDistributor"].Value.ToString() == "True")
                     {
-                        btnAddPrincipal.Enabled = true;
+                        //btnAddPrincipal.Enabled = true;
                     }
                     else
                     {
-                        btnAddPrincipal.Enabled = false;
+                        //btnAddPrincipal.Enabled = false;
                     }
                 }
                 else
                 {
-                    btnEdit.Enabled = false;
-                    btnSuppDel.Enabled = false;
-                    btnAddress.Enabled = false;
-                    btnContact.Enabled = false;
+                    //btnEdit.Enabled = false;
+                    //btnSuppDel.Enabled = false;
+                    //btnAddress.Enabled = false;
+                    //btnContact.Enabled = false;
                 }
             }
         }
@@ -665,28 +701,35 @@ namespace ACP
 
         private void btnNewProd_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Product Management Form", "Create"))
+            try
             {
-                Id.button = "Create";
-                int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
-                //int autoIncSKU = pc.autoInc("SKU", "product");
-                //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
-                //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
-                pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
-                Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
-                frmModifyProd modify = new frmModifyProd();
-                //frmNewProduct modify = new frmNewProduct();
-                modify.btnCreate.Text = "Create";
-                modify.btnClose.Text = "Cancel";
-                Id.dt.Rows.Clear();
-                Id.dt.Columns.Clear();
-                Id.isConcession = false;
-                DialogResult res = modify.ShowDialog();
+                if (_userPermission.CanPerformOperation("Product Management Form", "Create"))
+                {
+                    Id.button = "Create";
+                    int rowIndex = dgvSupplier.SelectedRows[0].Index;
+                    Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
+                    //int autoIncSKU = pc.autoInc("SKU", "product");
+                    //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
+                    //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
+                    pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
+                    Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
+                    frmModifyProd modify = new frmModifyProd();
+                    //frmNewProduct modify = new frmNewProduct();
+                    modify.btnCreate.Text = "Create";
+                    modify.btnClose.Text = "Cancel";
+                    Id.dt.Rows.Clear();
+                    Id.dt.Columns.Clear();
+                    Id.isConcession = false;
+                    DialogResult res = modify.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to create new Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("You don't have permission to create new Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -701,7 +744,7 @@ namespace ACP
             {
                 Id.button = "Create";
                 int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
+                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
                 frmNewAddress address = new frmNewAddress();
                 address.btnCreate.Text = "Create";
                 address.ShowDialog();
@@ -719,7 +762,7 @@ namespace ACP
             {
                 Id.button = "Create";
                 int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier ID"].Value.ToString();
+                Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
                 frmNewContact contact = new frmNewContact();
                 contact.btnCreate.Text = "Create";
                 contact.ShowDialog();

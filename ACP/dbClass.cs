@@ -44,6 +44,21 @@ namespace ACP
             return dt;
         }
 //Retreive for supplier data
+        public DataTable ifTransExist(string query, string action, string suppID)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", suppID);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
         public DataTable fetchRecordsForSupplier(string query, string tableName, string action, string suppID, string RID, string distriID, string name, string itemTaxID)
         {
             SqlConnection conn = getConnection();
@@ -56,6 +71,22 @@ namespace ACP
             cmd.Parameters.AddWithValue("@distriID", distriID);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@itemTaxID", itemTaxID);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            sda.Fill(dt);
+
+
+            return dt;
+        }
+
+        public DataTable fetchSupplierByRID(string query, string tableName, string action, string suppID)
+        {
+            SqlConnection conn = getConnection();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@suppID", suppID);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);

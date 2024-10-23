@@ -46,28 +46,35 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if(Id.button.Equals("Create"))
+            try
             {
-                btnCreate.Text = "Create";
-                if (!string.IsNullOrEmpty(txtDesc.Text) && !string.IsNullOrWhiteSpace(txtDesc.Text))
+                if (Id.button.Equals("Create"))
                 {
-                    supClass.createUpdatePaymentTerm("paymentTerms", "Create", null, txtDesc.Text, txtDays.Text, Id.userID);
+                    btnCreate.Text = "Create";
+                    if (!string.IsNullOrEmpty(txtDesc.Text) && !string.IsNullOrWhiteSpace(txtDesc.Text))
+                    {
+                        supClass.createUpdatePaymentTerm("paymentTerms", "Create", null, txtDesc.Text, txtDays.Text, Id.userID);
+                        fetchPaymentTerms();
+                        disableAndClear();
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fill up necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (Id.button.Equals("Update"))
+                {
+                    btnCreate.Text = "Update";
+                    supClass.createUpdatePaymentTerm("paymentTerms", "Update", Id.payID, txtDesc.Text, txtDays.Text, Id.userID);
                     fetchPaymentTerms();
                     disableAndClear();
                     this.DialogResult = DialogResult.OK;
                 }
-                else
-                {
-                    MessageBox.Show("Fill up necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
-            else if(Id.button.Equals("Update"))
+            catch (Exception ex)
             {
-                btnCreate.Text = "Update";
-                supClass.createUpdatePaymentTerm("paymentTerms", "Update", Id.payID, txtDesc.Text, txtDays.Text, Id.userID);
-                fetchPaymentTerms();
-                disableAndClear();
-                this.DialogResult = DialogResult.OK;
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -116,31 +123,46 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Id.button = "Update";
-            btnCreate.Text = "Update";
-            txtDays.Enabled = true;
-            txtDesc.Enabled = true;
-            btnCreate.Enabled = true;
-            if(dgvPayTerm.SelectedRows.Count > 0)
+            try
             {
-                int rowIndex = dgvPayTerm.SelectedRows[0].Index;
+                Id.button = "Update";
+                btnCreate.Text = "Update";
+                txtDays.Enabled = true;
+                txtDesc.Enabled = true;
+                btnCreate.Enabled = true;
+                if (dgvPayTerm.SelectedRows.Count > 0)
+                {
+                    int rowIndex = dgvPayTerm.SelectedRows[0].Index;
 
-                txtDesc.Text = dgvPayTerm.Rows[rowIndex].Cells["Description"].Value.ToString();
-                txtDays.Text = dgvPayTerm.Rows[rowIndex].Cells["Days"].Value.ToString();
+                    txtDesc.Text = dgvPayTerm.Rows[rowIndex].Cells["Description"].Value.ToString();
+                    txtDays.Text = dgvPayTerm.Rows[rowIndex].Cells["Days"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure to delete payment term?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if(res == DialogResult.Yes)
+            try
             {
-                supClass.deletePaymentTerm("paymentTerms", "Delete", Id.payID);
+                DialogResult res = MessageBox.Show("Are you sure to delete payment term?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                fetchPaymentTerms();
-                disableAndClear();
+                if (res == DialogResult.Yes)
+                {
+                    supClass.deletePaymentTerm("paymentTerms", "Delete", Id.payID);
+
+                    fetchPaymentTerms();
+                    disableAndClear();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void frmPaymentTerm_Load(object sender, EventArgs e)

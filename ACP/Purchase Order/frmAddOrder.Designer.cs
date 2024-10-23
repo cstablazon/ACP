@@ -1107,6 +1107,7 @@
             this.dgvLines.Location = new System.Drawing.Point(3, 46);
             this.dgvLines.MultiSelect = false;
             this.dgvLines.Name = "dgvLines";
+            this.dgvLines.ReadOnly = true;
             this.dgvLines.RowHeadersVisible = false;
             this.dgvLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLines.Size = new System.Drawing.Size(1352, 160);

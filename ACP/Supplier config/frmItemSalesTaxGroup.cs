@@ -78,16 +78,23 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvItemSalesTax.SelectedRows.Count > 0)
+            try
             {
-                Id.button = "Update";
-                btnCreate.Text = "Update";
-                int rowIndex = dgvItemSalesTax.SelectedRows[0].Index;
-                txtItemTax.Text = dgvItemSalesTax.Rows[rowIndex].Cells["Tax ID"].Value.ToString();
-                txtDescription.Text = dgvItemSalesTax.Rows[rowIndex].Cells["Tax Description"].Value.ToString();
-                btnCreate.Enabled = true;
-                txtItemTax.Enabled = true;
-                txtDescription.Enabled = true;
+                if (dgvItemSalesTax.SelectedRows.Count > 0)
+                {
+                    Id.button = "Update";
+                    btnCreate.Text = "Update";
+                    int rowIndex = dgvItemSalesTax.SelectedRows[0].Index;
+                    txtItemTax.Text = dgvItemSalesTax.Rows[rowIndex].Cells["Tax ID"].Value.ToString();
+                    txtDescription.Text = dgvItemSalesTax.Rows[rowIndex].Cells["Tax Description"].Value.ToString();
+                    btnCreate.Enabled = true;
+                    txtItemTax.Enabled = true;
+                    txtDescription.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -113,40 +120,54 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtItemTax.Text) || !string.IsNullOrEmpty(txtDescription.Text))
+            try
             {
-                if (Id.button == "Create")
+                if (!string.IsNullOrEmpty(txtItemTax.Text) || !string.IsNullOrEmpty(txtDescription.Text))
                 {
-                    supClass.createUpdateItemTax("itemSalesTaxGroup", "Create", Id.itemTaxID, txtItemTax.Text, txtDescription.Text, Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    itemTaxGroup();
-                    dgvSetup.DataSource = null;
-                    disableAndClear();
-                }
-                else if(Id.button == "Update")
-                {
-                    supClass.createUpdateItemTax("itemSalesTaxGroup", "Update", Id.itemTaxID, txtItemTax.Text, txtDescription.Text, Id.userID);
-                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    itemTaxGroup();
-                    dgvSetup.DataSource = null;
-                    disableAndClear();
-                    btnCreate.Text = "Create";
+                    if (Id.button == "Create")
+                    {
+                        supClass.createUpdateItemTax("itemSalesTaxGroup", "Create", Id.itemTaxID, txtItemTax.Text, txtDescription.Text, Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        itemTaxGroup();
+                        dgvSetup.DataSource = null;
+                        disableAndClear();
+                    }
+                    else if (Id.button == "Update")
+                    {
+                        supClass.createUpdateItemTax("itemSalesTaxGroup", "Update", Id.itemTaxID, txtItemTax.Text, txtDescription.Text, Id.userID);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        itemTaxGroup();
+                        dgvSetup.DataSource = null;
+                        disableAndClear();
+                        btnCreate.Text = "Create";
 
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure to delete item sales tax?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(res == DialogResult.Yes)
+            try
             {
-                supClass.deleteItemTax("itemSalesTaxGroup", "Delete", Id.itemTaxID);
+                DialogResult res = MessageBox.Show("Are you sure to delete item sales tax?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    supClass.deleteItemTax("itemSalesTaxGroup", "Delete", Id.itemTaxID);
 
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                itemTaxGroup();
-                dgvSetup.DataSource = null;
-                disableAndClear();
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    itemTaxGroup();
+                    dgvSetup.DataSource = null;
+                    disableAndClear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -197,31 +218,46 @@ namespace ACP
 
         private void tsbEdit_Click(object sender, EventArgs e)
         {
-            frmTaxSetup setup = new frmTaxSetup();
-            setup.btnCreate.Text = "Update";
-            int rowIndex = dgvSetup.SelectedRows[0].Index;
-            
-            setup.txtName.Text = dgvSetup.Rows[rowIndex].Cells["name"].Value.ToString();
-            setup.txtPercent.Text = dgvSetup.Rows[rowIndex].Cells["percent"].Value.ToString();
-            DialogResult res = setup.ShowDialog();
-            if(res == DialogResult.OK)
+            try
             {
-                itemTaxSetup();
-                tsbEdit.Enabled = false;
-                tsbRemove.Enabled = false;
+                frmTaxSetup setup = new frmTaxSetup();
+                setup.btnCreate.Text = "Update";
+                int rowIndex = dgvSetup.SelectedRows[0].Index;
+
+                setup.txtName.Text = dgvSetup.Rows[rowIndex].Cells["name"].Value.ToString();
+                setup.txtPercent.Text = dgvSetup.Rows[rowIndex].Cells["percent"].Value.ToString();
+                DialogResult res = setup.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    itemTaxSetup();
+                    tsbEdit.Enabled = false;
+                    tsbRemove.Enabled = false;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void tsbRemove_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure to delete setup?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(res == DialogResult.Yes)
+            try
             {
-                supClass.deleteItemTaxSetup("taxSetup", "Delete", Id.iGlobalID);
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                itemTaxSetup();
-                tsbEdit.Enabled = false;
-                tsbRemove.Enabled = false;
+                DialogResult res = MessageBox.Show("Are you sure to delete setup?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    supClass.deleteItemTaxSetup("taxSetup", "Delete", Id.iGlobalID);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    itemTaxSetup();
+                    tsbEdit.Enabled = false;
+                    tsbRemove.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

@@ -40,76 +40,97 @@ namespace ACP
 
         private void btEdit_Click(object sender, EventArgs e)
         {
-            if(dgvProdType.SelectedRows.Count > 0)
+            try
             {
-                btnCreate.Text = "Update";
-                Id.button = "UPDATE";
-                txtDesc.Text = Id.globalString;
-                btnCreate.Enabled = true;
+                if (dgvProdType.SelectedRows.Count > 0)
+                {
+                    btnCreate.Text = "Update";
+                    Id.button = "UPDATE";
+                    txtDesc.Text = Id.globalString;
+                    btnCreate.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (Id.button == "CREATE")
+            try
             {
-                string description = txtDesc.Text;
-                DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPEBYDESC", "", txtDesc.Text, "", "", "", "");
-                if (dt.Rows.Count > 0)
+                if (Id.button == "CREATE")
                 {
-                    errorProvider1.SetError(txtDesc, "Description already exist");
-                    txtDesc.Focus();
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(txtDesc.Text))
+                    string description = txtDesc.Text;
+                    DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPEBYDESC", "", txtDesc.Text, "", "", "", "");
+                    if (dt.Rows.Count > 0)
                     {
-                        description = char.ToUpper(description[0]) + description.Substring(1);
-                        //pc.modifyProduct("CRUD", "PRODTYPE", pc.autoIncrementID("prodTypeID", "product_type").ToString(), description, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                        prodType();
-                        txtDesc.Clear();
-                        btnCreate.Enabled = false;
-                        MessageBox.Show("Successfull saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        errorProvider1.SetError(txtDesc, "Description already exist");
+                        txtDesc.Focus();
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(txtDesc.Text))
+                        {
+                            description = char.ToUpper(description[0]) + description.Substring(1);
+                            //pc.modifyProduct("CRUD", "PRODTYPE", pc.autoIncrementID("prodTypeID", "product_type").ToString(), description, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                            prodType();
+                            txtDesc.Clear();
+                            btnCreate.Enabled = false;
+                            MessageBox.Show("Successfull saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                else if (Id.button == "UPDATE")
+                {
+                    string description2 = txtDesc.Text;
+                    DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPEFORUPDATE", Id.globalID, txtDesc.Text, "", "", "", "");
+                    if (dt.Rows.Count > 0)
+                    {
+                        errorProvider1.SetError(txtDesc, "Description already exist");
+                        txtDesc.Focus();
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(txtDesc.Text))
+                        {
+                            description2 = char.ToUpper(description2[0]) + description2.Substring(1);
+                            //pc.modifyProduct("CRUD", "PRODTYPE", Id.globalID, txtDesc.Text, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                            prodType();
+                            txtDesc.Clear();
+                            btnCreate.Enabled = false;
+                            MessageBox.Show("Successfull updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }
-            else if (Id.button == "UPDATE")
+            catch (Exception ex)
             {
-                string description2 = txtDesc.Text;
-                DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPEFORUPDATE", Id.globalID, txtDesc.Text, "", "", "", "");
-                if (dt.Rows.Count > 0)
-                {
-                    errorProvider1.SetError(txtDesc, "Description already exist");
-                    txtDesc.Focus();
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(txtDesc.Text))
-                    {
-                        description2 = char.ToUpper(description2[0]) + description2.Substring(1);
-                        //pc.modifyProduct("CRUD", "PRODTYPE", Id.globalID, txtDesc.Text, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                        prodType();
-                        txtDesc.Clear();
-                        btnCreate.Enabled = false;
-                        MessageBox.Show("Successfull updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            if (dgvProdType.SelectedRows.Count > 0)
+            try
             {
-                //pc.modifyProduct("DELETE", "PRODTYPE", Id.globalID, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                prodType();
-                btnCreate.Enabled = false;
-                txtDesc.Clear();
+                if (dgvProdType.SelectedRows.Count > 0)
+                {
+                    //pc.modifyProduct("DELETE", "PRODTYPE", Id.globalID, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    prodType();
+                    btnCreate.Enabled = false;
+                    txtDesc.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a row to delete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a row to delete", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

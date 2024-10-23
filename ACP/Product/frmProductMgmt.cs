@@ -89,67 +89,38 @@ namespace ACP
 
         private void btnNewProd_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Product Management Form", "Create"))
+            try
             {
-                Id.button = "Create";
-                //int autoIncSKU = pc.autoInc("SKU", "product");
-                //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
-                //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
-                pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
-                Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
-                frmModifyProd modify = new frmModifyProd();
-                //frmNewProduct modify = new frmNewProduct();
-                modify.btnCreate.Text = "Create";
-                modify.btnClose.Text = "Cancel";
-                Id.dt.Rows.Clear();
-                Id.dt.Columns.Clear();
-                Id.isConcession = false;
-                DialogResult res = modify.ShowDialog();
-                if (res == DialogResult.OK)
+                if (_userPermission.CanPerformOperation("Product Management Form", "Create"))
                 {
-                    productList();
+                    Id.button = "Create";
+                    //int autoIncSKU = pc.autoInc("SKU", "product");
+                    //Id.SKU = string.Format("{0:0000000}", autoIncSKU);
+                    //pc.createUpdateProduct("Product", "Create", Id.SKU, Id.userID, 0, 0, null, null, null, null, false, Id.userID);
+                    pc.createUpdateProduct("Create", null, null, 0, 0, 0, null, 0, null, null, false, Id.userID);
+                    Id.SKU = string.Format("{0:0000000}", Convert.ToInt32(Id.autoIncSKU));
+                    frmModifyProd modify = new frmModifyProd();
+                    //frmNewProduct modify = new frmNewProduct();
+                    modify.btnCreate.Text = "Create";
+                    modify.btnClose.Text = "Cancel";
+                    Id.dt.Rows.Clear();
+                    Id.dt.Columns.Clear();
+                    Id.isConcession = false;
+                    DialogResult res = modify.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        productList();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to create new Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to create new Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
-        //Product Info
-        //Id.desc2 = "@SKU";
-        //Id.desc3 = "@suppID";
-        //Id.desc4 = "@brandID";
-        //Id.desc5 = "@itemDesc";
-        //Id.desc6 = "@lineDisc";
-        //Id.desc7 = "@isConcession";
-        //Id.desc8 = "@userID";
-
-        ////barcode Info
-        //Id.desc9 = "@barcode";
-        //Id.desc12 = "@RID";
-        //Id.desc15 = "@retailPrice";
-        //Id.desc16 = "@costPrice";
-        //Id.desc17 = "@posDesc";
-        //Id.desc18 = "@salesTax";
-        //Id.desc19 = "@purchaseTax";
-        //Id.desc20 = "@bmrx";
-        //Id.desc21 = "@isActive";
-        //Id.desc26 = "@prodTypeID";
-        //Id.desc27 = "@prodSubTypeID";
-        //Id.desc28 = "@CPuomID";
-        //Id.desc29 = "@RPuomID";
-        //DialogResult res = modify.ShowDialog();
-        //   string suppID = modify.cmbSuppID.GetItemText(modify.cmbSuppID.SelectedValue);
-        //   string sku = modify.txtSKU.Text;
-        //   string lineDesc = modify.cmbLine.Text;
-        //   string prod_name = modify.txtProdName.Text;
-        //   string brandID = modify.cmbBrand.GetItemText(modify.cmbBrand.SelectedValue);
-        //if (res == DialogResult.OK)
-        //{
-        //    //pc.modifyProduct("CRUD","PRODUCT",sku,suppID,brandID,prod_name,lineDesc,Id.isConcession,"1","","","",
-        //    //    "","","","","","","","","","","","","","",0,0,0,0);
-        //    //productList();
-        //}
         }
 
         private void btnOtherPrice_Click(object sender, EventArgs e)
@@ -223,111 +194,124 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Product Management Form", "Update"))
+            try
             {
-                if (dgvProduct.SelectedRows.Count > 0)
+                if (_userPermission.CanPerformOperation("Product Management Form", "Update"))
                 {
-                    Id.button = "Update";
-                    int rowIndex = dgvProduct.SelectedRows[0].Index;
-                    Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
-                    frmModifyProd modyProd = new frmModifyProd();
-                    modyProd.btnCreate.Text = "Update";
-                    modyProd.btnClose.Text = "Close";
-                    modyProd.lblProdDetails.Enabled = true;
-
-                    MessageBox.Show(Id.SKU);
-                    DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
-
-                    foreach (DataRow row in dt.Rows)
+                    if (dgvProduct.SelectedRows.Count > 0)
                     {
-                        modyProd.txtCategory.Text = row["Subcategory code"].ToString();
-                        Id.RIDL = Convert.ToInt64(row["RID"]);
-                        modyProd.txtDepartment.Text = row["Department"].ToString();
-                        modyProd.cmbBrand.Text = row["bDesc"].ToString();
-                        modyProd.cmbProdType.Text = row["Product type"].ToString();
-                        modyProd.cmbProdSubType.Text = row["Product sub type"].ToString();
-                        modyProd.cmbProdDimension.Text = row["Product dimension group"].ToString();
-                        modyProd.txtSKU.Text = row["SKU"].ToString();
-                        modyProd.txtProdName.Text = row["Product description"].ToString();
-                        modyProd.txtSupplier.Text = row["Supplier ID"].ToString();
-                        Id.suppID = row["Supplier ID"].ToString();
-                        modyProd.cbConcession.Checked = Convert.ToBoolean(row["isConcession"]);
+                        Id.button = "Update";
+                        int rowIndex = dgvProduct.SelectedRows[0].Index;
+                        Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
+                        frmModifyProd modyProd = new frmModifyProd();
+                        modyProd.btnCreate.Text = "Update";
+                        modyProd.btnClose.Text = "Close";
+                        modyProd.lblProdDetails.Enabled = true;
+
+                        MessageBox.Show(Id.SKU);
+                        DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            modyProd.txtCategory.Text = row["Subcategory code"].ToString();
+                            Id.RIDL = Convert.ToInt64(row["RID"]);
+                            modyProd.txtDepartment.Text = row["Department"].ToString();
+                            modyProd.cmbBrand.Text = row["bDesc"].ToString();
+                            modyProd.cmbProdType.Text = row["Product type"].ToString();
+                            modyProd.cmbProdSubType.Text = row["Product sub type"].ToString();
+                            modyProd.cmbProdDimension.Text = row["Product dimension group"].ToString();
+                            modyProd.txtSKU.Text = row["SKU"].ToString();
+                            modyProd.txtProdName.Text = row["Product description"].ToString();
+                            modyProd.txtSupplier.Text = row["Supplier ID"].ToString();
+                            Id.suppID = row["Supplier ID"].ToString();
+                            modyProd.cbConcession.Checked = Convert.ToBoolean(row["isConcession"]);
+                        }
+
+                        DialogResult res = modyProd.ShowDialog();
+                        if (res == DialogResult.OK)
+                        {
+                            productList();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("You don't have permission to update a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
-                    DialogResult res = modyProd.ShowDialog();
-                    if (res == DialogResult.OK)
-                    {
-                        productList();
-                    }
+                    //int rowIndex = dgvProduct.SelectedRows[0].Index;
+
+                    //modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
+                    //Id.RIDL = Convert.ToInt64(dgvProduct.Rows[rowIndex].Cells["RID"].Value);
+                    //DataTable dt = pc.fetchDept("sp_catValidation", "rid", Id.RIDL);
+
+                    //foreach(DataRow dr in dt.Rows)
+                    //{
+                    //    modyProd.txtDepartment.Text = dr["dept_desc"].ToString();
+                    //}
+                    //modyProd.cmbBrand.Text = dgvProduct.Rows[rowIndex].Cells["bDesc"].Value.ToString();
+                    //modyProd.cmbProdType.Text = dgvProduct.Rows[rowIndex].Cells["prodTypeDesc"].Value.ToString();
+                    //modyProd.cmbProdSubType.Text = dgvProduct.Rows[rowIndex].Cells["prodSubTypeDesc"].Value.ToString();
+                    //modyProd.cmbProdDimension.Text = dgvProduct.Rows[rowIndex].Cells["pDimension"].Value.ToString();
+                    //modyProd.txtSKU.Text = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
+                    //modyProd.txtProdName.Text = dgvProduct.Rows[rowIndex].Cells["itemDesc"].Value.ToString();
+                    //modyProd.txtSupplier.Text = dgvProduct.Rows[rowIndex].Cells["name"].Value.ToString();
+                    //Id.suppID = dgvProduct.Rows[rowIndex].Cells["suppID"].Value.ToString();
+                    //modyProd.cbConcession.Checked = Convert.ToBoolean(dgvProduct.Rows[rowIndex].Cells["isConcession"].Value);
+
+
+                    //var product = db.vwProducts.Where(a => a.SKU.Equals(Id.productID)).FirstOrDefault();
+                    //bool isConcession = Convert.ToBoolean(product.isConcession);
+                    //var chTree = db.sp_catValidation("rid", product.RID).SingleOrDefault();
+                    //modyProd.txtSKU.Text = product.SKU;
+                    //modyProd.txtCategory.Text = product.RID.ToString();
+                    //modyProd.txtDepartment.Text = chTree.dept_desc;
+                    //modyProd.txtSupplier.Text = product.suppID;
+                    //modyProd.cmbProdType.Text = product.Product_type;
+                    //modyProd.cmbProdSubType.Text = product.prodSubTypeDesc;
+                    //modyProd.cmbProdDimension.Text = product.pDimension;
+                    //modyProd.cbConcession.Checked = isConcession;
+                    ////modyProd.cmbLine.Text = product.lineDisc;
+                    //modyProd.txtProdName.Text = product.itemDesc;
+                    //modyProd.cmbBrand.Text = product.bDesc;
+
+                    //var item = db.vwProducts.Where(a => a.SKU.Equals(Id.productID)).ToList();
+                    //foreach(vwProduct barcode in item)
+                    //{
+                    //    modyProd.dgvBarcode.Rows.Add(barcode.Barcode, barcode.Product_description, barcode.CPuomID, barcode.PO_Unit, barcode.Cost_price, barcode.factor, barcode.RPuomID, barcode.Retail_Unit, barcode.Retail_price, barcode.inventoryCost, barcode.discountID, barcode.dDesc, barcode.purchaseTax, barcode.salesTax, barcode.DID, barcode.BMRX, barcode.PID, barcode.Privilege_setup, barcode.itemModelID, barcode.itemModelDesc, barcode.isDiscountable, barcode.isActive, barcode.chargeID, barcode.chargeDesc, barcode.kitCode, barcode.LID, barcode.Location, barcode.siteID, barcode.whDesc, barcode.Location);
+                    //}
+                    //modyProd.ShowDialog();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to update a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            
-                //int rowIndex = dgvProduct.SelectedRows[0].Index;
-
-                //modyProd.txtCategory.Text = dgvProduct.Rows[rowIndex].Cells["desc"].Value.ToString();
-                //Id.RIDL = Convert.ToInt64(dgvProduct.Rows[rowIndex].Cells["RID"].Value);
-                //DataTable dt = pc.fetchDept("sp_catValidation", "rid", Id.RIDL);
-                
-                //foreach(DataRow dr in dt.Rows)
-                //{
-                //    modyProd.txtDepartment.Text = dr["dept_desc"].ToString();
-                //}
-                //modyProd.cmbBrand.Text = dgvProduct.Rows[rowIndex].Cells["bDesc"].Value.ToString();
-                //modyProd.cmbProdType.Text = dgvProduct.Rows[rowIndex].Cells["prodTypeDesc"].Value.ToString();
-                //modyProd.cmbProdSubType.Text = dgvProduct.Rows[rowIndex].Cells["prodSubTypeDesc"].Value.ToString();
-                //modyProd.cmbProdDimension.Text = dgvProduct.Rows[rowIndex].Cells["pDimension"].Value.ToString();
-                //modyProd.txtSKU.Text = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
-                //modyProd.txtProdName.Text = dgvProduct.Rows[rowIndex].Cells["itemDesc"].Value.ToString();
-                //modyProd.txtSupplier.Text = dgvProduct.Rows[rowIndex].Cells["name"].Value.ToString();
-                //Id.suppID = dgvProduct.Rows[rowIndex].Cells["suppID"].Value.ToString();
-                //modyProd.cbConcession.Checked = Convert.ToBoolean(dgvProduct.Rows[rowIndex].Cells["isConcession"].Value);
-
-                
-                //var product = db.vwProducts.Where(a => a.SKU.Equals(Id.productID)).FirstOrDefault();
-                //bool isConcession = Convert.ToBoolean(product.isConcession);
-                //var chTree = db.sp_catValidation("rid", product.RID).SingleOrDefault();
-                //modyProd.txtSKU.Text = product.SKU;
-                //modyProd.txtCategory.Text = product.RID.ToString();
-                //modyProd.txtDepartment.Text = chTree.dept_desc;
-                //modyProd.txtSupplier.Text = product.suppID;
-                //modyProd.cmbProdType.Text = product.Product_type;
-                //modyProd.cmbProdSubType.Text = product.prodSubTypeDesc;
-                //modyProd.cmbProdDimension.Text = product.pDimension;
-                //modyProd.cbConcession.Checked = isConcession;
-                ////modyProd.cmbLine.Text = product.lineDisc;
-                //modyProd.txtProdName.Text = product.itemDesc;
-                //modyProd.cmbBrand.Text = product.bDesc;
-
-                //var item = db.vwProducts.Where(a => a.SKU.Equals(Id.productID)).ToList();
-                //foreach(vwProduct barcode in item)
-                //{
-                //    modyProd.dgvBarcode.Rows.Add(barcode.Barcode, barcode.Product_description, barcode.CPuomID, barcode.PO_Unit, barcode.Cost_price, barcode.factor, barcode.RPuomID, barcode.Retail_Unit, barcode.Retail_price, barcode.inventoryCost, barcode.discountID, barcode.dDesc, barcode.purchaseTax, barcode.salesTax, barcode.DID, barcode.BMRX, barcode.PID, barcode.Privilege_setup, barcode.itemModelID, barcode.itemModelDesc, barcode.isDiscountable, barcode.isActive, barcode.chargeID, barcode.chargeDesc, barcode.kitCode, barcode.LID, barcode.Location, barcode.siteID, barcode.whDesc, barcode.Location);
-                //}
-                //modyProd.ShowDialog();
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Product Management Form", "Delete"))
+            try
             {
-                DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (res == DialogResult.Yes)
+                if (_userPermission.CanPerformOperation("Product Management Form", "Delete"))
                 {
-                    int rowIndex = dgvProduct.SelectedRows[0].Index;
-                    Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
-                    pc.deleteProduct("sp_Product", "Product", "Delete", Id.SKU);
-                    productList();
+                    DialogResult res = MessageBox.Show("Delete product and its barcode?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (res == DialogResult.Yes)
+                    {
+                        int rowIndex = dgvProduct.SelectedRows[0].Index;
+                        Id.SKU = dgvProduct.Rows[rowIndex].Cells["SKU"].Value.ToString();
+                        pc.deleteProduct("sp_Product", "Product", "Delete", Id.SKU);
+                        productList();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to delete a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to delete a Product.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
         }
 
         private void btnKitSetup_Click(object sender, EventArgs e)

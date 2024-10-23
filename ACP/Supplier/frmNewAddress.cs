@@ -27,60 +27,67 @@ namespace ACP
 
         private void createUpdate()
         {
-            if (!string.IsNullOrEmpty(cmbPurpose.Text) || !string.IsNullOrEmpty(txtAddress.Text) || !string.IsNullOrEmpty(txtCity.Text) || !string.IsNullOrEmpty(txtProvince.Text))
+            try
             {
-                if(Id.button == "Create")
+                if (!string.IsNullOrEmpty(cmbPurpose.Text) || !string.IsNullOrEmpty(txtAddress.Text) || !string.IsNullOrEmpty(txtCity.Text) || !string.IsNullOrEmpty(txtProvince.Text))
                 {
-                    supClass.createUpdateAddress("addressDIR", "Create", null, txtInfo.ToTitleCase(txtAddress.Text), Id.suppID, txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchAddress();
-                    disableAndClear();
+                    if (Id.button == "Create")
+                    {
+                        supClass.createUpdateAddress("addressDIR", "Create", null, txtInfo.ToTitleCase(txtAddress.Text), Id.suppID, txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchAddress();
+                        disableAndClear();
 
+                    }
+                    else if (Id.button == "Update")
+                    {
+                        supClass.createUpdateAddress("addressDIR", "Update", Id.addressID, txtInfo.ToTitleCase(txtAddress.Text), "", txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchAddress();
+                        disableAndClear();
+                    }
+                    //if (Id.button == "Create")
+                    //{
+                    //    if (btnCreate.Text.Equals("Create"))
+                    //    {
+                    //        this.DialogResult = DialogResult.OK;
+                    //        this.Hide();
+
+                    //    }
+                    //    else if (btnCreate.Text.Equals("Update"))
+                    //    {
+
+                    //        //supClass.createUpdateAddress("addressDIR", "Create", Id.addressID, txtAddress.Text, txtCity.Text, txtProvince.Text, cmbPurpose.Text, Id.isPrimary);
+                    //        this.DialogResult = DialogResult.OK;
+                    //        this.Hide();
+                    //    }
+
+                    //}
+                    //else if (Id.button == "Update")
+                    //{
+                    //    if (btnCreate.Text.Equals("Create"))
+                    //    {
+                    //        supClass.createUpdateAddress("addressDIR", "Create", null, txtInfo.ToTitleCase(txtAddress.Text), Id.suppID, txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
+                    //        this.DialogResult = DialogResult.OK;
+                    //        this.Hide();
+
+                    //    }
+                    //    else if (btnCreate.Text.Equals("Update"))
+                    //    {
+                    //        supClass.createUpdateAddress("addressDIR", "Update", Id.addressID, txtInfo.ToTitleCase(txtAddress.Text), "", txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, null);
+                    //        this.DialogResult = DialogResult.OK;
+                    //        this.Hide();
+                    //    }
+                    //}
                 }
-                else if(Id.button == "Update")
+                else
                 {
-                    supClass.createUpdateAddress("addressDIR", "Update", Id.addressID, txtInfo.ToTitleCase(txtAddress.Text), "", txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
-                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchAddress();
-                    disableAndClear();
+                    MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                //if (Id.button == "Create")
-                //{
-                //    if (btnCreate.Text.Equals("Create"))
-                //    {
-                //        this.DialogResult = DialogResult.OK;
-                //        this.Hide();
-
-                //    }
-                //    else if (btnCreate.Text.Equals("Update"))
-                //    {
-
-                //        //supClass.createUpdateAddress("addressDIR", "Create", Id.addressID, txtAddress.Text, txtCity.Text, txtProvince.Text, cmbPurpose.Text, Id.isPrimary);
-                //        this.DialogResult = DialogResult.OK;
-                //        this.Hide();
-                //    }
-
-                //}
-                //else if (Id.button == "Update")
-                //{
-                //    if (btnCreate.Text.Equals("Create"))
-                //    {
-                //        supClass.createUpdateAddress("addressDIR", "Create", null, txtInfo.ToTitleCase(txtAddress.Text), Id.suppID, txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, Id.userID);
-                //        this.DialogResult = DialogResult.OK;
-                //        this.Hide();
-
-                //    }
-                //    else if (btnCreate.Text.Equals("Update"))
-                //    {
-                //        supClass.createUpdateAddress("addressDIR", "Update", Id.addressID, txtInfo.ToTitleCase(txtAddress.Text), "", txtInfo.ToTitleCase(txtCity.Text), txtInfo.ToTitleCase(txtProvince.Text), txtInfo.ToTitleCase(cmbPurpose.Text), cbPrimary.Checked, null);
-                //        this.DialogResult = DialogResult.OK;
-                //        this.Hide();
-                //    }
-                //}
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -200,52 +207,64 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Address Management Form", "Update"))
+            try
             {
-                if (dgvAddress.SelectedRows.Count > 0)
+                if (_userPermission.CanPerformOperation("Address Management Form", "Update"))
                 {
-                    Id.button = "Update";
-                    btnCreate.Text = "Update";
+                    if (dgvAddress.SelectedRows.Count > 0)
+                    {
+                        Id.button = "Update";
+                        btnCreate.Text = "Update";
 
-                    int rowIndex = dgvAddress.SelectedRows[0].Index;
-                    Id.addressID = Convert.ToInt32(dgvAddress.Rows[rowIndex].Cells["addressID"].Value);
-                    txtAddress.Text = dgvAddress.Rows[rowIndex].Cells["address"].Value.ToString();
-                    txtCity.Text = dgvAddress.Rows[rowIndex].Cells["city"].Value.ToString();
-                    txtProvince.Text = dgvAddress.Rows[rowIndex].Cells["province"].Value.ToString();
-                    cmbPurpose.Text = dgvAddress.Rows[rowIndex].Cells["purpose"].Value.ToString();
-                    cbPrimary.Checked = Convert.ToBoolean(dgvAddress.Rows[rowIndex].Cells["isPrimary"].Value);
+                        int rowIndex = dgvAddress.SelectedRows[0].Index;
+                        Id.addressID = Convert.ToInt32(dgvAddress.Rows[rowIndex].Cells["addressID"].Value);
+                        txtAddress.Text = dgvAddress.Rows[rowIndex].Cells["address"].Value.ToString();
+                        txtCity.Text = dgvAddress.Rows[rowIndex].Cells["city"].Value.ToString();
+                        txtProvince.Text = dgvAddress.Rows[rowIndex].Cells["province"].Value.ToString();
+                        cmbPurpose.Text = dgvAddress.Rows[rowIndex].Cells["purpose"].Value.ToString();
+                        cbPrimary.Checked = Convert.ToBoolean(dgvAddress.Rows[rowIndex].Cells["isPrimary"].Value);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to update Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to update Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Address Management Form", "Delete"))
+            try
             {
-                if (dgvAddress.SelectedRows.Count > 0)
+                if (_userPermission.CanPerformOperation("Address Management Form", "Delete"))
                 {
-                    DialogResult res = MessageBox.Show("Are you sure to delete address?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (res == DialogResult.Yes)
+                    if (dgvAddress.SelectedRows.Count > 0)
                     {
-                        supClass.deleteAddress("addressDIR", "Delete", Id.addressID);
+                        DialogResult res = MessageBox.Show("Are you sure to delete address?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (res == DialogResult.Yes)
+                        {
+                            supClass.deleteAddress("addressDIR", "Delete", Id.addressID);
 
-                        fetchAddress();
-                        disableAndClear();
-                        btnEdit.Enabled = false;
-                        btnDelete.Enabled = false;
+                            fetchAddress();
+                            disableAndClear();
+                            btnEdit.Enabled = false;
+                            btnDelete.Enabled = false;
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("You don't have permission to create new Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to create new Address.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
         }
     }
 }

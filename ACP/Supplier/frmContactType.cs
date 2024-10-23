@@ -39,23 +39,30 @@ namespace ACP
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtDesc.Text))
+            try
             {
-                if (Id.button.Equals("Create"))
+                if (!string.IsNullOrEmpty(txtDesc.Text))
                 {
-                    supClass.createUpdateContactType("contactType", "Create", null, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetch_contactType();
-                    refresh();
-                    
+                    if (Id.button.Equals("Create"))
+                    {
+                        supClass.createUpdateContactType("contactType", "Create", null, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetch_contactType();
+                        refresh();
+
+                    }
+                    else if (Id.button.Equals("Update"))
+                    {
+                        supClass.createUpdateContactType("contactType", "Update", Id.contactTypeID, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetch_contactType();
+                        refresh();
+                    }
                 }
-                else if(Id.button.Equals("Update"))
-                {
-                    supClass.createUpdateContactType("contactType", "Update", Id.contactTypeID, txtInfo.ToTitleCase(txtDesc.Text), Id.userID);
-                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetch_contactType();
-                    refresh();
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -111,15 +118,22 @@ namespace ACP
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Id.button = "Update";
-            btnCreate.Text = "Update";
-
-            txtDesc.Enabled = true;
-            btnCreate.Enabled = true;
-            if(dgvContactType.SelectedRows.Count > 0)
+            try
             {
-                int rowIndex = dgvContactType.SelectedRows[0].Index;
-                txtDesc.Text = dgvContactType.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
+                Id.button = "Update";
+                btnCreate.Text = "Update";
+
+                txtDesc.Enabled = true;
+                btnCreate.Enabled = true;
+                if (dgvContactType.SelectedRows.Count > 0)
+                {
+                    int rowIndex = dgvContactType.SelectedRows[0].Index;
+                    txtDesc.Text = dgvContactType.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -130,13 +144,20 @@ namespace ACP
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Are you sure to delete contact type?", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (res == DialogResult.OK)
+            try
             {
-                supClass.deleteContactType("contactType", "Delete", Id.contactTypeID);
-                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fetch_contactType();
-                refresh();
+                DialogResult res = MessageBox.Show("Are you sure to delete contact type?", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (res == DialogResult.OK)
+                {
+                    supClass.deleteContactType("contactType", "Delete", Id.contactTypeID);
+                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fetch_contactType();
+                    refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

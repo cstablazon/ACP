@@ -46,28 +46,35 @@ namespace ACP
 
         private void createUpdate()
         {
-            if (!string.IsNullOrEmpty(cmbCtype.Text) || !string.IsNullOrEmpty(txtDesc.Text))
+            try
             {
-                if(Id.button == "Create")
+                if (!string.IsNullOrEmpty(cmbCtype.Text) || !string.IsNullOrEmpty(txtDesc.Text))
                 {
-                    int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
-                    supClass.createUpdateContact("contactDIR", "Create", null, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
-                    MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchContact();
-                    disableAndClear();
+                    if (Id.button == "Create")
+                    {
+                        int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
+                        supClass.createUpdateContact("contactDIR", "Create", null, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchContact();
+                        disableAndClear();
+                    }
+                    else if (Id.button == "Update")
+                    {
+                        int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
+                        supClass.createUpdateContact("contactDIR", "Update", Id.contactID, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchContact();
+                        disableAndClear();
+                    }
                 }
-                else if(Id.button == "Update")
+                else
                 {
-                    int typeID = Convert.ToInt32(cmbCtype.SelectedValue);
-                    supClass.createUpdateContact("contactDIR", "Update", Id.contactID, Id.suppID, typeID, txtDesc.Text, cbPrimary.Checked, Id.userID);
-                    MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchContact();
-                    disableAndClear();
+                    MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Fillup necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -157,48 +164,60 @@ namespace ACP
 
         private void btnConEdit_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Contact Management Form", "Update"))
+            try
             {
-                if (dgvCon.SelectedRows.Count > 0)
+                if (_userPermission.CanPerformOperation("Contact Management Form", "Update"))
                 {
-                    Id.button = "Update";
-                    btnCreate.Text = "Update";
+                    if (dgvCon.SelectedRows.Count > 0)
+                    {
+                        Id.button = "Update";
+                        btnCreate.Text = "Update";
 
-                    int rowIndex = dgvCon.SelectedRows[0].Index;
-                    Id.contactID = Convert.ToInt32(dgvCon.Rows[rowIndex].Cells["contactID"].Value);
-                    cmbCtype.Text = dgvCon.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
-                    txtDesc.Text = dgvCon.Rows[rowIndex].Cells["Contact information"].Value.ToString();
-                    cbPrimary.Checked = Convert.ToBoolean(dgvCon.Rows[rowIndex].Cells["isPrimary"].Value);
+                        int rowIndex = dgvCon.SelectedRows[0].Index;
+                        Id.contactID = Convert.ToInt32(dgvCon.Rows[rowIndex].Cells["contactID"].Value);
+                        cmbCtype.Text = dgvCon.Rows[rowIndex].Cells["Contact Type"].Value.ToString();
+                        txtDesc.Text = dgvCon.Rows[rowIndex].Cells["Contact information"].Value.ToString();
+                        cbPrimary.Checked = Convert.ToBoolean(dgvCon.Rows[rowIndex].Cells["isPrimary"].Value);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to update a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to update a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
         }
 
         private void btnConDelete_Click(object sender, EventArgs e)
         {
-            if (_userPermission.CanPerformOperation("Contact Management Form", "Delete"))
+            try
             {
-                DialogResult res = MessageBox.Show("Are you sure to delete contact?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
+                if (_userPermission.CanPerformOperation("Contact Management Form", "Delete"))
                 {
-                    int contactID = Convert.ToInt32(Id.contactID);
-                    supClass.deleteContact("contactDIR", "Delete", Id.contactID);
-                    MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fetchContact();
-                    disableAndClear();
-                    btnConEdit.Enabled = false;
-                    btnConDelete.Enabled = false;
+                    DialogResult res = MessageBox.Show("Are you sure to delete contact?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (res == DialogResult.Yes)
+                    {
+                        int contactID = Convert.ToInt32(Id.contactID);
+                        supClass.deleteContact("contactDIR", "Delete", Id.contactID);
+                        MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fetchContact();
+                        disableAndClear();
+                        btnConEdit.Enabled = false;
+                        btnConDelete.Enabled = false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You don't have permission to delete a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You don't have permission to delete a Contact.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
         }
 
         private void cmbCtype_SelectedIndexChanged(object sender, EventArgs e)

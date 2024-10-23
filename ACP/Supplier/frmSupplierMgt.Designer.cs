@@ -192,7 +192,6 @@
             // btnContact
             // 
             this.btnContact.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnContact.Enabled = false;
             this.btnContact.FlatAppearance.BorderSize = 0;
             this.btnContact.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnContact.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -212,7 +211,6 @@
             // btnAddress
             // 
             this.btnAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddress.Enabled = false;
             this.btnAddress.FlatAppearance.BorderSize = 0;
             this.btnAddress.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnAddress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -244,7 +242,6 @@
             // btnAddPrincipal
             // 
             this.btnAddPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddPrincipal.Enabled = false;
             this.btnAddPrincipal.FlatAppearance.BorderSize = 0;
             this.btnAddPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnAddPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -289,7 +286,6 @@
             // btnSuppDel
             // 
             this.btnSuppDel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSuppDel.Enabled = false;
             this.btnSuppDel.FlatAppearance.BorderSize = 0;
             this.btnSuppDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnSuppDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -309,7 +305,6 @@
             // btnEdit
             // 
             this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.Enabled = false;
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
