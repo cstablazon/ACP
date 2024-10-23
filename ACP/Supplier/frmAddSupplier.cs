@@ -118,28 +118,28 @@ namespace ACP
         int? userID;
         public void  createUpdate()
         {
-            if (cmbType.Text.Equals(""))
+            if (string.IsNullOrEmpty(cmbType.Text) || string.IsNullOrWhiteSpace(cmbType.Text))
             {
                 MessageBox.Show("Record type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbType.Focus();
             }
-            else if (cmbItemTax.Text.Equals(""))
+            else if (string.IsNullOrEmpty(cmbItemTax.Text) || string.IsNullOrWhiteSpace(cmbItemTax.Text))
             {
                 MessageBox.Show("Item sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbItemTax.Focus();
             }
-            else if (cmbGroup.Text.Equals(""))
+            else if (string.IsNullOrEmpty(cmbGroup.Text) || string.IsNullOrWhiteSpace(cmbGroup.Text))
             {
                 MessageBox.Show("Group is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbGroup.Focus();
             }
 
-            else if (txtSupCode.Text.Equals(""))
+            else if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
             {
                 MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSupCode.Focus();
             }
-            else if (txtName.Text.Equals(""))
+            else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtName.Focus();
@@ -148,58 +148,30 @@ namespace ACP
             {
                 if (Id.button.Equals("Create"))
                 {
-                    if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
+                    if (!db.suppliers.Any(a => a.suppID == txtSupCode.Text))
                     {
-                        MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtSupCode.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
-                    {
-                        MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtSupCode.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbItemTax.Text) || string.IsNullOrWhiteSpace(cmbItemTax.Text))
-                    {
-                        MessageBox.Show("Sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbItemTax.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbType.Text) || string.IsNullOrWhiteSpace(cmbType.Text))
-                    {
-                        MessageBox.Show("Record type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbType.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbGroup.Text) || string.IsNullOrWhiteSpace(cmbGroup.Text))
-                    {
-                        MessageBox.Show("Group type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbGroup.Focus();
-                    }
-                    else
-                    {
-                        if (!db.suppliers.Any(a => a.suppID == txtSupCode.Text))
+                        string itemTax = cmbItemTax.SelectedValue.ToString();
+                        int? payID;
+                        int? sGroupID;
+                        if (!string.IsNullOrEmpty(cmbPayTerms.Text) || !string.IsNullOrEmpty(cmbGroup.Text) || !string.IsNullOrWhiteSpace(cmbPayTerms.Text) || !string.IsNullOrWhiteSpace(cmbGroup.Text))
                         {
-                            string itemTax = cmbItemTax.SelectedValue.ToString();
-                            int? payID;
-                            int? sGroupID;
-                            if (!string.IsNullOrEmpty(cmbPayTerms.Text) || !string.IsNullOrEmpty(cmbGroup.Text) || !string.IsNullOrWhiteSpace(cmbPayTerms.Text) || !string.IsNullOrWhiteSpace(cmbGroup.Text))
-                            {
-                                payID = Convert.ToInt32(cmbPayTerms.SelectedValue);
-                                sGroupID = Convert.ToInt32(cmbGroup.SelectedValue);
-                            }
-                            else
-                            {
-                                payID = null;
-                                sGroupID = null;
-                            }
-                            supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text.Trim()), null, true, true, Id.userID);
-
-                            MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.DialogResult = DialogResult.OK;
-                            this.Hide();
+                            payID = Convert.ToInt32(cmbPayTerms.SelectedValue);
+                            sGroupID = Convert.ToInt32(cmbGroup.SelectedValue);
                         }
                         else
                         {
-                            MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            payID = null;
+                            sGroupID = null;
                         }
+                        supClass.createUpdateSupplier("Supplier", "Create", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), txtInfo.ToTitleCase(cmbType.Text), txtInfo.ToTitleCase(txtAgent.Text.Trim()), null, true, true, Id.userID);
+
+                        MessageBox.Show("Successfully saved", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else if (Id.button.Equals("Update"))
@@ -217,54 +189,27 @@ namespace ACP
                         payID = null;
                         sGroupID = null;
                     }
-                    if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
+
+                    var objExcept = db.suppliers.Where(a => a.suppID == Id.suppID);
+                    if (!db.suppliers.Except(objExcept).Any(a => a.suppID == txtSupCode.Text))
                     {
-                        MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtSupCode.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
-                    {
-                        MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtSupCode.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbItemTax.Text) || string.IsNullOrWhiteSpace(cmbItemTax.Text))
-                    {
-                        MessageBox.Show("Sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbItemTax.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbType.Text) || string.IsNullOrWhiteSpace(cmbType.Text))
-                    {
-                        MessageBox.Show("Record type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbType.Focus();
-                    }
-                    else if (string.IsNullOrEmpty(cmbGroup.Text) || string.IsNullOrWhiteSpace(cmbGroup.Text))
-                    {
-                        MessageBox.Show("Group type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        cmbGroup.Focus();
+                        DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            suppRID = row["RID"].ToString();
+                            isDistributor = Convert.ToBoolean(row["isDistributor"]);
+                            isActive = Convert.ToBoolean(row["isActive"]);
+                            userID = Convert.ToInt32(row["userID"]);
+                        }
+                        supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text.Trim()), suppRID, isDistributor, isActive, userID);
+
+                        MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Hide();
                     }
                     else
                     {
-                        var objExcept = db.suppliers.Where(a => a.suppID == Id.suppID);
-                        if (!db.suppliers.Except(objExcept).Any(a => a.suppID == txtSupCode.Text))
-                        {
-                            DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
-                            foreach (DataRow row in dt.Rows)
-                            {
-                                suppRID = row["RID"].ToString();
-                                isDistributor = Convert.ToBoolean(row["isDistributor"]);
-                                isActive = Convert.ToBoolean(row["isActive"]);
-                                userID = Convert.ToInt32(row["userID"]);
-                            }
-                            supClass.createUpdateSupplier("Supplier", "Update", txtSupCode.Text.Trim(), itemTax, payID, sGroupID, txtInfo.ToTitleCase(txtName.Text.Trim()), cmbType.Text, txtInfo.ToTitleCase(txtAgent.Text.Trim()), suppRID, isDistributor, isActive, userID);
-
-                            MessageBox.Show("Successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.DialogResult = DialogResult.OK;
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        MessageBox.Show("Supplier ID already exist", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

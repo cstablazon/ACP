@@ -1040,6 +1040,7 @@ namespace ACP
             dgvSupplier.ReadOnly = true;
             dgvSupplier.MultiSelect = false;
             dgvSupplier.RowHeadersVisible = false;
+            dgvSupplier.BackgroundColor = Color.White;
             dgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvSupplier.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

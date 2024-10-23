@@ -127,13 +127,14 @@ namespace ACP
         int? userID;
         public void createUpdate()
         {
-            if (txtSupCode.Text.Equals(""))
+            if (string.IsNullOrEmpty(txtSupCode.Text) || string.IsNullOrWhiteSpace(txtSupCode.Text))
             {
                 MessageBox.Show("Supplier code is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Supplier name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtName.Focus();
             }
             else
             {
@@ -888,6 +889,7 @@ namespace ACP
                 dgvPrincipal.Columns.Insert(0, cbPrincipal);
                 headerCheckBox();
                 headerCB.MouseClick += headerCB_MouseClick;
+                btnEdit.Enabled = true;
             }
             else if(btnSelect.Text.Equals("Cancel"))
             {
@@ -896,6 +898,8 @@ namespace ACP
                 btnCdistri.Enabled = false;
                 dgvPrincipal.Columns.RemoveAt(0);
                 dgvPrincipal.Controls.Remove(headerCB);
+                btnEdit.Enabled = false;
+
             }
         }
 

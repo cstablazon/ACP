@@ -447,6 +447,7 @@ namespace ACP
             dgvPurchaseDiscount.ReadOnly = true;
             dgvPurchaseDiscount.MultiSelect = false;
             dgvPurchaseDiscount.RowHeadersVisible = false;
+            dgvPurchaseDiscount.BackgroundColor = Color.White;
             dgvPurchaseDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvPurchaseDiscount.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvPurchaseDiscount.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -1406,62 +1407,62 @@ namespace ACP
 
         private void validation()
         {
-            if (string.IsNullOrEmpty(txtBarcode.Text))
+            if (string.IsNullOrEmpty(txtBarcode.Text) || string.IsNullOrWhiteSpace(txtBarcode.Text))
             {
                 MessageBox.Show("Barcode is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtBarcode.Focus();
             }
-            else if(string.IsNullOrEmpty(txtPosDesc.Text))
+            else if (string.IsNullOrEmpty(txtPosDesc.Text) || string.IsNullOrWhiteSpace(txtPosDesc.Text))
             {
                 MessageBox.Show("Product description is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtPosDesc.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbPOunit.Text))
+            else if(string.IsNullOrEmpty(cmbPOunit.Text) || string.IsNullOrWhiteSpace(cmbPOunit.Text))
             {
                 MessageBox.Show("Purchase unit is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbPOunit.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbRetailUnit.Text))
+            else if (string.IsNullOrEmpty(cmbRetailUnit.Text) || string.IsNullOrWhiteSpace(cmbRetailUnit.Text))
             {
                 MessageBox.Show("Retail unit is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbRetailUnit.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbBOM.Text))
+            else if (string.IsNullOrEmpty(cmbBOM.Text) || string.IsNullOrWhiteSpace(cmbBOM.Text))
             {
                 MessageBox.Show("BOM unit is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbBOM.Focus();
             }
-            else if(string.IsNullOrEmpty(txtRetailP.Text))
+            else if(string.IsNullOrEmpty(txtRetailP.Text) || txtRetailP.Text == "0.00")
             {
                 MessageBox.Show("Retail price is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtRetailP.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbPurchaseTax.Text))
+            else if (string.IsNullOrEmpty(cmbPurchaseTax.Text) || string.IsNullOrWhiteSpace(cmbPurchaseTax.Text))
             {
                 MessageBox.Show("Purchase tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbPurchaseTax.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbSalesTax.Text))
+            else if(string.IsNullOrEmpty(cmbSalesTax.Text) || string.IsNullOrWhiteSpace(cmbSalesTax.Text))
             {
                 MessageBox.Show("Sales tax is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbSalesTax.Focus();
             }
-            else if(string.IsNullOrEmpty(cmbItemModel.Text))
+            else if(string.IsNullOrEmpty(cmbItemModel.Text) || string.IsNullOrWhiteSpace(cmbItemModel.Text))
             {
                 MessageBox.Show("Item model group is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbItemModel.Focus();
             }
-            else if(string.IsNullOrEmpty(txtIssueLoc.Text))
+            else if(string.IsNullOrEmpty(txtIssueLoc.Text) || string.IsNullOrWhiteSpace(txtIssueLoc.Text))
             {
                 MessageBox.Show("Issue location is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtIssueLoc.Focus();
             }
-            else if(string.IsNullOrEmpty(txtBMRX.Text))
+            else if(string.IsNullOrEmpty(txtBMRX.Text) || string.IsNullOrWhiteSpace(txtBMRX.Text))
             {
                 MessageBox.Show("Issue location is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtBMRX.Focus();
             }
-            else if (string.IsNullOrEmpty(txtPrivilege.Text))
+            else if (string.IsNullOrEmpty(txtPrivilege.Text) || string.IsNullOrWhiteSpace(txtPrivilege.Text))
             {
                 MessageBox.Show("Issue location is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtPrivilege.Focus();

@@ -608,17 +608,17 @@ namespace ACP
            
             //try
             //{
-            if (string.IsNullOrEmpty(txtCategory.Text))
+            if (string.IsNullOrEmpty(txtCategory.Text) || string.IsNullOrWhiteSpace(txtCategory.Text))
             {
                 MessageBox.Show("Category is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtCategory.Focus();
             }
-            else if (string.IsNullOrEmpty(cmbProdType.Text))
+            else if (string.IsNullOrEmpty(cmbProdType.Text) || string.IsNullOrWhiteSpace(cmbProdType.Text))
             {
                 MessageBox.Show("Product type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbProdType.Focus();
             }
-            else if (string.IsNullOrEmpty(cmbProdSubType.Text))
+            else if (string.IsNullOrEmpty(cmbProdSubType.Text) || string.IsNullOrWhiteSpace(cmbProdSubType.Text))
             {
                 MessageBox.Show("Product sub type is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbProdSubType.Focus();
@@ -628,17 +628,17 @@ namespace ACP
                 MessageBox.Show("Product dimension is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cmbProdDimension.Focus();
             }
-            else if (string.IsNullOrEmpty(txtSKU.Text))
+            else if (string.IsNullOrEmpty(txtSKU.Text) || string.IsNullOrWhiteSpace(txtSKU.Text))
             {
                 MessageBox.Show("SKU is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSKU.Focus();
             }
-            else if (string.IsNullOrEmpty(txtProdName.Text))
+            else if (string.IsNullOrEmpty(txtProdName.Text) || string.IsNullOrWhiteSpace(txtProdName.Text))
             {
                 MessageBox.Show("Product name is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtProdName.Focus();
             }
-            else if (string.IsNullOrEmpty(txtSupplier.Text))
+            else if (string.IsNullOrEmpty(txtSupplier.Text) || string.IsNullOrWhiteSpace(txtSupplier.Text))
             {
                 MessageBox.Show("Supplier is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSupplier.Focus();
@@ -792,7 +792,7 @@ namespace ACP
             {
                 if (additionalInfo.ShowDialog() == DialogResult.OK)
                 {
-                    fetchBarcode();
+                    fetchBarcode(); 
                 }
             }
             //dgvBarcode.Rows.Add();
@@ -1365,6 +1365,7 @@ namespace ACP
             dgvSupplier.ReadOnly = true;
             dgvSupplier.MultiSelect = false;
             dgvSupplier.RowHeadersVisible = false;
+            dgvSupplier.BackgroundColor = Color.White;
             dgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvSupplier.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
