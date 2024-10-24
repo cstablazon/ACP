@@ -284,7 +284,6 @@ namespace ACP
             {
                 if (_userPermission.CanPerformOperation("Principal Management Form", "Update"))
                 {
-
                     if (dgvPrincipal.SelectedRows.Count > 0)
                     {
                         btnSave.Text = "Update";

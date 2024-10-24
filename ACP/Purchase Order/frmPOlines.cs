@@ -353,8 +353,8 @@ namespace ACP
                     }
                     else
                     {
-                        string posDesc = dgvNewItems.Rows[i].Cells["posDesc"].Value.ToString();
-                        string deptCode = dgvNewItems.Rows[i].Cells["dept_code"].Value.ToString();
+                        string posDesc = dgvNewItems.Rows[i].Cells["Product description"].Value.ToString();
+                        string deptCode = dgvNewItems.Rows[i].Cells["Dept code"].Value.ToString();
                         decimal qty = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["qtyCol"].Value);
                         string poUnit = dgvNewItems.Rows[i].Cells["poUnit"].Value.ToString();
                         decimal costPrice = Convert.ToDecimal(dgvNewItems.Rows[i].Cells["costPrice"].Value);

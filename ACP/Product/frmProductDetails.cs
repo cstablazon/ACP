@@ -159,7 +159,7 @@ namespace ACP
                 cbAutoGenerate.Enabled = false;
             }
             //txtFactor.Text = 0.ToString("N2");
-            txtFactor.Enabled = false;
+            //txtFactor.Enabled = false;
             discountCriteria();
             pPopup.Hide();
             purchaseDiscount();
@@ -876,6 +876,14 @@ namespace ACP
                 {
                     factor = null;
                 }
+            if(string.IsNullOrEmpty(cmbCharges.Text) || string.IsNullOrWhiteSpace(cmbCharges.Text))
+            {
+                chargeID = null;
+            }
+            else
+            {
+                Convert.ToInt32(cmbCharges.SelectedValue);
+            }
                 costPrice = Convert.ToDecimal(txtPOcostP.Text);
                 inventoryCost = Convert.ToDecimal(txtInventoryCost.Text);
                 if (Id.button == "Create")
@@ -1407,8 +1415,8 @@ namespace ACP
 
         private void validation()
         {
-            try
-            {
+            //try
+            //{
                 if (string.IsNullOrEmpty(txtBarcode.Text) || string.IsNullOrWhiteSpace(txtBarcode.Text))
                 {
                     MessageBox.Show("Barcode is required", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1478,11 +1486,11 @@ namespace ACP
                 {
                     createUpdate();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

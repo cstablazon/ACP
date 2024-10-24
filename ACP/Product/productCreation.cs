@@ -162,6 +162,20 @@ namespace ACP
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+        public void deleteBarcodeBySKU(string sp, string tableName, string action, string SKU)
+        {
+            SqlConnection conn = db.getConnection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sp, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tableName", tableName);
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@SKU", SKU);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
     //End of barcode CRUD
 
     //Brand CRUD

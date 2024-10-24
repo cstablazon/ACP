@@ -134,6 +134,7 @@ namespace ACP
             dgvBarcode.Columns["discountID"].Visible = false;
             dgvBarcode.Columns["userID"].Visible = false;
             dgvBarcode.Columns["chargeID"].Visible = false;
+            dgvBarcode.Columns["BOMid"].Visible = false;
         }
         
         private void fetchBarcode()
@@ -408,7 +409,14 @@ namespace ACP
                                 barcode = row.Cells["Barcode"].Value.ToString();
                                 SKU = txtSKU.Text;
                                 itemModelID = row.Cells["Item model ID"].Value.ToString();
-                                chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                                if (string.IsNullOrEmpty(row.Cells["chargeID"].Value as string))
+                                {
+                                    chargeID = null;
+                                }
+                                else
+                                {
+                                    chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                                }
                                 PID = Convert.ToInt64(row.Cells["PID"].Value);
                                 BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
                                 LID = row.Cells["LID"].Value.ToString();
@@ -461,11 +469,18 @@ namespace ACP
                             barcode = row.Cells["Barcode"].Value.ToString();
                             SKU = txtSKU.Text;
                             itemModelID = row.Cells["Item model ID"].Value.ToString();
-                            chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                            if (string.IsNullOrEmpty(row.Cells["chargeID"].Value.ToString()))
+                            {
+                                chargeID = null;
+                            }
+                            else
+                            {
+                                chargeID = Convert.ToInt32(row.Cells["chargeID"].Value);
+                            }
                             PID = Convert.ToInt64(row.Cells["PID"].Value);
                             BMRXID = Convert.ToInt64(row.Cells["BMRXID"].Value);
                             LID = row.Cells["LID"].Value.ToString();
-                            if (string.IsNullOrEmpty(row.Cells["discountID"].Value as string))
+                            if (string.IsNullOrEmpty(row.Cells["discountID"].Value.ToString()))
                             {
                                 discountID = null;
                             }
@@ -476,7 +491,7 @@ namespace ACP
                             CPuomID = Convert.ToInt32(row.Cells["CPuomID"].Value);
                             RPuomID = Convert.ToInt32(row.Cells["RPuomID"].Value);
                             BOMid = Convert.ToInt32(row.Cells["BOMid"].Value);
-                            if (string.IsNullOrEmpty(row.Cells["factor"].Value as string))
+                            if (string.IsNullOrEmpty(row.Cells["factor"].Value.ToString()))
                             {
                                 factor = null;
                             }
@@ -746,8 +761,8 @@ namespace ACP
 
         private void tsBtnNewBarcode_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 frmProductDetails additionalInfo = new frmProductDetails();
                 additionalInfo.btnCreate.Text = "Create";
                 additionalInfo.btnClose.Text = "Close";
@@ -801,12 +816,12 @@ namespace ACP
                         fetchBarcode();
                     }
                 }
-                //dgvBarcode.Rows.Add();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //    //dgvBarcode.Rows.Add();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         DataGridView dgvSupp;
@@ -1996,8 +2011,8 @@ namespace ACP
 
         private void tsbEdit_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (dgvBarcode.SelectedRows.Count > 0)
                 {
                     int rowIndex = dgvBarcode.SelectedRows[0].Index;
@@ -2015,6 +2030,14 @@ namespace ACP
                     details.cmbPurchaseTax.Text = dgvBarcode.Rows[rowIndex].Cells["Purchase tax"].Value.ToString();
                     details.cmbSalesTax.Text = dgvBarcode.Rows[rowIndex].Cells["Sales tax"].Value.ToString();
                     details.txtFactor.Text = dgvBarcode.Rows[rowIndex].Cells["factor"].Value.ToString();
+                    if (string.IsNullOrEmpty(dgvBarcode.Rows[rowIndex].Cells["factor"].Value.ToString()))
+                    {
+                        details.txtFactor.Enabled = false;
+                    }
+                    else
+                    {
+                        details.txtFactor.Enabled = true;
+                    }
                     details.cmbItemModel.Text = dgvBarcode.Rows[rowIndex].Cells["Item model ID"].Value.ToString();
                     if (string.IsNullOrEmpty(dgvBarcode.Rows[rowIndex].Cells["discountID"].Value.ToString()))
                     {
@@ -2099,11 +2122,11 @@ namespace ACP
                     //    fetchBarcode();
                     //}
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         private void btnKitSetup_Click(object sender, EventArgs e)

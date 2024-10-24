@@ -248,10 +248,12 @@ namespace ACP
             {
                 if (_userPermission.CanPerformOperation("Supplier Management Form", "Delete"))
                 {
-                    DialogResult res = MessageBox.Show("Are you sure you want to delete ?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult res = MessageBox.Show("Are you sure you want to delete?", "Delete Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (res == DialogResult.Yes)
                     {
+                        int rowIndex = dgvSupplier.SelectedRows[0].Index;
+                        Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
                         DataTable dTable = supClass.ifTransExist("fetchProductBySupplier", Id.suppID);
                         if (dTable.Rows.Count > 0)
                         {
@@ -259,19 +261,36 @@ namespace ACP
                         }
                         else
                         {
-                            int rowIndex = dgvSupplier.SelectedRows[0].Index;
-                            Id.suppID = dgvSupplier.Rows[rowIndex].Cells["Supplier_ID"].Value.ToString();
                             DataTable dt = supClass.getSupplierByRID("fetchSupplierByRID", Id.suppID);
-                            foreach (DataRow dRow in dt.Rows)
+                            if (dt.Rows.Count > 0)
                             {
-                                string id = dRow["Supplier_ID"].ToString();
-                                supClass.deleteContactByTID("ContactDIR", "deleteByTID", id);
-                                supClass.deleteAddressByTID("addressDIR", "deleteByTID", id);
+                                foreach (DataRow dRow in dt.Rows)
+                                {
+                                    DataTable dTable2 = supClass.ifTransExist("fetchProductBySupplier", Id.suppID);
+                                    if (dTable.Rows.Count > 0)
+                                    {
+                                        MessageBox.Show("Unable to delete because principal "+ dRow["Name"].ToString() +" is linked to a product", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        break;
+                                    }
+                                    string id = dRow["Supplier_ID"].ToString();
+                                    supClass.deleteContactByTID("ContactDIR", "deleteByTID", id);
+                                    supClass.deleteAddressByTID("addressDIR", "deleteByTID", id);
+                                }
                             }
-                            supClass.deleteSupplierByRID("Supplier", "deleteByRID", Id.suppID);
-                            supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
-                            MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            fetchSupplier();
+                            else
+                            {
+                                foreach (DataRow dRow in dt.Rows)
+                                {
+                                    string id = dRow["Supplier_ID"].ToString();
+                                    supClass.deleteContactByTID("ContactDIR", "deleteByTID", id);
+                                    supClass.deleteAddressByTID("addressDIR", "deleteByTID", id);
+                                }
+                                supClass.deleteSupplierByRID("Supplier", "deleteByRID", Id.suppID);
+                                supClass.deleteSupplier("Supplier", "Delete", Id.suppID);
+                                MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                fetchSupplier();
+                            }
+                            
                             //btnEdit.Enabled = false;
                             //btnSuppDel.Enabled = false;
                             //btnAddress.Enabled = false;

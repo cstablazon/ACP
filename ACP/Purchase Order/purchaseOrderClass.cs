@@ -149,6 +149,32 @@ namespace ACP
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+        public void deletePOlineByOrderNo(string action, string orderNo)
+        {
+            SqlConnection conn = db.getConnection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_POlines", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void deletePesoDiscountByOrderNo(string action, string orderNo)
+        {
+            SqlConnection conn = db.getConnection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("sp_pesoDiscount", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@action", action);
+            cmd.Parameters.AddWithValue("@orderNo", orderNo);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
 //END of CRUD
     }
 }

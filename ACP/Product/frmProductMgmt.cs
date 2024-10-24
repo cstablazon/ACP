@@ -208,7 +208,6 @@ namespace ACP
                         modyProd.btnClose.Text = "Close";
                         modyProd.lblProdDetails.Enabled = true;
 
-                        MessageBox.Show(Id.SKU);
                         DataTable dt = pc.fetchRecords("sp_Product", "Product", "fetchProductList2", Id.SKU);
 
                         foreach (DataRow row in dt.Rows)

@@ -267,7 +267,9 @@ namespace ACP
                 {
                     int rowIndex = dgvPO.SelectedRows[0].Index;
                     Id.orderNo = dgvPO.Rows[rowIndex].Cells["Order No."].Value.ToString();
-                    po.deletePO("sp_purchaseOrderOperations", "Delete", Id.orderNo);
+                    po.deletePO("sp_purchaseOrder", "Delete", Id.orderNo);
+                    po.deletePOlineByOrderNo("deleteByOrderNo", Id.orderNo);
+                    po.deletePesoDiscountByOrderNo("Delete", Id.orderNo);
                     MessageBox.Show("Successfully deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     fetchPO();
                 }

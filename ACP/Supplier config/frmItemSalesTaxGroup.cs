@@ -122,7 +122,7 @@ namespace ACP
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtItemTax.Text) || !string.IsNullOrEmpty(txtDescription.Text))
+                if (!string.IsNullOrEmpty(txtItemTax.Text) && !string.IsNullOrEmpty(txtDescription.Text))
                 {
                     if (Id.button == "Create")
                     {
@@ -142,6 +142,10 @@ namespace ACP
                         btnCreate.Text = "Create";
 
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Please fill necessary information", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
