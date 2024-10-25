@@ -278,6 +278,7 @@ namespace ACP
             dgvWarehouse.ReadOnly = true;
             dgvWarehouse.MultiSelect = false;
             dgvWarehouse.RowHeadersVisible = false;
+            dgvWarehouse.BackgroundColor = Color.White;
             dgvWarehouse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvWarehouse.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dgvWarehouse.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

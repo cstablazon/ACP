@@ -697,9 +697,10 @@ namespace ACP
         
         private void lblNewSalesTax_Click(object sender, EventArgs e)
         {
+            Id.category = "Supplier";
             frmItemSalesTaxGroup itemSalesTax = new frmItemSalesTaxGroup();
+            itemSalesTax.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             DialogResult res = itemSalesTax.ShowDialog();
-
             if(res == DialogResult.OK)
             {
                 itemTax();

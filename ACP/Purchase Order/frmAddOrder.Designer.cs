@@ -52,6 +52,8 @@
             this.tabRetail = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
             this.pHeader = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmbDiscountType = new System.Windows.Forms.ComboBox();
             this.label40 = new System.Windows.Forms.Label();
             this.txtPriceUnit = new System.Windows.Forms.TextBox();
@@ -70,6 +72,7 @@
             this.label28 = new System.Windows.Forms.Label();
             this.cmbOrderedBy = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.rtxtAddress = new System.Windows.Forms.RichTextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.cmbMOD = new System.Windows.Forms.ComboBox();
@@ -117,9 +120,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.tabPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabOder.SuspendLayout();
@@ -315,7 +315,7 @@
             this.tabMange.Location = new System.Drawing.Point(4, 22);
             this.tabMange.Name = "tabMange";
             this.tabMange.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMange.Size = new System.Drawing.Size(1103, 95);
+            this.tabMange.Size = new System.Drawing.Size(1352, 95);
             this.tabMange.TabIndex = 1;
             this.tabMange.Text = "Manage";
             // 
@@ -324,7 +324,7 @@
             this.tabRecieve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(245)))), ((int)(((byte)(254)))));
             this.tabRecieve.Location = new System.Drawing.Point(4, 22);
             this.tabRecieve.Name = "tabRecieve";
-            this.tabRecieve.Size = new System.Drawing.Size(1103, 95);
+            this.tabRecieve.Size = new System.Drawing.Size(1352, 95);
             this.tabRecieve.TabIndex = 2;
             this.tabRecieve.Text = "Receive";
             // 
@@ -333,7 +333,7 @@
             this.tabInvoce.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(245)))), ((int)(((byte)(254)))));
             this.tabInvoce.Location = new System.Drawing.Point(4, 22);
             this.tabInvoce.Name = "tabInvoce";
-            this.tabInvoce.Size = new System.Drawing.Size(1103, 95);
+            this.tabInvoce.Size = new System.Drawing.Size(1352, 95);
             this.tabInvoce.TabIndex = 3;
             this.tabInvoce.Text = "Invoice";
             // 
@@ -342,7 +342,7 @@
             this.tabRetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(245)))), ((int)(((byte)(254)))));
             this.tabRetail.Location = new System.Drawing.Point(4, 22);
             this.tabRetail.Name = "tabRetail";
-            this.tabRetail.Size = new System.Drawing.Size(1103, 95);
+            this.tabRetail.Size = new System.Drawing.Size(1352, 95);
             this.tabRetail.TabIndex = 4;
             this.tabRetail.Text = "Retail";
             // 
@@ -419,6 +419,28 @@
             this.pHeader.Size = new System.Drawing.Size(1360, 347);
             this.pHeader.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.Location = new System.Drawing.Point(659, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 19);
+            this.label5.TabIndex = 154;
+            this.label5.Text = "Delivery:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(331, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 19);
+            this.label1.TabIndex = 153;
+            this.label1.Text = "Discount:";
+            // 
             // cmbDiscountType
             // 
             this.cmbDiscountType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -429,7 +451,7 @@
             this.cmbDiscountType.Location = new System.Drawing.Point(458, 57);
             this.cmbDiscountType.Name = "cmbDiscountType";
             this.cmbDiscountType.Size = new System.Drawing.Size(182, 24);
-            this.cmbDiscountType.TabIndex = 152;
+            this.cmbDiscountType.TabIndex = 5;
             this.cmbDiscountType.SelectedIndexChanged += new System.EventHandler(this.cmbDiscountType_SelectedIndexChanged);
             this.cmbDiscountType.SelectionChangeCommitted += new System.EventHandler(this.cmbDiscountType_SelectionChangeCommitted);
             this.cmbDiscountType.SelectedValueChanged += new System.EventHandler(this.cmbDiscountType_SelectedValueChanged);
@@ -453,7 +475,7 @@
             this.txtPriceUnit.Location = new System.Drawing.Point(458, 145);
             this.txtPriceUnit.Name = "txtPriceUnit";
             this.txtPriceUnit.Size = new System.Drawing.Size(182, 23);
-            this.txtPriceUnit.TabIndex = 150;
+            this.txtPriceUnit.TabIndex = 8;
             this.txtPriceUnit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPriceUnit.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPriceUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
@@ -477,7 +499,7 @@
             this.txtPesoDiscount.Location = new System.Drawing.Point(458, 115);
             this.txtPesoDiscount.Name = "txtPesoDiscount";
             this.txtPesoDiscount.Size = new System.Drawing.Size(182, 23);
-            this.txtPesoDiscount.TabIndex = 148;
+            this.txtPesoDiscount.TabIndex = 7;
             this.txtPesoDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPesoDiscount.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPesoDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
@@ -500,7 +522,7 @@
             this.txtSuppID.Location = new System.Drawing.Point(129, 132);
             this.txtSuppID.Name = "txtSuppID";
             this.txtSuppID.Size = new System.Drawing.Size(182, 23);
-            this.txtSuppID.TabIndex = 141;
+            this.txtSuppID.TabIndex = 2;
             this.txtSuppID.Click += new System.EventHandler(this.txtSuppID_Click);
             this.txtSuppID.TextChanged += new System.EventHandler(this.txtSuppID_TextChanged);
             this.txtSuppID.Enter += new System.EventHandler(this.txtSuppID_Enter);
@@ -514,7 +536,7 @@
             this.cmbDeliveryAdd.Location = new System.Drawing.Point(786, 56);
             this.cmbDeliveryAdd.Name = "cmbDeliveryAdd";
             this.cmbDeliveryAdd.Size = new System.Drawing.Size(223, 24);
-            this.cmbDeliveryAdd.TabIndex = 139;
+            this.cmbDeliveryAdd.TabIndex = 13;
             this.cmbDeliveryAdd.SelectionChangeCommitted += new System.EventHandler(this.cmbDeliveryAdd_SelectionChangeCommitted);
             this.cmbDeliveryAdd.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbDeliveryAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbDeliveryAdd_KeyPress);
@@ -534,10 +556,10 @@
             // rtxtRemarks
             // 
             this.rtxtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtxtRemarks.Location = new System.Drawing.Point(1135, 117);
+            this.rtxtRemarks.Location = new System.Drawing.Point(1137, 117);
             this.rtxtRemarks.Name = "rtxtRemarks";
             this.rtxtRemarks.Size = new System.Drawing.Size(203, 216);
-            this.rtxtRemarks.TabIndex = 137;
+            this.rtxtRemarks.TabIndex = 20;
             this.rtxtRemarks.Text = "";
             this.rtxtRemarks.Enter += new System.EventHandler(this.hide_Enter);
             // 
@@ -559,7 +581,7 @@
             this.cmbCheckedBy.Location = new System.Drawing.Point(1135, 86);
             this.cmbCheckedBy.Name = "cmbCheckedBy";
             this.cmbCheckedBy.Size = new System.Drawing.Size(203, 24);
-            this.cmbCheckedBy.TabIndex = 135;
+            this.cmbCheckedBy.TabIndex = 19;
             this.cmbCheckedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // cmbApprovedBy
@@ -571,7 +593,7 @@
             this.cmbApprovedBy.Location = new System.Drawing.Point(1135, 57);
             this.cmbApprovedBy.Name = "cmbApprovedBy";
             this.cmbApprovedBy.Size = new System.Drawing.Size(203, 24);
-            this.cmbApprovedBy.TabIndex = 134;
+            this.cmbApprovedBy.TabIndex = 18;
             this.cmbApprovedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label30
@@ -614,7 +636,7 @@
             this.cmbOrderedBy.Location = new System.Drawing.Point(786, 246);
             this.cmbOrderedBy.Name = "cmbOrderedBy";
             this.cmbOrderedBy.Size = new System.Drawing.Size(223, 24);
-            this.cmbOrderedBy.TabIndex = 130;
+            this.cmbOrderedBy.TabIndex = 15;
             this.cmbOrderedBy.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label32
@@ -628,13 +650,24 @@
             this.label32.TabIndex = 128;
             this.label32.Text = "Ordered by:";
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label35.Location = new System.Drawing.Point(663, 219);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(105, 19);
+            this.label35.TabIndex = 124;
+            this.label35.Text = "Administration:";
+            // 
             // rtxtAddress
             // 
             this.rtxtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtAddress.Location = new System.Drawing.Point(786, 85);
             this.rtxtAddress.Name = "rtxtAddress";
             this.rtxtAddress.Size = new System.Drawing.Size(223, 124);
-            this.rtxtAddress.TabIndex = 123;
+            this.rtxtAddress.TabIndex = 14;
             this.rtxtAddress.Text = "";
             this.rtxtAddress.Enter += new System.EventHandler(this.hide_Enter);
             // 
@@ -656,7 +689,7 @@
             this.cmbMOD.Location = new System.Drawing.Point(458, 215);
             this.cmbMOD.Name = "cmbMOD";
             this.cmbMOD.Size = new System.Drawing.Size(182, 24);
-            this.cmbMOD.TabIndex = 120;
+            this.cmbMOD.TabIndex = 10;
             this.cmbMOD.SelectedIndexChanged += new System.EventHandler(this.cbMode_SelectedIndexChanged);
             this.cmbMOD.SelectionChangeCommitted += new System.EventHandler(this.cmbMOD_SelectionChangeCommitted);
             this.cmbMOD.Enter += new System.EventHandler(this.hide_Enter);
@@ -670,7 +703,7 @@
             this.dtpCancel.Location = new System.Drawing.Point(458, 272);
             this.dtpCancel.Name = "dtpCancel";
             this.dtpCancel.Size = new System.Drawing.Size(182, 21);
-            this.dtpCancel.TabIndex = 119;
+            this.dtpCancel.TabIndex = 12;
             this.dtpCancel.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // dtpDelivery
@@ -679,7 +712,7 @@
             this.dtpDelivery.Location = new System.Drawing.Point(458, 245);
             this.dtpDelivery.Name = "dtpDelivery";
             this.dtpDelivery.Size = new System.Drawing.Size(182, 21);
-            this.dtpDelivery.TabIndex = 118;
+            this.dtpDelivery.TabIndex = 11;
             this.dtpDelivery.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label22
@@ -733,7 +766,7 @@
             this.txtPoolDesc.Name = "txtPoolDesc";
             this.txtPoolDesc.ReadOnly = true;
             this.txtPoolDesc.Size = new System.Drawing.Size(223, 23);
-            this.txtPoolDesc.TabIndex = 111;
+            this.txtPoolDesc.TabIndex = 17;
             this.txtPoolDesc.Enter += new System.EventHandler(this.hide_Enter);
             this.txtPoolDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPoolDesc_KeyPress);
             // 
@@ -755,7 +788,7 @@
             this.cmbPool.Location = new System.Drawing.Point(786, 275);
             this.cmbPool.Name = "cmbPool";
             this.cmbPool.Size = new System.Drawing.Size(223, 24);
-            this.cmbPool.TabIndex = 109;
+            this.cmbPool.TabIndex = 16;
             this.cmbPool.SelectedIndexChanged += new System.EventHandler(this.cbPool_SelectedIndexChanged);
             this.cmbPool.SelectionChangeCommitted += new System.EventHandler(this.cmbPool_SelectionChangeCommitted);
             this.cmbPool.SelectedValueChanged += new System.EventHandler(this.cmbPool_SelectedValueChanged);
@@ -793,7 +826,7 @@
             this.txtTotalDiscount.Location = new System.Drawing.Point(458, 87);
             this.txtTotalDiscount.Name = "txtTotalDiscount";
             this.txtTotalDiscount.Size = new System.Drawing.Size(182, 23);
-            this.txtTotalDiscount.TabIndex = 106;
+            this.txtTotalDiscount.TabIndex = 6;
             this.txtTotalDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalDiscount.Enter += new System.EventHandler(this.hide_Enter);
             this.txtTotalDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
@@ -817,7 +850,7 @@
             this.txtPercentage.Location = new System.Drawing.Point(128, 310);
             this.txtPercentage.Name = "txtPercentage";
             this.txtPercentage.Size = new System.Drawing.Size(182, 23);
-            this.txtPercentage.TabIndex = 104;
+            this.txtPercentage.TabIndex = 4;
             this.txtPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPercentage.Enter += new System.EventHandler(this.hide_Enter);
             // 
@@ -839,7 +872,7 @@
             this.cmbCashDiscount.Location = new System.Drawing.Point(128, 280);
             this.cmbCashDiscount.Name = "cmbCashDiscount";
             this.cmbCashDiscount.Size = new System.Drawing.Size(182, 24);
-            this.cmbCashDiscount.TabIndex = 102;
+            this.cmbCashDiscount.TabIndex = 3;
             this.cmbCashDiscount.Enter += new System.EventHandler(this.hide_Enter);
             // 
             // label17
@@ -971,7 +1004,7 @@
             this.cmbPOtype.Location = new System.Drawing.Point(129, 76);
             this.cmbPOtype.Name = "cmbPOtype";
             this.cmbPOtype.Size = new System.Drawing.Size(182, 24);
-            this.cmbPOtype.TabIndex = 90;
+            this.cmbPOtype.TabIndex = 1;
             this.cmbPOtype.SelectionChangeCommitted += new System.EventHandler(this.cmbPOtype_SelectionChangeCommitted);
             this.cmbPOtype.Enter += new System.EventHandler(this.hide_Enter);
             this.cmbPOtype.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbPOtype_KeyPress);
@@ -1179,39 +1212,6 @@
             this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label35.Location = new System.Drawing.Point(663, 219);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(105, 19);
-            this.label35.TabIndex = 124;
-            this.label35.Text = "Administration:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(331, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 19);
-            this.label1.TabIndex = 153;
-            this.label1.Text = "Discount:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Location = new System.Drawing.Point(659, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 19);
-            this.label5.TabIndex = 154;
-            this.label5.Text = "Delivery:";
             // 
             // frmAddOrder
             // 

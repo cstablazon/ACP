@@ -77,7 +77,7 @@
             this.txtSupCode.Location = new System.Drawing.Point(10, 102);
             this.txtSupCode.Name = "txtSupCode";
             this.txtSupCode.Size = new System.Drawing.Size(113, 25);
-            this.txtSupCode.TabIndex = 2;
+            this.txtSupCode.TabIndex = 3;
             this.txtSupCode.TextChanged += new System.EventHandler(this.txtSupCode_TextChanged);
             this.txtSupCode.Leave += new System.EventHandler(this.txtSupCode_Leave);
             this.txtSupCode.MouseHover += new System.EventHandler(this.txtSupCode_MouseHover);
@@ -145,7 +145,7 @@
             this.cmbType.Location = new System.Drawing.Point(133, 102);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(139, 25);
-            this.cmbType.TabIndex = 97;
+            this.cmbType.TabIndex = 4;
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             this.cmbType.Leave += new System.EventHandler(this.cmbType_Leave);
             this.cmbType.MouseHover += new System.EventHandler(this.cmbType_MouseHover);
@@ -173,7 +173,7 @@
             this.cmbItemTax.Location = new System.Drawing.Point(284, 102);
             this.cmbItemTax.Name = "cmbItemTax";
             this.cmbItemTax.Size = new System.Drawing.Size(139, 25);
-            this.cmbItemTax.TabIndex = 94;
+            this.cmbItemTax.TabIndex = 5;
             this.cmbItemTax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbItemTax_KeyPress);
             // 
             // label4
@@ -193,7 +193,7 @@
             this.txtAgent.Location = new System.Drawing.Point(10, 209);
             this.txtAgent.Name = "txtAgent";
             this.txtAgent.Size = new System.Drawing.Size(413, 25);
-            this.txtAgent.TabIndex = 92;
+            this.txtAgent.TabIndex = 7;
             // 
             // label1
             // 
@@ -239,7 +239,7 @@
             this.txtName.Location = new System.Drawing.Point(10, 155);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(413, 25);
-            this.txtName.TabIndex = 4;
+            this.txtName.TabIndex = 6;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             this.txtName.MouseHover += new System.EventHandler(this.txtName_MouseHover);
@@ -269,7 +269,7 @@
             this.cmbPayTerms.Location = new System.Drawing.Point(129, 45);
             this.cmbPayTerms.Name = "cmbPayTerms";
             this.cmbPayTerms.Size = new System.Drawing.Size(148, 25);
-            this.cmbPayTerms.TabIndex = 69;
+            this.cmbPayTerms.TabIndex = 2;
             this.cmbPayTerms.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbPayTerms_KeyPress);
             // 
             // label6

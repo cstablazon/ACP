@@ -229,6 +229,7 @@ namespace ACP
                 case "itemSalesTaxGroup":
                     if (_permissionManager.CanOpenForm("Item Sales Tax Group Form"))
                     {
+                        Id.category = "All";
                         frmItemSalesTaxGroup tax = new frmItemSalesTaxGroup { TopLevel = false };
                         pBody.Controls.Clear();
                         pBody.Controls.Add(tax);

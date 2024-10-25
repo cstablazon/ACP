@@ -137,7 +137,7 @@
             this.txtFactor.Location = new System.Drawing.Point(124, 250);
             this.txtFactor.Name = "txtFactor";
             this.txtFactor.Size = new System.Drawing.Size(125, 23);
-            this.txtFactor.TabIndex = 106;
+            this.txtFactor.TabIndex = 7;
             this.txtFactor.TextChanged += new System.EventHandler(this.txtFactor_TextChanged);
             this.txtFactor.Enter += new System.EventHandler(this.txtDecimal_Enter);
             this.txtFactor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDecimal_KeyDown);
@@ -172,7 +172,7 @@
             this.cmbItemModel.Location = new System.Drawing.Point(398, 250);
             this.cmbItemModel.Name = "cmbItemModel";
             this.cmbItemModel.Size = new System.Drawing.Size(124, 23);
-            this.cmbItemModel.TabIndex = 11;
+            this.cmbItemModel.TabIndex = 16;
             this.cmbItemModel.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.cmbItemModel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -217,7 +217,7 @@
             this.cmbCharges.Location = new System.Drawing.Point(124, 509);
             this.cmbCharges.Name = "cmbCharges";
             this.cmbCharges.Size = new System.Drawing.Size(125, 23);
-            this.cmbCharges.TabIndex = 7;
+            this.cmbCharges.TabIndex = 13;
             this.cmbCharges.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.cmbCharges.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -262,7 +262,7 @@
             this.cmbPOunit.Location = new System.Drawing.Point(124, 134);
             this.cmbPOunit.Name = "cmbPOunit";
             this.cmbPOunit.Size = new System.Drawing.Size(125, 23);
-            this.cmbPOunit.TabIndex = 3;
+            this.cmbPOunit.TabIndex = 4;
             this.cmbPOunit.SelectedIndexChanged += new System.EventHandler(this.cmbPOunit_SelectedIndexChanged);
             this.cmbPOunit.SelectionChangeCommitted += new System.EventHandler(this.cmbPOunit_SelectionChangeCommitted);
             this.cmbPOunit.SelectedValueChanged += new System.EventHandler(this.cmbPOunit_SelectedValueChanged);
@@ -318,7 +318,7 @@
             this.cmbRetailUnit.Location = new System.Drawing.Point(124, 162);
             this.cmbRetailUnit.Name = "cmbRetailUnit";
             this.cmbRetailUnit.Size = new System.Drawing.Size(125, 23);
-            this.cmbRetailUnit.TabIndex = 4;
+            this.cmbRetailUnit.TabIndex = 5;
             this.cmbRetailUnit.SelectedIndexChanged += new System.EventHandler(this.cmbRetailUnit_SelectedIndexChanged);
             this.cmbRetailUnit.SelectionChangeCommitted += new System.EventHandler(this.cmbRetailUnit_SelectionChangeCommitted);
             this.cmbRetailUnit.SelectedValueChanged += new System.EventHandler(this.cmbRetailUnit_SelectedValueChanged);
@@ -375,7 +375,7 @@
             this.cbAutoGenerate.Location = new System.Drawing.Point(421, 39);
             this.cbAutoGenerate.Name = "cbAutoGenerate";
             this.cbAutoGenerate.Size = new System.Drawing.Size(101, 17);
-            this.cbAutoGenerate.TabIndex = 119;
+            this.cbAutoGenerate.TabIndex = 2;
             this.cbAutoGenerate.Text = "Auto Generate";
             this.cbAutoGenerate.UseVisualStyleBackColor = true;
             this.cbAutoGenerate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -397,7 +397,7 @@
             this.txtPosDesc.Location = new System.Drawing.Point(125, 65);
             this.txtPosDesc.Name = "txtPosDesc";
             this.txtPosDesc.Size = new System.Drawing.Size(290, 23);
-            this.txtPosDesc.TabIndex = 2;
+            this.txtPosDesc.TabIndex = 3;
             this.txtPosDesc.TextChanged += new System.EventHandler(this.txtPosDesc_TextChanged);
             this.txtPosDesc.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.txtPosDesc.Leave += new System.EventHandler(this.txtPosDesc_Leave);
@@ -429,7 +429,7 @@
             this.txtInventoryCost.Location = new System.Drawing.Point(124, 397);
             this.txtInventoryCost.Name = "txtInventoryCost";
             this.txtInventoryCost.Size = new System.Drawing.Size(125, 23);
-            this.txtInventoryCost.TabIndex = 126;
+            this.txtInventoryCost.TabIndex = 11;
             this.txtInventoryCost.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.txtInventoryCost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -449,7 +449,7 @@
             this.txtBMRX.Location = new System.Drawing.Point(124, 456);
             this.txtBMRX.Name = "txtBMRX";
             this.txtBMRX.Size = new System.Drawing.Size(125, 23);
-            this.txtBMRX.TabIndex = 128;
+            this.txtBMRX.TabIndex = 12;
             this.txtBMRX.Click += new System.EventHandler(this.txtBMRX_Click);
             this.txtBMRX.TextChanged += new System.EventHandler(this.txtBMRX_TextChanged);
             this.txtBMRX.Enter += new System.EventHandler(this.txtBMRX_Enter);
@@ -461,7 +461,7 @@
             this.txtPrivilege.Location = new System.Drawing.Point(398, 456);
             this.txtPrivilege.Name = "txtPrivilege";
             this.txtPrivilege.Size = new System.Drawing.Size(125, 23);
-            this.txtPrivilege.TabIndex = 129;
+            this.txtPrivilege.TabIndex = 20;
             this.txtPrivilege.Click += new System.EventHandler(this.txtPrivilege_Click);
             this.txtPrivilege.Enter += new System.EventHandler(this.txtPrivilege_Enter);
             this.txtPrivilege.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
@@ -483,7 +483,7 @@
             this.cmbBOM.Location = new System.Drawing.Point(124, 191);
             this.cmbBOM.Name = "cmbBOM";
             this.cmbBOM.Size = new System.Drawing.Size(125, 23);
-            this.cmbBOM.TabIndex = 131;
+            this.cmbBOM.TabIndex = 6;
             this.cmbBOM.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.cmbBOM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -514,7 +514,7 @@
             this.cmbPurchaseTax.Location = new System.Drawing.Point(398, 132);
             this.cmbPurchaseTax.Name = "cmbPurchaseTax";
             this.cmbPurchaseTax.Size = new System.Drawing.Size(124, 23);
-            this.cmbPurchaseTax.TabIndex = 135;
+            this.cmbPurchaseTax.TabIndex = 14;
             this.cmbPurchaseTax.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.cmbPurchaseTax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -535,7 +535,7 @@
             this.cmbSalesTax.Location = new System.Drawing.Point(398, 161);
             this.cmbSalesTax.Name = "cmbSalesTax";
             this.cmbSalesTax.Size = new System.Drawing.Size(124, 23);
-            this.cmbSalesTax.TabIndex = 137;
+            this.cmbSalesTax.TabIndex = 15;
             this.cmbSalesTax.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             this.cmbSalesTax.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
             // 
@@ -636,7 +636,7 @@
             this.txtConfig.Location = new System.Drawing.Point(398, 485);
             this.txtConfig.Name = "txtConfig";
             this.txtConfig.Size = new System.Drawing.Size(125, 23);
-            this.txtConfig.TabIndex = 149;
+            this.txtConfig.TabIndex = 21;
             this.txtConfig.Visible = false;
             this.txtConfig.Click += new System.EventHandler(this.txtConfig_Click);
             this.txtConfig.Enter += new System.EventHandler(this.hidePopupForms_Enter);
@@ -658,7 +658,7 @@
             this.txtPurchaseDiscount.Location = new System.Drawing.Point(124, 312);
             this.txtPurchaseDiscount.Name = "txtPurchaseDiscount";
             this.txtPurchaseDiscount.Size = new System.Drawing.Size(125, 23);
-            this.txtPurchaseDiscount.TabIndex = 152;
+            this.txtPurchaseDiscount.TabIndex = 8;
             this.txtPurchaseDiscount.Click += new System.EventHandler(this.txtPurchaseDiscount_Click);
             this.txtPurchaseDiscount.Enter += new System.EventHandler(this.txtPurchaseDiscount_Enter);
             this.txtPurchaseDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.disableKey_KeyPress);
@@ -676,7 +676,7 @@
             this.btnClose.Location = new System.Drawing.Point(444, 552);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 30);
-            this.btnClose.TabIndex = 123;
+            this.btnClose.TabIndex = 23;
             this.btnClose.Text = " Cancel";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = false;
@@ -694,7 +694,7 @@
             this.btnCreate.Location = new System.Drawing.Point(358, 552);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(80, 30);
-            this.btnCreate.TabIndex = 113;
+            this.btnCreate.TabIndex = 22;
             this.btnCreate.Text = "Create";
             this.btnCreate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCreate.UseVisualStyleBackColor = false;
@@ -707,7 +707,7 @@
             this.txtSite.Location = new System.Drawing.Point(398, 341);
             this.txtSite.Name = "txtSite";
             this.txtSite.Size = new System.Drawing.Size(125, 23);
-            this.txtSite.TabIndex = 154;
+            this.txtSite.TabIndex = 18;
             // 
             // txtWarehouse
             // 
@@ -716,7 +716,7 @@
             this.txtWarehouse.Location = new System.Drawing.Point(398, 370);
             this.txtWarehouse.Name = "txtWarehouse";
             this.txtWarehouse.Size = new System.Drawing.Size(125, 23);
-            this.txtWarehouse.TabIndex = 155;
+            this.txtWarehouse.TabIndex = 19;
             // 
             // txtIssueLoc
             // 
@@ -724,7 +724,7 @@
             this.txtIssueLoc.Location = new System.Drawing.Point(398, 312);
             this.txtIssueLoc.Name = "txtIssueLoc";
             this.txtIssueLoc.Size = new System.Drawing.Size(125, 23);
-            this.txtIssueLoc.TabIndex = 157;
+            this.txtIssueLoc.TabIndex = 17;
             this.txtIssueLoc.Click += new System.EventHandler(this.txtIssueLoc_Click);
             this.txtIssueLoc.Enter += new System.EventHandler(this.hidePopupForms_Enter);
             // 

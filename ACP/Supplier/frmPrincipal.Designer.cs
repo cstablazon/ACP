@@ -182,7 +182,7 @@
             this.btnSelect.Location = new System.Drawing.Point(4, 3);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(80, 35);
-            this.btnSelect.TabIndex = 35;
+            this.btnSelect.TabIndex = 7;
             this.btnSelect.Text = "Select";
             this.btnSelect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -202,7 +202,7 @@
             this.btnCdistri.Location = new System.Drawing.Point(261, 3);
             this.btnCdistri.Name = "btnCdistri";
             this.btnCdistri.Size = new System.Drawing.Size(161, 35);
-            this.btnCdistri.TabIndex = 34;
+            this.btnCdistri.TabIndex = 10;
             this.btnCdistri.Text = "Change distributor";
             this.btnCdistri.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCdistri.UseVisualStyleBackColor = true;
@@ -222,7 +222,7 @@
             this.btnEdit.Location = new System.Drawing.Point(88, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(80, 35);
-            this.btnEdit.TabIndex = 33;
+            this.btnEdit.TabIndex = 8;
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.btnDel.Location = new System.Drawing.Point(172, 3);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(87, 35);
-            this.btnDel.TabIndex = 32;
+            this.btnDel.TabIndex = 9;
             this.btnDel.Text = "Delete";
             this.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDel.UseVisualStyleBackColor = true;
@@ -321,7 +321,7 @@
             this.txtAgent.Location = new System.Drawing.Point(8, 275);
             this.txtAgent.Name = "txtAgent";
             this.txtAgent.Size = new System.Drawing.Size(505, 25);
-            this.txtAgent.TabIndex = 103;
+            this.txtAgent.TabIndex = 4;
             // 
             // label4
             // 
@@ -361,7 +361,7 @@
             this.cmbPayTerms.Location = new System.Drawing.Point(160, 160);
             this.cmbPayTerms.Name = "cmbPayTerms";
             this.cmbPayTerms.Size = new System.Drawing.Size(104, 25);
-            this.cmbPayTerms.TabIndex = 99;
+            this.cmbPayTerms.TabIndex = 2;
             this.cmbPayTerms.Visible = false;
             // 
             // label6
@@ -457,7 +457,7 @@
             this.txtSupCode.Location = new System.Drawing.Point(8, 160);
             this.txtSupCode.Name = "txtSupCode";
             this.txtSupCode.Size = new System.Drawing.Size(146, 25);
-            this.txtSupCode.TabIndex = 2;
+            this.txtSupCode.TabIndex = 1;
             // 
             // txtName
             // 
@@ -466,7 +466,7 @@
             this.txtName.Location = new System.Drawing.Point(9, 217);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(505, 25);
-            this.txtName.TabIndex = 4;
+            this.txtName.TabIndex = 3;
             // 
             // btnSave
             // 
@@ -500,7 +500,7 @@
             this.btnClear.Location = new System.Drawing.Point(769, 15);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(87, 34);
-            this.btnClear.TabIndex = 98;
+            this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClear.UseVisualStyleBackColor = false;

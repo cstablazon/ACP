@@ -21,11 +21,23 @@ namespace ACP
 
         private void itemTaxGroup()
         {
-            DataTable dt = supClass.getRecords("itemSalesTaxGroup", "fetchItemSalesTaxGroup", "", "");
-            dgvItemSalesTax.DataSource = dt;
+            if(Id.category == "All")
+            {
+                DataTable dt = supClass.getRecords("itemSalesTaxGroup", "fetchItemSalesTaxGroup2", "", "");
+                dgvItemSalesTax.DataSource = dt;
 
-            dgvItemSalesTax.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvItemSalesTax.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dgvItemSalesTax.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvItemSalesTax.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
+            else if(Id.category == "Supplier")
+            {
+                DataTable dt = supClass.getRecords("itemSalesTaxGroup", "fetchItemSalesTaxGroup", "", "");
+                dgvItemSalesTax.DataSource = dt;
+
+                dgvItemSalesTax.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvItemSalesTax.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
+            
         }
 
         private void itemTaxSetup()
