@@ -489,70 +489,41 @@ namespace ACP
                 txtPurchaseDiscount.Text = row.Cells["dDesc"].Value.ToString();
                 if (!string.IsNullOrEmpty(txtPOcostP.Text) && txtPOcostP.Text != "0.00")
                 {
-                    if (Id.isConcession != true)
+                    if (Id.isConcession != true && !string.IsNullOrEmpty(Id.suppID))
                     {
-                        if (!string.IsNullOrEmpty(Id.suppID))
+                        DataTable dt = suppClass.getSupplierById("fetchSupplierById", Id.suppID);
+                        if (dt.Rows.Count > 0)
                         {
-                            DataTable dt = suppClass.getSupplierById("fetchSupplierById", Id.suppID);
-                            //var objTax = db.vwSuppliers.Where(a => a.Supplier_ID == Id.suppID);
-                            if (dt.Rows.Count > 0)
-                            {
-                                decimal factor;
-                                string itemTaxID;// = objTax.SingleOrDefault().itemTaxID;
-                                //var objPercent = db.taxSetups.Where(a => a.itemTaxID == itemTaxID).SingleOrDefault();
-                                decimal itemTax = 0.00m;// = Convert.ToDecimal(objPercent.percent);
-                                decimal costP = Convert.ToDecimal(txtPOcostP.Text);
-                                foreach (DataRow rows in dt.Rows)
-                                {
-                                    itemTaxID = rows["itemTaxID"].ToString();
-                                    itemTax = Convert.ToDecimal(rows["percent"].ToString());
-                                }
-                                //decimal factor;
-                                //string itemTaxID = //objTax.SingleOrDefault().itemTaxID;
-                                //var objPercent = db.taxSetups.Where(a => a.itemTaxID == itemTaxID).SingleOrDefault();
-                                //decimal itemTax = Convert.ToDecimal(objPercent.percent);
-                                //decimal costP = Convert.ToDecimal(txtPOcostP.Text);
-                                if (txtFactor.Enabled == true && !string.IsNullOrEmpty(txtFactor.Text))
-                                {
-                                    factor = Convert.ToDecimal(txtFactor.Text);
-                                }
-                                else
-                                {
-                                    factor = 1;
-                                }
-                                decimal result;
-                                if (txtFactor.Enabled == false && Id.percent == 0)
-                                {
-                                    txtInventoryCost.Text = Convert.ToString(Decimal.Round((costP / ((itemTax + 100) / 100)), 2));
-                                    //result = ;
-                                    //txtInventoryCost.Text = result.ToString();
-                                }
-                                else if (txtFactor.Enabled == false && Id.percent != 0)
-                                {
-                                    txtInventoryCost.Text = Convert.ToString(Decimal.Round((costP * Id.percent) / ((itemTax + 100) / 100), 2));
-                                    //result = (costP * Id.percent) / itemTax;
-                                    //txtInventoryCost.Text = result.ToString();
-                                }
-                                else if (txtFactor.Enabled == true && Id.percent != 0)
-                                {
-                                    txtInventoryCost.Text = Convert.ToString(Decimal.Round(((costP * Id.percent) / factor) / ((itemTax + 100) / 100), 2));
-                                    //result = ((costP / factor) * Id.percent)  / itemTax;
-                                    //txtInventoryCost.Text = result.ToString();
-                                }
-                                else if (txtFactor.Enabled == true && Id.percent == 0)
-                                {
-                                    txtInventoryCost.Text = Convert.ToString(Decimal.Round((costP / factor) / ((itemTax + 100) / 100), 2));
-                                    //result = (costP / factor) / itemTax;
-                                    //txtInventoryCost.Text = result.ToString();
-                                }
+                            decimal costPrice = Convert.ToDecimal(txtPOcostP.Text);
+                            decimal itemTax = Convert.ToDecimal(dt.Rows[0]["percent"]);
+                            decimal factor = 1m;
 
+                            if (txtFactor.Enabled && !string.IsNullOrEmpty(txtFactor.Text))
+                            {
+                                factor = Convert.ToDecimal(txtFactor.Text);
                             }
 
+                            try
+                            {
+                                decimal inventoryCost = InventoryCostCalculator.CalculateInventoryCost(
+                                    costPrice,
+                                    itemTax,
+                                    Id.percent,
+                                    factor,
+                                    txtFactor.Enabled);
+
+                                txtInventoryCost.Text = inventoryCost.ToString();
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                MessageBox.Show(ex.Message, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show("Supplier ID is required for inventory cost", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Supplier ID is required for inventory cost", "Message",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
