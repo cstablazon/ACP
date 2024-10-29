@@ -183,27 +183,7 @@ namespace ACP
             }
         }
 
-        private void viewSupplier(string suppID) {
-            frmAddSupplier supplier = new frmAddSupplier();
-                DataTable dt = supClass.getSuppByID(suppID);
-                supplier.txtSupCode.Enabled = false;
-                foreach (DataRow rows in dt.Rows)
-                {
-                    supplier.txtSupCode.Text = rows["suppID"].ToString();
-                    supplier.txtName.Text = rows["name"].ToString();
-                    //supplier.txtAgent.Text = rows["agent"].ToString();
-                    supplier.cmbType.Text = rows["suppRtype"].ToString();
-                    supplier.cmbPayTerms.Text = Id.payID.ToString();
-                    supplier.cmbGroup.Text = Id.groupID;
-                    //supplier.txtFn.Text = rows["firstname"].ToString();
-                    //supplier.txtMn.Text = rows["middlename"].ToString();
-                    //supplier.txtLn.Text = rows["lastname"].ToString();
-                    //supplier.txtSuffix.Text = rows["suffix"].ToString();
-                    
-
-                    //gender = rows["gender"].ToString();
-            }
-        }
+        
 
         private void dgvSupplier_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -62,6 +62,9 @@
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).BeginInit();
             this.cmsStatus.SuspendLayout();
@@ -69,6 +72,7 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -77,7 +81,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 89);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1059, 440);
+            this.panel2.Size = new System.Drawing.Size(1220, 440);
             this.panel2.TabIndex = 10;
             // 
             // dgvSupplier
@@ -118,7 +122,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvSupplier.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupplier.Size = new System.Drawing.Size(1059, 440);
+            this.dgvSupplier.Size = new System.Drawing.Size(1220, 440);
             this.dgvSupplier.TabIndex = 0;
             this.dgvSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_CellClick);
             this.dgvSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_CellContentClick);
@@ -156,11 +160,12 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 87);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1059, 2);
+            this.panel1.Size = new System.Drawing.Size(1220, 2);
             this.panel1.TabIndex = 9;
             // 
             // header
             // 
+            this.header.Controls.Add(this.panel6);
             this.header.Controls.Add(this.panel5);
             this.header.Controls.Add(this.panel4);
             this.header.Controls.Add(this.panel3);
@@ -173,7 +178,7 @@
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(1059, 87);
+            this.header.Size = new System.Drawing.Size(1220, 87);
             this.header.TabIndex = 8;
             // 
             // panel5
@@ -415,7 +420,7 @@
             this.cmbSearchFilter.Items.AddRange(new object[] {
             "Supplier ID",
             "Name"});
-            this.cmbSearchFilter.Location = new System.Drawing.Point(729, 38);
+            this.cmbSearchFilter.Location = new System.Drawing.Point(890, 38);
             this.cmbSearchFilter.Name = "cmbSearchFilter";
             this.cmbSearchFilter.Size = new System.Drawing.Size(121, 25);
             this.cmbSearchFilter.TabIndex = 46;
@@ -429,7 +434,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(634, 38);
+            this.label1.Location = new System.Drawing.Point(795, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 23);
             this.label1.TabIndex = 45;
@@ -445,7 +450,7 @@
             "All",
             "Distributor",
             "Principal"});
-            this.cmbDisplay.Location = new System.Drawing.Point(930, 38);
+            this.cmbDisplay.Location = new System.Drawing.Point(1091, 38);
             this.cmbDisplay.Name = "cmbDisplay";
             this.cmbDisplay.Size = new System.Drawing.Size(121, 25);
             this.cmbDisplay.TabIndex = 43;
@@ -459,7 +464,7 @@
             this.lblDisplay.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDisplay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblDisplay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblDisplay.Location = new System.Drawing.Point(853, 38);
+            this.lblDisplay.Location = new System.Drawing.Point(1014, 38);
             this.lblDisplay.Name = "lblDisplay";
             this.lblDisplay.Size = new System.Drawing.Size(71, 23);
             this.lblDisplay.TabIndex = 42;
@@ -473,7 +478,7 @@
             this.lblSearch.ForeColor = System.Drawing.Color.Crimson;
             this.lblSearch.Image = ((System.Drawing.Image)(resources.GetObject("lblSearch.Image")));
             this.lblSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSearch.Location = new System.Drawing.Point(652, 12);
+            this.lblSearch.Location = new System.Drawing.Point(813, 12);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(71, 23);
             this.lblSearch.TabIndex = 1;
@@ -484,17 +489,58 @@
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(729, 10);
+            this.txtSearch.Location = new System.Drawing.Point(890, 10);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(322, 25);
             this.txtSearch.TabIndex = 41;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.btnExcel);
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(597, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(112, 87);
+            this.panel6.TabIndex = 47;
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExcel.FlatAppearance.BorderSize = 0;
+            this.btnExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.ForeColor = System.Drawing.Color.Crimson;
+            this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
+            this.btnExcel.Location = new System.Drawing.Point(22, 5);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(65, 56);
+            this.btnExcel.TabIndex = 45;
+            this.btnExcel.Text = "Excel";
+            this.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExcel.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Crimson;
+            this.label5.Location = new System.Drawing.Point(5, 65);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 17);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Import/ Export";
+            // 
             // frmSupplierMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 529);
+            this.ClientSize = new System.Drawing.Size(1220, 529);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -517,6 +563,8 @@
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -551,5 +599,8 @@
         private System.Windows.Forms.Button btnContact;
         private System.Windows.Forms.Button btnAddress;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.Label label5;
     }
 }

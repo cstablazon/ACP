@@ -60,7 +60,7 @@ namespace ACP
 
         private void showPayTerm() {
 
-            DataSet ds = supClass.showPayterms();
+            DataSet ds = supClass.cbRecords("sp_supplierOperations", "paymentTerms", "fetchPaymentTerms", "days");
             cmbPayTerms.DataSource = ds.Tables["days"];
             cmbPayTerms.DisplayMember = "days";
             cmbPayTerms.ValueMember = "payID";
@@ -69,7 +69,7 @@ namespace ACP
 
         private void showSGroup()
         {
-            DataSet ds = supClass.showSuppGroup();
+            DataSet ds = supClass.cbRecords("sp_supplierOperations", "supplier", "fetchSuppGroup", "desc");
             cmbGroup.DataSource = ds.Tables["desc"];
             cmbGroup.DisplayMember = "desc";
             cmbGroup.ValueMember = "sGroupID";

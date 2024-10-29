@@ -427,30 +427,7 @@ namespace ACP
 
             return ds;
         }
-
-
-        //Remake
-        public DataSet cbRecord(string query, string action, string desc, string dss)
-        {
-            //Use this for fetching all records in the combobox. 
-            try
-            {
-                SqlConnection conn = getConnection();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@action", action);
-                cmd.Parameters.AddWithValue("@desc", desc);
-                SqlDataAdapter adt = new SqlDataAdapter(cmd);
-                ds = new DataSet();
-                adt.Fill(ds, dss);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return ds;
-        }
+        
 
         //Autocomplete comboBox
         public AutoCompleteStringCollection cbAutoComplete(string query, string action, string desc, string dss)

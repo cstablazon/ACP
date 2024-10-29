@@ -21,99 +21,16 @@ namespace ACP
             currentMaxValue = db.autoIncrement("SELECT ISNULL(MAX(CAST(" + columnID + " as int)),0) FROM " + table + " WHERE isDistributor = 0");
             return currentMaxValue;
         }
-        //insert and update supplier records
-        public void insertSupplier(string suppID, string payID, string sGroup, string name, string agent, string rtype, string fn, string mn, string ln, string suffix, string gender, string dob, string status)
-        {
-            try
-            {
-                SqlConnection conn = db.getConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Supplier", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                //organization directory
-                cmd.Parameters.AddWithValue("@desc", "SUPPLIER");
-                cmd.Parameters.AddWithValue("@Id", "");
-                cmd.Parameters.AddWithValue("@action", "CRUD");
-                cmd.Parameters.AddWithValue("@suppID", suppID);
-                cmd.Parameters.AddWithValue("@payID", payID);
-                cmd.Parameters.AddWithValue("@sGroupID", sGroup);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@agent", agent);
-                cmd.Parameters.AddWithValue("@rType", rtype);
-                cmd.Parameters.AddWithValue("@isActive", "1");
-
-                //person directory
-                cmd.Parameters.AddWithValue("@TID", suppID);
-                cmd.Parameters.AddWithValue("@firstname", fn);
-                cmd.Parameters.AddWithValue("@middlename", mn);
-                cmd.Parameters.AddWithValue("@lastname", ln);
-                cmd.Parameters.AddWithValue("@suffix", suffix);
-                cmd.Parameters.AddWithValue("@gender", gender);
-                cmd.Parameters.AddWithValue("@dateOfBirth", dob);
-                cmd.Parameters.AddWithValue("@status", status);
-                cmd.Parameters.AddWithValue("@rType2", "Supplier");
-                string message = cmd.ExecuteScalar().ToString();
-                conn.Close();
-                MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //list of supplier record
-        
-
-
-
-        
-        public DataTable fetchRecord()
-        {
-            return db.getRecord("select * from vwSupplier order by ID");
-        }
-        //view the specific supplier by their IDs
-        public DataTable getSuppByID(string suppID)
-        {
-            return db.getRecord("Select * from vwSupplier where suppID = '" + suppID + "'");
-        }
-
-        //search supplier record by their name or ID
-        public DataTable searchSupplier(string name)
-        {
-            return db.getRecord("sp_Supplier 'SEARCHSUPPLIER','','CRUD','','','" + name + "'");
-        }
-
-        //view all payment terms records in combo box
-        public DataSet showPayterms()
-        {
-            return db.cbRecords("sp_Supplier", "paymentTerms", "fetchPaymentTerms", "days");
-        }
-        //view all payment terms in datagridview
-
-        //view all group records
-        public DataSet showSuppGroup()
-        {
-            return db.cbRecords("sp_Supplier", "suppGroup", "fetchSuppGroup", "desc");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Retreive
         public DataTable ifTransExist(string action, string suppID)
         {
             return db.ifTransExist("sp_Validation", action, suppID);
+        }
+
+        public DataSet cbRecords(string query, string tableName, string action, string dss)
+        {
+            return db.cbRecords(query, tableName, action, dss);
         }
 
         //Supplier/Principal/Distributor
@@ -143,25 +60,6 @@ namespace ACP
         {
             return db.fetchRecordsForSupplier("sp_Supplier", tableName, action, suppId, "", "", "", itemTaxID);
         }
-
-        //public DataTable fetchAddress(string action, string suppId)
-        //{
-        //    return db.fetchRecords("sp_Supplier", "AddressDIR", action, suppId, "", "", "");
-        //}
-
-        //public DataTable fetchContact(string action, string suppId)
-        //{
-        //    return db.fetchRecords("sp_Supplier", "contactDIR", action, suppId, "", "", "");
-        //}
-
-        //public DataTable fetchContactType(string action, string suppId)
-        //{
-        //    return db.fetchRecords("sp_Supplier", "contactType", action, suppId, "", "", "");
-        //}
-        //public DataTable fetchDistributors(string action, string suppId)
-        //{
-        //    return db.fetchRecords("sp_Supplier", "Supplier", action, suppId, "", "", "");
-        //}
 
         //Principal change distributor
         public DataTable fetchPrincipalToBeUpdated(string action, string RID, string suppId, string distriId)
