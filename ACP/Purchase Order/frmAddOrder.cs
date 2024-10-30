@@ -1180,7 +1180,7 @@ namespace ACP
                 //var suppDetails = db.suppliers.Join(db.paymentTerms, s => s.payID,
                 //    a => a.payID, (s, a) => new { s = s, a = a }).Where(sa => sa.s.suppID.Equals(Id.suppID)).FirstOrDefault();
 
-                DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                DataTable dt = supClass.getSupplierById("sp_supplierOpertaions", "supplier", "fetchSupplierById", Id.suppID);
                 foreach(DataRow dRow in dt.Rows)
                 {
                     txtPayTerm.Text = dRow["Payment_term"].ToString();

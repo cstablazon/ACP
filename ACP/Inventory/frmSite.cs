@@ -59,19 +59,19 @@ namespace ACP
             //sda.Fill(dt);
             //dgvInventLocation.DataSource = dt;
 
-            DataTable dt = pc.fetchRecord("VIEW", "FETCHSITE", "", "", "", "", "", "");
-            BindingSource source = new BindingSource();
-            source.DataSource = dt;
-            dgvSite.DataSource = source;
+            //DataTable dt = pc.fetchRecord("VIEW", "FETCHSITE", "", "", "", "", "", "");
+            //BindingSource source = new BindingSource();
+            //source.DataSource = dt;
+            //dgvSite.DataSource = source;
         }
 
         public void address()
         {
-            DataSet ds = pc.fetchSupplierId("VIEW", "ADDRESS", "Address");
-            cbAddress.DataSource = ds.Tables["Address"];
-            cbAddress.DisplayMember = "Address";
-            cbAddress.ValueMember = "Address ID";
-            cbAddress.Text = Id.address;
+            //DataSet ds = pc.fetchSupplierId("VIEW", "ADDRESS", "Address");
+            //cbAddress.DataSource = ds.Tables["Address"];
+            //cbAddress.DisplayMember = "Address";
+            //cbAddress.ValueMember = "Address ID";
+            //cbAddress.Text = Id.address;
         }
 
         private void frmSite_Load(object sender, EventArgs e)

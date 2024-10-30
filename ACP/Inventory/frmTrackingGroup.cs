@@ -20,10 +20,10 @@ namespace ACP
 
         public void trackingGroup()
         {
-            DataTable dt = pc.fetchRecord("VIEW", "FETCHTRACKINGDMNSN", "", "", "", "", "", "");
-            BindingSource source = new BindingSource();
-            source.DataSource = dt;
-            dgvTrackingDmnsn.DataSource = source;
+            //DataTable dt = pc.fetchRecord("VIEW", "FETCHTRACKINGDMNSN", "", "", "", "", "", "");
+            //BindingSource source = new BindingSource();
+            //source.DataSource = dt;
+            //dgvTrackingDmnsn.DataSource = source;
         }
 
         private void frmTrackingGroup_Load(object sender, EventArgs e)

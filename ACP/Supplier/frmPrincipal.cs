@@ -74,7 +74,7 @@ namespace ACP
         {
             if (Id.button == "Create")
             {
-                DataTable dt = supClass.fetchSupplier("fetchPrincipal", txtDistriID.Text);
+                DataTable dt = supClass.fetchSupplier("sp_supplierOperations", "supplier", "fetchPrincipal", txtDistriID.Text, false);
                 dgvPrincipal.DataSource = dt;
                 dgvPrincipal.AutoGenerateColumns = false;
                 dgvPrincipal.Columns[3].Visible = false;
@@ -180,7 +180,7 @@ namespace ACP
                         if (string.IsNullOrEmpty(currentMaxID))
                         {
                             int payID = Convert.ToInt32(cmbPayTerms.SelectedValue);
-                            DataTable dt = supClass.getSupplierById("fetchSupplierById", txtSupCode.Text);
+                            DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", txtSupCode.Text);
                             foreach (DataRow row in dt.Rows)
                             {
                                 itemTaxId = row["itemTaxID"].ToString();

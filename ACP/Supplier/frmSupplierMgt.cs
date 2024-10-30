@@ -62,21 +62,21 @@ namespace ACP
         {
             if (cmbDisplay.Text == "All")
             {
-                DataTable dt = supClass.fetchSupplier("fetchSupplier", "");
+                DataTable dt = supClass.fetchSupplier("sp_supplierOperations", "supplier", "fetchSupplier", "", null);
                 dgvSupplier.DataSource = dt;
                 dgvSupplier.Columns[8].Visible = true;
                 dgvSetup();
             }
             else if (cmbDisplay.Text == "Distributor")
             {
-                DataTable dt = supClass.fetchSupplier("fetchDistributor", "");
+                DataTable dt = supClass.fetchSupplier("sp_supplierOperations", "supplier", "fetchVendor", "", true);
                 dgvSupplier.DataSource = dt;
                 dgvSupplier.Columns[8].Visible = false;
                 dgvSetup();
             }
             else
             {
-                DataTable dt = supClass.fetchSupplier("fetchPrincipal2", "");
+                DataTable dt = supClass.fetchSupplier("sp_supplierOperations", "supplier", "fetchVendor", "", false);
                 dgvSupplier.DataSource = dt;
                 dgvSupplier.Columns[8].Visible = true;
                 dgvSetup();
@@ -123,7 +123,7 @@ namespace ACP
                         if (Id.isDistri == true)
                         {
                             frmAddSupplier supplier = new frmAddSupplier();
-                            DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                            DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", Id.suppID);
                             foreach (DataRow row in dt.Rows)
                             {
                                 supplier.cmbGroup.Text = row["Group"].ToString();
@@ -149,7 +149,7 @@ namespace ACP
                         else
                         {
                             frmPrincipal principal = new frmPrincipal(Program.CurrentUserId);
-                            DataTable dt = supClass.getSupplierById("fetchPrincipalById", Id.suppID);
+                            DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "fetchPrincipalById", Id.suppID);
                             foreach (DataRow row in dt.Rows)
                             {
                                 principal.tabControl1.TabPages.RemoveAt(0);
@@ -241,7 +241,7 @@ namespace ACP
                         }
                         else
                         {
-                            DataTable dt = supClass.getSupplierByRID("fetchSupplierByRID", Id.suppID);
+                            DataTable dt = supClass.getSupplierByRID("sp_supplierOperations", "supplier", "fetchSupplierByRID", Id.suppID);
                             if (dt.Rows.Count > 0)
                             {
                                 foreach (DataRow dRow in dt.Rows)

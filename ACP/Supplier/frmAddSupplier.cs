@@ -195,7 +195,7 @@ namespace ACP
                         var objExcept = db.suppliers.Where(a => a.suppID == Id.suppID);
                         if (!db.suppliers.Except(objExcept).Any(a => a.suppID == txtSupCode.Text))
                         {
-                            DataTable dt = supClass.getSupplierById("fetchSupplierById", Id.suppID);
+                            DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", Id.suppID);
                             foreach (DataRow row in dt.Rows)
                             {
                                 suppRID = row["RID"].ToString();
@@ -505,7 +505,7 @@ namespace ACP
             }
             else
             {
-                DataTable dt = supClass.getSupplierById("supplierValidation", Id.suppID);
+                DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "supplierValidation", Id.suppID);
                 foreach(DataRow row in dt.Rows)
                 {
                     if(txtName.Text != row["name"].ToString())
@@ -573,7 +573,7 @@ namespace ACP
             }
             else
             {
-                DataTable dt = supClass.getSupplierById("supplierValidation", Id.suppID);
+                DataTable dt = supClass.getSupplierById("sp_supplierOperations", "supplier", "supplierValidation", Id.suppID);
                 foreach(DataRow row in dt.Rows)
                 {
                     if(txtName.Text != row["name"].ToString())

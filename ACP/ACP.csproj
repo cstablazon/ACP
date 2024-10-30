@@ -86,7 +86,7 @@
     <Compile Include="barcode.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="barcodeClass.cs" />
+    <Compile Include="Product\barcodeClass.cs" />
     <Compile Include="brand.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
@@ -121,12 +121,12 @@
     <Compile Include="discount.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="dsPO.Designer.cs">
+    <Compile Include="Purchase Order\Reports\dsPO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPO.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsPurchaseOrder.Designer.cs">
+    <Compile Include="Purchase Order\Reports\dsPurchaseOrder.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
@@ -138,43 +138,19 @@
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
     <Compile Include="FormsPermissionsManager.cs" />
-    <Compile Include="frmAddress.cs">
+    <Compile Include="Product\frmBrand.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddress.Designer.cs">
-      <DependentUpon>frmAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmBrand.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmBrand.Designer.cs">
+    <Compile Include="Product\frmBrand.Designer.cs">
       <DependentUpon>frmBrand.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmKitComponents.cs">
+    <Compile Include="Product\frmKitComponents.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKitComponents.Designer.cs">
+    <Compile Include="Product\frmKitComponents.Designer.cs">
       <DependentUpon>frmKitComponents.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNewProduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNewProduct.Designer.cs">
-      <DependentUpon>frmNewProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmProdDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProdDetails.Designer.cs">
-      <DependentUpon>frmProdDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTest.Designer.cs">
-      <DependentUpon>frmTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InventoryCostCalculator.cs" />
+    <Compile Include="Product\InventoryCostCalculator.cs" />
     <Compile Include="Product\productCreation.cs" />
     <Compile Include="Purchase Order\purchaseOrderClass.cs" />
     <Compile Include="RoleManager.cs" />
@@ -195,7 +171,6 @@
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
     <Compile Include="loginClass.cs" />
-    <Compile Include="productClass.cs" />
     <Compile Include="profile.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
@@ -217,17 +192,16 @@
     <Compile Include="sp_Supplier_Result.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="supplierSetupClass.cs" />
     <Compile Include="Supplier\frmContactType.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Supplier\frmContactType.Designer.cs">
       <DependentUpon>frmContactType.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="Dashboard\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="Dashboard\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Supplier\frmNewContact.cs">
@@ -257,22 +231,16 @@
     <Compile Include="Supplier\frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddLines.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAddLines.Designer.cs">
-      <DependentUpon>frmAddLines.cs</DependentUpon>
-    </Compile>
     <Compile Include="Receiving\frmReceiving.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receiving\frmReceiving.Designer.cs">
       <DependentUpon>frmReceiving.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmReports.cs">
+    <Compile Include="Purchase Order\frmReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmReports.Designer.cs">
+    <Compile Include="Purchase Order\frmReports.Designer.cs">
       <DependentUpon>frmReports.cs</DependentUpon>
     </Compile>
     <Compile Include="infoCategory.cs">
@@ -302,7 +270,6 @@
     <Compile Include="personDIR.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="PO_Class.cs" />
     <Compile Include="PO_Line.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
@@ -327,12 +294,6 @@
     <Compile Include="Product\frmOtherPrice.Designer.cs">
       <DependentUpon>frmOtherPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPaymentConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPaymentConfig.Designer.cs">
-      <DependentUpon>frmPaymentConfig.cs</DependentUpon>
-    </Compile>
     <Compile Include="Supplier config\frmPaymentTerm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,10 +312,10 @@
     <Compile Include="Purchase Order\frmPurchaseOrder.Designer.cs">
       <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUOM.cs">
+    <Compile Include="Product\frmUOM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUOM.Designer.cs">
+    <Compile Include="Product\frmUOM.Designer.cs">
       <DependentUpon>frmUOM.cs</DependentUpon>
     </Compile>
     <Compile Include="purchase_order.cs">
@@ -481,10 +442,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Supplier\supplierClass.cs" />
-    <Compile Include="frMain.cs">
+    <Compile Include="Dashboard\frMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frMain.Designer.cs">
+    <Compile Include="Dashboard\frMain.Designer.cs">
       <DependentUpon>frMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Category Hierarchy\frmCatHierarchy.cs">
@@ -630,27 +591,15 @@
     <Compile Include="whLocation.cs">
       <DependentUpon>acpDB.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmAddress.resx">
-      <DependentUpon>frmAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmBrand.resx">
+    <EmbeddedResource Include="Product\frmBrand.resx">
       <DependentUpon>frmBrand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKitComponents.resx">
+    <EmbeddedResource Include="Product\frmKitComponents.resx">
       <DependentUpon>frmKitComponents.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNewProduct.resx">
-      <DependentUpon>frmNewProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProdDetails.resx">
-      <DependentUpon>frmProdDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTest.resx">
-      <DependentUpon>frmTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="reportPOretailAndCost.rdlc" />
-    <EmbeddedResource Include="reportPOcostPrice.rdlc" />
-    <EmbeddedResource Include="reportPOretailPrice.rdlc" />
+    <EmbeddedResource Include="Purchase Order\Reports\reportPOretailAndCost.rdlc" />
+    <EmbeddedResource Include="Purchase Order\Reports\reportPOcostPrice.rdlc" />
+    <EmbeddedResource Include="Purchase Order\Reports\reportPOretailPrice.rdlc" />
     <EmbeddedResource Include="Supplier config\frmItemSalesTaxGroup.resx">
       <DependentUpon>frmItemSalesTaxGroup.cs</DependentUpon>
     </EmbeddedResource>
@@ -663,7 +612,7 @@
     <EmbeddedResource Include="Supplier\frmContactType.resx">
       <DependentUpon>frmContactType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Dashboard\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier\frmNewContact.resx">
@@ -675,13 +624,10 @@
     <EmbeddedResource Include="Supplier\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddLines.resx">
-      <DependentUpon>frmAddLines.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Receiving\frmReceiving.resx">
       <DependentUpon>frmReceiving.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmReports.resx">
+    <EmbeddedResource Include="Purchase Order\frmReports.resx">
       <DependentUpon>frmReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase Order\frmAddOrder.resx">
@@ -689,9 +635,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Product\frmOtherPrice.resx">
       <DependentUpon>frmOtherPrice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPaymentConfig.resx">
-      <DependentUpon>frmPaymentConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Supplier config\frmPaymentTerm.resx">
       <DependentUpon>frmPaymentTerm.cs</DependentUpon>
@@ -702,10 +645,9 @@
     <EmbeddedResource Include="Product\frmProductDetails.resx">
       <DependentUpon>frmProductDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUOM.resx">
+    <EmbeddedResource Include="Product\frmUOM.resx">
       <DependentUpon>frmUOM.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportPO.rdlc" />
     <EmbeddedResource Include="Supplier\frmAddSupplier.resx">
       <DependentUpon>frmAddSupplier.cs</DependentUpon>
     </EmbeddedResource>
@@ -754,7 +696,7 @@
     <EmbeddedResource Include="Inventory\frmTrackingGroup.resx">
       <DependentUpon>frmTrackingGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frMain.resx">
+    <EmbeddedResource Include="Dashboard\frMain.resx">
       <DependentUpon>frMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Category Hierarchy\frmCatHierarchy.resx">
@@ -784,26 +726,26 @@
     <None Include="acpDB.edmx.diagram">
       <DependentUpon>acpDB.edmx</DependentUpon>
     </None>
-    <None Include="dsPO.xsc">
+    <None Include="Purchase Order\Reports\dsPO.xsc">
       <DependentUpon>dsPO.xsd</DependentUpon>
     </None>
-    <None Include="dsPO.xsd">
+    <None Include="Purchase Order\Reports\dsPO.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsPO.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dsPO.xss">
+    <None Include="Purchase Order\Reports\dsPO.xss">
       <DependentUpon>dsPO.xsd</DependentUpon>
     </None>
-    <None Include="dsPurchaseOrder.xsc">
+    <None Include="Purchase Order\Reports\dsPurchaseOrder.xsc">
       <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
     </None>
-    <None Include="dsPurchaseOrder.xsd">
+    <None Include="Purchase Order\Reports\dsPurchaseOrder.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsPurchaseOrder.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dsPurchaseOrder.xss">
+    <None Include="Purchase Order\Reports\dsPurchaseOrder.xss">
       <DependentUpon>dsPurchaseOrder.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />

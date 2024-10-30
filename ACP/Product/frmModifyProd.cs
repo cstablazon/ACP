@@ -85,7 +85,7 @@ namespace ACP
         }
         public void brand()
         {
-            DataSet ds = pc.cbRecords("Brand", "fetchBrand", "Brand");
+            DataSet ds = pc.cbRecords("sp_productOperations", "brand", "fetchBrand", "Brand");
             cmbBrand.DataSource = ds.Tables["Brand"];
             cmbBrand.DisplayMember = "Brand";
             cmbBrand.ValueMember = "brandID";
@@ -94,7 +94,7 @@ namespace ACP
        
         public  void prodType()
         {
-            DataSet ds = pc.cbRecords("product_type", "fetchProduct_type", "prodTypeDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "product_type", "fetchProduct_type", "prodTypeDesc");
             cmbProdType.DataSource = ds.Tables["prodTypeDesc"];
             cmbProdType.DisplayMember = "prodTypeDesc";
             cmbProdType.ValueMember = "prodTypeID";
@@ -108,7 +108,7 @@ namespace ACP
         }
         public void prodSubType()
         {
-            DataSet ds = pc.cbRecords("product_subType", "fetchProduct_subType", "prodSubTypeDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "product_subType", "fetchProduct_subType", "prodSubTypeDesc");
             cmbProdSubType.DataSource = ds.Tables["prodSubTypeDesc"];
             cmbProdSubType.DisplayMember = "prodSubTypeDesc";
             cmbProdSubType.ValueMember = "prodSubTypeID";
@@ -1361,7 +1361,7 @@ namespace ACP
             panel.Font = new System.Drawing.Font("Segeo UI", 8, FontStyle.Regular);
             //groupBox1.Controls.Add(p);
 
-            DataTable dt = supClass.fetchSupplier("fetchSupplier", "");
+            DataTable dt = supClass.fetchSupplier("sp_supplierOperations", "supplier", "fetchSupplier", "", null);
             dgvSupplier.DataSource = dt;
             //dgvSupplier.DataSource = (from a in db.suppliers where a.isActive == true
             //                          select new

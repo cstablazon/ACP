@@ -20,10 +20,10 @@ namespace ACP
 
         public void itemTax()
         {
-            DataTable dt = pc.fetchRecord("VIEW", "FETCHITEMTAX", "", "", "", "", "", "");
-            BindingSource source = new BindingSource();
-            source.DataSource = dt;
-            dgvItemTax.DataSource = source;
+            //DataTable dt = pc.fetchRecord("VIEW", "FETCHITEMTAX", "", "", "", "", "", "");
+            //BindingSource source = new BindingSource();
+            //source.DataSource = dt;
+            //dgvItemTax.DataSource = source;
         }
 
         private void frmItemTax_Load(object sender, EventArgs e)

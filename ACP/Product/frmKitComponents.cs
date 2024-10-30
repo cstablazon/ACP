@@ -76,7 +76,7 @@ namespace ACP
 
         private void autoCompleteBarcode()
         {
-            DataSet ds = pc.cbRecords("Barcode", "fetchBarcode", "barcode");
+            DataSet ds = pc.cbRecords("sp_productOperations", "Barcode", "fetchBarcode", "barcode");
 
             AutoCompleteStringCollection data = new AutoCompleteStringCollection();
             foreach (DataRow dr in ds.Tables["barcode"].Rows)

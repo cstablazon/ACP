@@ -59,7 +59,7 @@ namespace ACP
             return dt;
         }
 
-        public DataTable fetchRecordsForSupplier(string query, string tableName, string action, string suppID, string RID, string distriID, string name, string itemTaxID)
+        public DataTable fetchRecordsForSupplier(string query, string tableName, string action, string suppID, string RID, string distriID, string name, string itemTaxID, bool? isDistributor)
         {
             SqlConnection conn = getConnection();
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -71,6 +71,7 @@ namespace ACP
             cmd.Parameters.AddWithValue("@distriID", distriID);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@itemTaxID", itemTaxID);
+            cmd.Parameters.AddWithValue("@isDistributor", isDistributor);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);
@@ -339,34 +340,6 @@ namespace ACP
             return dt;
         }
 
-
-        //fetch all product and tables connected/ linked to it
-        public DataTable getRecords(string query, string action, string desc, string desc2, string desc3, string desc4, string desc5, string desc6, string desc7)
-        {
-            //fetch all record
-            //try{
-            SqlConnection conn = getConnection();
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@action", action);
-            cmd.Parameters.AddWithValue("@desc", desc);
-            cmd.Parameters.AddWithValue(Id.desc2, desc2);
-            cmd.Parameters.AddWithValue(Id.desc3, desc3);
-            cmd.Parameters.AddWithValue(Id.desc4, desc4);
-            cmd.Parameters.AddWithValue(Id.desc5, desc5);
-            cmd.Parameters.AddWithValue(Id.desc6, desc6);
-            cmd.Parameters.AddWithValue(Id.desc7, desc7);
-            SqlDataAdapter adt = new SqlDataAdapter(cmd);
-            dt = new DataTable();
-            adt.Fill(dt);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            return dt;
-        }
-
         public int autoIncrement(string query)
         {
             int currentMaxValue = 0;
@@ -427,7 +400,7 @@ namespace ACP
 
             return ds;
         }
-        
+
 
         //Autocomplete comboBox
         public AutoCompleteStringCollection cbAutoComplete(string query, string action, string desc, string dss)

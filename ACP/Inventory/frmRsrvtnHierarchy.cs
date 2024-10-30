@@ -20,10 +20,10 @@ namespace ACP
 
         public void rsrvtn()
         {
-            DataTable dt = pc.fetchRecord("VIEW", "FETCHRSRVTN", "", "", "", "", "", "");
-            BindingSource source = new BindingSource();
-            source.DataSource = dt;
-            dgvRsrvtn.DataSource = source;
+            //DataTable dt = pc.fetchRecord("VIEW", "FETCHRSRVTN", "", "", "", "", "", "");
+            //BindingSource source = new BindingSource();
+            //source.DataSource = dt;
+            //dgvRsrvtn.DataSource = source;
         }
 
         private void frmRsrvtnHierarchy_Load(object sender, EventArgs e)

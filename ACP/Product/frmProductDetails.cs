@@ -46,7 +46,7 @@ namespace ACP
 
         private void itemModel()
         {
-            DataSet ds = pc.cbRecords("itemModelGroup", "fetchItemModelGroup", "itemModelDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "itemModelGroup", "fetchItemModelGroup", "itemModelDesc");
             cmbItemModel.DataSource = ds.Tables["itemModelDesc"];
             cmbItemModel.DisplayMember = "itemModelDesc";
             cmbItemModel.ValueMember = "itemModelID";
@@ -59,7 +59,7 @@ namespace ACP
         //comboBox unit of measure
         private void BOM()
         {
-            DataSet ds = pc.cbRecords("UOM", "fetchUOM", "uomDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "UOM", "fetchUOM", "uomDesc");
             cmbBOM.DataSource = ds.Tables["uomDesc"];
             cmbBOM.DisplayMember = "uomDesc";
             cmbBOM.ValueMember = "uomID";
@@ -67,7 +67,7 @@ namespace ACP
 
         private void UOM()
         {
-            DataSet ds = pc.cbRecords("UOM", "fetchUOM", "uomDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "UOM", "fetchUOM", "uomDesc");
             cmbPOunit.DataSource = ds.Tables["uomDesc"];
             cmbPOunit.DisplayMember = "uomDesc";
             cmbPOunit.ValueMember = "uomID";
@@ -76,7 +76,7 @@ namespace ACP
         //Pricing(comboBox retail unit)
         private void UOMretail()
         {
-            DataSet ds = pc.cbRecords("UOM", "fetchUOM", "uomDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "UOM", "fetchUOM", "uomDesc");
             cmbRetailUnit.DataSource = ds.Tables["uomDesc"];
             cmbRetailUnit.DisplayMember = "uomDesc";
             cmbRetailUnit.ValueMember = "uomID";
@@ -84,7 +84,7 @@ namespace ACP
 
         private void charges()
         {
-            DataSet ds = pc.cbRecords("charges", "fetchCharges", "chargeDesc");
+            DataSet ds = pc.cbRecords("sp_productOperations", "charges", "fetchCharges", "chargeDesc");
             cmbCharges.DataSource = ds.Tables["chargeDesc"];
             cmbCharges.DisplayMember = "chargeDesc";
             cmbCharges.ValueMember = "chargeID";
@@ -113,7 +113,7 @@ namespace ACP
 
         private void PurchaseTax()
         {
-            DataSet ds = pc.cbRecords("itemSalesTaxGroup", "fetchItemSalesTaxGroup", "Tax ID");
+            DataSet ds = pc.cbRecords("sp_productOperations", "itemSalesTaxGroup", "fetchItemSalesTaxGroup", "Tax ID");
             cmbPurchaseTax.DataSource = ds.Tables["Tax ID"];
             cmbPurchaseTax.DisplayMember = "Tax ID";
             cmbPurchaseTax.ValueMember = "Tax ID";
@@ -123,7 +123,7 @@ namespace ACP
 
         private void salesTax()
         {
-            DataSet ds = pc.cbRecords("itemSalesTaxGroup", "fetchItemSalesTaxGroup", "Tax ID");
+            DataSet ds = pc.cbRecords("sp_productOperations", "itemSalesTaxGroup", "fetchItemSalesTaxGroup", "Tax ID");
             cmbSalesTax.DataSource = ds.Tables["Tax ID"];
             cmbSalesTax.DisplayMember = "Tax ID";
             cmbSalesTax.ValueMember = "Tax ID";
@@ -491,7 +491,7 @@ namespace ACP
                 {
                     if (Id.isConcession != true && !string.IsNullOrEmpty(Id.suppID))
                     {
-                        DataTable dt = suppClass.getSupplierById("fetchSupplierById", Id.suppID);
+                        DataTable dt = suppClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", Id.suppID);
                         if (dt.Rows.Count > 0)
                         {
                             decimal costPrice = Convert.ToDecimal(txtPOcostP.Text);
@@ -802,13 +802,13 @@ namespace ACP
                     dgvSite.Show();
                 //    cbSite.Focus();
 
-                    DataTable dt = pc.fetchRecord("VIEW", "FETCHCBSITE", "", "", "", "", "", "");
-                    BindingSource source = new BindingSource();
-                    source.DataSource = dt;
-                    dgvSite.DataSource = source;
-                    dgvSite.CellDoubleClick += dgvSite_CellDoubleClick;
-                    dgvSite.CellClick += dgvSite_CellClick;
-                    Id.showSite = true;
+                    //DataTable dt = pc.fetchRecord("VIEW", "FETCHCBSITE", "", "", "", "", "", "");
+                    //BindingSource source = new BindingSource();
+                    //source.DataSource = dt;
+                    //dgvSite.DataSource = source;
+                    //dgvSite.CellDoubleClick += dgvSite_CellDoubleClick;
+                    //dgvSite.CellClick += dgvSite_CellClick;
+                    //Id.showSite = true;
                 }
             }
         }
@@ -984,7 +984,7 @@ namespace ACP
                         //DataRow[] dRow = Id.dt.Select("barcode = '" + Id.barcode + "'");
                             foreach (DataRow dRow in Id.dt.Rows)
                             {
-                                if (dRow["Barcode"] == Id.barcode)
+                                if (dRow["Barcode"].ToString() == Id.barcode)
                                 {
                                     dRow["Barcode"] = txtBarcode.Text; 
                                     dRow["Item model ID"] = itemModelID;
@@ -1876,7 +1876,7 @@ namespace ACP
                     {
                         if (!string.IsNullOrEmpty(Id.suppID))
                         {
-                            DataTable dt = suppClass.getSupplierById("fetchSupplierById", Id.suppID);
+                            DataTable dt = suppClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", Id.suppID);
                             //var objTax = db.vwSuppliers.Where(a => a.Supplier_ID == Id.suppID);
                             if (dt.Rows.Count > 0)
                             {
@@ -1976,7 +1976,7 @@ namespace ACP
             {
                 if (!string.IsNullOrEmpty(Id.suppID))
                 {
-                    DataTable dt = suppClass.getSupplierById("fetchSupplierById", Id.suppID);
+                    DataTable dt = suppClass.getSupplierById("sp_supplierOperations", "supplier", "fetchSupplierById", Id.suppID);
                     //var objTax = db.vwSuppliers.Where(a => a.Supplier_ID == Id.suppID);
                     if (dt.Rows.Count > 0)
                     {

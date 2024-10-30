@@ -20,10 +20,10 @@ namespace ACP
 
         public void prodType()
         {
-            DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPE", "", "", "", "", "", "");
-            BindingSource source = new BindingSource();
-            source.DataSource = dt;
-            dgvProdType.DataSource = source;
+            //DataTable dt = pc.fetchRecord("VIEW", "FETCHPRODTYPE", "", "", "", "", "", "");
+            //BindingSource source = new BindingSource();
+            //source.DataSource = dt;
+            //dgvProdType.DataSource = source;
         }
 
         private void frmProdType_Load(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace ACP
         private string ConnectionString = Properties.Settings.Default.connectionDB;
         string printOutput;
         public SqlConnection getConnection()
-        {
+        { 
             System.Data.SqlClient.SqlConnection conn = new SqlConnection(ConnectionString);
             return conn;
         }
@@ -34,37 +34,37 @@ namespace ACP
         }
 
         //Supplier/Principal/Distributor
-        public DataTable fetchSupplier(string action, string RID)
+        public DataTable fetchSupplier(string query, string tableName, string action, string RID, bool? isDistributor)
         {
-            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, "", RID, "", "", "");
+            return db.fetchRecordsForSupplier(query, tableName, action, "", RID, "", "", "", isDistributor);
         }
         //Get supplier by supplier ID
-        public DataTable getSupplierById(string action, string suppId)
+        public DataTable getSupplierById(string query, string tableName, string action, string suppId)
         {
-            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, "", "", "", "");
+            return db.fetchRecordsForSupplier(query, tableName, action, suppId, "", "", "", "", null);
         }
 
-        public DataTable getSupplierByRID(string action, string suppId)
+        public DataTable getSupplierByRID(string query, string tableName, string action, string suppId)
         {
-            return db.fetchSupplierByRID("sp_Supplier", "Supplier", action, suppId);
+            return db.fetchRecordsForSupplier(query, tableName, action, suppId, "", "", "", "", null);
         }
 
         //Name validation for updating supplier
         public DataTable nameValidation(string action, string suppId, string name)
         {
-            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, name, "", "", "");
+            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, name, "", "", "", null);
         }
 
         //Address
         public DataTable getRecords(string tableName, string action, string suppId, string itemTaxID)
         {
-            return db.fetchRecordsForSupplier("sp_Supplier", tableName, action, suppId, "", "", "", itemTaxID);
+            return db.fetchRecordsForSupplier("sp_Supplier", tableName, action, suppId, "", "", "", itemTaxID, null);
         }
 
         //Principal change distributor
         public DataTable fetchPrincipalToBeUpdated(string action, string RID, string suppId, string distriId)
         {
-            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, RID, distriId, "", "");
+            return db.fetchRecordsForSupplier("sp_Supplier", "Supplier", action, suppId, RID, distriId, "", "", false);
         }
 
 //CRUD
