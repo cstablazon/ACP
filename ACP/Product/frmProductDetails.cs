@@ -496,7 +496,7 @@ namespace ACP
                         {
                             decimal costPrice = Convert.ToDecimal(txtPOcostP.Text);
                             decimal itemTax = Convert.ToDecimal(dt.Rows[0]["percent"]);
-                            decimal factor = 1m;
+                            decimal factor = 1m; // 'm' specifies the decimal type explicitly
 
                             if (txtFactor.Enabled && !string.IsNullOrEmpty(txtFactor.Text))
                             {
